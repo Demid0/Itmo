@@ -121,7 +121,8 @@ public class Main {
         give.giveInBox(moneys, bag);
 
         take.takeFromBox(list, book);
-        list.setContain("Текст записки");
+        write.setWhoDoIt(julio);
+        write.addText("Текст записки", list);
         give.giveInBox(list, wardrobe);
         give.giveInBox(tt1, wardrobe);
         give.giveInBox(tt2, wardrobe);
