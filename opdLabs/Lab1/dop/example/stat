@@ -1,0 +1,402 @@
+Linux 5.15.76-1-MANJARO (etoxtoLapTop) 	11/11/2022 	_x86_64_	(8 CPU)
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1        33.45       120.22      9990.64         0.00    6441999  535342494          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1       416.00         0.00    144996.00         0.00          0     144996          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1       838.61         0.00    291493.07         0.00          0     294408          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         1.00         0.00         4.00         0.00          0          4          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1       877.00         0.00    307120.00         0.00          0     307120          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1       334.00         0.00    132176.00         0.00          0     132176          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         2.00         0.00       268.00         0.00          0        268          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         1.00         0.00         8.00         0.00          0          8          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         1.00         0.00         4.00         0.00          0          4          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1        30.00         0.00       208.00         0.00          0        208          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         5.00         0.00        52.00         0.00          0         52          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00        60.00         0.00          0         60          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         2.00         0.00         4.00         0.00          0          4          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1        71.00         0.00       380.00         0.00          0        380          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         1.00         0.00       156.00         0.00          0        156          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         2.00         0.00        64.00         0.00          0         64          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1       846.00         0.00    292864.00         0.00          0     292864          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1       428.00         0.00    146624.00         0.00          0     146624          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1       670.00         0.00    232448.00         0.00          0     232448          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1       546.00         0.00    206848.00         0.00          0     206848          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         1.00         0.00        28.00         0.00          0         28          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         1.00         0.00       196.00         0.00          0        196          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1        11.00         0.00        76.00         0.00          0         76          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         1.00         0.00         8.00         0.00          0          8          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         2.00         0.00        20.00         0.00          0         20          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         2.00         0.00        12.00         0.00          0         12          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1        16.00         0.00        84.00         0.00          0         84          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1        71.00         0.00     24076.00         0.00          0      24076          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1      1193.00         0.00    415236.00         0.00          0     415236          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         2.00         0.00         8.00         0.00          0          8          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1        55.00         0.00     18944.00         0.00          0      18944          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1      1093.00         0.00    420352.00         0.00          0     420352          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         2.00         0.00       240.00         0.00          0        240          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1        52.00         0.00       312.00         0.00          0        312          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         8.00         0.00        44.00         0.00          0         44          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         2.00         0.00        20.00         0.00          0         20          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         3.00         0.00        16.00         0.00          0         16          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         2.00         0.00        52.00         0.00          0         52          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1       778.00         0.00    259816.00         0.00          0     259816          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1       521.00         0.00    179724.00         0.00          0     179724          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         3.00         0.00       300.00         0.00          0        300          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1      1124.00         0.00    439296.00         0.00          0     439296          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         5.00         0.00        52.00         0.00          0         52          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1        25.00         0.00       120.00         0.00          0        120          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         2.00         0.00       196.00         0.00          0        196          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         1.00         0.00       156.00         0.00          0        156          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         2.00         0.00        60.00         0.00          0         60          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1        17.00         0.00       132.00         0.00          0        132          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1        12.00         0.00        92.00         0.00          0         92          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1      1264.00         0.00    439296.00         0.00          0     439296          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1      1151.00         0.00    439472.00         0.00          0     439472          0
+
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+nvme0n1p1         0.00         0.00         0.00         0.00          0          0          0
+
+
