@@ -2,11 +2,12 @@ import actions.*;
 import enums.Material;
 import enums.TypeOfTravel;
 import real.objects.*;
+import real.objects.alive.Person;
 import real.objects.items.*;
 
 public class Main {
     public static void main(String[] args) {
-        //Places
+        //Places pull
         Place office = new Place("Контора");
         Place bank = new Place("Банк");
         Place rzdStation = new Place("Вокзал");
@@ -14,38 +15,38 @@ public class Main {
         Place cinema = new Place("Кино");
         Place outside = new Place("Улица");
 
-        //Persons
+        //Persons pull
         Person krabs = new Person("Крабс", office);
         Person grizzle = new Person("Гризл", office);
         Person miga = new Person("Мига", office);
         Person julio = new Person("Жулио", office);
         Person debil = new Person("Незнайка", office);
         Person kozel = new Person("Козлик", office);
-        Person bankWorker = new Person("Worker", shop);
+        Person bankWorker = new Person("Worker", bank);
         bankWorker.getMoney().setNominal(100000);
         Person shopWorker = new Person("Worker", shop);
         Person rzdWorker = new Person("Worker", rzdStation);
         Person cinemaWorker = new Person("Worker", cinema);
         Person visitor = new Person("Посетители", office);
         Person officeOwner = new Person("OO", office);
+        Person skuperfield = new Person("Скуперфильд", outside);
 
-        //Items
-        TrainTicket tt1 = new TrainTicket("Билет", rzdWorker, 500, 11092001, "San-Komarik");
-        TrainTicket tt2 = new TrainTicket("Билет", rzdWorker, 500, 11092001, "San-Komarik");
-        BoxItem bag = new BoxItem("Чемодан", shopWorker, Material.FIBROLIT);
+        //Item pull
+        TrainTicket tt1 = new TrainTicket(rzdWorker, 500, 11092001, "San-Komarik");
+        TrainTicket tt2 = new TrainTicket(rzdWorker, 500, 11092001, "San-Komarik");
+        BoxItem bag = new BoxItem("Чемодан", shopWorker, Material.FIBROLIT, shop);
         String film = "Таинственный незнакомец, или Рассказ о семи задушенных и одном утонувшем в мазуте";
-        CinemaTicket ct1 = new CinemaTicket("Билет", cinemaWorker, 400, 10092001, film);
-        CinemaTicket ct2 = new CinemaTicket("Билет", cinemaWorker, 400, 10092001, film);
-        Item sales = new Item("Акции", miga, Material.PAPER);
-        Money moneys = new Money("Деньги", officeOwner, 9999999);
-        BoxItem wardrobe = new BoxItem("Шкаф", officeOwner, Material.IRON);
+        CinemaTicket ct1 = new CinemaTicket(cinemaWorker, 400, 10092001, film);
+        CinemaTicket ct2 = new CinemaTicket(cinemaWorker, 400, 10092001, film);
+        Item sales = new Item("Акции", miga, Material.PAPER, office);
+        Money moneys = new Money(officeOwner, 9999999);
+        BoxItem wardrobe = new BoxItem("Шкаф", officeOwner, Material.IRON, office);
         wardrobe.getContain().add(moneys);
         RecordItem list = new RecordItem("Листок бумаги", julio);
-        BoxItem book = new BoxItem("Записная книжка", julio, Material.PAPER);
+        BoxItem book = new BoxItem("Записная книжка", julio, Material.PAPER, julio.getWhereIsHe());
         book.getContain().add(list);
 
-
-        //Actions
+        //Actions pull
         Say say = new Say(krabs);
         MoveTo move = new MoveTo(krabs);
         Give give = new Give(krabs);
@@ -53,10 +54,9 @@ public class Main {
         Write write = new Write(krabs);
         Buy buy = new Buy(krabs);
 
+        //code
         move.setWhoDoIt(krabs);
         move.setPlace(bank, TypeOfTravel.RIDE);
-
-        //
         say.setWhoDoIt(krabs);
         say.sayPhrase("Хочу деняк", bankWorker);
         give.setWhoDoIt(bankWorker);
@@ -103,7 +103,6 @@ public class Main {
         give.giveMoney(600, debil);
         give.setWhoDoIt(julio);
         give.changeOwner(ct2, kozel);
-
         move.setWhoDoIt(debil);
         move.setPlace(cinema, TypeOfTravel.RUN);
         move.setWhoDoIt(kozel);
@@ -116,7 +115,6 @@ public class Main {
         take.takeFromBox(moneys, wardrobe);
         give.setWhoDoIt(julio);
         give.giveInBox(moneys, bag);
-
         take.takeFromBox(list, book);
         write.setWhoDoIt(julio);
         write.addText("Текст записки", list);
@@ -124,6 +122,20 @@ public class Main {
         give.giveInBox(tt1, wardrobe);
         give.giveInBox(tt2, wardrobe);
         //
+        var unmove = new Action(krabs) {
+            public void doUnmove(Person person) {
+                person.getBody().setLeftLeg(false);
+                person.getBody().setRightLeg(false);
+                person.getBody().setLeftHand(false);
+                person.getBody().setRightHand(false);
+                System.out.println(describe() + person.getName());
+            }
+            @Override
+            public String describe() {
+                return getWhoDoIt().getName() + " cвязал ";
+            }
+        };
+        unmove.doUnmove(skuperfield);
 
     }
 
