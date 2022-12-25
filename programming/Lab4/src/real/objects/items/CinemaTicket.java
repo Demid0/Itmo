@@ -1,6 +1,6 @@
 package real.objects.items;
 
-import real.objects.alive.Person;
+import real.objects.Person;
 import system.CheckBadWords;
 
 public class CinemaTicket extends Ticket {
@@ -10,5 +10,9 @@ public class CinemaTicket extends Ticket {
         super(owner, cost, date);
         CheckBadWords.run(film);
         this.film = film;
+    }
+
+    public String getFilm() {
+        return film;
     }
 }

@@ -1,14 +1,14 @@
 package real.objects.items;
 
 import enums.Material;
-import real.objects.alive.Person;
+import real.objects.Person;
 import system.CheckBadWords;
 
 public class RecordItem extends Item {
     private String contain = "";
 
     public RecordItem(String name, Person owner) {
-        super(name, owner, Material.PAPER, owner.getWhereIsHe());
+        super(name, owner, Material.PAPER, owner.getWhereIsIt());
     }
 
     public String getContain() {

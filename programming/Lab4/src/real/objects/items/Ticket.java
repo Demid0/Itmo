@@ -1,15 +1,16 @@
 package real.objects.items;
 
 import enums.Material;
-import real.objects.alive.Person;
+import real.objects.Person;
 
 public class Ticket extends Item {
     private final int cost;
     private final int date;
 
     public Ticket(Person owner, int cost, int date) {
-        super("Билет", owner, Material.PAPER, owner.getWhereIsHe());
-        this.cost = cost;
+        super("Билет", owner, Material.PAPER, owner.getWhereIsIt());
+        if(cost >= 0) this.cost = cost;
+        else this.cost = 500;
         this.date = date;
     }
 

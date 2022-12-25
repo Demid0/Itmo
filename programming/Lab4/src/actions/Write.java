@@ -1,7 +1,8 @@
 package actions;
 
+import system.myExceptions.CantMoveException;
 import system.myExceptions.InterlocutorIsNotAround;
-import real.objects.alive.Person;
+import real.objects.Person;
 import real.objects.items.RecordItem;
 
 public class Write extends Action {
@@ -9,14 +10,18 @@ public class Write extends Action {
         super(whoDoIt);
     }
 
-    public void addText(String s, RecordItem recordItem) {
+    public void write(String s, RecordItem recordItem) {
         try {
-            if (recordItem.getWhereIsIt() != getWhoDoIt().getWhereIsHe()) throw new InterlocutorIsNotAround();
-            recordItem.setContain(recordItem.getContain() + " " + s);
+            if (recordItem.getWhereIsIt() != getWhoDoIt().getWhereIsIt()) throw new InterlocutorIsNotAround();
+            if (!getWhoDoIt().getBody().getHands().isCanMove()) throw new CantMoveException();
+            recordItem.setContain(recordItem.getContain() + "\n" + s);
             System.out.println(this.getWhoDoIt().getName() + describe() + "\"" + s + "\"" + " in " + recordItem.getName());
         }
         catch (InterlocutorIsNotAround ex) {
             System.out.println(ex.getMessage(getWhoDoIt().getName(), recordItem.getName()));
+        }
+        catch (CantMoveException ex) {
+            System.out.println(ex.getMessage(getWhoDoIt()));
         }
 
     }

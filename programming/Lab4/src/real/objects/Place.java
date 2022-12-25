@@ -1,11 +1,23 @@
 package real.objects;
+import system.CheckBadWords;
+
 import java.util.ArrayList;
 
-public class Place extends RealObject {
+public class Place {
+    public static Place Default = new Place("Default");
     private ArrayList<RealObject> whatIsWhere = new ArrayList<>(1);
+    private String name;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        CheckBadWords.run(name);
+        this.name = name;
+    }
     public Place(String name) {
-        super.setName(name);
+        setName(name);
     }
 
     public ArrayList<RealObject> getWhatIsWhere() {

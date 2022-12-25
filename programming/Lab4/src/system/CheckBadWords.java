@@ -9,7 +9,7 @@ public class CheckBadWords {
     private static final ArrayList<String> badWords = new ArrayList<>(Arrays.asList("fuck", "shit", "bitch", "хуй", "пизда", "шлюха", "гондон", "сука"));
     public static void run(String s) {
         s = s.toLowerCase();
-        String[] words = s.split("[\\s+\\,+\\.+]");
+        String[] words = s.split("[\\s\\,\\.]+");
         for(String word : words) {
             if (badWords.contains(word)) throw new BadWords();
         }

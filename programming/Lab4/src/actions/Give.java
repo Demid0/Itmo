@@ -1,11 +1,14 @@
 package actions;
 
+import system.myExceptions.CantMoveException;
 import system.myExceptions.InterlocutorIsNotAround;
 import real.objects.items.BoxItem;
 import real.objects.items.Item;
-import real.objects.alive.Person;
+import real.objects.Person;
 
 import java.util.ArrayList;
+
+import static java.lang.Math.min;
 
 public class Give extends Action {
 
@@ -13,9 +16,10 @@ public class Give extends Action {
         super(whoDoIt);
     }
 
-    public void changeOwner(Item item, Person person) {
+    public void give(Item item, Person person) {
         try {
-            if (person.getWhereIsHe() != getWhoDoIt().getWhereIsHe()) throw new InterlocutorIsNotAround();
+            if (person.getWhereIsIt() != getWhoDoIt().getWhereIsIt()) throw new InterlocutorIsNotAround();
+            if (!getWhoDoIt().getBody().getHands().isCanMove()) throw new CantMoveException();
             ArrayList<Item> inventory = getWhoDoIt().getInventory();
             if (inventory.contains(item)) {
                 inventory.remove(item);
@@ -32,14 +36,17 @@ public class Give extends Action {
         catch (InterlocutorIsNotAround ex) {
             System.out.println(ex.getMessage(getWhoDoIt().getName(), person.getName()));
         }
+        catch (CantMoveException ex) {
+            System.out.println(ex.getMessage(getWhoDoIt()));
+        }
 
     }
-    public void giveMoney(int nominal, Person person) {
+    public void give(int nominal, Person person) {
         try {
-            if (person.getWhereIsHe() != getWhoDoIt().getWhereIsHe()) throw new InterlocutorIsNotAround();
-            if (getWhoDoIt().getMoney().getNominal() >= nominal) {
-                getWhoDoIt().getMoney().setNominal(getWhoDoIt().getMoney().getNominal() - nominal);
-                person.getMoney().setNominal(person.getMoney().getNominal() + nominal);
+            if (person.getWhereIsIt() != getWhoDoIt().getWhereIsIt()) throw new InterlocutorIsNotAround();
+            if (getWhoDoIt().getMoney() >= nominal) {
+                getWhoDoIt().setMoney(getWhoDoIt().getMoney() - nominal);
+                person.setMoney(person.getMoney() + nominal);
                 System.out.println(describe() + nominal + " fertings to " + person.getName());
             }
         }
@@ -48,10 +55,9 @@ public class Give extends Action {
         }
 
     }
-
-    public void giveInBox(Item item, BoxItem box) {
+    public void give(Item item, BoxItem box) {
         try {
-            if (box.getWhereIsIt() != getWhoDoIt().getWhereIsHe()) throw new InterlocutorIsNotAround();
+            if (box.getWhereIsIt() != getWhoDoIt().getWhereIsIt()) throw new InterlocutorIsNotAround();
             if (getWhoDoIt().getInventory().contains(item)) {
                 box.getContain().add(item);
                 System.out.println(describe() + item.getName() + " in " + box.getName());
@@ -60,7 +66,17 @@ public class Give extends Action {
         catch (InterlocutorIsNotAround ex) {
             System.out.println(ex.getMessage(getWhoDoIt().getName(), box.getName()));
         }
-
+    }
+    public void give(int money, BoxItem box) {
+        try {
+            if (box.getWhereIsIt() != getWhoDoIt().getWhereIsIt()) throw new InterlocutorIsNotAround();
+            money = min(money, getWhoDoIt().getMoney());
+            box.setMoney(box.getMoney() + money);
+            getWhoDoIt().setMoney(getWhoDoIt().getMoney() - money);
+        }
+        catch (InterlocutorIsNotAround ex) {
+            System.out.println(ex.getMessage(getWhoDoIt().getName(), box.getName()));
+        }
     }
     @Override
     public String describe() {

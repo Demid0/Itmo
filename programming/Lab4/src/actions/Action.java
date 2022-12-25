@@ -1,14 +1,15 @@
 package actions;
 
 import interfaces.Describeable;
-import real.objects.alive.Person;
+import real.objects.Person;
 
 public abstract class Action implements Describeable {
     private Person whoDoIt;
-
     protected Action(Person whoDoIt) {
         this.whoDoIt = whoDoIt;
     }
+    protected Action() {}
+
     public void setWhoDoIt(Person whoDoIt) {
         this.whoDoIt = whoDoIt;
     }
