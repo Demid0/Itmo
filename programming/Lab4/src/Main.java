@@ -140,7 +140,7 @@ public class Main {
         Item mouses = new Item("Крысы", grizzle, Material.DONTUNDERSTANDABLE, grizzleOffice);
         BoxItem polka = new BoxItem("Полка", grizzle, Material.WOOD, grizzleOffice);
         see.setWhoDoIt(spectator);
-        see.see(write, "write", grizzle, new Object[]{"Мне было лень ", grizzleList});
+        see.see(write, "write", grizzle, new Object[]{"Мне было лень придумывать сюда какой-то текст", grizzleList});
         see.takeAlias(give, "give", grizzle, new Object[]{mouses, polka});
         initiate.setWhoDoIt(grizzle);
         initiate.initiate(itemSay, "say", button, null);

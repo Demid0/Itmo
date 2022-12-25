@@ -1,5 +1,6 @@
 package real.objects;
 
+import actions.topersons.Has;
 import real.objects.items.Item;
 import system.CheckBadWords;
 
@@ -9,7 +10,7 @@ public class Person extends RealObject {
     private final Body body = new Body();
     private ArrayList<Item> inventory = new ArrayList<>(1);
     private int money = 5000;
-
+    private Has.Condition condition = Has.Condition.DEFAULT;
     public Person(String name, Place whereIsHe) {
         super.setName(name);
         setWhereIsIt(whereIsHe);
@@ -39,6 +40,14 @@ public class Person extends RealObject {
         for (Item item : getInventory()) {
             item.setWhereIsIt(getWhereIsIt());
         }
+    }
+
+    public Has.Condition getCondition() {
+        return condition;
+    }
+
+    public void setCondition(Has.Condition condition) {
+        this.condition = condition;
     }
 
     public static class Body {

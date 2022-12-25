@@ -12,7 +12,8 @@ public class Has extends Action {
     public void has(Condition condition) {
         try {
             if (condition == Condition.SMILE && !getWhoDoIt().getBody().getMouth().isCanMove()) throw new CantMoveException();
-            System.out.println(describe() + condition);
+            getWhoDoIt().setCondition(condition);
+            System.out.println(describe() + getWhoDoIt().getCondition());
         }
         catch (CantMoveException ex) {
             System.out.println(ex.getMessage(getWhoDoIt()));
