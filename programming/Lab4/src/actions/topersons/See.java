@@ -1,12 +1,13 @@
-package actions;
+package actions.topersons;
 
+import actions.topersons.Action;
 import real.objects.Place;
 import real.objects.RealObject;
 import real.objects.Person;
 import system.InvokeMethod;
 import system.myExceptions.InterlocutorIsNotAround;
 
-public class See extends Action{
+public class See extends Action {
 
     public See(Person whoDoIt) {
         super(whoDoIt);
@@ -21,23 +22,22 @@ public class See extends Action{
             System.out.println(ex.getMessage(getWhoDoIt().getName(), object.getName()));
         }
     }
-    public void see(Action action, String method, Person whoDoAction, Object[] parameters) {
+    public void see(Object action, String method, Object whoDoAction, Object[] parameters) {
         try {
-            if(getWhoDoIt().getWhereIsIt() != whoDoAction.getWhereIsIt() && !(getWhoDoIt().getWhereIsIt() == Place.Default || whoDoAction.getWhereIsIt() == Place.Default)) throw new InterlocutorIsNotAround();
+            if(getWhoDoIt().getWhereIsIt() != ((RealObject)whoDoAction).getWhereIsIt() && !(getWhoDoIt().getWhereIsIt() == Place.Default || ((RealObject)whoDoAction).getWhereIsIt() == Place.Default)) throw new InterlocutorIsNotAround();
             System.out.print(describe());
             InvokeMethod.invoke(action, method, whoDoAction, parameters);
         }
         catch (InterlocutorIsNotAround ex) {
-            System.out.println(ex.getMessage(getWhoDoIt().getName(), whoDoAction.getName()));
+            System.out.println(ex.getMessage(getWhoDoIt().getName(), ((RealObject)whoDoAction).getName()));
         }
-
     }
     public void takeAlias(RealObject alias) {
         System.out.print("look like " + alias.getName() + "\n");
     }
-    public void takeAlias(Action action, String method, Person whoDoIt, Object[] parameters) {
+    public void takeAlias(Object action, String method, Object whoDoAction, Object[] parameters) {
         System.out.print("look like ");
-        InvokeMethod.invoke(action, method, whoDoIt, parameters);
+        InvokeMethod.invoke(action, method, whoDoAction, parameters);
     }
 
 

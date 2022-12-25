@@ -1,12 +1,11 @@
 package real.objects;
 
-import interfaces.Speakable;
 import real.objects.items.Item;
 import system.CheckBadWords;
 
 import java.util.ArrayList;
 
-public class Person extends RealObject implements Speakable {
+public class Person extends RealObject {
     private final Body body = new Body();
     private ArrayList<Item> inventory = new ArrayList<>(1);
     private int money = 5000;

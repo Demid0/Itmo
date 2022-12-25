@@ -1,5 +1,6 @@
-package actions;
+package actions.topersons;
 
+import actions.topersons.Action;
 import system.myExceptions.CantMoveException;
 import system.myExceptions.InterlocutorIsNotAround;
 import real.objects.Person;

@@ -1,18 +1,16 @@
-package actions;
+package actions.topersons;
 
-import interfaces.Speakable;
+import actions.topersons.Action;
+import actions.topersons.Hear;
 import real.objects.Person;
 
-import real.objects.items.SpeakableItem;
 import system.CheckBadWords;
 import system.myExceptions.CantMoveException;
 import system.myExceptions.InterlocutorIsNotAround;
 
 public class Say extends Action {
-    private Speakable whoDoIt;
-    public Say(Speakable whoDoIt) {
-        super();
-        this.whoDoIt = whoDoIt;
+    public Say(Person whoDoIt) {
+        setWhoDoIt(whoDoIt);
     }
 
     public void say(String phrase, Person person) {
@@ -31,17 +29,10 @@ public class Say extends Action {
             System.out.println(ex.getMessage(getWhoDoIt()));
         }
     }
-    public void say() {
-        if (whoDoIt instanceof SpeakableItem) {
-            System.out.println(((SpeakableItem) whoDoIt).getName() + describe() + ((SpeakableItem) whoDoIt).getNoise());
-        }
-    }
+
     @Override
     public String describe() {
         return " say: ";
     }
 
-    public void setWhoDoIt(Speakable whoDoIt) {
-        this.whoDoIt = whoDoIt;
-    }
 }

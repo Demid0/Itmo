@@ -1,4 +1,4 @@
-package actions;
+package actions.topersons;
 
 import system.myExceptions.InterlocutorIsNotAround;
 import real.objects.Person;

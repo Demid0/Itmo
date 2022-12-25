@@ -37,7 +37,7 @@ public abstract class RealObject {
     }
     @Override
     public String toString() {
-        return "Something[name: " + name + "]";
+        return "RealObject[name: " + name + "]";
     }
 
     @Override

@@ -4,7 +4,7 @@ import system.CheckBadWords;
 import java.util.ArrayList;
 
 public class Place {
-    public static Place Default = new Place("Default");
+    public static final Place Default = new Place("Default");
     private ArrayList<RealObject> whatIsWhere = new ArrayList<>(1);
     private String name;
 

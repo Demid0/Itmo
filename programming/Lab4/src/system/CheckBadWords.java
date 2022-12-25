@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class CheckBadWords {
-    private static final ArrayList<String> badWords = new ArrayList<>(Arrays.asList("fuck", "shit", "bitch", "хуй", "пизда", "шлюха", "гондон", "сука"));
+    private static final ArrayList<String> badWords = new ArrayList<>(Arrays.asList("fuck", "shit", "bitch", "хуй", "пизда", "шлюха", "гондон", "сука", "javarush"));
     public static void run(String s) {
         s = s.toLowerCase();
         String[] words = s.split("[\\s\\,\\.]+");

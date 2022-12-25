@@ -1,9 +1,13 @@
-import actions.*;
+import actions.toactionable.ItemAction;
+import actions.toactionable.ItemSay;
+import actions.topersons.*;
 import enums.Material;
 import enums.TypeOfTravel;
+import interfaces.Actionable;
 import real.objects.Place;
 import real.objects.Person;
 import real.objects.items.*;
+import system.InvokeMethod;
 
 public class Main {
     public static void main(String[] args) {
@@ -36,7 +40,7 @@ public class Main {
         Person secretary = new Person("Секретарша", grizzleOffice);
         Person skuperfield = new Person("Скуперфильд", outside);
         Person god = new Person("");
-        Person spectator = new Person("Наблюдатель");
+        Person spectator = new Person("Наблюдатель со стороны");
 
         //Item pull
 
@@ -59,7 +63,7 @@ public class Main {
         Item grizzlePen = new Item("Авторучка", grizzle, Material.DONTUNDERSTANDABLE, grizzleOffice);
         RecordItem grizzleList = new RecordItem("Лист бумаги", grizzle);
         BoxItem krabsBag = new BoxItem("Чемодан Крабса", krabs, Material.DONTUNDERSTANDABLE, krabs.getWhereIsIt());
-        SpeakableItem trees = new SpeakableItem("Деревья", god, Material.WOOD, outside, "Шшепшешепепшпепш");
+        SpeakableItem trees = new SpeakableItem("Деревья", god, Material.WOOD, outside, "Шшепшешепепшпепш (перевод с деревьего: закройте лабу :) пожалуйста)");
         SpeakableItem birds = new SpeakableItem("Птички", god, Material.DONTUNDERSTANDABLE, outside, "Чырык-Чырык");
         Item flowers = new Item("Цветы", god, Material.DONTUNDERSTANDABLE, outside);
 
@@ -73,20 +77,18 @@ public class Main {
         Buy buy = new Buy(krabs);
         See see = new See(krabs);
         Has has = new Has(krabs);
-
-        var inv = new Action(krabs) {
-            public void inv(SpeakableItem item) {
-                System.out.println(describe() + item.getName());
-                Say say1 = new Say(item);
-                say1.say();
+        ItemSay itemSay = new ItemSay(button);
+        var initiate = new Action(krabs) {
+            public void initiate(ItemAction action, String method, Actionable thatDoIt, Object[] parameters) {
+                InvokeMethod.invoke(action, method, thatDoIt, parameters);
             }
             @Override
             public String describe() {
-                return getWhoDoIt().getName() + " init ";
+                return getWhoDoIt().getName() + " initiate ";
             }
         };
         var unmove = new Action(krabs) {
-            public void doUnmove(Person.Body.Piece pieceOfBody) {
+            public void unmove(Person.Body.Piece pieceOfBody) {
                 pieceOfBody.setCanMove(false);
             }
             @Override
@@ -95,14 +97,14 @@ public class Main {
             }
         };
         var check = new Action() {
-            public boolean checkDoor(Door door) {
+            public boolean check(Door door) {
                 boolean bool = door.isClosed();
                 System.out.println(describe() + door.getName() + " is closed - " + bool);
                 return bool;
             }
-            public boolean checkMoney(int was, int now, int need) {
+            public boolean check(int was, int now, int need) {
                 boolean bool = (now - was == need);
-                System.out.println(describe() + " money is " + need + " fertings - " + bool);
+                System.out.println(describe() + "money is " + need + " fertings - " + bool);
                 return bool;
             }
             @Override
@@ -124,10 +126,10 @@ public class Main {
         see.setWhoDoIt(krabs);
         see.see(door);
         check.setWhoDoIt(krabs);
-        if (!check.checkDoor(door)) {
+        if (!check.check(door)) {
             System.out.println("А дверца-то открыта");
             door.setClosed(true);
-            check.checkDoor(door);
+            check.check(door);
         }
         say.setWhoDoIt(krabs);
         say.say("Я шепну тебе на ушко.. АННИГИЛЯТОРНАЯ ПУШКА", grizzle);
@@ -138,14 +140,15 @@ public class Main {
         Item mouses = new Item("Крысы", grizzle, Material.DONTUNDERSTANDABLE, grizzleOffice);
         BoxItem polka = new BoxItem("Полка", grizzle, Material.WOOD, grizzleOffice);
         see.setWhoDoIt(spectator);
-        see.see(write, "write", grizzle, new Object[]{"Буквыбуквыбуквы", grizzleList});
+        see.see(write, "write", grizzle, new Object[]{"Мне было лень ", grizzleList});
         see.takeAlias(give, "give", grizzle, new Object[]{mouses, polka});
-        inv.setWhoDoIt(grizzle);
-        inv.inv(button);
+        initiate.setWhoDoIt(grizzle);
+        initiate.initiate(itemSay, "say", button, null);
         give.setWhoDoIt(grizzle);
         give.give(grizzleList, secretary);
 
-        //////////
+        //////////////////////////////////
+
         move.setWhoDoIt(krabs);
         move.move(bank, TypeOfTravel.RIDE);
         say.setWhoDoIt(krabs);
@@ -213,7 +216,8 @@ public class Main {
         give.give(list, wardrobe);
         give.give(tt1, wardrobe);
         give.give(tt2, wardrobe);
-        //////////
+
+        //////////////////////////////////
 
         say.setWhoDoIt(miga);
         say.say("Контора закрывается, приходите завтра", visitor);
@@ -234,7 +238,7 @@ public class Main {
         take.setWhoDoIt(julio);
         take.take(krabsBag.getMoney(), krabsBag);
         check.setWhoDoIt(julio);
-        if(!check.checkMoney(was, julio.getMoney(), 2000000)) {
+        if(!check.check(was, julio.getMoney(), 2000000)) {
             System.out.println("Крабс не принёс 2000000.. Жулио расстроился");
             return;
         }
@@ -246,9 +250,9 @@ public class Main {
         has.setWhoDoIt(skuperfield);
         has.has(Has.Condition.SAD);
         unmove.setWhoDoIt(krabs);
-        unmove.doUnmove(skuperfield.getBody().getLegs());
-        unmove.doUnmove(skuperfield.getBody().getHands());
-        unmove.doUnmove(skuperfield.getBody().getMouth());
+        unmove.unmove(skuperfield.getBody().getLegs());
+        unmove.unmove(skuperfield.getBody().getHands());
+        unmove.unmove(skuperfield.getBody().getMouth());
         move.setWhoDoIt(skuperfield);
         for (int i = 0; i < 4; i++) {
             move.move(new Place("куда-нибудь"), TypeOfTravel.GO);
@@ -258,10 +262,10 @@ public class Main {
         has.has(Has.Condition.DEFAULT);
         see.setWhoDoIt(skuperfield);
         see.see(trees);
-        see.takeAlias(inv, "inv", god, new Object[]{trees});
+        see.takeAlias(itemSay, "say", trees, null);
         see.see(flowers);
         has.has(Has.Condition.HAPPY);
-        see.see(inv, "inv", god, new Object[]{birds});
+        see.see(itemSay, "say", birds, null);
         see.see(birds);
         has.has(Has.Condition.HAPPY);
     }

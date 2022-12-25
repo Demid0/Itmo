@@ -1,5 +1,6 @@
-package actions;
+package actions.topersons;
 
+import actions.topersons.Action;
 import real.objects.Place;
 import real.objects.RealObject;
 import real.objects.Person;

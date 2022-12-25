@@ -1,5 +1,6 @@
-package actions;
+package actions.topersons;
 
+import actions.topersons.Action;
 import real.objects.Person;
 import system.myExceptions.CantMoveException;
 

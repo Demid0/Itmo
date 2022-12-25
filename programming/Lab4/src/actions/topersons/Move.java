@@ -1,5 +1,6 @@
-package actions;
+package actions.topersons;
 
+import actions.topersons.Action;
 import enums.TypeOfTravel;
 import real.objects.Person;
 import real.objects.Place;

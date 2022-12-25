@@ -1,4 +1,4 @@
-package actions;
+package actions.topersons;
 
 import interfaces.Describeable;
 import real.objects.Person;
