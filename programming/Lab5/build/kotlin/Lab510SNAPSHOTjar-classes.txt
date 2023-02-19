@@ -1,0 +1,1 @@
+/home/demid/Desktop/Itmo/programming/Lab5/build/classes/kotlin/main/MainKt.class:/home/demid/Desktop/Itmo/programming/Lab5/build/classes/kotlin/main/Student$$serializer.class:/home/demid/Desktop/Itmo/programming/Lab5/build/classes/kotlin/main/Student$Companion.class:/home/demid/Desktop/Itmo/programming/Lab5/build/classes/kotlin/main/Student.class
