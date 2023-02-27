@@ -1,0 +1,13 @@
+Tasks:
+- sort Route class objects
+- class's fields ODZ
+- collection in ArrayDequeue
+- filename from environment variable
+- collection in yaml file
+- read data from files with InputStreamReader
+- write data in files with PrintWriter
+- write javadoc
+- correct work with incorrect data
+
+Dop Task:
+- 10 Unit tests (use mockk)
