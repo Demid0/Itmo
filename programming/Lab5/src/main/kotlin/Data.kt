@@ -3,7 +3,7 @@ import Commands.Command
 
 class Data {
     companion object {
-        val collection: ArrayDeque<Route> = ArrayDeque()
+        var collection: MutableCollection<Route> = ArrayDeque()
         private var commands: HashMap<String, Command> = HashMap()
         fun getCommands(): HashMap<String, Command> {
             return commands

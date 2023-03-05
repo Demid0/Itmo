@@ -9,8 +9,11 @@ class Starter {
         }
         private fun downloadCollection() {
             println("Downloading collection")
+            // здесь будет загружаться коллекция с файла в Data.collection
+            println("Done!")
         }
         private fun downloadCommands() {
+            println("Downloading commands")
             Data.addCommand("exit", Exit())
             Data.addCommand("help", Help())
             Data.addCommand("info", Info())
@@ -27,6 +30,7 @@ class Starter {
             Data.addCommand("count_by_distance", CountDistance { a: Double, b: Double -> a == b })
             Data.addCommand("count_less_than_distance", CountDistance { a: Double, b: Double -> a < b })
             Data.addCommand("print_field_descending_distance", PrintFieldDescendingDistance())
+            println("Done!")
         }
     }
 }

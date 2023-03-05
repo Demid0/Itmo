@@ -9,12 +9,7 @@ class Route (private var name: String,
              private var to: Location,
              private var distance: Double) {
     private var id: Long = 0
-    private var creationDate: Date
-
-    init {
-        id = 1//setId()
-        creationDate = Date()
-    }
+    private var creationDate: Date = Date()
 
     override fun toString(): String {
         var formatter = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
@@ -40,5 +35,11 @@ class Route (private var name: String,
         this.from = from
         this.to = to
         this.distance = distance
+    }
+    fun setId(id: Long) {
+        this.id = id
+    }
+    fun setDate(date: Date) {
+        this.creationDate = date
     }
 }
