@@ -2,6 +2,7 @@ val starter = Starter()
 val data = Data()
 val asker = Asker()
 val invoker = Invoker()
+
 fun main(args: Array<String>) {
     starter.start(data)
     while(true) {
