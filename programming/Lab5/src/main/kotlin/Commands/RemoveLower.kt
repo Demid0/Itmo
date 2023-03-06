@@ -1,11 +1,14 @@
 package Commands
 
-class RemoveLower : Command {
-    override fun execute(args: List<String>) {
-        val route = Asker.askRoute()
-        for (element in Data.collection) {
+import Asker
+import Data
+
+class RemoveLower: Command {
+    override fun execute(data: Data, asker: Asker, args: List<String>) {
+        val route = asker.askRoute()
+        for (element in data.collection) {
             if (element.getDistance() < route.getDistance()) {
-                Data.collection.remove(element)
+                data.collection.remove(element)
             }
         }
     }

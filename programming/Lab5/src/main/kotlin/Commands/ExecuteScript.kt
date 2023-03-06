@@ -1,7 +1,10 @@
 package Commands
 
-class ExecuteScript : Command {
-    override fun execute(args: List<String>) {
+import Asker
+import Data
+
+class ExecuteScript: Command {
+    override fun execute(data: Data, asker: Asker, args: List<String>) {
         println("Executing..")
     }
 

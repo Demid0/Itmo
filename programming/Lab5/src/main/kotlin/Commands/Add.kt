@@ -1,7 +1,10 @@
 package Commands
 
+import Asker
+import Data
+
 class Add: Command {
-    override fun execute(args: List<String>) {
-        Data.collection.add(Asker.askRoute())
+    override fun execute(data: Data, asker: Asker, args: List<String>) {
+        data.collection.add(asker.askRoute())
     }
 }

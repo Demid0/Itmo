@@ -1,9 +1,12 @@
-
+val starter = Starter()
+val data = Data()
+val asker = Asker()
+val invoker = Invoker()
 fun main(args: Array<String>) {
-    Starter.start()
+    starter.start(data)
     while(true) {
         val input = readln().split(" ").toMutableList()
         input.removeAll(setOf("", {input.size}))
-        Invoker.invoke(input)
+        invoker.invoke(data, asker, input)
     }
 }

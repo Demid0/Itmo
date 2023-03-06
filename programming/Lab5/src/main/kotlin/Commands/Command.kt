@@ -1,5 +1,8 @@
 package Commands
 
+import Asker
+import Data
+
 interface Command {
-    fun execute(args: List<String>)
+    fun execute(data: Data, asker: Asker, args: List<String>)
 }

@@ -1,10 +1,13 @@
 package Commands
 
-class AddIfMax : Command {
-    override fun execute(args: List<String>) {
-        val route = Asker.askRoute()
+import Asker
+import Data
+
+class AddIfMax: Command {
+    override fun execute(data: Data, asker: Asker, args: List<String>) {
+        val route = asker.askRoute()
         var bool = true
-        for (element in Data.collection) {
+        for (element in data.collection) {
             if (element.getDistance() >= route.getDistance()) {
                 println("I didn't add it")
                 bool = false
@@ -12,7 +15,7 @@ class AddIfMax : Command {
             }
         }
         if(bool) {
-            Data.collection.add(route)
+            data.collection.add(route)
             println("Route added")
         }
     }

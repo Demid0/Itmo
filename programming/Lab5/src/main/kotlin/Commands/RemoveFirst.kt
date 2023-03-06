@@ -1,9 +1,10 @@
 package Commands
 
+import Asker
 import Data
 
-class RemoveFirst : Command {
-    override fun execute(args: List<String>) {
-        Data.collection.remove(Data.collection.first())
+class RemoveFirst: Command {
+    override fun execute(data: Data, asker: Asker, args: List<String>) {
+        data.collection.remove(data.collection.first())
     }
 }

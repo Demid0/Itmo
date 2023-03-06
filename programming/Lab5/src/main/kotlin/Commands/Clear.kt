@@ -1,10 +1,10 @@
 package Commands
 
+import Asker
 import Data
-import Invoker
 
-class Clear : Command {
-    override fun execute(args: List<String>) {
-        Data.collection.clear()
+class Clear: Command {
+    override fun execute(data: Data, asker: Asker, args: List<String>) {
+        data.collection.clear()
     }
 }

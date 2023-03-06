@@ -1,15 +1,16 @@
 package Commands
 
+import Asker
 import Data
 import java.lang.Exception
 
-class RemoveById : Command {
-    override fun execute(args: List<String>) {
+class RemoveById: Command {
+    override fun execute(data: Data, asker: Asker, args: List<String>) {
         try {
-            var id: Long = args[1].toLong()
-            for (element in Data.collection) {
+            val id: Long = args[1].toLong()
+            for (element in data.collection) {
                 if (element.getId() == id) {
-                    Data.collection.remove(element)
+                    data.collection.remove(element)
                     break
                 }
             }

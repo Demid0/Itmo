@@ -1,9 +1,12 @@
 package Commands
 
-class Info : Command {
-    override fun execute(args: List<String>) {
+import Asker
+import Data
+
+class Info: Command {
+    override fun execute(data: Data, asker: Asker, args: List<String>) {
         println("Information about collection:")
-        println("Type: ${Data.collection::class}")
-        println("Size: ${Data.collection.size}")
+        println("Type: ${data.collection.javaClass.simpleName}")
+        println("Size: ${data.collection.size}")
     }
 }
