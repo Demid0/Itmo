@@ -6,8 +6,6 @@ build
 **/build/
 !src/**/build/
 
-#ignore TODOlist
-TODO
 # Ignore Gradle GUI config
 gradle-app.setting
 
