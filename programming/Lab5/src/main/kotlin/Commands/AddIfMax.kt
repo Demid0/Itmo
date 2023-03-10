@@ -1,13 +1,12 @@
 package Commands
 
-import Asker
-import Data
+import Utils.Tank
 
 class AddIfMax: Command {
-    override fun execute(data: Data, asker: Asker, args: List<String>) {
-        val route = asker.askRoute()
+    override fun execute(tank: Tank, args: List<String>) {
+        val route = tank.asker.askRoute()
         var bool = true
-        for (element in data.collection) {
+        for (element in tank.data.collection) {
             if (element.getDistance() >= route.getDistance()) {
                 println("I didn't add it")
                 bool = false
@@ -15,7 +14,7 @@ class AddIfMax: Command {
             }
         }
         if(bool) {
-            data.collection.add(route)
+            tank.data.collection.add(route)
             println("Route added")
         }
     }

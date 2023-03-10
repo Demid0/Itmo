@@ -20,6 +20,7 @@ dependencies {
     implementation("com.google.dagger:dagger:2.45")
     annotationProcessor("com.google.dagger:dagger-compiler:2.45")
     dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.6.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.0")
 }
 
 tasks.test {

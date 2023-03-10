@@ -1,15 +1,14 @@
 package Commands
 
-import Asker
-import Data
+import Utils.Tank
 import java.lang.Exception
 
 class UpdateId: Command {
-    override fun execute(data: Data, asker: Asker, args: List<String>) {
+    override fun execute(tank: Tank, args: List<String>) {
         try {
             val id: Long = args[1].toLong()
-            val route = asker.askRoute()
-            for (element in data.collection) {
+            val route = tank.asker.askRoute()
+            for (element in tank.data.collection) {
                 if (element.getId() == id) {
                     element.update(
                         name = route.getName(),

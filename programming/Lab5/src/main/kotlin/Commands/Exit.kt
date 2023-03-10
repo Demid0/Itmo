@@ -1,11 +1,10 @@
 package Commands
 
-import Asker
-import Data
+import Utils.Tank
 import kotlin.system.exitProcess
 
 class Exit: Command {
-    override fun execute(data: Data, asker: Asker, args: List<String>) {
+    override fun execute(tank: Tank, args: List<String>) {
         println("Bye!")
         exitProcess(0)
     }

@@ -1,16 +1,15 @@
 package Commands
 
-import Asker
-import Data
+import Utils.Tank
 import java.lang.Exception
 
 class RemoveById: Command {
-    override fun execute(data: Data, asker: Asker, args: List<String>) {
+    override fun execute(tank: Tank, args: List<String>) {
         try {
             val id: Long = args[1].toLong()
-            for (element in data.collection) {
+            for (element in tank.data.collection) {
                 if (element.getId() == id) {
-                    data.collection.remove(element)
+                    tank.data.collection.remove(element)
                     break
                 }
             }

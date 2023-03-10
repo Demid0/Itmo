@@ -1,0 +1,1 @@
+export lab5_filename="/home/demid/Desktop/Itmo/programming/Lab5/dataFile";

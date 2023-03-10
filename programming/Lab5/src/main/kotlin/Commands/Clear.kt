@@ -1,10 +1,9 @@
 package Commands
 
-import Asker
-import Data
+import Utils.Tank
 
 class Clear: Command {
-    override fun execute(data: Data, asker: Asker, args: List<String>) {
-        data.collection.clear()
+    override fun execute(tank: Tank, args: List<String>) {
+        tank.data.collection.clear()
     }
 }

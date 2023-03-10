@@ -1,8 +1,7 @@
 package Commands
 
-import Asker
-import Data
+import Utils.Tank
 
 interface Command {
-    fun execute(data: Data, asker: Asker, args: List<String>)
+    fun execute(tank: Tank, args: List<String>)
 }

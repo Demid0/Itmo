@@ -1,16 +1,16 @@
 package Commands
 
-import Asker
-import Data
+import Utils.Tank
 import kotlin.Exception
 
 class ChangeCollectionType: Command {
 
-    override fun execute(data: Data, asker: Asker, args: List<String>) {
+    override fun execute(tank: Tank, args: List<String>) {
         try {
             val newType = args[1]
+            tank.data.changeType(newType)
         } catch (e: Exception) {
-            println("Unknown type")
+            println("Unsupported collection type")
         }
     }
 
