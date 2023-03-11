@@ -15,9 +15,11 @@ class Serializator {
         strategies[name] = strategy
     }
 
-    fun getStrategies() = strategies
+    fun getStrategies(name: String) = strategies[name]
 
     fun changeStrategy(strategy: Strategy) {
         chosenStrategy = strategy
     }
+
+    fun getChosenStrategy() = chosenStrategy
 }

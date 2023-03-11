@@ -60,8 +60,8 @@ class Asker {
 
     private fun askNullableLocation(Lname: String): Location? {
         println("Field \"$Lname\" may null. If you want to make it null - write \"Yes\".")
-        val ans = readln().toLowerCase()
+        val ans = readln().lowercase()
         if (ans == "yes") return null
-        else return this.askLocation(Lname)
+        else return askLocation(Lname)
     }
 }
