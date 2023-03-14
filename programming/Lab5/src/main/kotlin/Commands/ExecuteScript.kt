@@ -17,7 +17,7 @@ class ExecuteScript: Command {
                 tank.invoker.invoke(tank, input)
             }
         } catch (e: Exception) {
-            println("No such file.")
+            println("File not found")
         }
     }
 }

@@ -1,8 +1,10 @@
 import Serialization.Serializator
 import Utils.*
+import java.io.InputStreamReader
+import java.io.PrintWriter
 
 val starter = Starter()
-val asker = Asker()
+val asker = Asker(InputStreamReader(System.`in`), PrintWriter(System.out))
 val invoker = Invoker()
 val serializator = Serializator()
 val data = Data()
@@ -12,10 +14,6 @@ fun main(args: Array<String>) {
     while(true) {
         val input = readln().split(" ").toMutableList()
         input.removeAll(setOf("", {input.size}))
-        //try {
-            invoker.invoke(tank, input)
-        //} catch (e: Exception) {
-          //  println("Oops, something went wrong")
-        //}
+        invoker.invoke(tank, input)
     }
 }
