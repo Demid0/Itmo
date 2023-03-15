@@ -3,32 +3,33 @@ package Utils
 import CollectionObjectsClasses.Coordinates
 import CollectionObjectsClasses.Location
 import CollectionObjectsClasses.Route
-import java.io.InputStreamReader
+import java.io.BufferedReader
 import java.io.PrintWriter
 import java.util.function.Predicate
 
 typealias ToType<T> = (input: String?) -> T
 
-class Asker(var inputF: InputStreamReader, var outputF: PrintWriter) {
+class Asker {
     private fun <T> ask(
-        reader: InputStreamReader = inputF,
-        writer: PrintWriter = outputF,
+        reader: BufferedReader,
+        writer: PrintWriter,
         printHint: String,
         converter: ToType<T>,
         checker: Predicate<T>
     ): T {
         var output: T
-        println("$printHint > ")
+        writer.println("$printHint > ")
+        writer.flush()
         while (true) {
            try {
-               val input = reader.read().toString()
-               writer.println(input)
-               writer.flush()
+               var input = reader.readLine()
+               input = if (input == "") null else input
                output = converter(input)
                if (checker.test(output)) break
                else throw Exception()
            } catch (e: Exception) {
-               println("Incorrect input. Try again.")
+               writer.println("Incorrect input. Try again.")
+               writer.flush()
            }
         }
         return output
@@ -41,32 +42,32 @@ class Asker(var inputF: InputStreamReader, var outputF: PrintWriter) {
     val ToDouble: ToType<Double> = { it!!.toDouble() }
     val ToString: ToType<String> = { it!! }
 
-    fun askRoute(): Route {
-        val name: String = ask(inputF, outputF, "name", ToString) { it != "" }
-        val coordinates = askCoordinates()
-        val from: Location? = askNullableLocation("from")
-        val to: Location = askLocation("to")
-        val distance: Double = ask(inputF, outputF, "distance", ToDouble) { it > 1 }
+    fun askRoute(reader: BufferedReader, writer: PrintWriter): Route {
+        val name: String = ask(reader, writer, "name", ToString) { it != "" }
+        val coordinates = askCoordinates(reader, writer)
+        val from: Location? = askNullableLocation(reader, writer, "from")
+        val to: Location = askLocation(reader, writer, "to")
+        val distance: Double = ask(reader, writer, "distance", ToDouble) { it > 1 }
         return Route(name, coordinates, from, to, distance)
     }
 
-    private fun askCoordinates(): Coordinates {
-        val x: Float? = ask(inputF, outputF, "Coordinates - x", ToFloatOrNull) { it == null || it <= 800 }
-        val y: Int? = ask(inputF, outputF, "Coordinates - y", ToIntOrNull) { true }
+    private fun askCoordinates(reader: BufferedReader, writer: PrintWriter): Coordinates {
+        val x: Float? = ask(reader, writer, "Coordinates - x", ToFloatOrNull) { it == null || it <= 800 }
+        val y: Int? = ask(reader, writer, "Coordinates - y", ToIntOrNull) { true }
         return Coordinates(x, y)
     }
 
-    private fun askLocation(Lname: String): Location {
-        val x: Int? = ask(inputF, outputF, "$Lname - x", ToIntOrNull) { true }
-        val y: Float = ask(inputF, outputF, "$Lname - y", ToFloat) { true }
-        val z: Long = ask(inputF, outputF, "$Lname - z", ToLong) { true }
-        val name: String = ask(inputF, outputF, "$Lname - name", ToString) { it != "" && it.length <= 496}
+    private fun askLocation(reader: BufferedReader, writer: PrintWriter, Lname: String): Location {
+        val x: Int? = ask(reader, writer, "$Lname - x", ToIntOrNull) { true }
+        val y: Float = ask(reader, writer, "$Lname - y", ToFloat) { true }
+        val z: Long = ask(reader, writer, "$Lname - z", ToLong) { true }
+        val name: String = ask(reader, writer, "$Lname - name", ToString) { it != "" && it.length <= 496}
         return Location(x, y, z, name)
     }
 
-    private fun askNullableLocation(Lname: String): Location? {
-        val ans = ask(inputF, outputF, "$Lname is nullable field. If you want to make it null, print \"yes\".", ToString) {true}
+    private fun askNullableLocation(reader: BufferedReader, writer: PrintWriter, Lname: String): Location? {
+        val ans = ask(reader, writer, "$Lname is nullable field. If you want to make it null, print \"yes\".", ToString) {true}
         return if (ans == "yes") null
-        else askLocation(Lname)
+        else askLocation(reader, writer, Lname)
     }
 }

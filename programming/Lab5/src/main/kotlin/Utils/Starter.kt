@@ -9,12 +9,16 @@ import kotlin.system.exitProcess
 
 class Starter {
     fun start(tank: Tank) {
-        downloadCollection(tank.data, tank.serializator)
+        //all functional
         downloadCommands(tank.invoker)
         downloadSerializationStrategies(tank.serializator)
         downloadSupportedCollectionTypes(tank.data)
 
+        //last functional condition
         downloadLastSystemCondition(tank)
+
+        //saved data
+        downloadCollection(tank.data, tank.serializator)
     }
     fun downloadCollection(data: Data, serializator: Serializator) {
         println("Downloading collection")
@@ -34,29 +38,28 @@ class Starter {
     }
     fun downloadCommands(invoker: Invoker) {
         println("Downloading commands")
-        invoker.addCommand("exit", Exit())
-        invoker.addCommand("help", Help())
-        invoker.addCommand("info", Info())
-        invoker.addCommand("show", Show())
-        invoker.addCommand("add", Add())
-        invoker.addCommand("update", UpdateId())
-        invoker.addCommand("remove_by_id", RemoveById())
-        invoker.addCommand("clear", Clear())
-        invoker.addCommand("save", Save())
-        invoker.addCommand("execute_script", ExecuteScript())
-        invoker.addCommand("remove_first", RemoveFirst())
-        invoker.addCommand("add_if_max", AddIfMax())
-        invoker.addCommand("remove_lower", RemoveLower())
-        invoker.addCommand("count_by_distance", CountDistance { a: Double, b: Double -> a == b })
-        invoker.addCommand("count_less_than_distance", CountDistance { a: Double, b: Double -> a < b })
-        invoker.addCommand("print_field_descending_distance", PrintFieldDescendingDistance())
-        invoker.addCommand("change_collection_type", ChangeCollectionType())
-        invoker.addCommand("change_serialization_strategy", ChangeSerializationStrategy())
+        invoker.addCommand("exit", Exit()) // done
+        invoker.addCommand("help", Help()) // done
+        invoker.addCommand("info", Info()) // done
+        invoker.addCommand("show", Show()) // done
+        invoker.addCommand("add", Add()) // optimize validator
+        invoker.addCommand("update", UpdateId()) // done
+        invoker.addCommand("remove_by_id", RemoveById()) // done
+        invoker.addCommand("clear", Clear()) // done
+        invoker.addCommand("save", Save()) // done
+        invoker.addCommand("execute_script", ExecuteScript()) // change with writer and printer, StackOverflowError, executes path
+        invoker.addCommand("remove_first", RemoveFirst()) // done
+        invoker.addCommand("add_if_max", AddIfMax()) // done
+        invoker.addCommand("remove_lower", RemoveLower()) // done
+        invoker.addCommand("count_by_distance", CountDistance { a: Double, b: Double -> a == b }) // done
+        invoker.addCommand("count_less_than_distance", CountDistance { a: Double, b: Double -> a < b }) // done
+        invoker.addCommand("print_field_descending_distance", PrintFieldDescendingDistance()) // done
+        invoker.addCommand("change_collection_type", ChangeCollectionType()) // done
+        invoker.addCommand("change_serialization_strategy", ChangeSerializationStrategy()) // done
         println("Done!")
     }
     fun downloadSerializationStrategies(serializator: Serializator) {
         println("Downloading supported serialization strategy")
-        serializator.addStrategy("yamlstrategy", YamlStrategy())
         serializator.addStrategy("jsonstrategy", JsonStrategy())
         println("Done!")
     }
@@ -73,7 +76,7 @@ class Starter {
             val reader = InputStreamReader(file.inputStream())
             val output = reader.readLines()
             tank.data.changeType(output[0])
-            tank.serializator.changeStrategy(tank.serializator.getStrategies(output[1])!!)
+            tank.serializator.changeStrategy(tank.serializator.getStrategy(output[1])!!)
             println("Done!")
         } catch (e: Exception) {
             println("Can't found info about last system condition. Will use default serialization strategy and default collection type.")
