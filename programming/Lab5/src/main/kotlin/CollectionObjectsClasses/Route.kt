@@ -3,19 +3,21 @@ package CollectionObjectsClasses
 import kotlinx.serialization.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.abs
 
 @Serializable
 class Route (private var name: String,
              private var coordinates: Coordinates,
              private var from: Location?,
              private var to: Location,
-             private var distance: Double) {
-    private var id: Long = 0
+             private var distance: Double,
+             private var id: Long = abs(UUID.randomUUID().mostSignificantBits)
+) {
     private var creationDate = SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(Date())
 
     override fun toString(): String {
-        return "\nname: $name\ncoordinates: $coordinates\nfrom(Location): ${from.toString()}" +
-                "\nto(Location): $to\ndistance: $distance\nid: $id\ncreationDate: $creationDate"
+        return "name: $name\ncoordinates: $coordinates\nfrom(Location): ${from.toString()}" +
+                "\nto(Location): $to\ndistance: $distance\nid: $id\ncreationDate: $creationDate\n"
     }
 
     fun getId(): Long = id
@@ -36,7 +38,5 @@ class Route (private var name: String,
         this.to = to
         this.distance = distance
     }
-    fun setId(id: Long) {
-        this.id = id
-    }
+
 }
