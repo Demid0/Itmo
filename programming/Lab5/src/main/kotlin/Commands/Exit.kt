@@ -13,7 +13,7 @@ class Exit: Command {
         writer.flush()
         writer.println(tank.serializator.getChosenStrategy().javaClass.simpleName.lowercase())
         writer.flush()
-        println("Bye!")
+        tank.writer.println("Bye!")
         exitProcess(0)
     }
 }

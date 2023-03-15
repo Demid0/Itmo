@@ -11,7 +11,7 @@ class CountDistance(val compare: (a: Double, b: Double) -> Boolean): Command {
             for (element in tank.data.collection) {
                 if (compare(element.getDistance(), distance)) counter++
             }
-            println("$counter element(s)")
+            tank.writer.println("$counter element(s)")
         } catch (e: Exception) {
             System.err.println("Wrong distance format")
         }

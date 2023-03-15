@@ -14,6 +14,7 @@ class Save: Command {
                 writer.println(tank.serializator.serialize(element))
                 writer.flush()
             }
+            tank.writer.println("Done!")
         } catch (e: Exception) {
             System.err.println("Cannot open file")
         }

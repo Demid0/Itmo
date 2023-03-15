@@ -8,6 +8,7 @@ class ChangeCollectionType: Command {
         try {
             val newType = args[1]
             tank.data.changeType(newType)
+            tank.writer.println("Changed")
         } catch (e: NullPointerException) {
             System.err.println("Unsupported collection type.")
         } catch (e: IndexOutOfBoundsException) {

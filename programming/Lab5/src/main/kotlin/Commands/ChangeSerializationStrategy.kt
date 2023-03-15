@@ -7,6 +7,7 @@ class ChangeSerializationStrategy: Command {
         try {
             val newType = args[1] + "strategy"
             tank.serializator.changeStrategy(tank.serializator.getStrategy(newType)!!)
+            tank.writer.println("Changed!")
         } catch (e: NullPointerException) {
             System.err.println("Unknown serialization strategy.")
         } catch (e: IndexOutOfBoundsException) {
