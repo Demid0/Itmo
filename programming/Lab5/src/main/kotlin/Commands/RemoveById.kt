@@ -14,7 +14,7 @@ class RemoveById: Command {
                 }
             }
         } catch (e: Exception) {
-            println("Wrong id format.")
+            System.err.println("Wrong id format.")
         }
     }
 

@@ -16,8 +16,9 @@ class ExecuteScript: Command {
                 input.removeAll(setOf("", { input.size }))
                 tank.invoker.invoke(tank, input)
             }
+            println("Script $file_name")
         } catch (e: Exception) {
-            println("File not found")
+            System.err.println("File not found")
         }
     }
 }

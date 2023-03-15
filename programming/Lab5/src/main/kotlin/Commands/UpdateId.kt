@@ -21,7 +21,7 @@ class UpdateId: Command {
                 }
             }
         } catch (e: Exception) {
-            println("Wrong id format.")
+            System.err.println("Wrong id format.")
         }
     }
 

@@ -7,8 +7,10 @@ class ChangeSerializationStrategy: Command {
         try {
             val newType = args[1] + "strategy"
             tank.serializator.changeStrategy(tank.serializator.getStrategy(newType)!!)
-        } catch (e: Exception) {
-            println("Unknown serialization strategy.")
+        } catch (e: NullPointerException) {
+            System.err.println("Unknown serialization strategy.")
+        } catch (e: IndexOutOfBoundsException) {
+            System.err.println("Empty input.")
         }
     }
 }

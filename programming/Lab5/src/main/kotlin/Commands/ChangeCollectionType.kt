@@ -1,7 +1,6 @@
 package Commands
 
 import Utils.Tank
-import kotlin.Exception
 
 class ChangeCollectionType: Command {
 
@@ -9,8 +8,10 @@ class ChangeCollectionType: Command {
         try {
             val newType = args[1]
             tank.data.changeType(newType)
-        } catch (e: Exception) {
-            println("Unsupported collection type")
+        } catch (e: NullPointerException) {
+            System.err.println("Unsupported collection type.")
+        } catch (e: IndexOutOfBoundsException) {
+            System.err.println("Empty input.")
         }
     }
 
