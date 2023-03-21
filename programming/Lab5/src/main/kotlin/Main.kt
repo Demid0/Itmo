@@ -1,15 +1,17 @@
 import Utils.*
+import org.koin.core.component.inject
 import org.koin.core.context.startKoin
-import java.io.*
 
 
 fun main(args: Array<String>) {
     startKoin {
         modules(koinModule)
     }
-    val starter = Starter()
-    val reader = BufferedReader(InputStreamReader(System.`in`))
-    val invoker = Invoker()
+    val utilFabric = UtilFabric()
+    val starter: Starter by utilFabric.inject()
+    val bufferedReaderManager: BufferedReaderManager by utilFabric.inject()
+    val reader = bufferedReaderManager.get()
+    val invoker: Invoker by utilFabric.inject()
     starter.downloadLastSystemCondition()
     while(true) {
         val input = reader.readLine().split(" ").toMutableList()

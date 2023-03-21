@@ -1,5 +1,6 @@
 package Utils
 
+import org.koin.core.component.KoinComponent
 import org.koin.dsl.module
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -25,3 +26,5 @@ val koinModule = module {
     single { Stack<String>() }
 
 }
+
+class UtilFabric: KoinComponent

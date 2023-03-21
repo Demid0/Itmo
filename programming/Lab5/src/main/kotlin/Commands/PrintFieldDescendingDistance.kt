@@ -8,5 +8,6 @@ class PrintFieldDescendingDistance: Command() {
         for (element in collection) {
             writer.print("${element.getDistance()} ")
         }
+        writer.println()
     }
 }
