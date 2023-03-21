@@ -15,7 +15,7 @@ val data = creator.createData()
 
 val tank = Tank(invoker, data, serializator, asker, reader, writer)
 fun main(args: Array<String>) {
-    starter.start(tank)
+    starter.downloadLastSystemCondition(tank)
     while(true) {
         val input = reader.readLine().split(" ").toMutableList()
         input.removeAll(setOf("", {input.size}))

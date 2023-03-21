@@ -3,6 +3,7 @@ package Utils
 import Commands.*
 import Serialization.Serializator
 import Serialization.Strategies.JsonStrategy
+import Serialization.Strategies.YamlStrategy
 
 class UtilFabric {
 
@@ -36,6 +37,7 @@ class UtilFabric {
     fun createSerializator() : Serializator {
         val serializator = Serializator()
         serializator.addStrategy("jsonstrategy", JsonStrategy())
+        serializator.addStrategy("yamlstrategy", YamlStrategy())
         return serializator
     }
 

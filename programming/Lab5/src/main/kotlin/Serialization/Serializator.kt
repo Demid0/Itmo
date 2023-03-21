@@ -8,7 +8,7 @@ class Serializator {
     private var strategies = HashMap<String, Strategy>()
     private var chosenStrategy: Strategy = JsonStrategy()
 
-    fun serialize(route: Route) = chosenStrategy.encode(route)
+    fun serialize(collection: MutableCollection<Route>) = chosenStrategy.encode(collection)
     fun deserialize(string: String) = chosenStrategy.decode(string)
 
     fun addStrategy(name: String, strategy: Strategy) {
@@ -16,6 +16,7 @@ class Serializator {
     }
 
     fun getStrategy(name: String) = strategies[name]
+    fun getStrategies() = strategies
 
     fun changeStrategy(strategy: Strategy) {
         chosenStrategy = strategy

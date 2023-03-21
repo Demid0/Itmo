@@ -3,7 +3,8 @@ package Serialization.Strategies
 import CollectionObjectsClasses.Route
 
 interface Strategy {
-    fun decode(str: String) : Route
-    fun encode(obj: Route): String
+    fun decode(str: String): MutableCollection<Route>
+    fun encode(collection: MutableCollection<Route>): String
     override fun toString(): String
+
 }

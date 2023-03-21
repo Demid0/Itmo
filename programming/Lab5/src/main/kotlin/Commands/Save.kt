@@ -10,10 +10,8 @@ class Save: Command {
             val collection = tank.data.collection
             val file = File(tank.data.getFileName())
             val writer = PrintWriter(file)
-            for (element in collection) {
-                writer.println(tank.serializator.serialize(element))
-                writer.flush()
-            }
+            writer.println(tank.serializator.serialize(collection))
+            writer.flush()
             tank.writer.println("Done!")
         } catch (e: Exception) {
             System.err.println("Cannot open file")
