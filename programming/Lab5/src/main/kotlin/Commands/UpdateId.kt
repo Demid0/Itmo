@@ -1,15 +1,14 @@
 package Commands
 
-import Utils.Tank
 import java.lang.Exception
 
-class UpdateId: Command {
-    override fun execute(tank: Tank, args: List<String>) {
+class UpdateId: Command() {
+    override fun execute(args: List<String>) {
         try {
             var bool = false
             val id: Long = args[1].toLong()
-            val route = tank.asker.askRoute(tank.reader, tank.writer)
-            for (element in tank.data.collection) {
+            val route = asker.askRoute(reader, writer)
+            for (element in data.collection) {
                 if (element.getId() == id) {
                     element.update(
                         name = route.getName(),
@@ -22,8 +21,8 @@ class UpdateId: Command {
                     break
                 }
             }
-            if (bool) tank.writer.println("Done!")
-            else tank.writer.println("No element with this id")
+            if (bool) writer.println("Done!")
+            else writer.println("No element with this id")
         } catch (e: Exception) {
             System.err.println("Wrong id format.")
         }

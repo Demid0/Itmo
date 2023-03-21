@@ -1,19 +1,25 @@
 package Commands
 
-import Utils.Tank
+class ChangeCollectionType: Command() {
 
-class ChangeCollectionType: Command {
-
-    override fun execute(tank: Tank, args: List<String>) {
+    override fun execute(args: List<String>) {
         try {
             val newType = args[1]
-            tank.data.changeType(newType)
-            tank.writer.println("Changed")
+            data.changeType(newType)
+            writer.println("Changed!")
         } catch (e: NullPointerException) {
             System.err.println("Unsupported collection type.")
+            printSupportedTypes()
         } catch (e: IndexOutOfBoundsException) {
             System.err.println("Empty input.")
+            printSupportedTypes()
         }
     }
 
+    private fun printSupportedTypes() {
+        println("You can use this types:")
+        for (type in data.getSupportedCollectionTypes()) {
+            println(type.key)
+        }
+    }
 }

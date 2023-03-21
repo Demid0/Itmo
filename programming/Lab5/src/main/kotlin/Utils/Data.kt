@@ -7,6 +7,11 @@ class Data {
     private var supportedCollectionTypes: HashMap<String, MutableCollection<Route>> = hashMapOf()
     private var fileName = System.getenv("lab5_filename")
     private var infoFileName = System.getenv("lab5_collection_info_file")
+
+    init {
+        addSupportedCollectionType("arraylist", ArrayList())
+        addSupportedCollectionType("arraydeque", ArrayDeque())
+    }
     fun changeType(newType: String) {
         val old = collection
         collection = supportedCollectionTypes[newType.lowercase()]!!
@@ -19,5 +24,6 @@ class Data {
     }
     fun getFileName() = fileName
     fun getInfoFileName() = infoFileName
+    fun getSupportedCollectionTypes() = supportedCollectionTypes
 
 }

@@ -3,7 +3,9 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.8.10"
     kotlin("plugin.serialization") version "1.8.10"
+
     id("org.jetbrains.dokka") version "1.7.20"
+
     application
 }
 
@@ -15,13 +17,15 @@ repositories {
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
     implementation("com.charleskorn.kaml:kaml:0.51.0")
-    implementation("com.google.dagger:dagger:2.45")
-    annotationProcessor("com.google.dagger:dagger-compiler:2.45")
-    dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.6.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.1")
+
+    implementation("io.insert-koin:koin-core:3.2.0")
+
+    testImplementation(kotlin("test"))
+
+    dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.6.0")
 }
 
 tasks.test {

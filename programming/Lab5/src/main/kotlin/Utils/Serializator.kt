@@ -1,13 +1,18 @@
-package Serialization
+package Utils
 
 import CollectionObjectsClasses.Route
-import Serialization.Strategies.JsonStrategy
-import Serialization.Strategies.Strategy
+import SerializationStrategies.JsonStrategy
+import SerializationStrategies.Strategy
+import SerializationStrategies.YamlStrategy
 
 class Serializator {
-    private var strategies = HashMap<String, Strategy>()
+    private var strategies: HashMap<String, Strategy> = hashMapOf()
     private var chosenStrategy: Strategy = JsonStrategy()
 
+    init {
+        addStrategy("jsonstrategy", JsonStrategy())
+        addStrategy("yamlstrategy", YamlStrategy())
+    }
     fun serialize(collection: MutableCollection<Route>) = chosenStrategy.encode(collection)
     fun deserialize(string: String) = chosenStrategy.decode(string)
 

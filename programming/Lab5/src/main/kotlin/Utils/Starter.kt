@@ -1,36 +1,39 @@
 package Utils
 
-import Serialization.*
+import org.koin.core.component.KoinComponent
 import java.io.*
 import kotlin.system.exitProcess
+import org.koin.core.component.inject
+class Starter: KoinComponent {
 
-class Starter {
+    fun downloadLastSystemCondition() {
+        val data: Data by inject()
+        val serializator: Serializator by inject()
 
-    fun downloadLastSystemCondition(tank: Tank) {
         println("Downloading last system condition")
         try {
-            val file = File(tank.data.getInfoFileName())
+            val file = File(data.getInfoFileName())
             val reader = InputStreamReader(file.inputStream())
             val output = reader.readLines()
 
             // Пробует десериализовать по последней стратегии, если не получается, то пробегается по всем возможным
-            tank.serializator.changeStrategy(tank.serializator.getStrategy(output[1])!!)
-            if (!downloadCollection(tank.data, tank.serializator)) {
+            serializator.changeStrategy(serializator.getStrategy(output[1])!!)
+            if (!downloadCollection(data, serializator)) {
                 var flag = false
-                for (strategy in tank.serializator.getStrategies()) {
-                    tank.serializator.changeStrategy(strategy.value)
-                    if (downloadCollection(tank.data, tank.serializator)) {
+                for (strategy in serializator.getStrategies()) {
+                    serializator.changeStrategy(strategy.value)
+                    if (downloadCollection(data, serializator)) {
                         flag = true
                         break
                     }
                 }
-                if (flag) System.err.println("File was in ${tank.serializator.getChosenStrategy().toString()} type.")
+                if (flag) System.err.println("File was in ${serializator.getChosenStrategy().toString()} type.")
                 else System.err.println("Collection didn't download")
             }
 
-            tank.serializator.changeStrategy(tank.serializator.getStrategy(output[1])!!)
+            serializator.changeStrategy(serializator.getStrategy(output[1])!!)
 
-            tank.data.changeType(output[0])
+            data.changeType(output[0])
             println("Done!")
         } catch (e: Exception) {
             println("Can't found info about last system condition. Will use default serialization strategy and default collection type.")
@@ -46,7 +49,7 @@ class Starter {
             println("File not found")
             exitProcess(1)
         } catch (e: Exception) {
-            println("Serialization strategy ${serializator.getChosenStrategy()} not working.")
+            println("Serialization strategy ${serializator.getChosenStrategy()} is not working.")
             return false
         }
         return true

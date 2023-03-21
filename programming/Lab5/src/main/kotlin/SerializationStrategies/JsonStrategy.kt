@@ -1,4 +1,4 @@
-package Serialization.Strategies
+package SerializationStrategies
 
 import CollectionObjectsClasses.Route
 import kotlinx.serialization.decodeFromString

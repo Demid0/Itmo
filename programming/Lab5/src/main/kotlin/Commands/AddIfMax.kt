@@ -1,22 +1,20 @@
 package Commands
 
-import Utils.Tank
-
-class AddIfMax: Command {
-    override fun execute(tank: Tank, args: List<String>) {
+class AddIfMax: Command() {
+    override fun execute(args: List<String>) {
         try {
-            val route = tank.asker.askRoute(tank.reader, tank.writer)
+            val route = asker.askRoute(reader, writer)
             var bool = true
-            for (element in tank.data.collection) {
+            for (element in data.collection) {
                 if (element.getDistance() >= route.getDistance()) {
-                    tank.writer.println("I didn't add it")
+                    writer.println("I didn't add it")
                     bool = false
                     break
                 }
             }
             if (bool) {
-                tank.data.collection.add(route)
-                tank.writer.println("Done!")
+                data.collection.add(route)
+                writer.println("Done!")
             }
         } catch (e: Exception) {
             System.err.println("Something went wrong.")

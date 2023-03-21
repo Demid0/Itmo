@@ -1,51 +1,27 @@
 package Utils
 
-import Commands.*
-import Serialization.Serializator
-import Serialization.Strategies.JsonStrategy
-import Serialization.Strategies.YamlStrategy
+import org.koin.dsl.module
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.io.PrintWriter
+import java.util.*
 
-class UtilFabric {
+val koinModule = module {
 
-    fun createStarter() = Starter()
+    single { Starter() }
 
-    fun createAsker() = Asker()
+    single { Asker() }
 
-    fun createInvoker() : Invoker {
-        val invoker = Invoker()
-        invoker.addCommand("exit", Exit()) // done
-        invoker.addCommand("help", Help()) // done
-        invoker.addCommand("info", Info()) // done
-        invoker.addCommand("show", Show()) // done
-        invoker.addCommand("add", Add()) // optimize validator
-        invoker.addCommand("update", UpdateId()) // done
-        invoker.addCommand("remove_by_id", RemoveById()) // done
-        invoker.addCommand("clear", Clear()) // done
-        invoker.addCommand("save", Save()) // done
-        invoker.addCommand("execute_script", ExecuteScript()) // change with writer and printer, StackOverflowError, executes path
-        invoker.addCommand("remove_first", RemoveFirst()) // done
-        invoker.addCommand("add_if_max", AddIfMax()) // done
-        invoker.addCommand("remove_lower", RemoveLower()) // done
-        invoker.addCommand("count_by_distance", CountDistance { a: Double, b: Double -> a == b }) // done
-        invoker.addCommand("count_less_than_distance", CountDistance { a: Double, b: Double -> a < b }) // done
-        invoker.addCommand("print_field_descending_distance", PrintFieldDescendingDistance()) // done
-        invoker.addCommand("change_collection_type", ChangeCollectionType()) // done
-        invoker.addCommand("change_serialization_strategy", ChangeSerializationStrategy()) // done
-        return invoker
-    }
+    single { PrintWriterManager(PrintWriter(System.out, true)) }
 
-    fun createSerializator() : Serializator {
-        val serializator = Serializator()
-        serializator.addStrategy("jsonstrategy", JsonStrategy())
-        serializator.addStrategy("yamlstrategy", YamlStrategy())
-        return serializator
-    }
+    single { BufferedReaderManager(BufferedReader(InputStreamReader(System.`in`))) }
 
-    fun createData() : Data {
-        val data = Data()
-        data.addSupportedCollectionType("arraylist", ArrayList())
-        data.addSupportedCollectionType("arraydeque", ArrayDeque())
-        return data
-    }
+    single { Invoker() }
+
+    single { Serializator() }
+
+    single { Data() }
+
+    single { Stack<String>() }
 
 }

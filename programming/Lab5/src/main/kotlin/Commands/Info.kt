@@ -1,13 +1,12 @@
 package Commands
 
-import Utils.Tank
-
-class Info: Command {
-    override fun execute(tank: Tank, args: List<String>) {
-        tank.writer.println("Information about collection:" +
-                "\n\tType: ${tank.data.collection.javaClass.simpleName}" +
-                "\n\tSize: ${tank.data.collection.size}" +
+class Info: Command() {
+    override fun execute(args: List<String>) {
+        writer.println("Information about collection:" +
+                "\n\tType: ${data.collection.javaClass.simpleName}" +
+                "\n\tSize: ${data.collection.size}" +
                 "\nInfo about system:" +
-                "\n\tSerialization strategy: ${tank.serializator.getChosenStrategy().toString()}")
+                "\n\tSerialization strategy: ${serializator.getChosenStrategy().toString()}"
+        )
     }
 }
