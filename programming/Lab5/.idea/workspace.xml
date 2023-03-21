@@ -4,14 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8500fb34-274f-4286-9f5d-68add248c2be" name="Changes" comment="?: Idea's jokes">
+    <list default="true" id="8500fb34-274f-4286-9f5d-68add248c2be" name="Changes" comment="feat: if applied, will add YamlSerialization">
+      <change afterPath="$PROJECT_DIR$/build/classes/kotlin/main/Serialization/Strategies/YamlStrategy.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/kotlin/main/Utils/UtilFabric$createInvoker$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/kotlin/main/Utils/UtilFabric$createInvoker$2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/kotlin/main/Utils/UtilFabric.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/Serialization/Strategies/YamlStrategy.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../dataFile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_03_2023,_23_51_[Changes]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_03_2023__23_51__Changes_.xml" beforeDir="false" />
@@ -21,6 +30,7 @@
       <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/CollectionObjectsClasses/Route.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/CollectionObjectsClasses/Route.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/Commands/ExecuteScript$execute$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/Commands/ExecuteScript$execute$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/Commands/ExecuteScript.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/Commands/ExecuteScript.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/Commands/Save.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/Commands/Save.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/MainKt$main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/MainKt$main$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/MainKt.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/MainKt.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/Serialization/Serializator.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/Serialization/Serializator.class" afterDir="false" />
@@ -264,7 +274,7 @@
       <workItem from="1678911760033" duration="4614000" />
       <workItem from="1679027017431" duration="97000" />
       <workItem from="1679027151101" duration="3385000" />
-      <workItem from="1679410446844" duration="5798000" />
+      <workItem from="1679410446844" duration="6129000" />
     </task>
     <task id="LOCAL-00001" summary="Lab5 init">
       <created>1676809431144</created>
@@ -448,7 +458,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678916122132</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="feat: if applied, will add YamlSerialization">
+      <created>1679418844804</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1679418844805</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -488,7 +505,8 @@
     <MESSAGE value="feat: add unique id" />
     <MESSAGE value="test: scripts to ExecuteScript command" />
     <MESSAGE value="?: Idea's jokes" />
-    <option name="LAST_COMMIT_MESSAGE" value="?: Idea's jokes" />
+    <MESSAGE value="feat: if applied, will add YamlSerialization" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: if applied, will add YamlSerialization" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
