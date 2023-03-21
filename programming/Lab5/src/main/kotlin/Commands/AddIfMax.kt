@@ -1,5 +1,8 @@
 package Commands
 
+/***
+ *     add_if_max {element} : добавить новый элемент в коллекцию, если его значение превышает значение наибольшего элемента этой коллекции
+ */
 class AddIfMax: Command() {
     override fun execute(args: List<String>) {
         try {

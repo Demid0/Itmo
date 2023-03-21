@@ -1,5 +1,8 @@
 package Commands
 
+/***
+ *     change_collection_type type : поменять тип коллекции
+ */
 class ChangeCollectionType: Command() {
 
     override fun execute(args: List<String>) {

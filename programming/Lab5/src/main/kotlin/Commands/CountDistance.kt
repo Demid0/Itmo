@@ -2,6 +2,10 @@ package Commands
 
 import java.lang.Exception
 
+/***
+ *     count_by_distance distance : вывести количество элементов, значение поля distance которых равно заданному
+ *     count_less_than_distance distance : вывести количество элементов, значение поля distance которых меньше заданного
+ */
 class CountDistance(val compare: (a: Double, b: Double) -> Boolean): Command() {
     override fun execute(args: List<String>) {
         try {

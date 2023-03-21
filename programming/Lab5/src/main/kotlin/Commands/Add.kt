@@ -1,5 +1,8 @@
 package Commands
 
+/***
+ *     add {element} : добавить новый элемент в коллекцию
+ */
 class Add: Command() {
     override fun execute(args: List<String>) {
         try {

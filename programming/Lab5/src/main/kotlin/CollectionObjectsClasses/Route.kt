@@ -4,7 +4,11 @@ import kotlinx.serialization.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.abs
-
+/***
+ * Класс, экземляры которого содержаться в коллекции
+ * @constructor Route (name: String, coordinates: Coordinates, from: Location?, to: Location, distance: Double)
+ *
+ */
 @Serializable
 class Route (private var name: String,
              private var coordinates: Coordinates,

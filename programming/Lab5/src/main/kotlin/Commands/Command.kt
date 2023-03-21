@@ -4,7 +4,9 @@ import Utils.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.util.*
-
+/***
+ *     Абстрактный класс команды
+ */
 abstract class Command : KoinComponent {
     private val printWriterManager: PrintWriterManager by inject()
     private val bufferedReaderManager: BufferedReaderManager by inject()

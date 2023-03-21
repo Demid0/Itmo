@@ -4,6 +4,9 @@ import java.io.File
 import java.io.PrintWriter
 import kotlin.system.exitProcess
 
+/***
+ *     exit : завершить программу (без сохранения в файл)
+ */
 class Exit: Command() {
     override fun execute(args: List<String>) {
         val file = File(data.getInfoFileName())

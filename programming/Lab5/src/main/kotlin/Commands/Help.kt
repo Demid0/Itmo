@@ -1,5 +1,7 @@
 package Commands
-
+/***
+ *     help : вывести справку по доступным командам
+ */
 class Help: Command() {
     override fun execute(args: List<String>) {
         val commands = invoker.getCommands()

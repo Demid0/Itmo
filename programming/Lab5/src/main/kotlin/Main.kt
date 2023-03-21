@@ -2,7 +2,9 @@ import Utils.*
 import org.koin.core.component.inject
 import org.koin.core.context.startKoin
 
-
+/***
+ * Точка входа в программу
+ */
 fun main(args: Array<String>) {
     startKoin {
         modules(koinModule)

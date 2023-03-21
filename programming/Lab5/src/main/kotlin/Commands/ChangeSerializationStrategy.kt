@@ -1,5 +1,7 @@
 package Commands
-
+/***
+ * change_serialization_strategy strategy : поменять тип сериализации
+ */
 class ChangeSerializationStrategy: Command() {
     override fun execute(args: List<String>) {
         try {

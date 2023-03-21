@@ -5,6 +5,9 @@ import java.io.File
 import java.io.InputStreamReader
 import java.io.PrintWriter
 
+/***
+ *     execute_script file_name : считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.
+ */
 class ExecuteScript: Command() {
     override fun execute(args: List<String>) {
         try {

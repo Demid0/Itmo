@@ -1,7 +1,9 @@
 package Commands
 
 import java.util.NoSuchElementException
-
+/***
+ *     remove_first : удалить первый элемент из коллекции
+ */
 class RemoveFirst: Command() {
     override fun execute(args: List<String>) {
         try {

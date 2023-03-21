@@ -1,5 +1,7 @@
 package Commands
-
+/***
+ *     remove_lower {element} : удалить из коллекции все элементы, меньшие, чем заданный
+ */
 class RemoveLower: Command() {
     override fun execute(args: List<String>) {
         try {

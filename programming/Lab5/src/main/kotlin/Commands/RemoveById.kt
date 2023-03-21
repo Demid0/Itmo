@@ -1,7 +1,9 @@
 package Commands
 
 import java.lang.Exception
-
+/***
+ *     remove_by_id id : удалить элемент из коллекции по его id
+ */
 class RemoveById: Command() {
     override fun execute(args: List<String>) {
         try {
