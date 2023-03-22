@@ -1,0 +1,13 @@
+- name: "6"
+  coordinates:
+    x: 6.0
+    y: null
+  from: null
+  to:
+    x: 6
+    y: 6.0
+    z: 6
+    name: "6"
+  distance: 6.0
+  id: 4755671888309563642
+  creationDate: "22-03-2023 03:25:13"
