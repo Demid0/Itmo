@@ -23,7 +23,7 @@ class Asker {
         checker: Predicate<T>
     ): T {
         var output: T
-        writer.println("$printHint > ")
+        writer.print("$printHint > ")
         writer.flush()
         while (true) {
            try {
