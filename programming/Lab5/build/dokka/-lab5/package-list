@@ -1,7 +1,8 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
 $dokka.location:////PointingToDeclaration/-lab5/[root]/index.html
-$dokka.location://main/#kotlin.Array[kotlin.String]/PointingToDeclaration/-lab5/[root]/main.html
+$dokka.location:/MainKt///PointingToDeclaration/-lab5/[root]/-main-kt/index.html
+$dokka.location:/MainKt/main/#kotlin.Array[kotlin.String]/PointingToDeclaration/-lab5/[root]/-main-kt/main.html
 $dokka.location:CollectionObjectsClasses////PointingToDeclaration/-lab5/CollectionObjectsClasses/index.html
 $dokka.location:CollectionObjectsClasses/Coordinates///PointingToDeclaration/-lab5/CollectionObjectsClasses/-coordinates/index.html
 $dokka.location:CollectionObjectsClasses/Coordinates/Coordinates/#kotlin.Float?#kotlin.Int?/PointingToDeclaration/-lab5/CollectionObjectsClasses/-coordinates/-coordinates.html
@@ -37,18 +38,20 @@ $dokka.location:Commands/Clear/Clear/#/PointingToDeclaration/-lab5/Commands/-cl
 $dokka.location:Commands/Clear/execute/#kotlin.collections.List[kotlin.String]/PointingToDeclaration/-lab5/Commands/-clear/execute.html
 $dokka.location:Commands/Command///PointingToDeclaration/-lab5/Commands/-command/index.html
 $dokka.location:Commands/Command/Command/#/PointingToDeclaration/-lab5/Commands/-command/-command.html
-$dokka.location:Commands/Command/asker/#/PointingToDeclaration/-lab5/Commands/-command/asker.html
-$dokka.location:Commands/Command/data/#/PointingToDeclaration/-lab5/Commands/-command/data.html
 $dokka.location:Commands/Command/execute/#kotlin.collections.List[kotlin.String]/PointingToDeclaration/-lab5/Commands/-command/execute.html
-$dokka.location:Commands/Command/invoker/#/PointingToDeclaration/-lab5/Commands/-command/invoker.html
-$dokka.location:Commands/Command/reader/#/PointingToDeclaration/-lab5/Commands/-command/reader.html
-$dokka.location:Commands/Command/scriptStack/#/PointingToDeclaration/-lab5/Commands/-command/script-stack.html
-$dokka.location:Commands/Command/serializator/#/PointingToDeclaration/-lab5/Commands/-command/serializator.html
-$dokka.location:Commands/Command/writer/#/PointingToDeclaration/-lab5/Commands/-command/writer.html
+$dokka.location:Commands/Command/getAsker/#/PointingToDeclaration/-lab5/Commands/-command/get-asker.html
+$dokka.location:Commands/Command/getData/#/PointingToDeclaration/-lab5/Commands/-command/get-data.html
+$dokka.location:Commands/Command/getInvoker/#/PointingToDeclaration/-lab5/Commands/-command/get-invoker.html
+$dokka.location:Commands/Command/getReader/#/PointingToDeclaration/-lab5/Commands/-command/get-reader.html
+$dokka.location:Commands/Command/getScriptStack/#/PointingToDeclaration/-lab5/Commands/-command/get-script-stack.html
+$dokka.location:Commands/Command/getSerializator/#/PointingToDeclaration/-lab5/Commands/-command/get-serializator.html
+$dokka.location:Commands/Command/getWriter/#/PointingToDeclaration/-lab5/Commands/-command/get-writer.html
+$dokka.location:Commands/Command/setReader/#java.io.BufferedReader/PointingToDeclaration/-lab5/Commands/-command/set-reader.html
+$dokka.location:Commands/Command/setWriter/#java.io.PrintWriter/PointingToDeclaration/-lab5/Commands/-command/set-writer.html
 $dokka.location:Commands/CountDistance///PointingToDeclaration/-lab5/Commands/-count-distance/index.html
 $dokka.location:Commands/CountDistance/CountDistance/#kotlin.Function2[kotlin.Double,kotlin.Double,kotlin.Boolean]/PointingToDeclaration/-lab5/Commands/-count-distance/-count-distance.html
-$dokka.location:Commands/CountDistance/compare/#/PointingToDeclaration/-lab5/Commands/-count-distance/compare.html
 $dokka.location:Commands/CountDistance/execute/#kotlin.collections.List[kotlin.String]/PointingToDeclaration/-lab5/Commands/-count-distance/execute.html
+$dokka.location:Commands/CountDistance/getCompare/#/PointingToDeclaration/-lab5/Commands/-count-distance/get-compare.html
 $dokka.location:Commands/ExecuteScript///PointingToDeclaration/-lab5/Commands/-execute-script/index.html
 $dokka.location:Commands/ExecuteScript/ExecuteScript/#/PointingToDeclaration/-lab5/Commands/-execute-script/-execute-script.html
 $dokka.location:Commands/ExecuteScript/execute/#kotlin.collections.List[kotlin.String]/PointingToDeclaration/-lab5/Commands/-execute-script/execute.html
@@ -98,26 +101,26 @@ $dokka.location:SerializationStrategies/YamlStrategy/decode/#kotlin.String/Point
 $dokka.location:SerializationStrategies/YamlStrategy/encode/#kotlin.collections.MutableCollection[CollectionObjectsClasses.Route]/PointingToDeclaration/-lab5/SerializationStrategies/-yaml-strategy/encode.html
 $dokka.location:SerializationStrategies/YamlStrategy/toString/#/PointingToDeclaration/-lab5/SerializationStrategies/-yaml-strategy/to-string.html
 $dokka.location:Utils////PointingToDeclaration/-lab5/Utils/index.html
-$dokka.location:Utils//koinModule/#/PointingToDeclaration/-lab5/Utils/koin-module.html
 $dokka.location:Utils/Asker///PointingToDeclaration/-lab5/Utils/-asker/index.html
 $dokka.location:Utils/Asker/Asker/#/PointingToDeclaration/-lab5/Utils/-asker/-asker.html
-$dokka.location:Utils/Asker/ToDouble/#/PointingToDeclaration/-lab5/Utils/-asker/-to-double.html
-$dokka.location:Utils/Asker/ToFloat/#/PointingToDeclaration/-lab5/Utils/-asker/-to-float.html
-$dokka.location:Utils/Asker/ToFloatOrNull/#/PointingToDeclaration/-lab5/Utils/-asker/-to-float-or-null.html
-$dokka.location:Utils/Asker/ToIntOrNull/#/PointingToDeclaration/-lab5/Utils/-asker/-to-int-or-null.html
-$dokka.location:Utils/Asker/ToLong/#/PointingToDeclaration/-lab5/Utils/-asker/-to-long.html
-$dokka.location:Utils/Asker/ToString/#/PointingToDeclaration/-lab5/Utils/-asker/-to-string.html
 $dokka.location:Utils/Asker/askRoute/#java.io.BufferedReader#java.io.PrintWriter/PointingToDeclaration/-lab5/Utils/-asker/ask-route.html
+$dokka.location:Utils/Asker/getToDouble/#/PointingToDeclaration/-lab5/Utils/-asker/get-to-double.html
+$dokka.location:Utils/Asker/getToFloat/#/PointingToDeclaration/-lab5/Utils/-asker/get-to-float.html
+$dokka.location:Utils/Asker/getToFloatOrNull/#/PointingToDeclaration/-lab5/Utils/-asker/get-to-float-or-null.html
+$dokka.location:Utils/Asker/getToIntOrNull/#/PointingToDeclaration/-lab5/Utils/-asker/get-to-int-or-null.html
+$dokka.location:Utils/Asker/getToLong/#/PointingToDeclaration/-lab5/Utils/-asker/get-to-long.html
+$dokka.location:Utils/Asker/getToString/#/PointingToDeclaration/-lab5/Utils/-asker/get-to-string.html
 $dokka.location:Utils/BufferedReaderManager///PointingToDeclaration/-lab5/Utils/-buffered-reader-manager/index.html
 $dokka.location:Utils/BufferedReaderManager/BufferedReaderManager/#java.io.BufferedReader/PointingToDeclaration/-lab5/Utils/-buffered-reader-manager/-buffered-reader-manager.html
 $dokka.location:Utils/Data///PointingToDeclaration/-lab5/Utils/-data/index.html
 $dokka.location:Utils/Data/Data/#/PointingToDeclaration/-lab5/Utils/-data/-data.html
 $dokka.location:Utils/Data/addSupportedCollectionType/#kotlin.String#kotlin.collections.MutableCollection[CollectionObjectsClasses.Route]/PointingToDeclaration/-lab5/Utils/-data/add-supported-collection-type.html
 $dokka.location:Utils/Data/changeType/#kotlin.String/PointingToDeclaration/-lab5/Utils/-data/change-type.html
-$dokka.location:Utils/Data/collection/#/PointingToDeclaration/-lab5/Utils/-data/collection.html
+$dokka.location:Utils/Data/getCollection/#/PointingToDeclaration/-lab5/Utils/-data/get-collection.html
 $dokka.location:Utils/Data/getFileName/#/PointingToDeclaration/-lab5/Utils/-data/get-file-name.html
 $dokka.location:Utils/Data/getInfoFileName/#/PointingToDeclaration/-lab5/Utils/-data/get-info-file-name.html
 $dokka.location:Utils/Data/getSupportedCollectionTypes/#/PointingToDeclaration/-lab5/Utils/-data/get-supported-collection-types.html
+$dokka.location:Utils/Data/setCollection/#kotlin.collections.MutableCollection[CollectionObjectsClasses.Route]/PointingToDeclaration/-lab5/Utils/-data/set-collection.html
 $dokka.location:Utils/Invoker///PointingToDeclaration/-lab5/Utils/-invoker/index.html
 $dokka.location:Utils/Invoker/Invoker/#/PointingToDeclaration/-lab5/Utils/-invoker/-invoker.html
 $dokka.location:Utils/Invoker/addCommand/#kotlin.String#Commands.Command/PointingToDeclaration/-lab5/Utils/-invoker/add-command.html
@@ -144,6 +147,8 @@ $dokka.location:Utils/Starter/downloadCollection/#Utils.Data#Utils.Serializator/
 $dokka.location:Utils/Starter/downloadLastSystemCondition/#/PointingToDeclaration/-lab5/Utils/-starter/download-last-system-condition.html
 $dokka.location:Utils/UtilFabric///PointingToDeclaration/-lab5/Utils/-util-fabric/index.html
 $dokka.location:Utils/UtilFabric/UtilFabric/#/PointingToDeclaration/-lab5/Utils/-util-fabric/-util-fabric.html
+$dokka.location:Utils/UtilFabricKt///PointingToDeclaration/-lab5/Utils/-util-fabric-kt/index.html
+$dokka.location:Utils/UtilFabricKt/getKoinModule/#/PointingToDeclaration/-lab5/Utils/-util-fabric-kt/get-koin-module.html
 CollectionObjectsClasses
 Commands
 SerializationStrategies

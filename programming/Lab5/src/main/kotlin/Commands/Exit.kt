@@ -5,7 +5,9 @@ import java.io.PrintWriter
 import kotlin.system.exitProcess
 
 /***
- *     exit : завершить программу (без сохранения в файл)
+ * exit : завершить программу (без сохранения в файл)
+ * @author Demid0
+ * @since 1.0
  */
 class Exit: Command() {
     override fun execute(args: List<String>) {

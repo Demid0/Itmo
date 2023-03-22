@@ -1,6 +1,8 @@
 package Commands
 /***
- *     remove_lower {element} : удалить из коллекции все элементы, меньшие, чем заданный
+ * remove_lower {element} : удалить из коллекции все элементы, меньшие, чем заданный
+ * @author Demid0
+ * @since 1.0
  */
 class RemoveLower: Command() {
     override fun execute(args: List<String>) {

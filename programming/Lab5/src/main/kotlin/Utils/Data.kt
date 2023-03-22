@@ -3,6 +3,19 @@ package Utils
 import CollectionObjectsClasses.Route
 import kotlinx.serialization.Serializable
 
+/***
+ * Класс, работающий с коллекцией
+ * @author Demid0
+ * @since 1.0
+ * @param collection
+ * Поле, в котором хранится коллекция
+ * @param supportedCollectionTypes
+ * Поддерживаемые типы коллекции
+ * @param fileName
+ * Имя файла, в который сохраняется коллекция
+ * @param infoFileName
+ * Имя файла, в который сохраняется информация о коллекции
+ */
 class Data {
     @Serializable
     var collection: MutableCollection<Route> = ArrayDeque()

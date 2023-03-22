@@ -2,7 +2,9 @@ package Commands
 
 import java.lang.Exception
 /***
- *     update id {element} : обновить значение элемента коллекции, id которого равен заданному
+ * update id {element} : обновить значение элемента коллекции, id которого равен заданному
+ * @author Demid0
+ * @since 1.0
  */
 class UpdateId: Command() {
     override fun execute(args: List<String>) {

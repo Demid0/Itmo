@@ -3,7 +3,9 @@ package Commands
 import java.io.File
 import java.io.PrintWriter
 /***
- *     save : сохранить коллекцию в файл
+ * save : сохранить коллекцию в файл
+ * @author Demid0
+ * @since 1.0
  */
 class Save: Command() {
     override fun execute(args: List<String>) {

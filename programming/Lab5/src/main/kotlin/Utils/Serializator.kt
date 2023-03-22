@@ -5,6 +5,15 @@ import SerializationStrategies.JsonStrategy
 import SerializationStrategies.Strategy
 import SerializationStrategies.YamlStrategy
 
+/***
+ * Класс, занимающийся сериализацией и десериализацией
+ * @author Demid0
+ * @since 1.0
+ * @param strategies
+ * Поддерживаемые типы стратегий
+ * @param chosenStrategy
+ * Выбраная стратегия (По умолчанию: JsonStrategy)
+ */
 class Serializator {
     private var strategies: HashMap<String, Strategy> = hashMapOf()
     private var chosenStrategy: Strategy = JsonStrategy()

@@ -9,6 +9,11 @@ import java.util.function.Predicate
 
 typealias ToType<T> = (input: String?) -> T
 
+/***
+ * Считывает строки из потока ввода значения полей, проверяет их на правильность и конвертирует в нужный тип
+ * @author Demid0
+ * @since 1.0
+ */
 class Asker {
     private fun <T> ask(
         reader: BufferedReader,

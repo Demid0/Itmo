@@ -1,6 +1,8 @@
 package Commands
 /***
- *     help : вывести справку по доступным командам
+ * help : вывести справку по доступным командам
+ * @author Demid0
+ * @since 1.0
  */
 class Help: Command() {
     override fun execute(args: List<String>) {

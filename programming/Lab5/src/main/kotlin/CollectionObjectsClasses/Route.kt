@@ -6,8 +6,15 @@ import java.util.*
 import kotlin.math.abs
 /***
  * Класс, экземляры которого содержаться в коллекции
- * @constructor Route (name: String, coordinates: Coordinates, from: Location?, to: Location, distance: Double)
- *
+ * @author Demid0
+ * @since 1.0
+ * @param name Название тура
+ * @param coordinates Местоположение
+ * @param from Откуда
+ * @param to Куда
+ * @param distance Расстояние
+ * @param id Id генерируется автоматически
+ * @param creationDate Дата создания экземпляра класса
  */
 @Serializable
 class Route (private var name: String,

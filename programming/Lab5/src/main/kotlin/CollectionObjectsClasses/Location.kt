@@ -4,8 +4,13 @@ import kotlinx.serialization.Serializable
 
 /***
  * Класс, экземляр которого содержится в экземпляре коллекции в качестве поля
- * @constructor Location(x: Int?, y: Float, z: Long, name: String)
  *
+ * @author Demid0
+ * @since 1.0
+ * @param x Координата x
+ * @param y Координата y
+ * @param z Координата z
+ * @param name Название локации
  */
 @Serializable
 class Location(private var x: Int?, private var y: Float, private var z: Long, private var name: String) {

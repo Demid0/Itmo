@@ -7,6 +7,11 @@ import java.io.InputStreamReader
 import java.io.PrintWriter
 import java.util.*
 
+/***
+ * Модуль для Koin DI
+ * @author Demid0
+ * @since 1.0
+ */
 val koinModule = module {
 
     single { Starter() }
@@ -27,4 +32,9 @@ val koinModule = module {
 
 }
 
+/***
+ * Класс, экземпляр которого используется для инъекции зависимостей в main
+ * @author Demid0
+ * @since 1.0
+ */
 class UtilFabric: KoinComponent

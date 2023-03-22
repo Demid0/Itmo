@@ -1,6 +1,8 @@
 package Commands
 /***
- *     clear : очистить коллекцию
+ * clear : очистить коллекцию
+ * @author Demid0
+ * @since 1.0
  */
 class Clear: Command() {
     override fun execute(args: List<String>) {

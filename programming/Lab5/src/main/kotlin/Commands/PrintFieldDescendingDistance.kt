@@ -1,6 +1,8 @@
 package Commands
 /***
- *     print_field_descending_distance : вывести значения поля distance всех элементов в порядке убывания
+ * print_field_descending_distance : вывести значения поля distance всех элементов в порядке убывания
+ * @author Demid0
+ * @since 1.0
  */
 class PrintFieldDescendingDistance: Command() {
     override fun execute(args: List<String>) {

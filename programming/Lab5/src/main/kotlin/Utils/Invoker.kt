@@ -4,6 +4,13 @@ import Commands.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
+/***
+ * Класс, вызывающий команды
+ * @author Demid0
+ * @since 1.0
+ * @param commands
+ * Поддерживаемые типы комманд
+ */
 class Invoker: KoinComponent {
     private var commands: HashMap<String, Command> = HashMap()
     init {

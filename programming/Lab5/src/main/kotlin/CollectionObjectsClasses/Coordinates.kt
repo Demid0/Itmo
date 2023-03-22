@@ -4,8 +4,10 @@ import kotlinx.serialization.Serializable
 
 /***
  * Класс, экземляр которого содержится в экземпляре коллекции в качестве поля
- * @constructor Coordinates(x: Float?, y: Int?)
- *
+ * @author Demid0
+ * @since 1.0
+ * @param x Координата x
+ * @param y Координата y
  */
 @Serializable
 class Coordinates(private var x: Float?, private var y: Int?) {

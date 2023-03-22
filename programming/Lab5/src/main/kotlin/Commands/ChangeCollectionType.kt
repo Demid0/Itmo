@@ -1,7 +1,9 @@
 package Commands
 
 /***
- *     change_collection_type type : поменять тип коллекции
+ * change_collection_type type : поменять тип коллекции
+ * @author Demid0
+ * @since 1.0
  */
 class ChangeCollectionType: Command() {
 
