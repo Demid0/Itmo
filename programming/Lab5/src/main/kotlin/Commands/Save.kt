@@ -10,11 +10,11 @@ class Save: Command() {
         try {
             val collection = data.collection
             val file = File(data.getFileName())
-            val writer = PrintWriter(file)
-            writer.println(serializator.serialize(collection))
-            writer.flush()
+            val fileWriter = PrintWriter(file.outputStream(), true)
+            fileWriter.println(serializator.serialize(collection))
             writer.println("Done!")
         } catch (e: Exception) {
+            e.printStackTrace()
             System.err.println("Cannot open file")
         }
     }

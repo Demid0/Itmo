@@ -1,8 +1,10 @@
 package Utils
 
 import CollectionObjectsClasses.Route
+import kotlinx.serialization.Serializable
 
 class Data {
+    @Serializable
     var collection: MutableCollection<Route> = ArrayDeque()
     private var supportedCollectionTypes: HashMap<String, MutableCollection<Route>> = hashMapOf()
     private var fileName = System.getenv("lab5_filename")
