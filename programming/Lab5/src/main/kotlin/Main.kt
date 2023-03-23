@@ -17,11 +17,15 @@ fun main(args: Array<String>) {
     val writer = printWriterManager.get()
     val invoker: Invoker by utilFabric.inject()
     starter.downloadLastSystemCondition()
-    while(true) {
-        writer.print("> ")
-        writer.flush()
-        val input = reader.readLine().split(" ").toMutableList()
-        input.removeAll(setOf("", {input.size}))
-        invoker.invoke(input)
+    try {
+        while(true) {
+            writer.print("> ")
+            writer.flush()
+            val input = reader.readLine().split(" ").toMutableList()
+            input.removeAll(setOf("", { input.size }))
+            invoker.invoke(input)
+        }
+    } catch (_: NullPointerException) {
+        System.err.println("Зачем вы Ctrl+D нажали?")
     }
 }
