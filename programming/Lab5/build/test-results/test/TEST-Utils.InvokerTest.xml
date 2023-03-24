@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Utils.InvokerTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-03-24T03:07:53" hostname="demid-VivoBook-ASUSLaptop-X515JA-F515JA" time="0.051">
+  <properties/>
+  <testcase name="addCommand()" classname="Utils.InvokerTest" time="0.047"/>
+  <testcase name="invoke()" classname="Utils.InvokerTest" time="0.004"/>
+  <system-out><![CDATA[Information about collection:
+	Type: ArrayDeque
+	Size: 0
+Info about system:
+	Serialization strategy: Json
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

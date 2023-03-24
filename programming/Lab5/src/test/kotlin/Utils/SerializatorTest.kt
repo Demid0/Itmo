@@ -70,7 +70,7 @@ class SerializatorTest {
         val newStrategy = JsonStrategy()
         val newStrategyName = "${SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(Date())}strategy"
         serializator.addStrategy(newStrategyName, newStrategy)
-        assert(serializator.getStrategy(newStrategyName) == newStrategy)
+        assertEquals(serializator.getStrategy(newStrategyName), newStrategy)
     }
 
     @Test

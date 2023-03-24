@@ -27,8 +27,8 @@ class Route (private var name: String,
     private var creationDate = SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(Date())
 
     override fun toString(): String {
-        return "name: $name\ncoordinates: $coordinates\nfrom(Location): ${from.toString()}" +
-                "\nto(Location): $to\ndistance: $distance\nid: $id\ncreationDate: $creationDate\n"
+        return "name: $name\ncoordinates: ${coordinates.toString()}\nfrom(Location): ${from.toString()}" +
+                "\nto(Location): ${to.toString()}\ndistance: $distance\nid: $id\ncreationDate: $creationDate\n"
     }
 
     fun getId(): Long = id
@@ -37,6 +37,7 @@ class Route (private var name: String,
     fun getFrom(): Location? = from
     fun getTo(): Location = to
     fun getDistance(): Double = distance
+    fun getCreationDate() = creationDate
 
     fun update(name: String = this.name,
                coordinates: Coordinates = this.coordinates,

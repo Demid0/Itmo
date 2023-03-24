@@ -33,7 +33,7 @@ class Invoker: KoinComponent {
         addCommand("change_collection_type", ChangeCollectionType()) // done
         addCommand("change_serialization_strategy", ChangeSerializationStrategy()) // done
     }
-    fun invoke(args: List<String>) {
+    fun invoke(args: List<String>): Boolean {
         val printWriterManager: PrintWriterManager by inject()
         val writer = printWriterManager.get()
         if (args.isEmpty()) writer.println("Error! Empty input.")
@@ -41,8 +41,12 @@ class Invoker: KoinComponent {
             val commandName = args[0]
             val command = commands[commandName]
             if (command == null) writer.println("Error! Command not found.")
-            else command.execute(args)
+            else {
+                command.execute(args)
+                return true
+            }
         }
+        return false
     }
     fun getCommands() = commands
 
