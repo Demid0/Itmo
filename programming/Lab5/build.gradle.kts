@@ -23,7 +23,13 @@ dependencies {
 
     implementation("io.insert-koin:koin-core:3.3.3")
 
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
     testImplementation(kotlin("test"))
+    testImplementation("io.mockk:mockk:1.13.4")
+    testImplementation("io.insert-koin:koin-test-junit5:3.3.3")
+    testImplementation("org.jetbrains.kotlin:kotlin-test:1.8.10")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.8.10")
 
     dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.8.10")
 }
