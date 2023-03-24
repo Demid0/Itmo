@@ -1,12 +1,15 @@
 package Utils
 
 import CollectionObjectsClasses.Route
+import SerializationStrategies.JsonStrategy
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
 import java.io.File
 import java.io.InputStreamReader
 import java.io.PrintWriter
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class SerializatorTest {
 
@@ -42,6 +45,7 @@ class SerializatorTest {
             output = serializator.serialize(collection)
             assertEquals(input, output)
         } catch (_: Exception) {
+            System.err.println(serializator.getChosenStrategy().toString())
             assertEquals("good", "bad")
         }
         finally {//rollback
@@ -49,5 +53,32 @@ class SerializatorTest {
             writer.print(rollback)
             writer.flush()
         }
+    }
+
+    @Test
+    fun addStrategy() {
+        val serializator = Serializator()
+        val newStrategy = JsonStrategy()
+        val newStrategyName = "${SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(Date())}strategy"
+        serializator.addStrategy(newStrategyName, newStrategy)
+        assert(serializator.getStrategies()[newStrategyName] != null)
+    }
+
+    @Test
+    fun getStrategy() {
+        val serializator = Serializator()
+        val newStrategy = JsonStrategy()
+        val newStrategyName = "${SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(Date())}strategy"
+        serializator.addStrategy(newStrategyName, newStrategy)
+        assert(serializator.getStrategy(newStrategyName) == newStrategy)
+    }
+
+    @Test
+    fun changeStrategy() {
+        val serializator = Serializator()
+        val chosen = serializator.getChosenStrategy()
+        val strategy = JsonStrategy()
+        serializator.changeStrategy(strategy)
+        assert(chosen != strategy)
     }
 }

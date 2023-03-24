@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Utils.SerializatorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-03-24T01:38:19" hostname="demid-VivoBook-ASUSLaptop-X515JA-F515JA" time="0.507">
+<testsuite name="Utils.SerializatorTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2023-03-24T02:10:18" hostname="demid-VivoBook-ASUSLaptop-X515JA-F515JA" time="0.43">
   <properties/>
-  <testcase name="check serialization and deserialization()" classname="Utils.SerializatorTest" time="0.507"/>
+  <testcase name="getStrategy()" classname="Utils.SerializatorTest" time="0.022"/>
+  <testcase name="check serialization and deserialization()" classname="Utils.SerializatorTest" time="0.401"/>
+  <testcase name="addStrategy()" classname="Utils.SerializatorTest" time="0.001"/>
+  <testcase name="changeStrategy()" classname="Utils.SerializatorTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
