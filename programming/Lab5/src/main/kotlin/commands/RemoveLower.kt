@@ -11,16 +11,12 @@ import commands.utils.CommandType
  */
 class RemoveLower: Command(CommandType.OBJECT_ARG) {
     override fun execute(args: Any?): String {
-        return try {
-            val route = args as Route
-            for (element in data.collection) {
-                if (element.getDistance() < route.getDistance()) {
-                    data.collection.remove(element)
-                }
+        val route = args as Route
+        for (element in data.collection) {
+            if (element.getDistance() < route.getDistance()) {
+                data.collection.remove(element)
             }
-            "Done!"
-        } catch (e: Exception) {
-            "Something went wrong."
         }
+        return "Done!"
     }
 }

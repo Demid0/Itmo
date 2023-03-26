@@ -28,7 +28,7 @@ class Data {
         addSupportedCollectionType("arraydeque", ArrayDeque())
     }
     fun changeType(newType: String) {
-        if (collection == supportedCollectionTypes[newType.lowercase()]!!) return
+        if (collection == getSupportedCollectionTypes()[newType]!!) return
         val old = collection
         collection = supportedCollectionTypes[newType.lowercase()]!!
         for (element in old) {

@@ -11,11 +11,7 @@ import commands.utils.CommandType
  */
 class Add: Command(CommandType.OBJECT_ARG) {
     override fun execute(args: Any?): String {
-        return try {
-            data.collection.add(args as Route)
-            "Done!"
-        } catch (e: Exception) {
-            "Not added."
-        }
+        data.collection.add(args as Route)
+        return "Done!"
     }
 }

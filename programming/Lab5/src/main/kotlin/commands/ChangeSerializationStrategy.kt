@@ -10,14 +10,14 @@ import commands.utils.CommandType
  */
 class ChangeSerializationStrategy: Command(CommandType.SINGLE_ARG) {
     override fun execute(args: Any?): String {
-        try {
+        return try {
             val newType = (args as List<*>)[0] as String + "strategy"
             serializator.changeStrategy(serializator.getStrategy(newType)!!)
-            return "Changed"
+            "Changed"
         } catch (e: NullPointerException) {
-            return "Unknown serialization strategy\n${printSupportedStrategies()}"
+            "Unknown serialization strategy\n${printSupportedStrategies()}"
         } catch (e: IndexOutOfBoundsException) {
-            return "Empty input\n${printSupportedStrategies()}"
+            "Empty input\n${printSupportedStrategies()}"
         }
     }
 

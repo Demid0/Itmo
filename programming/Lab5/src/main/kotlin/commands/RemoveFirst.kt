@@ -15,6 +15,5 @@ class RemoveFirst: Command(CommandType.NO_ARG) {
             "Done!"
         }
         catch (e: NoSuchElementException) { "Collection is empty" }
-        catch (e: Exception) { "Something went wrong" }
     }
 }

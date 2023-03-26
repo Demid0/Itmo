@@ -10,11 +10,7 @@ import commands.utils.CommandType
  */
 class Clear: Command(CommandType.NO_ARG) {
     override fun execute(args: Any?): String {
-        return try {
-            data.collection.clear()
-            "Done!"
-        } catch (e: Exception) {
-            "Not cleared. Хз как"
-        }
+        data.collection.clear()
+        return "Done!"
     }
 }
