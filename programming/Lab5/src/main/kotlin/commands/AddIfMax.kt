@@ -1,0 +1,28 @@
+package commands
+
+import collectionObjectsClasses.Route
+import commands.utils.Command
+import commands.utils.CommandType
+
+/***
+ * add_if_max {element} : добавить новый элемент в коллекцию, если его значение превышает значение наибольшего элемента этой коллекции
+ * @author Demid0
+ * @since 1.0
+ */
+class AddIfMax: Command(CommandType.OBJECT_ARG) {
+    override fun execute(args: Any?): String {
+        try {
+            val route = args as Route
+            for (element in data.collection) {
+                if (element.getDistance() >= route.getDistance()) {
+                    return "I didn't add it"
+                }
+            }
+            data.collection.add(route)
+            return "Done!"
+        } catch (e: Exception) {
+            return "Something went wrong."
+        }
+    }
+
+}
