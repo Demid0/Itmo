@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="utils.DataTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2023-03-26T15:15:33" hostname="demid-VivoBook-ASUSLaptop-X515JA-F515JA" time="0.008">
+<testsuite name="utils.DataTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2023-03-26T15:22:18" hostname="demid-VivoBook-ASUSLaptop-X515JA-F515JA" time="0.005">
   <properties/>
-  <testcase name="getInfoFileName()" classname="utils.DataTest" time="0.002"/>
+  <testcase name="getInfoFileName()" classname="utils.DataTest" time="0.001"/>
   <testcase name="getFileName()" classname="utils.DataTest" time="0.001"/>
-  <testcase name="addSupportedCollectionType()" classname="utils.DataTest" time="0.002"/>
+  <testcase name="addSupportedCollectionType()" classname="utils.DataTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -13,12 +13,12 @@ class App: KoinComponent {
     private val asker: Asker by inject()
     private val commandParser: CommandParser by inject()
     private val scriptStack: Stack<String> by inject()
-    private val printWriterManager: WriterManager<PrintWriter> by inject()
-    private var writer = printWriterManager.get()
     private val nullWriter = PrintWriter("/dev/null")
 
-    fun run(reader: BufferedReader) {
+    fun run(inputReader: BufferedReader, outputWriter: PrintWriter) {
         while (true) {
+            var writer = outputWriter
+            val reader = inputReader
             val commandReturnWriter = writer
             writer = if (scriptStack.isEmpty()) writer else nullWriter
             writer.print("> ")

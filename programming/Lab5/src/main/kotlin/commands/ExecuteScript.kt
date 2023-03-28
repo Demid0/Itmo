@@ -23,7 +23,7 @@ class ExecuteScript: Command(CommandType.SINGLE_ARG) {
             scriptStack.add(file_name)
 
             try {
-                app.run(fileReader)
+                app.run(fileReader, writer)
             } catch (_: NullPointerException) {
                 scriptStack.remove(file_name)
 

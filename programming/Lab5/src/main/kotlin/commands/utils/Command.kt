@@ -4,6 +4,7 @@ import utils.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import serializationStrategies.utils.Serializator
+import java.io.PrintWriter
 import java.util.*
 /***
  * Абстрактный класс команды
@@ -16,5 +17,7 @@ abstract class Command(val type: CommandType) : KoinComponent {
     val serializator: Serializator by inject()
     val scriptStack: Stack<String> by inject()
     val commandParser: CommandParser by inject()
+    private val printWriterManager: WriterManager<PrintWriter> by inject()
+    var writer = printWriterManager.get()
     abstract fun execute(args: Any?) : String
 }
