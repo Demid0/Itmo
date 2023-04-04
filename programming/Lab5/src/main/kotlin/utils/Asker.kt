@@ -32,7 +32,7 @@ class Asker {
                output = converter(input)
                if (checker.test(output)) break
                else throw Exception()
-           } catch (e: Exception) {
+           } catch (_: Exception) {
                writer.println("Incorrect input. Try again.")
                writer.flush()
            }

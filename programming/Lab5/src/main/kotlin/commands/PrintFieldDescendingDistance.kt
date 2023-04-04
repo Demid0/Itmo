@@ -17,7 +17,7 @@ class PrintFieldDescendingDistance: Command(CommandType.NO_ARG) {
             for (element in collection) {
                 out += "${element.getDistance()} "
             }
-            out + "\n"
+            out
         }
     }
 }

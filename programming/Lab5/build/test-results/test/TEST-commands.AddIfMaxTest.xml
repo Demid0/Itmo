@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="commands.AddIfMaxTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-03-26T15:22:18" hostname="demid-VivoBook-ASUSLaptop-X515JA-F515JA" time="0.063">
+<testsuite name="commands.AddIfMaxTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-04-04T17:10:11" hostname="demid-VivoBook-ASUSLaptop-X515JA-F515JA" time="0.086">
   <properties/>
-  <testcase name="execute()" classname="commands.AddIfMaxTest" time="0.063"/>
+  <testcase name="execute()" classname="commands.AddIfMaxTest" time="0.086"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

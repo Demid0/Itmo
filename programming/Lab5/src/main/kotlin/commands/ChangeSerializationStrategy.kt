@@ -26,6 +26,6 @@ class ChangeSerializationStrategy: Command(CommandType.SINGLE_ARG) {
         for (strategy in serializator.getStrategies()) {
             out += strategy.value.toString() + "\n"
         }
-        return out
+        return out.dropLast(1)
     }
 }

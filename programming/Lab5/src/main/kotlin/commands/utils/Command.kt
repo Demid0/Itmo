@@ -12,12 +12,12 @@ import java.util.*
  * @since 1.0
  */
 abstract class Command(val type: CommandType) : KoinComponent {
-    val app: App by inject()
-    val data: Data by inject()
-    val serializator: Serializator by inject()
-    val scriptStack: Stack<String> by inject()
-    val commandParser: CommandParser by inject()
+    internal val app: App by inject()
+    internal val data: Data by inject()
+    internal val serializator: Serializator by inject()
+    internal val scriptStack: Stack<String> by inject()
+    internal val commandParser: CommandParser by inject()
     private val printWriterManager: WriterManager<PrintWriter> by inject()
-    var writer = printWriterManager.get()
+    internal var writer = printWriterManager.get()
     abstract fun execute(args: Any?) : String
 }

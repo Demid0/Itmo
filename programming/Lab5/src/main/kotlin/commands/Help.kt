@@ -11,13 +11,13 @@ import commands.utils.CommandType
 class Help: Command(CommandType.NO_ARG) {
     override fun execute(args: Any?): String {
         val commands = commandParser.getCommands()
-        if (commands.isEmpty()) return "No commands\n"
+        return if (commands.isEmpty()) "No commands"
         else {
             var out = "You can use this commands:\n"
             for (command in commands.toSortedMap()) {
                 out += command.key + "\n"
             }
-            return out
+            out.dropLast(1)
         }
     }
 }

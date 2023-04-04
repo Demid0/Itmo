@@ -27,6 +27,6 @@ class ChangeCollectionType: Command(CommandType.SINGLE_ARG) {
         for (type in data.getSupportedCollectionTypes()) {
             out += type.key +"\n"
         }
-        return out
+        return out.dropLast(1)
     }
 }

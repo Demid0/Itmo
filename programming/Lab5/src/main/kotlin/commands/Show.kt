@@ -17,7 +17,7 @@ class Show: Command(CommandType.NO_ARG) {
             for (element in collection) {
                 out += element.toString() + "\n"
             }
-            out
+            out.dropLast(1)
         }
     }
 }

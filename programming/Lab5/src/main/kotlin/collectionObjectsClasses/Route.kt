@@ -21,14 +21,14 @@ class Route (private var name: String,
              private var coordinates: Coordinates,
              private var from: Location?,
              private var to: Location,
-             private var distance: Double,
-             private var id: Long = abs(UUID.randomUUID().mostSignificantBits)
+             private var distance: Double
 ) {
+    private var id: Long = abs(UUID.randomUUID().mostSignificantBits)
     private var creationDate = SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(Date())
 
     override fun toString(): String {
         return "name: $name\ncoordinates: ${coordinates.toString()}\nfrom(Location): ${from.toString()}" +
-                "\nto(Location): ${to.toString()}\ndistance: $distance\nid: $id\ncreationDate: $creationDate\n"
+                "\nto(Location): ${to.toString()}\ndistance: $distance\nid: $id\ncreationDate: $creationDate"
     }
 
     fun getId(): Long = id

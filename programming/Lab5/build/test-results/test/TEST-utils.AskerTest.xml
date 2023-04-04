@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="utils.AskerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-03-26T15:22:18" hostname="demid-VivoBook-ASUSLaptop-X515JA-F515JA" time="0.024">
+<testsuite name="utils.AskerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-04-04T17:10:11" hostname="demid-VivoBook-ASUSLaptop-X515JA-F515JA" time="0.066">
   <properties/>
-  <testcase name="askRoute()" classname="utils.AskerTest" time="0.024"/>
+  <testcase name="askRoute()" classname="utils.AskerTest" time="0.066"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[name > Coordinates - x > Coordinates - y > from is nullable field. If you want to make it null, print "yes". > to - x > to - y > to - z > to - name > distance > ]]></system-err>
 </testsuite>

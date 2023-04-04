@@ -12,12 +12,12 @@ import serializationStrategies.utils.Serializator
  * @since 1.0
  */
 class Starter: KoinComponent {
-
+    private val data: Data by inject()
+    private val serializator: Serializator by inject()
+    private val printWriterManager: WriterManager<PrintWriter> by inject()
+    private val writer = printWriterManager.get()
     fun downloadLastSystemCondition() {
-        val data: Data by inject()
-        val serializator: Serializator by inject()
-
-        println("Downloading last system condition")
+        writer.println("Downloading last system condition")
         try {
             val file = File(data.getInfoFileName())
             val reader = InputStreamReader(file.inputStream())
@@ -25,38 +25,38 @@ class Starter: KoinComponent {
 
             // Пробует десериализовать по последней стратегии, если не получается, то пробегается по всем возможным
             serializator.changeStrategy(serializator.getStrategy(output[1])!!)
-            if (!downloadCollection(data, serializator)) {
+            if (!downloadCollection()) {
                 var flag = false
                 for (strategy in serializator.getStrategies()) {
                     serializator.changeStrategy(strategy.value)
-                    if (downloadCollection(data, serializator)) {
+                    if (downloadCollection()) {
                         flag = true
                         break
                     }
                 }
-                if (flag) System.err.println("File was in ${serializator.getChosenStrategy().toString()} type.")
-                else System.err.println("Collection didn't download")
+                if (flag) writer.println("File was in ${serializator.getChosenStrategy().toString()} type.")
+                else writer.println("Collection didn't download")
             }
 
             serializator.changeStrategy(serializator.getStrategy(output[1])!!)
 
             data.changeType(output[0])
-            println("Done!")
-        } catch (e: Exception) {
-            println("Can't found info about last system condition. Will use default serialization strategy and default collection type.")
+            writer.println("Done!")
+        } catch (_: Exception) {
+            writer.println("Can't found info about last system condition. Will use default serialization strategy and default collection type.")
         }
     }
 
-    fun downloadCollection(data: Data, serializator: Serializator): Boolean {
+    private fun downloadCollection(): Boolean {
         try {
             val file = File(data.getFileName())
             val reader = InputStreamReader(file.inputStream())
             data.collection = serializator.deserialize(reader.readText())
         } catch (e: FileNotFoundException) {
-            println("File not found")
+            writer.println("File not found")
             exitProcess(1)
         } catch (e: Exception) {
-            println("Serialization strategy ${serializator.getChosenStrategy()} is not working.")
+            writer.println("Serialization strategy ${serializator.getChosenStrategy()} is not working.")
             return false
         }
         return true

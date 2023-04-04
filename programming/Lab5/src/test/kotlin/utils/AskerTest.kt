@@ -30,7 +30,7 @@ class AskerTest {
             "name: a\ncoordinates: x: 5.0, y: 5\nfrom(Location): null" +
                     "\nto(Location): \n" +
                     "\tname: b\n" +
-                    "\tx: 5, y: 5.0, z: 5\ndistance: 5.0\nid: ${route.getId()}\ncreationDate: ${route.getCreationDate()}\n",
+                    "\tx: 5, y: 5.0, z: 5\ndistance: 5.0\nid: ${route.getId()}\ncreationDate: ${route.getCreationDate()}",
             route.toString()
         )
     }
