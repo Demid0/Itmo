@@ -1,0 +1,11 @@
+*.aux
+*.toc
+*.log
+*.fls
+*.fdb_latexmk
+*.bcf
+*.synctex.gz
+*.out
+__pycache__
+.vscode
+.idea
