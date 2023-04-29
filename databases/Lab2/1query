@@ -1,0 +1,5 @@
+SELECT TYPES.НАИМЕНОВАНИЕ, VED.ДАТА FROM
+Н_ТИПЫ_ВЕДОМОСТЕЙ AS TYPES
+RIGHT JOIN Н_ВЕДОМОСТИ AS VED 
+ON VED.ВЕД_ИД = TYPES.ИД
+WHERE TYPES.НАИМЕНОВАНИЕ = 'Экзаменационный лист' AND VED.ИД = 1457443 AND VED.ИД < 1250972;

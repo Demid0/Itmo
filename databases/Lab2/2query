@@ -1,0 +1,8 @@
+select peoples.ФАМИЛИЯ, edu.ЧЛВК_ИД, st.ИД from
+Н_ЛЮДИ as peoples
+join
+Н_ОБУЧЕНИЯ as edu
+on edu.ЧЛВК_ИД = peoples.ИД
+join
+Н_УЧЕНИКИ as st using (ЧЛВК_ИД, ВИД_ОБУЧ_ИД)
+where peoples.ИМЯ > 'Николай' and edu.НЗК::int > 933232;
