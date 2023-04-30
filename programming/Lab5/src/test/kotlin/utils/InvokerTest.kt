@@ -20,8 +20,8 @@ class InvokerTest {
         val newCommand = Info()
         val newCommandName = SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(Date())
         commandParser.addCommand(newCommandName, newCommand)
-        val command = commandParser.parse(arrayListOf(newCommandName))
-        assert(invoker.invoke(command!!.first, command.second).isNotEmpty())
+        val commandPacket = commandParser.parse(arrayListOf(newCommandName))
+        assert(invoker.invoke(commandPacket).isNotEmpty())
         stopKoin()
     }
 }

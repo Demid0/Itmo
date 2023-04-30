@@ -3,6 +3,7 @@ package commands
 import collectionObjectsClasses.Coordinates
 import collectionObjectsClasses.Location
 import collectionObjectsClasses.Route
+import commands.utils.CommandPacket
 import commands.utils.Invoker
 import org.junit.jupiter.api.Test
 
@@ -25,7 +26,8 @@ class AddTest {
         val invoker: Invoker by utilFabric.inject()
         val data: Data by utilFabric.inject()
         val count = data.collection.size + 1
-        invoker.invoke(command, route)
+        val commandPacket = CommandPacket(command, null, route)
+        val output = invoker.invoke(commandPacket)
         assertEquals(count, data.collection.size)
         stopKoin()
     }

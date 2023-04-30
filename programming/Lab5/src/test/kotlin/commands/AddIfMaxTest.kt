@@ -3,6 +3,7 @@ package commands
 import collectionObjectsClasses.Coordinates
 import collectionObjectsClasses.Location
 import collectionObjectsClasses.Route
+import commands.utils.CommandPacket
 import commands.utils.Invoker
 import org.junit.jupiter.api.Test
 
@@ -25,7 +26,8 @@ class AddIfMaxTest {
         val invoker: Invoker by utilFabric.inject()
         val data: Data by utilFabric.inject()
         val count = data.collection.size
-        val output = invoker.invoke(command, route)
+        val commandPacket = CommandPacket(command, null, route)
+        val output = invoker.invoke(commandPacket)
         if (output == "I didn't add it") assertEquals(count, data.collection.size)
         else kotlin.test.assertEquals(count + 1, data.collection.size)
         stopKoin()
