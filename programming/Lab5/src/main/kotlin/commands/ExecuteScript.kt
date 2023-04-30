@@ -1,5 +1,6 @@
 package commands
 
+import collectionObjectsClasses.Route
 import commands.utils.Command
 import commands.utils.CommandType
 import java.io.BufferedReader
@@ -12,9 +13,9 @@ import java.io.InputStreamReader
  * @since 1.0
  */
 class ExecuteScript: Command(CommandType.SINGLE_ARG) {
-    override fun execute(args: Any?): String {
+    override fun execute(singleArg: String?, objectArg: Route?): String {
         try {
-            val file_name = (args as List<*>)[0] as String
+            val file_name = singleArg!!
             if (scriptStack.contains(file_name)) return "No way! Recursion."
 
             val file = File(file_name)

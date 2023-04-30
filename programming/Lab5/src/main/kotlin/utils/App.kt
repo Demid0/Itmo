@@ -25,25 +25,14 @@ class App: KoinComponent {
             writer.flush()
             val input = reader.readLine().split(" ").toMutableList()
             input.removeAll(setOf("", { input.size }))
-            val command = commandParser.parse(input)
-            if (command == null) {
+            val commandPacket = commandParser.parse(input)
+            if (commandPacket.command == null) {
                 writer.print("Command not found.\n")
                 writer.flush()
                 continue
             }
-            val args_to_command: Any? = if (command.second == null) null
-            else if (command.second == 0) asker.askRoute(reader, writer)
-            else if ((command.second as List<*>).size == 2 && (command.second as List<*>)[1] == 0) listOf(
-                (command.second as List<*>)[0],
-                asker.askRoute(reader, writer)
-            )
-            else if ((command.second as List<*>).size == 1) command.second
-            else {
-                writer.print("Wrong args.\n")
-                writer.flush()
-                continue
-            }
-            val output = invoker.invoke(command.first, args_to_command)
+            if (commandPacket.objectArg != null) commandPacket.objectArg = asker.askRoute(reader, writer)
+            val output = invoker.invoke(commandPacket)
             commandReturnWriter.println(output)
             commandReturnWriter.flush()
         }

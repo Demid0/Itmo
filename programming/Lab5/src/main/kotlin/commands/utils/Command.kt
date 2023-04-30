@@ -1,5 +1,6 @@
 package commands.utils
 
+import collectionObjectsClasses.Route
 import utils.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -19,5 +20,5 @@ abstract class Command(val type: CommandType) : KoinComponent {
     internal val commandParser: CommandParser by inject()
     private val printWriterManager: WriterManager<PrintWriter> by inject()
     internal var writer = printWriterManager.get()
-    abstract fun execute(args: Any?) : String
+    abstract fun execute(singleArg: String?, objectArg: Route?) : String
 }

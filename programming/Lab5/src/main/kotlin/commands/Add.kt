@@ -10,8 +10,8 @@ import commands.utils.CommandType
  * @since 1.0
  */
 class Add: Command(CommandType.OBJECT_ARG) {
-    override fun execute(args: Any?): String {
-        data.collection.add(args as Route)
+    override fun execute(singleArg: String?, objectArg: Route?): String {
+        data.collection.add(objectArg!!)
         return "Done!"
     }
 }

@@ -10,10 +10,9 @@ import java.lang.Exception
  * @since 1.0
  */
 class UpdateId: Command(CommandType.MIXED_ARG) {
-    override fun execute(args: Any?): String {
-        val arg = args as List<*>
-        val id: Long = ((arg[0] as List<*>)[0] as String).toLong()
-        val route = arg[1] as Route
+    override fun execute(singleArg: String?, objectArg: Route?): String {
+        val id: Long = singleArg!!.toLong()
+        val route = objectArg!!
         return try {
             var bool = false
             for (element in data.collection) {

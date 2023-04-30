@@ -1,5 +1,6 @@
 package commands
 
+import collectionObjectsClasses.Route
 import commands.utils.Command
 import commands.utils.CommandType
 import java.lang.Exception
@@ -9,9 +10,9 @@ import java.lang.Exception
  * @since 1.0
  */
 class RemoveById: Command(CommandType.SINGLE_ARG) {
-    override fun execute(args: Any?): String {
+    override fun execute(singleArg: String?, objectArg: Route?): String {
         return try {
-            val id: Long = ((args as List<*>)[0] as String).toLong()
+            val id: Long = singleArg!!.toLong()
             var bool = false
             for (element in data.collection) {
                 if (element.getId() == id) {

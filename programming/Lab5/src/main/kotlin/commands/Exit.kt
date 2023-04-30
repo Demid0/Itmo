@@ -1,5 +1,6 @@
 package commands
 
+import collectionObjectsClasses.Route
 import commands.utils.Command
 import commands.utils.CommandType
 import java.io.File
@@ -12,7 +13,7 @@ import kotlin.system.exitProcess
  * @since 1.0
  */
 class Exit: Command(CommandType.NO_ARG) {
-    override fun execute(args: Any?): String {
+    override fun execute(singleArg: String?, objectArg: Route?): String {
         val file = File(data.getInfoFileName())
         val fileWriter = PrintWriter(file)
         fileWriter.println(data.collection.javaClass.simpleName.lowercase())
