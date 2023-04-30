@@ -1,7 +1,16 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+import java.net.InetSocketAddress
+import java.nio.ByteBuffer
+import java.nio.channels.DatagramChannel
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+fun main(args: Array<String>) {
+    val channel = DatagramChannel.open()
+    while (true) {
+        val byteBuffer = ByteBuffer.wrap(readln().toByteArray())
+        val serverAddress = InetSocketAddress("localhost", 5555)
+        channel.send(byteBuffer, serverAddress)
+        val ansBuffer = ByteBuffer.wrap(ByteArray(65535))
+        channel.receive(ansBuffer)
+        val ans = String(ansBuffer.array(), 0, ansBuffer.position())
+        println(ans)
+    }
 }
