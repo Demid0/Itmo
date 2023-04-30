@@ -1,5 +1,6 @@
 package utils
 
+import collectionObjectsClasses.Route
 import org.koin.core.component.KoinComponent
 import java.io.*
 import kotlin.system.exitProcess
@@ -51,10 +52,10 @@ class Starter: KoinComponent {
         try {
             val file = File(data.getFileName())
             val reader = InputStreamReader(file.inputStream())
-            data.collection = serializator.deserialize(reader.readText())
+            data.collection = serializator.deserialize(reader.readText(), data.collection)
         } catch (e: FileNotFoundException) {
             writer.println("File not found")
-            exitProcess(1)
+            return false
         } catch (e: Exception) {
             writer.println("Serialization strategy ${serializator.getChosenStrategy()} is not working.")
             return false
