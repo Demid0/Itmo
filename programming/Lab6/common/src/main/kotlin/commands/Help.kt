@@ -1,5 +1,6 @@
 package commands
 
+import collectionObjectsClasses.Route
 import commands.utils.Command
 import commands.utils.CommandType
 
@@ -9,7 +10,7 @@ import commands.utils.CommandType
  * @since 1.0
  */
 class Help: Command(CommandType.NO_ARG) {
-    override fun execute(args: Any?): String {
+    override fun execute(singleArg: String?, objectArg: Route?): String {
         val commands = commandParser.getCommands()
         return if (commands.isEmpty()) "No commands"
         else {

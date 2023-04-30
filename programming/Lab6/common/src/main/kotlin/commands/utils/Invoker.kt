@@ -11,8 +11,8 @@ import org.koin.core.component.KoinComponent
  * Поддерживаемые типы комманд
  */
 class Invoker: KoinComponent {
-    fun invoke(command: Command, args: Any?): String {
-        return command.execute(args)
+    fun invoke(commandPacket: CommandPacket): String {
+        return commandPacket.command!!.execute(commandPacket.singleArg, commandPacket.objectArg)
     }
 
 }

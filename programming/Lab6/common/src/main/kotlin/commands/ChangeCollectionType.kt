@@ -1,5 +1,6 @@
 package commands
 
+import collectionObjectsClasses.Route
 import commands.utils.Command
 import commands.utils.CommandType
 
@@ -10,9 +11,9 @@ import commands.utils.CommandType
  */
 class ChangeCollectionType: Command(CommandType.SINGLE_ARG) {
 
-    override fun execute(args: Any?): String {
+    override fun execute(singleArg: String?, objectArg: Route?): String {
         return try {
-            val newType = (args as List<*>)[0] as String
+            val newType = singleArg!!
             data.changeType(newType)
             "Changed"
         } catch (e: NullPointerException) {

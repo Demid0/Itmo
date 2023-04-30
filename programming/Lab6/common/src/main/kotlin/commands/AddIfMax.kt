@@ -10,8 +10,8 @@ import commands.utils.CommandType
  * @since 1.0
  */
 class AddIfMax: Command(CommandType.OBJECT_ARG) {
-    override fun execute(args: Any?): String {
-        val route = args as Route
+    override fun execute(singleArg: String?, objectArg: Route?): String {
+        val route = objectArg!!
         for (element in data.collection) {
             if (element.getDistance() >= route.getDistance()) {
                 return "I didn't add it"

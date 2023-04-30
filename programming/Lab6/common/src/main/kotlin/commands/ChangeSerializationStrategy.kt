@@ -1,5 +1,6 @@
 package commands
 
+import collectionObjectsClasses.Route
 import commands.utils.Command
 import commands.utils.CommandType
 
@@ -9,9 +10,9 @@ import commands.utils.CommandType
  * @since 1.0
  */
 class ChangeSerializationStrategy: Command(CommandType.SINGLE_ARG) {
-    override fun execute(args: Any?): String {
+    override fun execute(singleArg: String?, objectArg: Route?): String {
         return try {
-            val newType = (args as List<*>)[0] as String + "strategy"
+            val newType = singleArg!! + "strategy"
             serializator.changeStrategy(serializator.getStrategy(newType)!!)
             "Changed"
         } catch (e: NullPointerException) {

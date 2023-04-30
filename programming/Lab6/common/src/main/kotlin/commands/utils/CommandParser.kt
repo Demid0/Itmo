@@ -1,5 +1,8 @@
 package commands.utils
 
+import collectionObjectsClasses.Coordinates
+import collectionObjectsClasses.Location
+import collectionObjectsClasses.Route
 import commands.*
 
 class CommandParser {
@@ -30,24 +33,20 @@ class CommandParser {
         commands.put(name, command)
     }
 
-    fun parse(args: MutableList<String>): Pair<Command, Any?>? {
-        if (args.isEmpty()) return null
+    fun parse(args: MutableList<String>): CommandPacket {
+        return if (args.isEmpty()) CommandPacket(null, null, null)
         else {
             val commandName = args[0]
             val command = commands[commandName]
-            return if (command == null) null
+            if (command == null) CommandPacket(null, null, null)
             else {
                 when (command.type) {
-                    CommandType.NO_ARG -> Pair(command, null)
-                    CommandType.SINGLE_ARG -> {
-                        args.removeFirst()
-                        Pair(command, args)
-                    }
-                    CommandType.OBJECT_ARG -> Pair(command, 0)
-                    CommandType.MIXED_ARG -> {
-                        args.removeFirst()
-                        Pair(command, listOf(args, 0))
-                    }
+                    CommandType.NO_ARG -> CommandPacket(command, null, null)
+                    CommandType.SINGLE_ARG -> CommandPacket(command, args[1], null)
+                    CommandType.OBJECT_ARG -> CommandPacket(command, null,
+                        Route("", Coordinates(null, null), null, Location(1, 1f, 1, ""), 4.0))
+
+                    CommandType.MIXED_ARG -> CommandPacket(command, args[1], Route("", Coordinates(null, null), null, Location(1, 1f, 1, ""), 4.0))
                 }
             }
         }

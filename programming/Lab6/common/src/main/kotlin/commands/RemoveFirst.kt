@@ -1,5 +1,6 @@
 package commands
 
+import collectionObjectsClasses.Route
 import commands.utils.Command
 import commands.utils.CommandType
 import java.util.NoSuchElementException
@@ -9,7 +10,7 @@ import java.util.NoSuchElementException
  * @since 1.0
  */
 class RemoveFirst: Command(CommandType.NO_ARG) {
-    override fun execute(args: Any?): String {
+    override fun execute(singleArg: String?, objectArg: Route?): String {
         return try {
             data.collection.remove(data.collection.first())
             "Done!"

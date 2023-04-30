@@ -9,11 +9,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8500fb34-274f-4286-9f5d-68add248c2be" name="Changes" comment="feat: if applied, will add commandPacket">
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/kotlin/commands/AddIfMaxTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/commands/AddIfMaxTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/kotlin/commands/AddTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/commands/AddTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/kotlin/utils/InvokerTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/utils/InvokerTest.kt" afterDir="false" />
+    <list default="true" id="8500fb34-274f-4286-9f5d-68add248c2be" name="Changes" comment="?: Idea's jokes">
+      <change afterPath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/utils/CommandPacket.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/Add.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/Add.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/AddIfMax.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/AddIfMax.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/ChangeCollectionType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/ChangeCollectionType.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/ChangeSerializationStrategy.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/ChangeSerializationStrategy.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/Clear.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/Clear.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/CountDistance.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/CountDistance.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/ExecuteScript.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/ExecuteScript.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/Exit.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/Exit.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/Help.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/Help.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/Info.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/Info.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/PrintFieldDescendingDistance.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/PrintFieldDescendingDistance.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/RemoveById.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/RemoveById.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/RemoveFirst.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/RemoveFirst.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/RemoveLower.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/RemoveLower.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/Save.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/Save.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/Show.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/Show.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/UpdateId.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/UpdateId.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/utils/Command.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/utils/Command.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/utils/CommandParser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/utils/CommandParser.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/utils/Invoker.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/commands/utils/Invoker.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/utils/App.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab6/common/src/main/kotlin/utils/App.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,32 +121,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ToolWindowChanges.ShowToolbar&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/demid/Desktop/Itmo/programming/Lab5&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ToolWindowChanges.ShowToolbar": "false",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "last_opened_file_path": "/home/demid/Desktop/Itmo/programming/Lab5/src/main/kotlin",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "terminal",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/kotlin" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
@@ -263,7 +282,7 @@
       <workItem from="1680625871904" duration="2361000" />
       <workItem from="1680905450386" duration="146000" />
       <workItem from="1680971140345" duration="208000" />
-      <workItem from="1682870848468" duration="1560000" />
+      <workItem from="1682870848468" duration="1750000" />
     </task>
     <task id="LOCAL-00001" summary="Lab5 init">
       <created>1676809431144</created>
@@ -559,7 +578,21 @@
       <option name="project" value="LOCAL" />
       <updated>1682872153513</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="test: if applied, will rewriting test with commandPacket">
+      <created>1682872470203</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1682872470203</updated>
+    </task>
+    <task id="LOCAL-00044" summary="?: Idea's jokes">
+      <created>1682872511413</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1682872511413</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -577,7 +610,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: if applied, will add out/in put stream object in asker constructor" />
     <MESSAGE value="refactor: if applied, change fun names&#10;getStrategies -&gt; getStrategy" />
     <MESSAGE value="revert: if applied, will remove Yaml serialization strategy" />
     <MESSAGE value="refactor: if applied, will change exception handling" />
@@ -587,7 +619,6 @@
     <MESSAGE value="feat: add unique id" />
     <MESSAGE value="test: scripts to ExecuteScript command" />
     <MESSAGE value="feat: if applied, will add YamlSerialization" />
-    <MESSAGE value="?: Idea's jokes" />
     <MESSAGE value="feat: pivo" />
     <MESSAGE value="refactor: if applied, will add DI (koin)" />
     <MESSAGE value="perf: if applied, will inject starter, reader, invoker in main" />
@@ -602,7 +633,9 @@
     <MESSAGE value="test: if applied, will remove invoker test, add some command tests" />
     <MESSAGE value="refactor: if applied, change some cosmetic with &quot;&gt; &quot;" />
     <MESSAGE value="feat: if applied, will add commandPacket" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: if applied, will add commandPacket" />
+    <MESSAGE value="test: if applied, will rewriting test with commandPacket" />
+    <MESSAGE value="?: Idea's jokes" />
+    <option name="LAST_COMMIT_MESSAGE" value="?: Idea's jokes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
