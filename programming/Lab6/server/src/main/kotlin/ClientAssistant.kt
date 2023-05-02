@@ -6,7 +6,7 @@ import serializationStrategies.utils.Serializator
 class ClientAssistant: KoinComponent {
     val serializator: Serializator by inject()
 
-    fun handleMessage(message: String) : String {
+    fun executeQuery(message: String) : String {
         val commandPacket = deserializeMessage(message)
 
     }

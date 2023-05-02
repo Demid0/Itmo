@@ -1,6 +1,6 @@
 fun main(args: Array<String>) {
-    val handler = Handler()
+    val messageHandler = MessageHandler()
     while (true) {
-        handler.run()
+        messageHandler.run()
     }
 }

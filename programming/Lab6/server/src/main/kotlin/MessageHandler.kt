@@ -4,7 +4,7 @@ import java.net.DatagramSocket
 import java.net.SocketAddress
 import java.util.logging.Logger
 
-class Handler: Runnable, KoinComponent {
+class MessageHandler: Runnable, KoinComponent {
 
     private val logger = Logger.getLogger("Handler logger")
     private val socket = DatagramSocket(5555)
@@ -20,7 +20,7 @@ class Handler: Runnable, KoinComponent {
             clients[clientName] = ClientAssistant()
         }
         logger.info("Message from client ${clientName.toString()}")
-        val out = clients[clientName]!!.handleMessage(unpackMessage(packet))
+        val out = clients[clientName]!!.executeQuery(unpackMessage(packet))
         logger.info("Answer to client \"$out\"")
         sendMessage(packMessage(out, packet))
     }
