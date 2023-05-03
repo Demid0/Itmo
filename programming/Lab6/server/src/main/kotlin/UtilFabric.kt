@@ -1,6 +1,8 @@
 package utils
 
-import commands.utils.CommandParser
+import ClientCommandInvoker
+import Data
+import Starter
 import org.koin.core.component.KoinComponent
 import org.koin.dsl.module
 import java.io.BufferedReader
@@ -17,8 +19,6 @@ val koinModule = module {
 
     single { Starter() }
 
-    single { Asker() }
-
     single { WriterManager(PrintWriter(System.out, true)) }
 
     single { ReaderManager(BufferedReader(InputStreamReader(System.`in`))) }
@@ -30,10 +30,6 @@ val koinModule = module {
     single { Data() }
 
     single { Stack<String>() }
-
-    single { CommandParser() }
-
-    single { App() }
 
 }
 
