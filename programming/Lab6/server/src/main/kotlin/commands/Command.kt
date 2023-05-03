@@ -1,12 +1,12 @@
 package commands
 
+import Data
 import collectionObjectsClasses.Route
 import kotlinx.serialization.Serializable
 import utils.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import java.io.PrintWriter
-import java.util.*
+
 /***
  * Абстрактный класс команды
  * @author Demid0
@@ -14,12 +14,8 @@ import java.util.*
  */
 @Serializable
 abstract class Command(val type: CommandType) : KoinComponent {
-    internal val app: App by inject()
     internal val data: Data by inject()
     internal val serializator: Serializator by inject()
-    internal val scriptStack: Stack<String> by inject()
-    internal val commandParser: CommandParser by inject()
-    internal val printWriterManager: WriterManager<PrintWriter> by inject()
 
-    abstract fun execute(singleArg: String?, objectArg: Route?) : String
+    abstract fun execute(singleArg: String?, objectArg: Route?) : AnswerPacket
 }

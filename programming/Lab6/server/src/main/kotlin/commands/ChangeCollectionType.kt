@@ -1,7 +1,7 @@
 package commands
 
 import collectionObjectsClasses.Route
-import utils.Command
+import utils.AnswerPacket
 import utils.CommandType
 
 /***
@@ -11,8 +11,8 @@ import utils.CommandType
  */
 class ChangeCollectionType: Command(CommandType.SINGLE_ARG) {
 
-    override fun execute(singleArg: String?, objectArg: Route?): String {
-        return try {
+    override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
+        return AnswerPacket(try {
             val newType = singleArg!!
             data.changeType(newType)
             "Changed"
@@ -20,7 +20,7 @@ class ChangeCollectionType: Command(CommandType.SINGLE_ARG) {
             "Unsupported collection type\n${printSupportedTypes()}"
         } catch (e: IndexOutOfBoundsException) {
             "Empty input\n${printSupportedTypes()}"
-        }
+        })
     }
 
     private fun printSupportedTypes() : String {

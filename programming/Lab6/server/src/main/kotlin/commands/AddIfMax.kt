@@ -1,7 +1,7 @@
 package commands
 
 import collectionObjectsClasses.Route
-import utils.Command
+import utils.AnswerPacket
 import utils.CommandType
 
 /***
@@ -10,15 +10,15 @@ import utils.CommandType
  * @since 1.0
  */
 class AddIfMax: Command(CommandType.OBJECT_ARG) {
-    override fun execute(singleArg: String?, objectArg: Route?): String {
+    override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
         val route = objectArg!!
         for (element in data.collection) {
             if (element.getDistance() >= route.getDistance()) {
-                return "I didn't add it"
+                return AnswerPacket("I didn't add it")
             }
         }
         data.collection.add(route)
-        return "Done!"
+        return AnswerPacket("Done!")
     }
 
 }

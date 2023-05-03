@@ -1,11 +1,10 @@
 package commands
 
 import collectionObjectsClasses.Route
-import utils.Command
+import utils.AnswerPacket
 import utils.CommandType
 import java.io.File
 import java.io.PrintWriter
-import kotlin.system.exitProcess
 
 /***
  * exit : завершить программу (без сохранения в файл)
@@ -13,13 +12,14 @@ import kotlin.system.exitProcess
  * @since 1.0
  */
 class Exit: Command(CommandType.NO_ARG) {
-    override fun execute(singleArg: String?, objectArg: Route?): String {
+    override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
         val file = File(data.getInfoFileName())
         val fileWriter = PrintWriter(file)
         fileWriter.println(data.collection.javaClass.simpleName.lowercase())
         fileWriter.flush()
         fileWriter.println(serializator.getChosenStrategy().javaClass.simpleName.lowercase())
         fileWriter.flush()
-        exitProcess(0)
+        //exitProcess(0)
+        return AnswerPacket("exit", null, null)
     }
 }

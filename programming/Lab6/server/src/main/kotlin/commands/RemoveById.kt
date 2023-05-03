@@ -1,7 +1,7 @@
 package commands
 
 import collectionObjectsClasses.Route
-import utils.Command
+import utils.AnswerPacket
 import utils.CommandType
 import java.lang.Exception
 /***
@@ -10,8 +10,8 @@ import java.lang.Exception
  * @since 1.0
  */
 class RemoveById: Command(CommandType.SINGLE_ARG) {
-    override fun execute(singleArg: String?, objectArg: Route?): String {
-        return try {
+    override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
+        return AnswerPacket(try {
             val id: Long = singleArg!!.toLong()
             var bool = false
             for (element in data.collection) {
@@ -25,7 +25,7 @@ class RemoveById: Command(CommandType.SINGLE_ARG) {
             else "No element with this id."
         } catch (e: Exception) {
             "Wrong id format."
-        }
+        })
     }
 
 }

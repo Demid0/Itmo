@@ -1,7 +1,7 @@
 package commands
 
 import collectionObjectsClasses.Route
-import utils.Command
+import utils.AnswerPacket
 import utils.CommandType
 import java.lang.Exception
 
@@ -12,8 +12,8 @@ import java.lang.Exception
  * @since 1.0
  */
 class CountDistance(val compare: (a: Double, b: Double) -> Boolean): Command(CommandType.SINGLE_ARG) {
-    override fun execute(singleArg: String?, objectArg: Route?): String {
-        return try {
+    override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
+        return AnswerPacket(try {
             var counter = 0
             val distance: Double = singleArg!!.toDouble()
             for (element in data.collection) {
@@ -22,7 +22,7 @@ class CountDistance(val compare: (a: Double, b: Double) -> Boolean): Command(Com
             "$counter element(s)"
         } catch (e: Exception) {
             "Wrong distance format"
-        }
+        })
     }
 
 }

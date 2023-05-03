@@ -1,7 +1,9 @@
 package commands
 
+import ClientCommandInvoker
 import collectionObjectsClasses.Route
-import utils.Command
+import sun.awt.shell.ShellFolder
+import utils.AnswerPacket
 import utils.CommandType
 
 /***
@@ -10,15 +12,15 @@ import utils.CommandType
  * @since 1.0
  */
 class Help: Command(CommandType.NO_ARG) {
-    override fun execute(singleArg: String?, objectArg: Route?): String {
-        val commands = commandParser.getCommands()
-        return if (commands.isEmpty()) "No commands"
+    override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
+        val commands = ClientCommandInvoker().getCommands()
+        return AnswerPacket(if (commands.isEmpty()) "No commands"
         else {
             var out = "You can use this commands:\n"
             for (command in commands.toSortedMap()) {
                 out += command.key + "\n"
             }
             out.dropLast(1)
-        }
+        })
     }
 }

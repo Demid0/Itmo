@@ -1,7 +1,7 @@
 package commands
 
 import collectionObjectsClasses.Route
-import utils.Command
+import utils.AnswerPacket
 import utils.CommandType
 
 /***
@@ -10,8 +10,8 @@ import utils.CommandType
  * @since 1.0
  */
 class ChangeSerializationStrategy: Command(CommandType.SINGLE_ARG) {
-    override fun execute(singleArg: String?, objectArg: Route?): String {
-        return try {
+    override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
+        return AnswerPacket(try {
             val newType = singleArg!! + "strategy"
             serializator.changeStrategy(serializator.getStrategy(newType)!!)
             "Changed"
@@ -19,7 +19,7 @@ class ChangeSerializationStrategy: Command(CommandType.SINGLE_ARG) {
             "Unknown serialization strategy\n${printSupportedStrategies()}"
         } catch (e: IndexOutOfBoundsException) {
             "Empty input\n${printSupportedStrategies()}"
-        }
+        })
     }
 
     private fun printSupportedStrategies(): String {

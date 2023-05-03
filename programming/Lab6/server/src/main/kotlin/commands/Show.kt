@@ -1,7 +1,7 @@
 package commands
 
 import collectionObjectsClasses.Route
-import utils.Command
+import utils.AnswerPacket
 import utils.CommandType
 
 /***
@@ -10,15 +10,15 @@ import utils.CommandType
  * @since 1.0
  */
 class Show: Command(CommandType.NO_ARG) {
-    override fun execute(singleArg: String?, objectArg: Route?): String {
+    override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
         val collection = data.collection
-        return if (collection.isEmpty()) "Collection is empty :("
+        return AnswerPacket(if (collection.isEmpty()) "Collection is empty :("
         else {
             var out = "Collection:\n"
             for (element in collection) {
                 out += element.toString() + "\n"
             }
             out.dropLast(1)
-        }
+        })
     }
 }

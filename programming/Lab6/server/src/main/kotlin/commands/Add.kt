@@ -1,7 +1,7 @@
 package commands
 
 import collectionObjectsClasses.Route
-import utils.Command
+import utils.AnswerPacket
 import utils.CommandType
 
 /***
@@ -10,8 +10,8 @@ import utils.CommandType
  * @since 1.0
  */
 class Add: Command(CommandType.OBJECT_ARG) {
-    override fun execute(singleArg: String?, objectArg: Route?): String {
+    override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
         data.collection.add(objectArg!!)
-        return "Done!"
+        return AnswerPacket("Done!")
     }
 }
