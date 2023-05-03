@@ -23,7 +23,7 @@ val koinModule = module {
 
     single { ReaderManager(BufferedReader(InputStreamReader(System.`in`))) }
 
-    single { Invoker() }
+    single { ClientCommandInvoker() }
 
     single { Serializator() }
 
