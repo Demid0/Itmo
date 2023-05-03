@@ -13,7 +13,7 @@ import org.koin.core.component.inject
  * @since 1.0
  */
 @Serializable
-abstract class Command(val type: CommandType) : KoinComponent {
+abstract class ClientCommand(val type: CommandType) : KoinComponent {
     internal val data: Data by inject()
     internal val serializator: Serializator by inject()
 

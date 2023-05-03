@@ -11,7 +11,7 @@ import java.lang.Exception
  * @author Demid0
  * @since 1.0
  */
-class CountDistance(val compare: (a: Double, b: Double) -> Boolean): Command(CommandType.SINGLE_ARG) {
+class CountDistance(val compare: (a: Double, b: Double) -> Boolean): ClientCommand(CommandType.SINGLE_ARG) {
     override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
         return AnswerPacket(try {
             var counter = 0

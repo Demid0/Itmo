@@ -9,7 +9,7 @@ import java.lang.Exception
  * @author Demid0
  * @since 1.0
  */
-class RemoveById: Command(CommandType.SINGLE_ARG) {
+class RemoveById: ClientCommand(CommandType.SINGLE_ARG) {
     override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
         return AnswerPacket(try {
             val id: Long = singleArg!!.toLong()

@@ -9,7 +9,7 @@ import utils.CommandType
  * @author Demid0
  * @since 1.0
  */
-class AddIfMax: Command(CommandType.OBJECT_ARG) {
+class AddIfMax: ClientCommand(CommandType.OBJECT_ARG) {
     override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
         val route = objectArg!!
         for (element in data.collection) {

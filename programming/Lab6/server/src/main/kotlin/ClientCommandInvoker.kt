@@ -11,7 +11,7 @@ import utils.ArgumentPacket
  * Поддерживаемые типы комманд
  */
 class ClientCommandInvoker: KoinComponent {
-    val commands = HashMap<String, Command>()
+    val commands = HashMap<String, ClientCommand>()
 
     init {
         addCommand("exit", Exit())
@@ -37,7 +37,7 @@ class ClientCommandInvoker: KoinComponent {
     fun invoke(argumentPacket: ArgumentPacket): AnswerPacket {
         return commands[argumentPacket.commandName]!!.execute(argumentPacket.singleArg, argumentPacket.objectArg)
     }
-    fun addCommand (commandName: String, command: Command) = commands.put(commandName, command)
+    fun addCommand (commandName: String, clientCommand: ClientCommand) = commands.put(commandName, clientCommand)
     fun getCommands() = commands
 
 }

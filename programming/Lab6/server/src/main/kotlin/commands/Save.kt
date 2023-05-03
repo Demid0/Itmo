@@ -10,7 +10,7 @@ import java.io.PrintWriter
  * @author Demid0
  * @since 1.0
  */
-class Save: Command(CommandType.NO_ARG) {
+class Save: ClientCommand(CommandType.NO_ARG) {
     override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
         return AnswerPacket(try {
             val collection = data.collection

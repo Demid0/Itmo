@@ -11,7 +11,7 @@ import java.io.PrintWriter
  * @author Demid0
  * @since 1.0
  */
-class Exit: Command(CommandType.NO_ARG) {
+class Exit: ClientCommand(CommandType.NO_ARG) {
     override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
         val file = File(data.getInfoFileName())
         val fileWriter = PrintWriter(file)

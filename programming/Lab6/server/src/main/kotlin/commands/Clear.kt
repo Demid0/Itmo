@@ -9,7 +9,7 @@ import utils.CommandType
  * @author Demid0
  * @since 1.0
  */
-class Clear: Command(CommandType.NO_ARG) {
+class Clear: ClientCommand(CommandType.NO_ARG) {
     override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
         data.collection.clear()
         return AnswerPacket("Done!")

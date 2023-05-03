@@ -9,7 +9,7 @@ import utils.CommandType
  * @author Demid0
  * @since 1.0
  */
-class Info: Command(CommandType.NO_ARG) {
+class Info: ClientCommand(CommandType.NO_ARG) {
     override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
         return AnswerPacket("Information about collection:" +
                 "\n\tType: ${data.collection.javaClass.simpleName}" +

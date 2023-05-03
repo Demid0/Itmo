@@ -9,7 +9,7 @@ import utils.CommandType
  * @author Demid0
  * @since 1.0
  */
-class ChangeCollectionType: Command(CommandType.SINGLE_ARG) {
+class ChangeCollectionType: ClientCommand(CommandType.SINGLE_ARG) {
 
     override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
         return AnswerPacket(try {

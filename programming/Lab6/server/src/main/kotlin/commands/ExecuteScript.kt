@@ -9,7 +9,7 @@ import utils.CommandType
  * @author Demid0
  * @since 1.0
  */
-class ExecuteScript: Command(CommandType.SINGLE_ARG) {
+class ExecuteScript: ClientCommand(CommandType.SINGLE_ARG) {
     override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
         val file_name = singleArg!!
         return AnswerPacket("read_from_file", file_name, null)

@@ -9,7 +9,7 @@ import utils.CommandType
  * @author Demid0
  * @since 1.0
  */
-class Show: Command(CommandType.NO_ARG) {
+class Show: ClientCommand(CommandType.NO_ARG) {
     override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
         val collection = data.collection
         return AnswerPacket(if (collection.isEmpty()) "Collection is empty :("

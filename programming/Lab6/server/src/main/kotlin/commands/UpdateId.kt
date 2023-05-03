@@ -9,7 +9,7 @@ import java.lang.Exception
  * @author Demid0
  * @since 1.0
  */
-class UpdateId: Command(CommandType.MIXED_ARG) {
+class UpdateId: ClientCommand(CommandType.MIXED_ARG) {
     override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
         val id: Long = singleArg!!.toLong()
         val route = objectArg!!

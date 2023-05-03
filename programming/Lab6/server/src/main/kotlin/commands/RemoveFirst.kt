@@ -9,7 +9,7 @@ import java.util.NoSuchElementException
  * @author Demid0
  * @since 1.0
  */
-class RemoveFirst: Command(CommandType.NO_ARG) {
+class RemoveFirst: ClientCommand(CommandType.NO_ARG) {
     override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
         return AnswerPacket(try {
             data.collection.remove(data.collection.first())

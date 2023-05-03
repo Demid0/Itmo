@@ -10,7 +10,7 @@ import utils.CommandType
  * @author Demid0
  * @since 1.0
  */
-class Help: Command(CommandType.NO_ARG) {
+class Help: ClientCommand(CommandType.NO_ARG) {
     override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
         val commands = ClientCommandInvoker().getCommands()
         return AnswerPacket(if (commands.isEmpty()) "No commands"
