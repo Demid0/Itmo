@@ -27,5 +27,6 @@ class App: KoinComponent {
             return
         }
         if (packet.objectArg != null) packet.objectArg = asker.askRoute(reader, writer)
+        packet.commandFrom = scriptStack.lastOrNull()
     }
 }

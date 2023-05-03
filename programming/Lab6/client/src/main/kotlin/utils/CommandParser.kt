@@ -15,7 +15,7 @@ class CommandParser {
     }
 
     fun parse(args: MutableList<String>): ArgumentPacket {
-        return if (args.isEmpty()) ArgumentPacket(null, null, null)
+        return if (args.isEmpty()) ArgumentPacket()
         else {
             val commandName = args[0]
             val commandType = commands[commandName]
@@ -24,19 +24,19 @@ class CommandParser {
                 when(commandType) {
                     CommandType.NO_ARG -> {
                         if (args.size != 1) ArgumentPacket()
-                        else ArgumentPacket(commandName, null, null)
+                        else ArgumentPacket(commandName, null, null, null)
                     }
                     CommandType.SINGLE_ARG -> {
                         if (args.size != 2) ArgumentPacket()
-                        else ArgumentPacket(commandName, args[1], null)
+                        else ArgumentPacket(commandName, args[1], null, null)
                     }
                     CommandType.OBJECT_ARG -> {
                         if (args.size != 1) ArgumentPacket()
-                        else ArgumentPacket(commandName, null, Route("", Coordinates(null, null), null, Location(1, 1f, 1, ""), 4.0))
+                        else ArgumentPacket(commandName, null, Route("", Coordinates(null, null), null, Location(1, 1f, 1, ""), 4.0), null)
                     }
                     CommandType.MIXED_ARG -> {
                         if (args.size != 2) ArgumentPacket()
-                        else ArgumentPacket(commandName, args[1], Route("", Coordinates(null, null), null, Location(1, 1f, 1, ""), 4.0))
+                        else ArgumentPacket(commandName, args[1], Route("", Coordinates(null, null), null, Location(1, 1f, 1, ""), 4.0), null)
                     }
                 }
             }
