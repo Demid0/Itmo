@@ -26,16 +26,16 @@ class Asker {
         writer.print("$printHint > ")
         writer.flush()
         while (true) {
-           try {
-               var input = reader.readLine()
-               input = if (input == "") null else input
-               output = converter(input)
-               if (checker.test(output)) break
-               else throw Exception()
-           } catch (_: Exception) {
-               writer.println("Incorrect input. Try again.")
-               writer.flush()
-           }
+            try {
+                var input = reader.readLine()
+                input = if (input == "") null else input
+                output = converter(input)
+                if (checker.test(output)) break
+                else throw Exception()
+            } catch (_: Exception) {
+                writer.println("Incorrect input. Try again.")
+                writer.flush()
+            }
         }
         return output
     }
