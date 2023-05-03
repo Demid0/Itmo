@@ -13,6 +13,9 @@ class CommandParser {
     fun addCommand(name: String, command: CommandType) {
         commands.put(name, command)
     }
+    fun removeCommand(name: String) {
+        commands.remove(name)
+    }
 
     fun parse(args: MutableList<String>): ArgumentPacket {
         return if (args.isEmpty()) ArgumentPacket()
