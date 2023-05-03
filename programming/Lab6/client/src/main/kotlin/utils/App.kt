@@ -13,7 +13,7 @@ class App: KoinComponent {
     private val scriptStack: Stack<String> by inject()
     private val nullWriter = PrintWriter("/dev/null")
 
-    fun run(inputReader: BufferedReader, outputWriter: PrintWriter) {
+    fun run(inputReader: BufferedReader, outputWriter: PrintWriter): ArgumentPacket? {
         val reader = inputReader
         val writer = if (scriptStack.isEmpty()) outputWriter else nullWriter
         writer.print("> ")
@@ -24,9 +24,10 @@ class App: KoinComponent {
         if (packet.commandName == null) {
             writer.print("Command not found.\n")
             writer.flush()
-            return
+            return null
         }
         if (packet.objectArg != null) packet.objectArg = asker.askRoute(reader, writer)
         packet.commandFrom = scriptStack.lastOrNull()
+        return packet
     }
 }
