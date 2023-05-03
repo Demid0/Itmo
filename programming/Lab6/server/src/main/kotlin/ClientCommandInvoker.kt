@@ -11,7 +11,7 @@ import utils.ArgumentPacket
  * Поддерживаемые типы комманд
  */
 class ClientCommandInvoker: KoinComponent {
-    val commands = HashMap<String, ClientCommand>()
+    private val commands = HashMap<String, ClientCommand>()
 
     init {
         addCommand("exit", Exit())
