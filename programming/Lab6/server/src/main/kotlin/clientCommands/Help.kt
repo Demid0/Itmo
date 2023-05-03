@@ -1,6 +1,6 @@
-package commands
+package clientCommands
 
-import ClientCommandInvoker
+import utils.ClientCommandInvoker
 import collectionObjectsClasses.Route
 import utils.AnswerPacket
 import utils.CommandType

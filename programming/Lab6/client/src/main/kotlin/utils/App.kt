@@ -1,6 +1,6 @@
 package utils
 
-import commands.utils.CommandParser
+import clientCommands.utils.CommandParser
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.BufferedReader

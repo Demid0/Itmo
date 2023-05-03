@@ -1,4 +1,4 @@
-import commands.utils.CommandParser
+import clientCommands.utils.CommandParser
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 import utils.*

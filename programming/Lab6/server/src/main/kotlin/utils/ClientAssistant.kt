@@ -1,8 +1,7 @@
-import utils.ArgumentPacket
+package utils
+
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import utils.AnswerPacket
-import utils.Serializator
 
 class ClientAssistant: KoinComponent {
     val serializator: Serializator by inject()

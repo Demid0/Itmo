@@ -1,4 +1,4 @@
-package commands.utils
+package clientCommands.utils
 
 import collectionObjectsClasses.Coordinates
 import collectionObjectsClasses.Location

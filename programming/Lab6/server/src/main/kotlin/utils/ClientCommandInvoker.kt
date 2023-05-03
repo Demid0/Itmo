@@ -1,4 +1,6 @@
-import commands.*
+package utils
+
+import clientCommands.*
 import org.koin.core.component.KoinComponent
 import utils.AnswerPacket
 import utils.ArgumentPacket

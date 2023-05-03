@@ -1,4 +1,4 @@
-package commands
+package clientCommands
 
 import collectionObjectsClasses.Route
 import utils.AnswerPacket

@@ -1,8 +1,8 @@
+package utils
+
 import org.koin.core.component.KoinComponent
 import java.io.*
 import org.koin.core.component.inject
-import utils.Serializator
-import utils.WriterManager
 
 /***
  * Класс, загружающий последнее сохраненное состояние системы и коллекции
