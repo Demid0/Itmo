@@ -1,11 +1,8 @@
-package utils
-
-import collectionObjectsClasses.Route
 import org.koin.core.component.KoinComponent
 import java.io.*
-import kotlin.system.exitProcess
 import org.koin.core.component.inject
-import serializationStrategies.utils.Serializator
+import utils.Serializator
+import utils.WriterManager
 
 /***
  * Класс, загружающий последнее сохраненное состояние системы и коллекции

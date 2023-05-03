@@ -1,8 +1,8 @@
 package commands
 
 import collectionObjectsClasses.Route
-import commands.utils.Command
-import commands.utils.CommandType
+import utils.Command
+import utils.CommandType
 
 /***
  * remove_lower {element} : удалить из коллекции все элементы, меньшие, чем заданный

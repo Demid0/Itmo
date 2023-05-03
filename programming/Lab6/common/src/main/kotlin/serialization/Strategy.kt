@@ -1,8 +1,7 @@
-package serializationStrategies.utils
+package serialization
 
 import collectionObjectsClasses.Route
-import commands.utils.CommandPacket
-import kotlinx.serialization.Serializable
+import utils.ArgumentPacket
 
 /***
  * Обертка для разных типов сериализации
@@ -11,8 +10,8 @@ import kotlinx.serialization.Serializable
  */
 interface Strategy {
     fun decode(str: String, collection: MutableCollection<Route>): MutableCollection<Route>
-    fun decode(str: String, commandPacket: CommandPacket): CommandPacket
+    fun decode(str: String, argumentPacket: ArgumentPacket): ArgumentPacket
     fun encode(collection: MutableCollection<Route>): String
-    fun encode(commandPacket: CommandPacket): String
+    fun encode(argumentPacket: ArgumentPacket): String
     override fun toString(): String
 }

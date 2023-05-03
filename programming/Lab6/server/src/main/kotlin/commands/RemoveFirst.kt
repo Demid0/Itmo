@@ -1,8 +1,8 @@
 package commands
 
 import collectionObjectsClasses.Route
-import commands.utils.Command
-import commands.utils.CommandType
+import utils.Command
+import utils.CommandType
 import java.util.NoSuchElementException
 /***
  * remove_first : удалить первый элемент из коллекции

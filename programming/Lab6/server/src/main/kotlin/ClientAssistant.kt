@@ -1,7 +1,7 @@
-import commands.utils.CommandPacket
+import utils.ArgumentPacket
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import serializationStrategies.utils.Serializator
+import utils.Serializator
 
 class ClientAssistant: KoinComponent {
     val serializator: Serializator by inject()
@@ -11,11 +11,11 @@ class ClientAssistant: KoinComponent {
 
     }
 
-    fun serializeMessage(commandPacket: CommandPacket) : String {
-        return serializator.serialize(commandPacket)
+    fun serializeMessage(argumentPacket: ArgumentPacket) : String {
+        return serializator.serialize(argumentPacket)
     }
 
-    fun deserializeMessage(message: String) : CommandPacket {
-        return serializator.deserialize(message, CommandPacket())
+    fun deserializeMessage(message: String) : ArgumentPacket {
+        return serializator.deserialize(message, ArgumentPacket())
     }
 }

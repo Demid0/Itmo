@@ -1,4 +1,4 @@
-package commands.utils
+package utils
 
 enum class CommandType {
     NO_ARG,

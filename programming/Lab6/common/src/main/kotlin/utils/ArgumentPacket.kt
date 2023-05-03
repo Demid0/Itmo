@@ -1,9 +1,9 @@
-package commands.utils
+package utils
 
 import collectionObjectsClasses.Route
 import kotlinx.serialization.Serializable
 
 @Serializable
-class CommandPacket(var commandName: String?, var singleArg: String?, var objectArg: Route?) {
+class ArgumentPacket(var commandName: String?, var singleArg: String?, var objectArg: Route?) {
     constructor() : this(null, null, null)
 }

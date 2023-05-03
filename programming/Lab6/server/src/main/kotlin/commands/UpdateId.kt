@@ -1,8 +1,8 @@
 package commands
 
 import collectionObjectsClasses.Route
-import commands.utils.Command
-import commands.utils.CommandType
+import utils.Command
+import utils.CommandType
 import java.lang.Exception
 /***
  * update id {element} : обновить значение элемента коллекции, id которого равен заданному

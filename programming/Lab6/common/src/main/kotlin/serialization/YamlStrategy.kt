@@ -1,12 +1,10 @@
-package serializationStrategies
+package serialization
 
 import collectionObjectsClasses.Route
 import com.charleskorn.kaml.Yaml
-import commands.utils.CommandPacket
-import kotlinx.serialization.Serializable
+import utils.ArgumentPacket
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
-import serializationStrategies.utils.Strategy
 
 /***
  * Обертка для yaml сериализации
@@ -15,9 +13,9 @@ import serializationStrategies.utils.Strategy
  */
 class YamlStrategy : Strategy {
     override fun decode(str: String, collection: MutableCollection<Route>): MutableCollection<Route> = Yaml.default.decodeFromString(str)
-    override fun decode(str: String, commandPacket: CommandPacket): CommandPacket = Yaml.default.decodeFromString(str)
+    override fun decode(str: String, argumentPacket: ArgumentPacket): ArgumentPacket = Yaml.default.decodeFromString(str)
     override fun encode(collection: MutableCollection<Route>) = Yaml.default.encodeToString(collection)
-    override fun encode(commandPacket: CommandPacket): String = Yaml.default.encodeToString(commandPacket)
+    override fun encode(argumentPacket: ArgumentPacket): String = Yaml.default.encodeToString(argumentPacket)
 
     override fun toString() = "Yaml"
 }

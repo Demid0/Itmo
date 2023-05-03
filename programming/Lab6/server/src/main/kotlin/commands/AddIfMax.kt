@@ -1,8 +1,8 @@
 package commands
 
 import collectionObjectsClasses.Route
-import commands.utils.Command
-import commands.utils.CommandType
+import utils.Command
+import utils.CommandType
 
 /***
  * add_if_max {element} : добавить новый элемент в коллекцию, если его значение превышает значение наибольшего элемента этой коллекции

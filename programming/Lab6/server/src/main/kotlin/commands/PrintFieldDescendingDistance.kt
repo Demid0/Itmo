@@ -1,8 +1,8 @@
 package commands
 
 import collectionObjectsClasses.Route
-import commands.utils.Command
-import commands.utils.CommandType
+import utils.Command
+import utils.CommandType
 
 /***
  * print_field_descending_distance : вывести значения поля distance всех элементов в порядке убывания

@@ -1,5 +1,3 @@
-package utils
-
 import collectionObjectsClasses.Route
 import kotlinx.serialization.Serializable
 

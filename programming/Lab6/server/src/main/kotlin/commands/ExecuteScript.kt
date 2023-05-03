@@ -1,8 +1,7 @@
 package commands
 
 import collectionObjectsClasses.Route
-import commands.utils.Command
-import commands.utils.CommandType
+import utils.CommandType
 import java.io.BufferedReader
 import java.io.File
 import java.io.InputStreamReader
