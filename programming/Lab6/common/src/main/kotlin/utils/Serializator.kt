@@ -1,7 +1,6 @@
 package utils
 
 import collectionObjectsClasses.Route
-import utils.ArgumentPacket
 import serialization.JsonStrategy
 import serialization.Strategy
 import serialization.YamlStrategy
@@ -24,9 +23,11 @@ class Serializator {
         addStrategy("yamlstrategy", YamlStrategy())
     }
     fun serialize(collection: MutableCollection<Route>) = chosenStrategy.encode(collection)
+    fun serialize(answerPacket: AnswerPacket) = chosenStrategy.encode(answerPacket)
     fun serialize(argumentPacket: ArgumentPacket) = chosenStrategy.encode(argumentPacket)
     fun deserialize(string: String, collection: MutableCollection<Route>) = chosenStrategy.decode(string, collection)
     fun deserialize(string: String, argumentPacket: ArgumentPacket) = chosenStrategy.decode(string, argumentPacket)
+    fun deserialize(string: String, answerPacket: AnswerPacket) = chosenStrategy.decode(string, answerPacket)
 
     fun addStrategy(name: String, strategy: Strategy) {
         strategies[name] = strategy
