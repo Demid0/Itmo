@@ -26,3 +26,5 @@ class CountDistance(val compare: (a: Double, b: Double) -> Boolean): Command(Com
     }
 
 }
+//CountDistance { a: Double, b: Double -> a == b }
+//CountDistance { a: Double, b: Double -> a < b }
