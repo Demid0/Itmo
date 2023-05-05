@@ -1,5 +1,8 @@
 package utils
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 enum class CommandType {
     NO_ARG,
     SINGLE_ARG,
