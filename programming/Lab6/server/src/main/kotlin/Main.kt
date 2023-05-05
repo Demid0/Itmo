@@ -1,10 +1,15 @@
 import org.koin.core.component.inject
+import org.koin.core.context.startKoin
 import utils.MessageHandler
-import utils.UtilFabric
+import utils.ServerUtilFabric
+import utils.serverKoinModule
 
 fun main(args: Array<String>)  {
-    val utilFabric = UtilFabric()
-    val messageHandler: MessageHandler by utilFabric.inject()
+    startKoin {
+        modules(serverKoinModule)
+    }
+    val serverUtilFabric = ServerUtilFabric()
+    val messageHandler: MessageHandler by serverUtilFabric.inject()
     while (true) {
         messageHandler.run()
     }

@@ -33,4 +33,4 @@ val serverKoinModule = module {
  * @author Demid0
  * @since 1.0
  */
-class UtilFabric: KoinComponent
+class ServerUtilFabric: KoinComponent
