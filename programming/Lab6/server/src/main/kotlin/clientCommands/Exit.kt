@@ -20,6 +20,6 @@ class Exit: ClientCommand(CommandType.NO_ARG) {
         fileWriter.println(serializator.getChosenStrategy().javaClass.simpleName.lowercase())
         fileWriter.flush()
         //exitProcess(0)
-        return AnswerPacket("exit", null, null)
+        return AnswerPacket("end_client_session", null, null)
     }
 }

@@ -10,6 +10,7 @@ class SystemCommandInvoker {
         addCommand("add_client_command", AddClientCommand())
         addCommand("remove_client_command", RemoveClientCommand())
         addCommand("read_from_file", ReadFromFile())
+        addCommand("end_client_session", EndClientSession())
     }
 
     fun invoke(answerPacket: AnswerPacket) {
