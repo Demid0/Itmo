@@ -13,9 +13,9 @@ import java.io.PrintWriter
  */
 class Exit: ClientCommand(CommandType.NO_ARG) {
     override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
-        val file = File(data.getInfoFileName())
+        val file = File(collectionManager.getInfoFileName())
         val fileWriter = PrintWriter(file)
-        fileWriter.println(data.collection.javaClass.simpleName.lowercase())
+        fileWriter.println(collectionManager.collection.javaClass.simpleName.lowercase())
         fileWriter.flush()
         fileWriter.println(serializator.getChosenStrategy().javaClass.simpleName.lowercase())
         fileWriter.flush()

@@ -16,7 +16,7 @@ import kotlinx.serialization.Serializable
  * @param infoFileName
  * Имя файла, в который сохраняется информация о коллекции
  */
-class Data {
+class CollectionManager {
     @Serializable
     var collection: MutableCollection<Route> = ArrayDeque()
     private var supportedCollectionTypes: HashMap<String, MutableCollection<Route>> = hashMapOf()

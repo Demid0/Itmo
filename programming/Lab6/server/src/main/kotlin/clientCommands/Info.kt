@@ -12,8 +12,8 @@ import utils.CommandType
 class Info: ClientCommand(CommandType.NO_ARG) {
     override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
         return AnswerPacket("Information about collection:" +
-                "\n\tType: ${data.collection.javaClass.simpleName}" +
-                "\n\tSize: ${data.collection.size}" +
+                "\n\tType: ${collectionManager.collection.javaClass.simpleName}" +
+                "\n\tSize: ${collectionManager.collection.size}" +
                 "\nInfo about system:" +
                 "\n\tSerialization strategy: ${serializator.getChosenStrategy().toString()}")
     }

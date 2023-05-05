@@ -12,7 +12,7 @@ import java.util.NoSuchElementException
 class RemoveFirst: ClientCommand(CommandType.NO_ARG) {
     override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
         return AnswerPacket(try {
-            data.collection.remove(data.collection.first())
+            collectionManager.collection.remove(collectionManager.collection.first())
             "Done!"
         }
         catch (e: NoSuchElementException) { "Collection is empty" })

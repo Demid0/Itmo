@@ -11,7 +11,7 @@ import utils.CommandType
  */
 class Clear: ClientCommand(CommandType.NO_ARG) {
     override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
-        data.collection.clear()
+        collectionManager.collection.clear()
         return AnswerPacket("Done!")
     }
 }

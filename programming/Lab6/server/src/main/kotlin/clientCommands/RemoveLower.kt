@@ -12,9 +12,9 @@ import utils.CommandType
 class RemoveLower: ClientCommand(CommandType.OBJECT_ARG) {
     override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
         val route = objectArg!!
-        for (element in data.collection) {
+        for (element in collectionManager.collection) {
             if (element.getDistance() < route.getDistance()) {
-                data.collection.remove(element)
+                collectionManager.collection.remove(element)
             }
         }
         return AnswerPacket("Done!")

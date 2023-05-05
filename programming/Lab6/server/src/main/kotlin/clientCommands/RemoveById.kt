@@ -14,9 +14,9 @@ class RemoveById: ClientCommand(CommandType.SINGLE_ARG) {
         return AnswerPacket(try {
             val id: Long = singleArg!!.toLong()
             var bool = false
-            for (element in data.collection) {
+            for (element in collectionManager.collection) {
                 if (element.getId() == id) {
-                    data.collection.remove(element)
+                    collectionManager.collection.remove(element)
                     bool = true
                     break
                 }

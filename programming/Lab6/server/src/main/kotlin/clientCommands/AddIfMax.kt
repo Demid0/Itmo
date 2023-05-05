@@ -12,12 +12,12 @@ import utils.CommandType
 class AddIfMax: ClientCommand(CommandType.OBJECT_ARG) {
     override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
         val route = objectArg!!
-        for (element in data.collection) {
+        for (element in collectionManager.collection) {
             if (element.getDistance() >= route.getDistance()) {
                 return AnswerPacket("I didn't add it")
             }
         }
-        data.collection.add(route)
+        collectionManager.collection.add(route)
         return AnswerPacket("Done!")
     }
 

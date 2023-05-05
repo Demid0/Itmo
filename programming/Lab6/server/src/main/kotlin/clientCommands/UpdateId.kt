@@ -15,7 +15,7 @@ class UpdateId: ClientCommand(CommandType.MIXED_ARG) {
         val route = objectArg!!
         return AnswerPacket(try {
             var bool = false
-            for (element in data.collection) {
+            for (element in collectionManager.collection) {
                 if (element.getId() == id) {
                     element.update(
                         name = route.getName(),

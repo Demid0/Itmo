@@ -5,14 +5,13 @@ import org.koin.dsl.module
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.PrintWriter
-import java.util.*
 
 /***
  * Модуль для Koin DI
  * @author Demid0
  * @since 1.0
  */
-val koinModule = module {
+val serverKoinModule = module {
 
     single { Starter() }
 
@@ -24,10 +23,9 @@ val koinModule = module {
 
     single { Serializator() }
 
-    single { Data() }
+    single { CollectionManager() }
 
-    single { Stack<String>() }
-
+    single { MessageHandler() }
 }
 
 /***

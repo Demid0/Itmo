@@ -13,8 +13,8 @@ import java.io.PrintWriter
 class Save: ClientCommand(CommandType.NO_ARG) {
     override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
         return AnswerPacket(try {
-            val collection = data.collection
-            val file = File(data.getFileName())
+            val collection = collectionManager.collection
+            val file = File(collectionManager.getFileName())
             val fileWriter = PrintWriter(file.outputStream(), true)
             fileWriter.println(serializator.serialize(collection))
             "Done!"

@@ -11,7 +11,7 @@ import utils.CommandType
  */
 class PrintFieldDescendingDistance: ClientCommand(CommandType.NO_ARG) {
     override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
-        val collection = data.collection.sortedByDescending { it.getDistance() }
+        val collection = collectionManager.collection.sortedByDescending { it.getDistance() }
         return AnswerPacket(if (collection.isEmpty()) "Collection is empty."
         else {
             var out = "Collection:\n"

@@ -11,7 +11,7 @@ import utils.CommandType
  */
 class Add: ClientCommand(CommandType.OBJECT_ARG) {
     override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
-        data.collection.add(objectArg!!)
+        collectionManager.collection.add(objectArg!!)
         return AnswerPacket("Done!")
     }
 }

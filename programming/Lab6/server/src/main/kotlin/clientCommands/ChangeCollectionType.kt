@@ -14,7 +14,7 @@ class ChangeCollectionType: ClientCommand(CommandType.SINGLE_ARG) {
     override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
         return AnswerPacket(try {
             val newType = singleArg!!
-            data.changeType(newType)
+            collectionManager.changeType(newType)
             "Changed"
         } catch (e: NullPointerException) {
             "Unsupported collection type\n${printSupportedTypes()}"
@@ -25,7 +25,7 @@ class ChangeCollectionType: ClientCommand(CommandType.SINGLE_ARG) {
 
     private fun printSupportedTypes() : String {
         var out = "You can use this types:\n"
-        for (type in data.getSupportedCollectionTypes()) {
+        for (type in collectionManager.getSupportedCollectionTypes()) {
             out += type.key +"\n"
         }
         return out.dropLast(1)

@@ -16,7 +16,7 @@ class CountDistance(val compare: (a: Double, b: Double) -> Boolean): ClientComma
         return AnswerPacket(try {
             var counter = 0
             val distance: Double = singleArg!!.toDouble()
-            for (element in data.collection) {
+            for (element in collectionManager.collection) {
                 if (compare(element.getDistance(), distance)) counter++
             }
             "$counter element(s)"

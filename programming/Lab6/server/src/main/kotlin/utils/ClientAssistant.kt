@@ -4,7 +4,11 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 class ClientAssistant: KoinComponent {
-    val serializator: Serializator by inject()
+    private val serializator: Serializator by inject()
+    var collectionManager = CollectionManager()
+    init {
+        //download last system condition
+    }
 
     fun executeQuery(message: String) : String {
         val argumentPacket = deserializeMessage(message)
