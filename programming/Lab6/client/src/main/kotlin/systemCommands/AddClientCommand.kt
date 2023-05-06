@@ -4,11 +4,11 @@ import utils.CommandType
 
 class AddClientCommand : SystemCommand() {
     override fun execute(singleArg: String?, commandType: CommandType?): Boolean {
-        try {
+        return try {
             commandParser.addCommand(singleArg!!, commandType!!)
-            return true
+            true
         } catch (_: Exception) {
-            return false
+            false
         }
     }
 

@@ -21,9 +21,13 @@ val clientKoinModule = module {
 
     single { Serializator() }
 
+    single { Asker() }
+
     single { SystemCommandInvoker() }
 
     single { Stack<String>() }
+
+    single { Stack<BufferedReader>() }
 
 }
 

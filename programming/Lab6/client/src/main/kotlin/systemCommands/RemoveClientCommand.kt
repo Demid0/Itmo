@@ -4,11 +4,11 @@ import utils.CommandType
 
 class RemoveClientCommand : SystemCommand() {
     override fun execute(singleArg: String?, commandType: CommandType?): Boolean {
-        try {
+        return try {
             commandParser.removeCommand(singleArg!!)
-            return true
+            true
         } catch (_: Exception) {
-            return false
+            false
         }
     }
 

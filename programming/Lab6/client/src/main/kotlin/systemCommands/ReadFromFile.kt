@@ -9,9 +9,11 @@ class ReadFromFile : SystemCommand() {
     override fun execute(singleArg: String?, commandType: CommandType?): Boolean {
         try {
             val fileName = singleArg!!
-            if (scriptStack.contains(fileName) && scriptStack.last() != fileName) return false
-            else if (!scriptStack.contains(fileName)) scriptStack.add(fileName)
-            readerManager.set(BufferedReader(InputStreamReader(FileInputStream(fileName))))
+            val reader = BufferedReader(InputStreamReader(FileInputStream(fileName)))
+            val pair = Pair(fileName, reader)
+            if (scriptStack.contains(pair) && scriptStack.last().first != fileName) return false
+            readerManager.set(reader)
+            if (!scriptStack.contains(pair)) scriptStack.add(pair)
             return true
         } catch (_: Exception) {
             return false

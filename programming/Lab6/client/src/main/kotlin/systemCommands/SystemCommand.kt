@@ -6,12 +6,13 @@ import org.koin.core.component.inject
 import utils.CommandType
 import utils.ReaderManager
 import utils.WriterManager
+import java.io.BufferedReader
 import java.util.Stack
 
 abstract class SystemCommand: KoinComponent {
+    internal val scriptStack: Stack<Pair<String, BufferedReader>> by inject()
     internal val commandParser : CommandParser by inject()
-    internal val commandOutputWriterManager : WriterManager by inject()
+    internal val writerManager : WriterManager by inject()
     internal val readerManager : ReaderManager by inject()
-    internal val scriptStack: Stack<String> by inject()
     abstract fun execute(singleArg: String?, commandType: CommandType?): Boolean
 }
