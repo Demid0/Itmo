@@ -10,7 +10,8 @@ import java.io.BufferedReader
 import java.util.Stack
 
 abstract class SystemCommand: KoinComponent {
-    internal val scriptStack: Stack<Pair<String, BufferedReader>> by inject()
+    internal val scriptStack: ArrayDeque<String> by inject()
+    internal val readerStack: HashMap<String, BufferedReader> by inject()
     internal val commandParser : CommandParser by inject()
     internal val writerManager : WriterManager by inject()
     internal val readerManager : ReaderManager by inject()

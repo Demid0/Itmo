@@ -8,11 +8,13 @@ import java.io.File
 import java.io.InputStreamReader
 import java.io.PrintWriter
 import java.util.*
+import kotlin.collections.ArrayDeque
 
 class App: KoinComponent {
     private val asker: Asker by inject()
     private val commandParser: CommandParser by inject()
-    private val scriptStack: Stack<Pair<String, BufferedReader>> by inject()
+    private val scriptStack: ArrayDeque<String> by inject()
+    private val readerStack: MutableMap<String, BufferedReader> by inject()
     private val nullWriterManager = WriterManager(PrintWriter(File("/dev/null")))
 
     fun run(readerManager: ReaderManager, writerManager: WriterManager): ArgumentPacket? {
@@ -30,10 +32,10 @@ class App: KoinComponent {
                 return null
             }
             if (packet.objectArg != null) packet.objectArg = asker.askRoute(reader, writer)
-            packet.commandFrom = scriptStack.lastOrNull()?.first
+            packet.commandFrom = scriptStack.lastOrNull()
             return packet
         } catch (e: NullPointerException) {
-            scriptStack.removeLast()
+            readerStack.remove(scriptStack.removeLast())
             if(scriptStack.isEmpty()) readerManager.set(BufferedReader(InputStreamReader(System.`in`)))
             return null
         }

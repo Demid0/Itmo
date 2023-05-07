@@ -3,10 +3,12 @@ import org.koin.core.context.startKoin
 import utils.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
+import java.io.PrintWriter
 import java.net.InetSocketAddress
 import java.nio.ByteBuffer
 import java.nio.channels.DatagramChannel
 import java.util.*
+import kotlin.collections.ArrayDeque
 
 fun main(args: Array<String>) {
     startKoin {
@@ -18,6 +20,8 @@ fun main(args: Array<String>) {
     val writerManager: WriterManager by fabric.inject()
     val readerManager: ReaderManager by fabric.inject()
     val systemCommandInvoker: SystemCommandInvoker by fabric.inject()
+    val scriptStack: ArrayDeque<String> by fabric.inject()
+    val readerStack: HashMap<String, BufferedReader> by fabric.inject()
 
     val channel = DatagramChannel.open()
     /****
@@ -38,6 +42,13 @@ fun main(args: Array<String>) {
         val ansBuffer = ByteBuffer.wrap(ByteArray(65535))
         channel.receive(ansBuffer)
         val ans = serializator.deserialize(String(ansBuffer.array(), 0, ansBuffer.position()), AnswerPacket())
-        systemCommandInvoker.invoke(ans)
+        if (!systemCommandInvoker.invoke(ans)) {
+            writerManager.set(PrintWriter(System.out))
+            readerManager.set(BufferedReader(InputStreamReader(System.`in`)))
+            scriptStack.clear()
+            readerStack.clear()
+            writerManager.get().println("Something went wrong")
+            writerManager.get().flush()
+        }
     }
 }

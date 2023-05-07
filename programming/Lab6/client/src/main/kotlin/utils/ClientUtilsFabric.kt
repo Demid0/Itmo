@@ -25,9 +25,9 @@ val clientKoinModule = module {
 
     single { SystemCommandInvoker() }
 
-    single { Stack<String>() }
+    single { ArrayDeque<String>() }
 
-    single { Stack<BufferedReader>() }
+    single { HashMap<String, BufferedReader>() }
 
 }
 
