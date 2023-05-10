@@ -9,8 +9,6 @@ import java.io.InputStreamReader
 class ReadFromFile : SystemCommand() {
     override fun execute(singleArg: String?, commandType: CommandType?): Boolean {
         try {
-            writerManager.get().println(scriptStack.lastOrNull())
-            writerManager.get().flush()
             var fileName = singleArg!!
             val file = File(fileName)
             val reader = BufferedReader(InputStreamReader(FileInputStream(file)))

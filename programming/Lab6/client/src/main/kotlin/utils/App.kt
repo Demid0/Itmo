@@ -9,12 +9,13 @@ import java.io.InputStreamReader
 import java.io.PrintWriter
 import java.util.*
 import kotlin.collections.ArrayDeque
+import kotlin.collections.HashMap
 
 class App: KoinComponent {
     private val asker: Asker by inject()
     private val commandParser: CommandParser by inject()
     private val scriptStack: ArrayDeque<String> by inject()
-    private val readerStack: MutableMap<String, BufferedReader> by inject()
+    private val readerStack: HashMap<String, BufferedReader> by inject()
     private val nullWriterManager = WriterManager(PrintWriter(File("/dev/null")))
 
     fun run(readerManager: ReaderManager, writerManager: WriterManager): ArgumentPacket? {
