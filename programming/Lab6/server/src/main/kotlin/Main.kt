@@ -1,6 +1,6 @@
 import org.koin.core.component.inject
 import org.koin.core.context.startKoin
-import utils.MessageHandler
+import utils.ServerMessageHandler
 import utils.ServerUtilFabric
 import utils.serverKoinModule
 
@@ -9,8 +9,8 @@ fun main(args: Array<String>)  {
         modules(serverKoinModule)
     }
     val serverUtilFabric = ServerUtilFabric()
-    val messageHandler: MessageHandler by serverUtilFabric.inject()
+    val serverMessageHandler: ServerMessageHandler by serverUtilFabric.inject()
     while (true) {
-        messageHandler.run()
+        serverMessageHandler.run()
     }
 }

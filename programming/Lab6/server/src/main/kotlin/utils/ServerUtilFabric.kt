@@ -25,7 +25,7 @@ val serverKoinModule = module {
 
     single { CollectionManager() }
 
-    single { MessageHandler() }
+    single { ServerMessageHandler() }
 
     single { HashMap<String, BufferedReader>() }
 }

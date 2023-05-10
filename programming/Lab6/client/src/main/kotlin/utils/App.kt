@@ -16,6 +16,8 @@ class App: KoinComponent {
     private val commandParser: CommandParser by inject()
     private val scriptStack: ArrayDeque<String> by inject()
     private val readerStack: HashMap<String, BufferedReader> by inject()
+    private val writerManager: WriterManager by inject()
+    private val readerManager: ReaderManager by inject()
     private val nullWriterManager = WriterManager(PrintWriter(File("/dev/null")))
 
     fun run(readerManager: ReaderManager, writerManager: WriterManager): ArgumentPacket? {
@@ -40,5 +42,14 @@ class App: KoinComponent {
             if(scriptStack.isEmpty()) readerManager.set(BufferedReader(InputStreamReader(System.`in`)))
             return null
         }
+    }
+
+    fun setDefaultConditionCausedByException(e: Exception) {
+        writerManager.set(PrintWriter(System.out))
+        readerManager.set(BufferedReader(InputStreamReader(System.`in`)))
+        scriptStack.clear()
+        readerStack.clear()
+        writerManager.get().println(e.message)
+        writerManager.get().flush()
     }
 }

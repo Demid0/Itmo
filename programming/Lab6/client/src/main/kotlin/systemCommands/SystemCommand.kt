@@ -7,7 +7,6 @@ import utils.CommandType
 import utils.ReaderManager
 import utils.WriterManager
 import java.io.BufferedReader
-import java.util.Stack
 
 abstract class SystemCommand: KoinComponent {
     internal val scriptStack: ArrayDeque<String> by inject()
@@ -15,5 +14,5 @@ abstract class SystemCommand: KoinComponent {
     internal val commandParser : CommandParser by inject()
     internal val writerManager : WriterManager by inject()
     internal val readerManager : ReaderManager by inject()
-    abstract fun execute(singleArg: String?, commandType: CommandType?): Boolean
+    abstract fun execute(singleArg: String?, commandType: CommandType?)
 }

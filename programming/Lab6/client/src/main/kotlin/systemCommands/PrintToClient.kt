@@ -1,16 +1,16 @@
 package systemCommands
 
+import exceptions.SystemCommandInvocationException
 import utils.CommandType
 
 class PrintToClient : SystemCommand() {
-    override fun execute(singleArg: String?, commandType: CommandType?): Boolean {
-        return try {
+    override fun execute(singleArg: String?, commandType: CommandType?) {
+        try {
             val writer = writerManager.get()
             writer.println(singleArg)
             writer.flush()
-            true
         } catch (_: Exception) {
-            false
+            throw SystemCommandInvocationException()
         }
     }
 

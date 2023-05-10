@@ -29,6 +29,8 @@ val clientKoinModule = module {
 
     single { HashMap<String, BufferedReader>() }
 
+    single { ClientMessageHandler() }
+
 }
 
 class ClientUtilsFabric: KoinComponent

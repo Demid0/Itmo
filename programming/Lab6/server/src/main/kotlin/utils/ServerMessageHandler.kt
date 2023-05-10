@@ -6,10 +6,10 @@ import java.net.DatagramSocket
 import java.net.SocketAddress
 import java.util.logging.Logger
 
-class MessageHandler: Runnable, KoinComponent {
+class ServerMessageHandler: Runnable, KoinComponent {
 
     private val logger = Logger.getLogger("Handler logger")
-    private val socket = DatagramSocket(5555)
+    private val socket = DatagramSocket(1488)
 
     override fun run() {
         val byteArray = ByteArray(65535)
