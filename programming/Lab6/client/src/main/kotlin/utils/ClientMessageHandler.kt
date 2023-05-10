@@ -27,7 +27,7 @@ class ClientMessageHandler: Runnable, KoinComponent {
         try {
             systemCommandInvoker.invoke(ans)
         } catch (e: SystemCommandInvocationException) {
-            app.setDefaultConditionCausedByException(e)
+            app.setDefaultCondition(e)
         }
     }
 

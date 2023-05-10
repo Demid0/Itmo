@@ -10,19 +10,20 @@ class ServerMessageHandler: Runnable, KoinComponent {
 
     private val logger = Logger.getLogger("Handler logger")
     private val socket = DatagramSocket(1488)
+    private val clients = HashMap<SocketAddress, ClientAssistant>()
 
     override fun run() {
         val byteArray = ByteArray(65535)
         val packet = DatagramPacket(byteArray, byteArray.size)
         receiveMessage(packet)
-        val clients = HashMap<SocketAddress, ClientAssistant>()
-        val clientName = packet.socketAddress
+        val clientName = packet.socketAddress // will change
         if (clients[clientName] == null) {
             logger.info("New client: ${clientName.toString()}")
             clients[clientName] = ClientAssistant()
         }
         logger.info("Message from client ${clientName.toString()}")
-        val out = clients[clientName]!!.executeQuery(unpackMessage(packet))
+        val query = unpackMessage(packet)
+        val out = clients[clientName]!!.executeQuery(query)
         logger.info("Answer to client \"$out\"")
         sendMessage(packMessage(out, packet))
     }

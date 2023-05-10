@@ -7,7 +7,6 @@ import java.io.BufferedReader
 import java.io.File
 import java.io.InputStreamReader
 import java.io.PrintWriter
-import java.util.*
 import kotlin.collections.ArrayDeque
 import kotlin.collections.HashMap
 
@@ -44,7 +43,7 @@ class App: KoinComponent {
         }
     }
 
-    fun setDefaultConditionCausedByException(e: Exception) {
+    fun setDefaultCondition (e: Exception) {
         writerManager.set(PrintWriter(System.out))
         readerManager.set(BufferedReader(InputStreamReader(System.`in`)))
         scriptStack.clear()

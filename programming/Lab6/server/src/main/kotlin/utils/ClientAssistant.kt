@@ -5,6 +5,7 @@ import org.koin.core.component.inject
 
 class ClientAssistant: KoinComponent {
     private val serializator: Serializator by inject()
+    private val clientCommandInvoker: ClientCommandInvoker by inject()
     var collectionManager = CollectionManager()
     init {
         //download last system condition
@@ -12,7 +13,6 @@ class ClientAssistant: KoinComponent {
 
     fun executeQuery(message: String) : String {
         val argumentPacket = deserializeMessage(message)
-        val clientCommandInvoker = ClientCommandInvoker()
         val out = clientCommandInvoker.invoke(argumentPacket)
         return serializeMessage(out)
     }
