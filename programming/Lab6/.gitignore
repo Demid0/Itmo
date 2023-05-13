@@ -5,6 +5,7 @@ build
 */build
 **/build/
 !src/**/build/
+META-INF
 
 # Ignore Gradle GUI config
 gradle-app.setting
