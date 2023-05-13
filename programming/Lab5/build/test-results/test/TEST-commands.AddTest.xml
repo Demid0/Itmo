@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="commands.AddTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-05-03T01:54:56" hostname="mgoepvs" time="0.007">
-  <properties/>
-  <testcase name="execute()" classname="commands.AddTest" time="0.007"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
