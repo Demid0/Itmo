@@ -13,9 +13,9 @@ class SystemCommandInvoker {
         addCommand("end_client_session", EndClientSession())
     }
 
-    fun invoke(answerPacket: AnswerPacket) {
-        val command = commands[answerPacket.commandName]!!
-        command.execute(answerPacket.singleArg, answerPacket.commandType)
+    fun invoke(packet: Packet) {
+        val command = commands[packet.commandName]!!
+        command.execute(packet.arguments)
     }
     fun addCommand (commandName: String, systemCommand: SystemCommand) = commands.put(commandName, systemCommand)
     fun getCommands() = commands

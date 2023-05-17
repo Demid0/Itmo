@@ -1,8 +1,9 @@
 package clientCommands
 
-import collectionObjectsClasses.Route
-import utils.AnswerPacket
-import utils.CommandType
+import commandArgumentsAndTheirsComponents.CommandArgument
+import utils.Packet
+import commandArgumentsAndTheirsComponents.CommandType
+import commandArgumentsAndTheirsComponents.MyString
 
 /***
  * clear : очистить коллекцию
@@ -10,8 +11,8 @@ import utils.CommandType
  * @since 1.0
  */
 class Clear: ClientCommand(CommandType.NO_ARG) {
-    override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
+    override fun execute(arguments: ArrayList<CommandArgument>): Packet {
         collectionManager.collection.clear()
-        return AnswerPacket("Done!")
+        return Packet("print_to_client", arrayListOf(MyString("Done!")))
     }
 }

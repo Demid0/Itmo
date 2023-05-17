@@ -1,8 +1,8 @@
 package clientCommands
 
-import collectionObjectsClasses.Route
-import utils.AnswerPacket
-import utils.CommandType
+import commandArgumentsAndTheirsComponents.CommandArgument
+import utils.Packet
+import commandArgumentsAndTheirsComponents.CommandType
 import java.io.File
 import java.io.PrintWriter
 
@@ -12,7 +12,7 @@ import java.io.PrintWriter
  * @since 1.0
  */
 class Exit: ClientCommand(CommandType.NO_ARG) {
-    override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
+    override fun execute(arguments: ArrayList<CommandArgument>): Packet {
         val file = File(collectionManager.getInfoFileName())
         val fileWriter = PrintWriter(file)
         fileWriter.println(collectionManager.collection.javaClass.simpleName.lowercase())
@@ -20,6 +20,6 @@ class Exit: ClientCommand(CommandType.NO_ARG) {
         fileWriter.println(serializator.getChosenStrategy().javaClass.simpleName.lowercase())
         fileWriter.flush()
         //exitProcess(0)
-        return AnswerPacket("end_client_session", null, null)
+        return Packet("end_client_session", arrayListOf())
     }
 }

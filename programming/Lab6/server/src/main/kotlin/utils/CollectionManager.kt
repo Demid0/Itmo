@@ -1,7 +1,7 @@
 package utils
 
-import collectionObjectsClasses.Route
 import kotlinx.serialization.Serializable
+import commandArgumentsAndTheirsComponents.Route
 
 /***
  * Класс, работающий с коллекцией

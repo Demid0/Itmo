@@ -1,8 +1,9 @@
 package clientCommands
 
-import collectionObjectsClasses.Route
-import utils.AnswerPacket
-import utils.CommandType
+import commandArgumentsAndTheirsComponents.CommandArgument
+import utils.Packet
+import commandArgumentsAndTheirsComponents.CommandType
+import commandArgumentsAndTheirsComponents.MyString
 import java.io.File
 import java.io.PrintWriter
 /***
@@ -11,8 +12,9 @@ import java.io.PrintWriter
  * @since 1.0
  */
 class Save: ClientCommand(CommandType.NO_ARG) {
-    override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
-        return AnswerPacket(try {
+    override fun execute(arguments: ArrayList<CommandArgument>): Packet {
+        return Packet("print_to_client", arrayListOf(
+            MyString(try {
             val collection = collectionManager.collection
             val file = File(collectionManager.getFileName())
             val fileWriter = PrintWriter(file.outputStream(), true)
@@ -21,6 +23,7 @@ class Save: ClientCommand(CommandType.NO_ARG) {
         } catch (e: Exception) {
             "Something went wrong"
         })
+        ))
     }
 
 }

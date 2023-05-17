@@ -1,12 +1,13 @@
 package systemCommands
 
 import exceptions.SystemCommandInvocationException
-import utils.CommandType
+import commandArgumentsAndTheirsComponents.CommandArgument
 
 class RemoveClientCommand : SystemCommand() {
-    override fun execute(singleArg: String?, commandType: CommandType?) {
+    override fun execute(arguments: ArrayList<CommandArgument>) {
         try {
-            commandParser.removeCommand(singleArg!!)
+            val singleArg = caster.toString(arguments[0])
+            commandParser.removeCommand(singleArg)
         } catch (_: Exception) {
             throw SystemCommandInvocationException()
         }

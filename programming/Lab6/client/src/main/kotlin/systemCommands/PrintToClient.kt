@@ -1,11 +1,12 @@
 package systemCommands
 
 import exceptions.SystemCommandInvocationException
-import utils.CommandType
+import commandArgumentsAndTheirsComponents.CommandArgument
 
 class PrintToClient : SystemCommand() {
-    override fun execute(singleArg: String?, commandType: CommandType?) {
+    override fun execute(arguments: ArrayList<CommandArgument>) {
         try {
+            val singleArg = caster.toString(arguments[0])
             val writer = writerManager.get()
             writer.println(singleArg)
             writer.flush()

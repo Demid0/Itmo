@@ -3,6 +3,7 @@ package utils
 import org.koin.core.component.KoinComponent
 import java.io.*
 import org.koin.core.component.inject
+import commandArgumentsAndTheirsComponents.MyString
 
 /***
  * Класс, загружающий последнее сохраненное состояние системы и коллекции
@@ -12,7 +13,7 @@ import org.koin.core.component.inject
 class Starter: KoinComponent {
     private val collectionManager: CollectionManager by inject()
     private val serializator: Serializator by inject()
-    fun downloadLastSystemCondition() : AnswerPacket {
+    fun downloadLastSystemCondition() : Packet {
         try {
             val file = File(collectionManager.getInfoFileName())
             val reader = InputStreamReader(file.inputStream())
@@ -31,9 +32,9 @@ class Starter: KoinComponent {
             serializator.changeStrategy(serializator.getStrategy(output[1])!!)
             collectionManager.changeType(output[0])
 
-            return AnswerPacket("Last system condition downloaded successful")
+            return Packet("print_to_client", arrayListOf(MyString("Last system condition downloaded successful")))
         } catch (_: Exception) {
-            return AnswerPacket("Can't found info about last system condition. Will use default serialization strategy and default collection type.")
+            return Packet("print_to_client", arrayListOf(MyString("Can't found info about last system condition. Will use default serialization strategy and default collection type.")))
         }
     }
 

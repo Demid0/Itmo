@@ -1,8 +1,9 @@
 package clientCommands
 
-import collectionObjectsClasses.Route
-import utils.AnswerPacket
-import utils.CommandType
+import commandArgumentsAndTheirsComponents.CommandArgument
+import utils.Packet
+import commandArgumentsAndTheirsComponents.CommandType
+import commandArgumentsAndTheirsComponents.MyString
 import java.lang.Exception
 /***
  * update id {element} : обновить значение элемента коллекции, id которого равен заданному
@@ -10,10 +11,11 @@ import java.lang.Exception
  * @since 1.0
  */
 class UpdateId: ClientCommand(CommandType.MIXED_ARG) {
-    override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
-        val id: Long = singleArg!!.toLong()
-        val route = objectArg!!
-        return AnswerPacket(try {
+    override fun execute(arguments: ArrayList<CommandArgument>): Packet {
+        val id: Long = caster.toString(arguments[0]).toLong()
+        val route = caster.toRoute(arguments[1])
+        return Packet("print_to_client", arrayListOf(
+            MyString(try {
             var bool = false
             for (element in collectionManager.collection) {
                 if (element.getId() == id) {
@@ -33,6 +35,7 @@ class UpdateId: ClientCommand(CommandType.MIXED_ARG) {
         } catch (e: Exception) {
             "Wrong id format."
         })
+        ))
     }
 
 }

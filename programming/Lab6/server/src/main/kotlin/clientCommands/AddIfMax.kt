@@ -1,8 +1,9 @@
 package clientCommands
 
-import collectionObjectsClasses.Route
-import utils.AnswerPacket
-import utils.CommandType
+import commandArgumentsAndTheirsComponents.CommandArgument
+import utils.Packet
+import commandArgumentsAndTheirsComponents.CommandType
+import commandArgumentsAndTheirsComponents.MyString
 
 /***
  * add_if_max {element} : добавить новый элемент в коллекцию, если его значение превышает значение наибольшего элемента этой коллекции
@@ -10,15 +11,15 @@ import utils.CommandType
  * @since 1.0
  */
 class AddIfMax: ClientCommand(CommandType.OBJECT_ARG) {
-    override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
-        val route = objectArg!!
+    override fun execute(arguments: ArrayList<CommandArgument>): Packet {
+        val route = caster.toRoute(arguments[0])
         for (element in collectionManager.collection) {
             if (element.getDistance() >= route.getDistance()) {
-                return AnswerPacket("I didn't add it")
+                return Packet("print_to_client", arrayListOf(MyString("I didn't add it")))
             }
         }
         collectionManager.collection.add(route)
-        return AnswerPacket("Done!")
+        return Packet("print_to_client", arrayListOf(MyString("Done!")))
     }
 
 }

@@ -1,11 +1,12 @@
 package clientCommands
 
 import utils.CollectionManager
-import collectionObjectsClasses.Route
 import kotlinx.serialization.Serializable
 import utils.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import commandArgumentsAndTheirsComponents.CommandArgument
+import commandArgumentsAndTheirsComponents.CommandType
 
 /***
  * Абстрактный класс команды
@@ -16,6 +17,7 @@ import org.koin.core.component.inject
 abstract class ClientCommand(val type: CommandType) : KoinComponent {
     internal val collectionManager: CollectionManager by inject()
     internal val serializator: Serializator by inject()
+    internal val caster: Caster by inject()
 
-    abstract fun execute(singleArg: String?, objectArg: Route?) : AnswerPacket
+    abstract fun execute(arguments: ArrayList<CommandArgument>) : Packet
 }

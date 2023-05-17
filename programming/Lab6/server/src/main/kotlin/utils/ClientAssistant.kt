@@ -17,11 +17,11 @@ class ClientAssistant: KoinComponent {
         return serializeMessage(out)
     }
 
-    fun serializeMessage(answerPacket: AnswerPacket) : String {
-        return serializator.serialize(answerPacket)
+    fun serializeMessage(packet: Packet) : String {
+        return serializator.serialize(packet)
     }
 
-    fun deserializeMessage(message: String) : ArgumentPacket {
-        return serializator.deserialize(message, ArgumentPacket())
+    fun deserializeMessage(message: String) : Packet {
+        return serializator.deserialize(message, Packet())
     }
 }

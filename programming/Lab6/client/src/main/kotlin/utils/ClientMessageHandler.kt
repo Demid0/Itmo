@@ -31,18 +31,18 @@ class ClientMessageHandler: Runnable, KoinComponent {
         }
     }
 
-    fun getPacket(): ArgumentPacket {
+    fun getPacket(): Packet {
         var packet = app.run(readerManager, writerManager)
         while (packet == null) packet = app.run(readerManager, writerManager)
         return packet
     }
 
-    fun packMessage(packet: ArgumentPacket) : ByteBuffer {
+    fun packMessage(packet: Packet) : ByteBuffer {
         return ByteBuffer.wrap(serializator.serialize(packet).toByteArray())
     }
 
-    fun unpackMessage(byteBuffer: ByteBuffer): AnswerPacket {
-        return serializator.deserialize(String(byteBuffer.array(), 0, byteBuffer.position()), AnswerPacket())
+    fun unpackMessage(byteBuffer: ByteBuffer): Packet {
+        return serializator.deserialize(String(byteBuffer.array(), 0, byteBuffer.position()), Packet())
     }
 
     fun sendMessage(byteBuffer: ByteBuffer, address: InetSocketAddress) {

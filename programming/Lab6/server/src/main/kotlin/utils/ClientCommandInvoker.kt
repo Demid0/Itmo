@@ -2,8 +2,6 @@ package utils
 
 import clientCommands.*
 import org.koin.core.component.KoinComponent
-import utils.AnswerPacket
-import utils.ArgumentPacket
 
 /***
  * Класс, вызывающий команды
@@ -36,8 +34,8 @@ class ClientCommandInvoker: KoinComponent {
         addCommand("change_serialization_strategy", ChangeSerializationStrategy())
     }
 
-    fun invoke(argumentPacket: ArgumentPacket): AnswerPacket {
-        return commands[argumentPacket.commandName]!!.execute(argumentPacket.singleArg, argumentPacket.objectArg)
+    fun invoke(packet: Packet): Packet {
+        return commands[packet.commandName]!!.execute(packet.arguments)
     }
     fun addCommand (commandName: String, clientCommand: ClientCommand) = commands.put(commandName, clientCommand)
     fun getCommands() = commands

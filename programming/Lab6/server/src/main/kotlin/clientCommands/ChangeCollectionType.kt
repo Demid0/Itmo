@@ -1,8 +1,9 @@
 package clientCommands
 
-import collectionObjectsClasses.Route
-import utils.AnswerPacket
-import utils.CommandType
+import commandArgumentsAndTheirsComponents.CommandArgument
+import utils.Packet
+import commandArgumentsAndTheirsComponents.CommandType
+import commandArgumentsAndTheirsComponents.MyString
 
 /***
  * change_collection_type type : поменять тип коллекции
@@ -11,9 +12,10 @@ import utils.CommandType
  */
 class ChangeCollectionType: ClientCommand(CommandType.SINGLE_ARG) {
 
-    override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
-        return AnswerPacket(try {
-            val newType = singleArg!!
+    override fun execute(arguments: ArrayList<CommandArgument>): Packet {
+        return Packet("print_to_client", arrayListOf(
+            MyString(try {
+            val newType = caster.toString(arguments[0])
             collectionManager.changeType(newType)
             "Changed"
         } catch (e: NullPointerException) {
@@ -21,6 +23,7 @@ class ChangeCollectionType: ClientCommand(CommandType.SINGLE_ARG) {
         } catch (e: IndexOutOfBoundsException) {
             "Empty input\n${printSupportedTypes()}"
         })
+        ))
     }
 
     private fun printSupportedTypes() : String {

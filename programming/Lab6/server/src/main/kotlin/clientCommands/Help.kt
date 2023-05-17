@@ -1,9 +1,9 @@
 package clientCommands
 
-import utils.ClientCommandInvoker
-import collectionObjectsClasses.Route
-import utils.AnswerPacket
-import utils.CommandType
+import utils.*
+import commandArgumentsAndTheirsComponents.CommandArgument
+import commandArgumentsAndTheirsComponents.CommandType
+import commandArgumentsAndTheirsComponents.MyString
 
 /***
  * help : вывести справку по доступным командам
@@ -11,15 +11,19 @@ import utils.CommandType
  * @since 1.0
  */
 class Help: ClientCommand(CommandType.NO_ARG) {
-    override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
+    override fun execute(arguments: ArrayList<CommandArgument>): Packet {
         val commands = ClientCommandInvoker().getCommands()
-        return AnswerPacket(if (commands.isEmpty()) "No commands"
-        else {
-            var out = "You can use this commands:\n"
-            for (command in commands.toSortedMap()) {
-                out += command.key + "\n"
+        return Packet("print_to_client", arrayListOf(
+            MyString(
+            if (commands.isEmpty()) "No commands"
+            else {
+                var out = "You can use this commands:\n"
+                for (command in commands.toSortedMap()) {
+                    out += command.key + "\n"
+                }
+                out.dropLast(1)
             }
-            out.dropLast(1)
-        })
+        )
+        ))
     }
 }

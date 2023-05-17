@@ -28,6 +28,8 @@ val serverKoinModule = module {
     single { ServerMessageHandler() }
 
     single { HashMap<String, BufferedReader>() }
+
+    single { Caster() }
 }
 
 /***

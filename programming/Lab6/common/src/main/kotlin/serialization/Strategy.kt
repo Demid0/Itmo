@@ -1,8 +1,7 @@
 package serialization
 
-import collectionObjectsClasses.Route
-import utils.AnswerPacket
-import utils.ArgumentPacket
+import commandArgumentsAndTheirsComponents.Route
+import utils.Packet
 
 /***
  * Обертка для разных типов сериализации
@@ -12,9 +11,7 @@ import utils.ArgumentPacket
 interface Strategy {
     fun decode(str: String, collection: MutableCollection<Route>): MutableCollection<Route>
     fun encode(collection: MutableCollection<Route>): String
-    fun decode(str: String, argumentPacket: ArgumentPacket): ArgumentPacket
-    fun encode(argumentPacket: ArgumentPacket): String
-    fun decode(str: String, answerPacket: AnswerPacket): AnswerPacket
-    fun encode(answerPacket: AnswerPacket): String
+    fun decode(str: String, packet: Packet): Packet
+    fun encode(packet: Packet): String
     override fun toString(): String
 }
