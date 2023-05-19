@@ -57,7 +57,7 @@ class ClientMessageHandler: Runnable, KoinComponent {
     fun login() {
         writerManager.get().println("Enter username:")
         writerManager.get().flush()
-        username = readerManager.get().readLine()
+        while(username == "") username = readerManager.get().readLine()
     }
 
 }
