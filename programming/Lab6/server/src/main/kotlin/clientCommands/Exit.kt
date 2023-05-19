@@ -13,13 +13,18 @@ import java.io.PrintWriter
  */
 class Exit: ClientCommand(CommandType.NO_ARG) {
     override fun execute(arguments: ArrayList<CommandArgument>): Packet {
-        val file = File(collectionManager.getInfoFileName())
-        val fileWriter = PrintWriter(file)
+        //save collection
+        val collection = collectionManager.collection
+        var file = File(collectionManager.getFileName())
+        var fileWriter = PrintWriter(file.outputStream(), true)
+        fileWriter.println(serializator.serialize(collection))
+        fileWriter.close()
+        //save info about collection
+        file = File(collectionManager.getInfoFileName())
+        fileWriter = PrintWriter(file.outputStream(), true)
         fileWriter.println(collectionManager.collection.javaClass.simpleName.lowercase())
-        fileWriter.flush()
         fileWriter.println(serializator.getChosenStrategy().javaClass.simpleName.lowercase())
-        fileWriter.flush()
-        //exitProcess(0)
+        fileWriter.close()
         return Packet("end_client_session", arrayListOf())
     }
 }

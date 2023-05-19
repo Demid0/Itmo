@@ -3,7 +3,6 @@ package utils
 import serialization.JsonStrategy
 import serialization.Strategy
 import commandArgumentsAndTheirsComponents.Route
-import serialization.YamlStrategy
 
 /***
  * Класс, занимающийся сериализацией и десериализацией
@@ -20,12 +19,12 @@ class Serializator {
 
     init {
         addStrategy("jsonstrategy", JsonStrategy())
-        addStrategy("yamlstrategy", YamlStrategy())
+        //addStrategy("yamlstrategy", YamlStrategy())
     }
     fun serialize(collection: MutableCollection<Route>) = chosenStrategy.encode(collection)
-    fun serialize(packet: Packet) = chosenStrategy.encode(packet)
+    fun serialize(packet: ArrayList<Packet>) = chosenStrategy.encode(packet)
     fun deserialize(string: String, collection: MutableCollection<Route>) = chosenStrategy.decode(string, collection)
-    fun deserialize(string: String, packet: Packet) = chosenStrategy.decode(string, packet)
+    fun deserialize(string: String, packet: ArrayList<Packet>) = chosenStrategy.decode(string, packet)
 
     fun addStrategy(name: String, strategy: Strategy) {
         strategies[name] = strategy

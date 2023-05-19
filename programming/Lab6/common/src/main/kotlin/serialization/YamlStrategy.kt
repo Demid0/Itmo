@@ -13,8 +13,8 @@ import kotlinx.serialization.encodeToString
  */
 class YamlStrategy : Strategy {
     override fun decode(str: String, collection: MutableCollection<Route>): MutableCollection<Route> = Yaml.default.decodeFromString(str)
-    override fun decode(str: String, packet: Packet): Packet = Yaml.default.decodeFromString(str)
+    override fun decode(str: String, packet: ArrayList<Packet>): ArrayList<Packet> = Yaml.default.decodeFromString(str)
     override fun encode(collection: MutableCollection<Route>) = Yaml.default.encodeToString(collection)
-    override fun encode(packet: Packet) = Yaml.default.encodeToString(packet)
+    override fun encode(packet: ArrayList<Packet>): String = Yaml.default.encodeToString(packet)
     override fun toString() = "Yaml"
 }

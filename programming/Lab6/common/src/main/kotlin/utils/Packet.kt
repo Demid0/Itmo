@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 import commandArgumentsAndTheirsComponents.CommandArgument
 
 @Serializable
-class Packet(val commandName: String, val arguments: ArrayList<CommandArgument>) {
+open class Packet(val commandName: String, val arguments: ArrayList<CommandArgument>) {
+    var clientName: String = ""
     constructor() : this("command", arrayListOf())
 }

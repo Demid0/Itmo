@@ -13,12 +13,12 @@ class ClientMessageHandler: Runnable, KoinComponent {
     private val writerManager: WriterManager by inject()
     private val readerManager: ReaderManager by inject()
     private val systemCommandInvoker: SystemCommandInvoker by inject()
-
+    private var username: String = ""
     private val channel = DatagramChannel.open()
     private val serverAddress = InetSocketAddress("localhost", 1488)
 
     override fun run() {
-        val packet = getPacket()
+        val packet = getPacket(username)
         val byteBuffer = packMessage(packet)
         val ansBuffer = ByteBuffer.wrap(ByteArray(65535))
         sendMessage(byteBuffer, serverAddress)
@@ -31,18 +31,19 @@ class ClientMessageHandler: Runnable, KoinComponent {
         }
     }
 
-    fun getPacket(): Packet {
+    fun getPacket(username: String): Packet {
         var packet = app.run(readerManager, writerManager)
         while (packet == null) packet = app.run(readerManager, writerManager)
+        packet.clientName = username
         return packet
     }
 
     fun packMessage(packet: Packet) : ByteBuffer {
-        return ByteBuffer.wrap(serializator.serialize(packet).toByteArray())
+        return ByteBuffer.wrap(serializator.serialize(arrayListOf(packet)).toByteArray())
     }
 
-    fun unpackMessage(byteBuffer: ByteBuffer): Packet {
-        return serializator.deserialize(String(byteBuffer.array(), 0, byteBuffer.position()), Packet())
+    fun unpackMessage(byteBuffer: ByteBuffer): ArrayList<Packet> {
+        return serializator.deserialize(String(byteBuffer.array(), 0, byteBuffer.position()), ArrayList<Packet>())
     }
 
     fun sendMessage(byteBuffer: ByteBuffer, address: InetSocketAddress) {
@@ -51,6 +52,12 @@ class ClientMessageHandler: Runnable, KoinComponent {
 
     fun receiveMessage(byteBuffer: ByteBuffer) {
         channel.receive(byteBuffer)
+    }
+
+    fun login() {
+        writerManager.get().println("Enter username:")
+        writerManager.get().flush()
+        username = readerManager.get().readLine()
     }
 
 }

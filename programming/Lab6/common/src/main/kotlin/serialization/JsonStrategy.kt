@@ -13,8 +13,8 @@ import kotlinx.serialization.json.Json
  */
 class JsonStrategy: Strategy {
     override fun decode(str: String, collection: MutableCollection<Route>): MutableCollection<Route> = Json.decodeFromString(str)
-    override fun decode(str: String, packet: Packet): Packet = Json.decodeFromString(str)
+    override fun decode(str: String, packet: ArrayList<Packet>): ArrayList<Packet> = Json.decodeFromString(str)
     override fun encode(collection: MutableCollection<Route>) = Json.encodeToString(collection)
-    override fun encode(packet: Packet) = Json.encodeToString(packet)
+    override fun encode(packet: ArrayList<Packet>): String = Json.encodeToString(packet)
     override fun toString(): String = "Json"
 }

@@ -11,9 +11,8 @@ import commandArgumentsAndTheirsComponents.MyString
  * @since 1.0
  */
 class Starter: KoinComponent {
-    private val collectionManager: CollectionManager by inject()
     private val serializator: Serializator by inject()
-    fun downloadLastSystemCondition() : Packet {
+    fun downloadLastSystemCondition(collectionManager: CollectionManager) : Packet {
         try {
             val file = File(collectionManager.getInfoFileName())
             val reader = InputStreamReader(file.inputStream())
@@ -21,10 +20,10 @@ class Starter: KoinComponent {
 
             // Пробует десериализовать по последней стратегии, если не получается, то пробегается по всем возможным
             serializator.changeStrategy(serializator.getStrategy(output[1])!!)
-            if (!downloadCollection()) {
+            if (!downloadCollection(collectionManager)) {
                 for (strategy in serializator.getStrategies()) {
                     serializator.changeStrategy(strategy.value)
-                    if (downloadCollection()) {
+                    if (downloadCollection(collectionManager)) {
                         break
                     }
                 }
@@ -38,7 +37,7 @@ class Starter: KoinComponent {
         }
     }
 
-    private fun downloadCollection(): Boolean {
+    private fun downloadCollection(collectionManager: CollectionManager): Boolean {
         try {
             val file = File(collectionManager.getFileName())
             val reader = InputStreamReader(file.inputStream())

@@ -22,7 +22,6 @@ class ClientCommandInvoker: KoinComponent {
         addCommand("update", UpdateId())
         addCommand("remove_by_id", RemoveById())
         addCommand("clear", Clear())
-        addCommand("save", Save())
         addCommand("execute_script", ExecuteScript())
         addCommand("remove_first", RemoveFirst())
         addCommand("add_if_max", AddIfMax())
@@ -34,8 +33,14 @@ class ClientCommandInvoker: KoinComponent {
         addCommand("change_serialization_strategy", ChangeSerializationStrategy())
     }
 
-    fun invoke(packet: Packet): Packet {
-        return commands[packet.commandName]!!.execute(packet.arguments)
+    fun invoke(listOfPackets: ArrayList<Packet>, collectionManager: CollectionManager): ArrayList<Packet> {
+        val ans = ArrayList<Packet>()
+        for (packet in listOfPackets) {
+            val command = commands[packet.commandName]!!
+            command.collectionManager = collectionManager
+            ans.add(command.execute(packet.arguments))
+        }
+        return ans
     }
     fun addCommand (commandName: String, clientCommand: ClientCommand) = commands.put(commandName, clientCommand)
     fun getCommands() = commands

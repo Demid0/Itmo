@@ -3,25 +3,15 @@ package utils
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class ClientAssistant: KoinComponent {
-    private val serializator: Serializator by inject()
+class ClientAssistant(clientName: String): KoinComponent {
     private val clientCommandInvoker: ClientCommandInvoker by inject()
-    var collectionManager = CollectionManager()
+    private var collectionManager = CollectionManager(clientName)
+    private val starter: Starter by inject()
     init {
-        //download last system condition
+        starter.downloadLastSystemCondition(collectionManager)
     }
 
-    fun executeQuery(message: String) : String {
-        val argumentPacket = deserializeMessage(message)
-        val out = clientCommandInvoker.invoke(argumentPacket)
-        return serializeMessage(out)
-    }
-
-    fun serializeMessage(packet: Packet) : String {
-        return serializator.serialize(packet)
-    }
-
-    fun deserializeMessage(message: String) : Packet {
-        return serializator.deserialize(message, Packet())
+    fun executeQuery(packets: ArrayList<Packet>) : ArrayList<Packet> {
+        return clientCommandInvoker.invoke(packets, collectionManager)
     }
 }

@@ -20,7 +20,6 @@ class CommandParser: KoinComponent {
         addCommand("update", CommandType.MIXED_ARG)
         addCommand("remove_by_id", CommandType.SINGLE_ARG)
         addCommand("clear", CommandType.NO_ARG)
-        addCommand("save", CommandType.NO_ARG)
         addCommand("execute_script", CommandType.SINGLE_ARG)
         addCommand("remove_first", CommandType.NO_ARG)
         addCommand("add_if_max", CommandType.OBJECT_ARG)
