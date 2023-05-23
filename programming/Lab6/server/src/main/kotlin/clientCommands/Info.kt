@@ -1,8 +1,9 @@
 package clientCommands
 
-import collectionObjectsClasses.Route
-import utils.AnswerPacket
-import utils.CommandType
+import commandArgumentsAndTheirsComponents.CommandArgument
+import utils.Packet
+import commandArgumentsAndTheirsComponents.CommandType
+import commandArgumentsAndTheirsComponents.MyString
 
 /***
  * info : вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)
@@ -10,11 +11,13 @@ import utils.CommandType
  * @since 1.0
  */
 class Info: ClientCommand(CommandType.NO_ARG) {
-    override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
-        return AnswerPacket("Information about collection:" +
+    override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
+        return Packet("print_to_client", arrayListOf(
+            MyString("Information about collection:" +
                 "\n\tType: ${collectionManager.collection.javaClass.simpleName}" +
                 "\n\tSize: ${collectionManager.collection.size}" +
                 "\nInfo about system:" +
                 "\n\tSerialization strategy: ${serializator.getChosenStrategy().toString()}")
+        )).wrapIntoArray()
     }
 }

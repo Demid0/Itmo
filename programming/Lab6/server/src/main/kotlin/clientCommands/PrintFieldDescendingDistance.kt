@@ -1,8 +1,9 @@
 package clientCommands
 
-import collectionObjectsClasses.Route
-import utils.AnswerPacket
-import utils.CommandType
+import commandArgumentsAndTheirsComponents.CommandArgument
+import utils.Packet
+import commandArgumentsAndTheirsComponents.CommandType
+import commandArgumentsAndTheirsComponents.MyString
 
 /***
  * print_field_descending_distance : вывести значения поля distance всех элементов в порядке убывания
@@ -10,9 +11,10 @@ import utils.CommandType
  * @since 1.0
  */
 class PrintFieldDescendingDistance: ClientCommand(CommandType.NO_ARG) {
-    override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
+    override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         val collection = collectionManager.collection.sortedByDescending { it.getDistance() }
-        return AnswerPacket(if (collection.isEmpty()) "Collection is empty."
+        return Packet("print_to_client", arrayListOf(
+            MyString(if (collection.isEmpty()) "Collection is empty."
         else {
             var out = "Collection:\n"
             for (element in collection) {
@@ -20,5 +22,6 @@ class PrintFieldDescendingDistance: ClientCommand(CommandType.NO_ARG) {
             }
             out
         })
+        )).wrapIntoArray()
     }
 }

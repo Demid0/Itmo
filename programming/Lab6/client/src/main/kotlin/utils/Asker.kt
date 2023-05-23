@@ -1,8 +1,10 @@
 package utils
 
-import collectionObjectsClasses.Coordinates
-import collectionObjectsClasses.Location
-import collectionObjectsClasses.Route
+import commandArgumentsAndTheirsComponents.Coordinates
+import commandArgumentsAndTheirsComponents.Location
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import commandArgumentsAndTheirsComponents.Route
 import java.io.BufferedReader
 import java.io.PrintWriter
 import java.util.function.Predicate
@@ -14,10 +16,13 @@ typealias ToType<T> = (input: String?) -> T
  * @author Demid0
  * @since 1.0
  */
-class Asker {
+class Asker: KoinComponent {
+    private val writerManager : WriterManager by inject()
+    private val readerManager : ReaderManager by inject()
+    private val writer: PrintWriter = writerManager.get()
+    private val reader: BufferedReader = readerManager.get()
+
     private fun <T> ask(
-        reader: BufferedReader,
-        writer: PrintWriter,
         printHint: String,
         converter: ToType<T>,
         checker: Predicate<T>
@@ -47,32 +52,32 @@ class Asker {
     val ToDouble: ToType<Double> = { it!!.toDouble() }
     val ToString: ToType<String> = { it!! }
 
-    fun askRoute(reader: BufferedReader, writer: PrintWriter): Route {
-        val name: String = ask(reader, writer, "name", ToString) { it != "" }
-        val coordinates = askCoordinates(reader, writer)
-        val from: Location? = askNullableLocation(reader, writer, "from")
-        val to: Location = askLocation(reader, writer, "to")
-        val distance: Double = ask(reader, writer, "distance", ToDouble) { it > 1 }
+    fun askRoute(): Route {
+        val name: String = ask("name", ToString) { it != "" }
+        val coordinates = askCoordinates()
+        val from: Location? = askNullableLocation("from")
+        val to: Location = askLocation("to")
+        val distance: Double = ask("distance", ToDouble) { it > 1 }
         return Route(name, coordinates, from, to, distance)
     }
 
-    private fun askCoordinates(reader: BufferedReader, writer: PrintWriter): Coordinates {
-        val x: Float? = ask(reader, writer, "Coordinates - x", ToFloatOrNull) { it == null || it <= 800 }
-        val y: Int? = ask(reader, writer, "Coordinates - y", ToIntOrNull) { true }
+    private fun askCoordinates(): Coordinates {
+        val x: Float? = ask("Coordinates - x", ToFloatOrNull) { it == null || it <= 800 }
+        val y: Int? = ask("Coordinates - y", ToIntOrNull) { true }
         return Coordinates(x, y)
     }
 
-    private fun askLocation(reader: BufferedReader, writer: PrintWriter, Lname: String): Location {
-        val x: Int? = ask(reader, writer, "$Lname - x", ToIntOrNull) { true }
-        val y: Float = ask(reader, writer, "$Lname - y", ToFloat) { true }
-        val z: Long = ask(reader, writer, "$Lname - z", ToLong) { true }
-        val name: String = ask(reader, writer, "$Lname - name", ToString) { it != "" && it.length <= 496}
+    private fun askLocation(Lname: String): Location {
+        val x: Int? = ask("$Lname - x", ToIntOrNull) { true }
+        val y: Float = ask("$Lname - y", ToFloat) { true }
+        val z: Long = ask("$Lname - z", ToLong) { true }
+        val name: String = ask("$Lname - name", ToString) { it != "" && it.length <= 496}
         return Location(x, y, z, name)
     }
 
-    private fun askNullableLocation(reader: BufferedReader, writer: PrintWriter, Lname: String): Location? {
-        val ans = ask(reader, writer, "$Lname is nullable field. If you want to make it null, print \"yes\".", ToString) {true}
+    private fun askNullableLocation(Lname: String): Location? {
+        val ans = ask("$Lname is nullable field. If you want to make it null, print \"yes\".", ToString) {true}
         return if (ans == "yes") null
-        else askLocation(reader, writer, Lname)
+        else askLocation(Lname)
     }
 }

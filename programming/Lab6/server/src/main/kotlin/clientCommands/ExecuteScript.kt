@@ -1,8 +1,9 @@
 package clientCommands
 
-import collectionObjectsClasses.Route
-import utils.AnswerPacket
-import utils.CommandType
+import commandArgumentsAndTheirsComponents.CommandArgument
+import utils.Packet
+import commandArgumentsAndTheirsComponents.CommandType
+import commandArgumentsAndTheirsComponents.MyString
 
 /***
  * execute_script file_name : считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.
@@ -10,9 +11,9 @@ import utils.CommandType
  * @since 1.0
  */
 class ExecuteScript: ClientCommand(CommandType.SINGLE_ARG) {
-    override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
-        val file_name = singleArg!!
-        return AnswerPacket("read_from_file", file_name, null)
+    override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
+        val file_name = caster.toString(arguments[0])
+        return Packet("read_from_file", arrayListOf(MyString(file_name))).wrapIntoArray()
     }
 }
 /***

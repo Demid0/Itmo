@@ -1,8 +1,9 @@
 package clientCommands
 
-import collectionObjectsClasses.Route
-import utils.AnswerPacket
-import utils.CommandType
+import commandArgumentsAndTheirsComponents.CommandArgument
+import utils.Packet
+import commandArgumentsAndTheirsComponents.CommandType
+import commandArgumentsAndTheirsComponents.MyString
 import java.lang.Exception
 /***
  * remove_by_id id : удалить элемент из коллекции по его id
@@ -10,9 +11,10 @@ import java.lang.Exception
  * @since 1.0
  */
 class RemoveById: ClientCommand(CommandType.SINGLE_ARG) {
-    override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
-        return AnswerPacket(try {
-            val id: Long = singleArg!!.toLong()
+    override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
+        return Packet("print_to_client", arrayListOf(
+            MyString(try {
+            val id: Long = caster.toString(arguments[0]).toLong()
             var bool = false
             for (element in collectionManager.collection) {
                 if (element.getId() == id) {
@@ -26,6 +28,7 @@ class RemoveById: ClientCommand(CommandType.SINGLE_ARG) {
         } catch (e: Exception) {
             "Wrong id format."
         })
+        )).wrapIntoArray()
     }
 
 }

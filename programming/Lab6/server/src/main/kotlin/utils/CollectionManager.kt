@@ -1,7 +1,7 @@
 package utils
 
-import collectionObjectsClasses.Route
 import kotlinx.serialization.Serializable
+import commandArgumentsAndTheirsComponents.Route
 
 /***
  * Класс, работающий с коллекцией
@@ -16,12 +16,13 @@ import kotlinx.serialization.Serializable
  * @param infoFileName
  * Имя файла, в который сохраняется информация о коллекции
  */
-class CollectionManager {
+class CollectionManager(clientName: String) {
     @Serializable
     var collection: MutableCollection<Route> = ArrayDeque()
     private var supportedCollectionTypes: HashMap<String, MutableCollection<Route>> = hashMapOf()
-    private var fileName = System.getenv("lab5_filename")
-    private var infoFileName = System.getenv("lab5_collection_info_file")
+    private var fileName = System.getenv("lab5_filename") + "/" + clientName
+    private var infoFileName = System.getenv("lab5_collection_info_file") + "/" + clientName
+
 
     init {
         addSupportedCollectionType("arraylist", ArrayList())

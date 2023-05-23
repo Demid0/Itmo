@@ -1,4 +1,4 @@
-package utils
+package commandArgumentsAndTheirsComponents
 
 import kotlinx.serialization.Serializable
 

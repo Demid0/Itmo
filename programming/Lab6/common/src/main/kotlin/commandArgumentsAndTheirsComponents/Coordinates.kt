@@ -1,4 +1,4 @@
-package collectionObjectsClasses
+package commandArgumentsAndTheirsComponents
 
 import kotlinx.serialization.Serializable
 

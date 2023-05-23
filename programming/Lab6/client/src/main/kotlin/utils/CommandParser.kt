@@ -1,12 +1,14 @@
 package clientCommands.utils
 
-import collectionObjectsClasses.Coordinates
-import collectionObjectsClasses.Location
-import collectionObjectsClasses.Route
-import utils.ArgumentPacket
-import utils.CommandType
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import utils.Asker
+import utils.Packet
+import commandArgumentsAndTheirsComponents.CommandType
+import commandArgumentsAndTheirsComponents.MyString
 
-class CommandParser {
+class CommandParser: KoinComponent {
+    private val asker: Asker by inject()
     private var commands: HashMap<String, CommandType> = HashMap()
 
     init {
@@ -18,7 +20,6 @@ class CommandParser {
         addCommand("update", CommandType.MIXED_ARG)
         addCommand("remove_by_id", CommandType.SINGLE_ARG)
         addCommand("clear", CommandType.NO_ARG)
-        addCommand("save", CommandType.NO_ARG)
         addCommand("execute_script", CommandType.SINGLE_ARG)
         addCommand("remove_first", CommandType.NO_ARG)
         addCommand("add_if_max", CommandType.OBJECT_ARG)
@@ -34,33 +35,33 @@ class CommandParser {
     fun addCommand(name: String, command: CommandType) {
         commands.put(name, command)
     }
-    fun removeCommand(name: String) {
-        commands.remove(name)
+    fun clear() {
+        commands.clear()
     }
 
-    fun parse(args: MutableList<String>): ArgumentPacket {
-        return if (args.isEmpty()) ArgumentPacket()
+    fun parse(args: MutableList<String>): Packet {
+        return if (args.isEmpty()) Packet()
         else {
             val commandName = args[0]
             val commandType = commands[commandName]
-            if (commandType == null) ArgumentPacket()
+            if (commandType == null) Packet()
             else {
                 when(commandType) {
                     CommandType.NO_ARG -> {
-                        if (args.size != 1) ArgumentPacket()
-                        else ArgumentPacket(commandName, null, null, null)
+                        if (args.size != 1) Packet()
+                        else Packet(commandName, arrayListOf())
                     }
                     CommandType.SINGLE_ARG -> {
-                        if (args.size != 2) ArgumentPacket()
-                        else ArgumentPacket(commandName, args[1], null, null)
+                        if (args.size != 2) Packet()
+                        else Packet(commandName, arrayListOf(MyString(args[1])))
                     }
                     CommandType.OBJECT_ARG -> {
-                        if (args.size != 1) ArgumentPacket()
-                        else ArgumentPacket(commandName, null, Route("", Coordinates(null, null), null, Location(1, 1f, 1, ""), 4.0), null)
+                        if (args.size != 1) Packet()
+                        else Packet(commandName, arrayListOf(asker.askRoute()))
                     }
                     CommandType.MIXED_ARG -> {
-                        if (args.size != 2) ArgumentPacket()
-                        else ArgumentPacket(commandName, args[1], Route("", Coordinates(null, null), null, Location(1, 1f, 1, ""), 4.0), null)
+                        if (args.size != 2) Packet()
+                        else Packet(commandName, arrayListOf(MyString(args[1]), asker.askRoute()))
                     }
                 }
             }
