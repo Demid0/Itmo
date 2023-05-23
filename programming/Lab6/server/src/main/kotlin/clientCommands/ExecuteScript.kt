@@ -11,9 +11,9 @@ import commandArgumentsAndTheirsComponents.MyString
  * @since 1.0
  */
 class ExecuteScript: ClientCommand(CommandType.SINGLE_ARG) {
-    override fun execute(arguments: ArrayList<CommandArgument>): Packet {
+    override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         val file_name = caster.toString(arguments[0])
-        return Packet("read_from_file", arrayListOf(MyString(file_name)))
+        return Packet("read_from_file", arrayListOf(MyString(file_name))).wrapIntoArray()
     }
 }
 /***

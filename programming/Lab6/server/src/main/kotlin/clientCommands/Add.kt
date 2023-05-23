@@ -11,9 +11,9 @@ import commandArgumentsAndTheirsComponents.MyString
  * @since 1.0
  */
 class Add: ClientCommand(CommandType.OBJECT_ARG) {
-    override fun execute(arguments: ArrayList<CommandArgument>): Packet {
+    override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         val objectArg = caster.toRoute(arguments[0])
         collectionManager.collection.add(objectArg)
-        return Packet("print_to_client", arrayListOf(MyString("Done!")))
+        return Packet("print_to_client", arrayListOf(MyString("Done!"))).wrapIntoArray()
     }
 }

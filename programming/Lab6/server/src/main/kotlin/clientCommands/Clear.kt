@@ -11,8 +11,8 @@ import commandArgumentsAndTheirsComponents.MyString
  * @since 1.0
  */
 class Clear: ClientCommand(CommandType.NO_ARG) {
-    override fun execute(arguments: ArrayList<CommandArgument>): Packet {
+    override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         collectionManager.collection.clear()
-        return Packet("print_to_client", arrayListOf(MyString("Done!")))
+        return Packet("print_to_client", arrayListOf(MyString("Done!"))).wrapIntoArray()
     }
 }

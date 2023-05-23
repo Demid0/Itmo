@@ -31,6 +31,7 @@ class ClientCommandInvoker: KoinComponent {
         addCommand("print_field_descending_distance", PrintFieldDescendingDistance())
         addCommand("change_collection_type", ChangeCollectionType())
         addCommand("change_serialization_strategy", ChangeSerializationStrategy())
+        addCommand("checkout", Checkout())
     }
 
     fun invoke(listOfPackets: ArrayList<Packet>, collectionManager: CollectionManager): ArrayList<Packet> {
@@ -38,7 +39,7 @@ class ClientCommandInvoker: KoinComponent {
         for (packet in listOfPackets) {
             val command = commands[packet.commandName]!!
             command.collectionManager = collectionManager
-            ans.add(command.execute(packet.arguments))
+            ans.addAll(command.execute(packet.arguments))
         }
         return ans
     }

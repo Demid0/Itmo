@@ -12,7 +12,7 @@ import commandArgumentsAndTheirsComponents.MyString
  */
 class ChangeCollectionType: ClientCommand(CommandType.SINGLE_ARG) {
 
-    override fun execute(arguments: ArrayList<CommandArgument>): Packet {
+    override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         return Packet("print_to_client", arrayListOf(
             MyString(try {
             val newType = caster.toString(arguments[0])
@@ -23,7 +23,7 @@ class ChangeCollectionType: ClientCommand(CommandType.SINGLE_ARG) {
         } catch (e: IndexOutOfBoundsException) {
             "Empty input\n${printSupportedTypes()}"
         })
-        ))
+        )).wrapIntoArray()
     }
 
     private fun printSupportedTypes() : String {

@@ -11,7 +11,7 @@ import commandArgumentsAndTheirsComponents.MyString
  * @since 1.0
  */
 class Help: ClientCommand(CommandType.NO_ARG) {
-    override fun execute(arguments: ArrayList<CommandArgument>): Packet {
+    override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         val commands = ClientCommandInvoker().getCommands()
         return Packet("print_to_client", arrayListOf(
             MyString(
@@ -24,6 +24,6 @@ class Help: ClientCommand(CommandType.NO_ARG) {
                 out.dropLast(1)
             }
         )
-        ))
+        )).wrapIntoArray()
     }
 }

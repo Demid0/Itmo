@@ -11,13 +11,13 @@ import java.util.NoSuchElementException
  * @since 1.0
  */
 class RemoveFirst: ClientCommand(CommandType.NO_ARG) {
-    override fun execute(arguments: ArrayList<CommandArgument>): Packet {
+    override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         return Packet("print_to_client", arrayListOf(
             MyString(try {
             collectionManager.collection.remove(collectionManager.collection.first())
             "Done!"
         }
         catch (e: NoSuchElementException) { "Collection is empty" })
-        ))
+        )).wrapIntoArray()
     }
 }

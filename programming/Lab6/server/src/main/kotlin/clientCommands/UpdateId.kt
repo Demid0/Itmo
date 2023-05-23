@@ -11,7 +11,7 @@ import java.lang.Exception
  * @since 1.0
  */
 class UpdateId: ClientCommand(CommandType.MIXED_ARG) {
-    override fun execute(arguments: ArrayList<CommandArgument>): Packet {
+    override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         val id: Long = caster.toString(arguments[0]).toLong()
         val route = caster.toRoute(arguments[1])
         return Packet("print_to_client", arrayListOf(
@@ -35,7 +35,7 @@ class UpdateId: ClientCommand(CommandType.MIXED_ARG) {
         } catch (e: Exception) {
             "Wrong id format."
         })
-        ))
+        )).wrapIntoArray()
     }
 
 }

@@ -31,15 +31,15 @@ class ClientMessageHandler: Runnable, KoinComponent {
         }
     }
 
-    fun getPacket(username: String): Packet {
+    fun getPacket(username: String): ArrayList<Packet> {
         var packet = app.run(readerManager, writerManager)
         while (packet == null) packet = app.run(readerManager, writerManager)
         packet.clientName = username
-        return packet
+        return arrayListOf(packet, Packet("checkout", arrayListOf()))
     }
 
-    fun packMessage(packet: Packet) : ByteBuffer {
-        return ByteBuffer.wrap(serializator.serialize(arrayListOf(packet)).toByteArray())
+    fun packMessage(packet: ArrayList<Packet>) : ByteBuffer {
+        return ByteBuffer.wrap(serializator.serialize(packet).toByteArray())
     }
 
     fun unpackMessage(byteBuffer: ByteBuffer): ArrayList<Packet> {

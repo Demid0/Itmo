@@ -7,4 +7,5 @@ import commandArgumentsAndTheirsComponents.CommandArgument
 open class Packet(val commandName: String, val arguments: ArrayList<CommandArgument>) {
     var clientName: String = ""
     constructor() : this("command", arrayListOf())
+    fun wrapIntoArray(): ArrayList<Packet> = arrayListOf(this)
 }

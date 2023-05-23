@@ -8,7 +8,7 @@ class SystemCommandInvoker {
     init {
         addCommand("print_to_client", PrintToClient())
         addCommand("add_client_command", AddClientCommand())
-        addCommand("remove_client_command", RemoveClientCommand())
+        addCommand("clear_client_commands", ClearClientCommands())
         addCommand("read_from_file", ReadFromFile())
         addCommand("end_client_session", EndClientSession())
     }

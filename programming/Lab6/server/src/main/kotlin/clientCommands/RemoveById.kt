@@ -11,7 +11,7 @@ import java.lang.Exception
  * @since 1.0
  */
 class RemoveById: ClientCommand(CommandType.SINGLE_ARG) {
-    override fun execute(arguments: ArrayList<CommandArgument>): Packet {
+    override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         return Packet("print_to_client", arrayListOf(
             MyString(try {
             val id: Long = caster.toString(arguments[0]).toLong()
@@ -28,7 +28,7 @@ class RemoveById: ClientCommand(CommandType.SINGLE_ARG) {
         } catch (e: Exception) {
             "Wrong id format."
         })
-        ))
+        )).wrapIntoArray()
     }
 
 }

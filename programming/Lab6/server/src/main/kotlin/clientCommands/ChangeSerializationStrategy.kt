@@ -11,7 +11,7 @@ import commandArgumentsAndTheirsComponents.MyString
  * @since 1.0
  */
 class ChangeSerializationStrategy: ClientCommand(CommandType.SINGLE_ARG) {
-    override fun execute(arguments: ArrayList<CommandArgument>): Packet {
+    override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         return Packet("print_to_client", arrayListOf(
             MyString(try {
             val newType = caster.toString(arguments[0]) + "strategy"
@@ -22,7 +22,7 @@ class ChangeSerializationStrategy: ClientCommand(CommandType.SINGLE_ARG) {
         } catch (e: IndexOutOfBoundsException) {
             "Empty input\n${printSupportedStrategies()}"
         })
-        ))
+        )).wrapIntoArray()
     }
 
     private fun printSupportedStrategies(): String {

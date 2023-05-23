@@ -13,7 +13,7 @@ import java.lang.Exception
  * @since 1.0
  */
 class CountDistance(val compare: (a: Double, b: Double) -> Boolean): ClientCommand(CommandType.SINGLE_ARG) {
-    override fun execute(arguments: ArrayList<CommandArgument>): Packet {
+    override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         return Packet("print_to_client", arrayListOf(
             MyString(try {
             var counter = 0
@@ -25,7 +25,7 @@ class CountDistance(val compare: (a: Double, b: Double) -> Boolean): ClientComma
         } catch (e: Exception) {
             "Wrong distance format"
         })
-        ))
+        )).wrapIntoArray()
     }
 
 }

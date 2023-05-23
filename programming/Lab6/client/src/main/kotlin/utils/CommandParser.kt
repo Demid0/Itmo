@@ -35,8 +35,8 @@ class CommandParser: KoinComponent {
     fun addCommand(name: String, command: CommandType) {
         commands.put(name, command)
     }
-    fun removeCommand(name: String) {
-        commands.remove(name)
+    fun clear() {
+        commands.clear()
     }
 
     fun parse(args: MutableList<String>): Packet {

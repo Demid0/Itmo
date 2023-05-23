@@ -17,6 +17,7 @@ abstract class ClientCommand(val type: CommandType) : KoinComponent {
     var collectionManager = CollectionManager("default")
     internal val serializator: Serializator by inject()
     internal val caster: Caster by inject()
+    internal val clientCommandInvoker: ClientCommandInvoker by inject()
 
-    abstract fun execute(arguments: ArrayList<CommandArgument>) : Packet
+    abstract fun execute(arguments: ArrayList<CommandArgument>) : ArrayList<Packet>
 }
