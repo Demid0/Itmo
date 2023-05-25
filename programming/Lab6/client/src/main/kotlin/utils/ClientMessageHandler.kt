@@ -18,8 +18,13 @@ class ClientMessageHandler: Runnable, KoinComponent {
     private val serverAddress = InetSocketAddress("localhost", 1488)
 
     override fun run() {
-        val packet = getPacket(username)
-        val byteBuffer = packMessage(packet)
+        sendRecieveInvoke(checkout())
+        sendRecieveInvoke(getPacket())
+    }
+
+    fun sendRecieveInvoke(packet: Packet) {
+        packet.clientName = username
+        val byteBuffer = packMessage(packet.wrapIntoArray())
         val ansBuffer = ByteBuffer.wrap(ByteArray(65535))
         sendMessage(byteBuffer, serverAddress)
         receiveMessage(ansBuffer)
@@ -31,11 +36,11 @@ class ClientMessageHandler: Runnable, KoinComponent {
         }
     }
 
-    fun getPacket(username: String): ArrayList<Packet> {
+    fun checkout() = Packet("checkout", arrayListOf())
+    fun getPacket(): Packet {
         var packet = app.run(readerManager, writerManager)
         while (packet == null) packet = app.run(readerManager, writerManager)
-        packet.clientName = username
-        return arrayListOf(packet, Packet("checkout", arrayListOf()))
+        return packet
     }
 
     fun packMessage(packet: ArrayList<Packet>) : ByteBuffer {
