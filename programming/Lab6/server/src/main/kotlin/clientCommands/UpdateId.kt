@@ -16,22 +16,14 @@ class UpdateId: ClientCommand(CommandType.MIXED_ARG) {
         val route = caster.toRoute(arguments[1])
         return Packet("print_to_client", arrayListOf(
             MyString(try {
-            var bool = false
-            for (element in collectionManager.collection) {
-                if (element.getId() == id) {
-                    element.update(
-                        name = route.getName(),
-                        coordinates = route.getCoordinates(),
-                        from = route.getFrom(),
-                        to = route.getTo(),
-                        distance = route.getDistance()
-                    )
-                    bool = true
-                    break
-                }
-            }
-            if (bool) "Done!"
-            else "No element with this id"
+            collectionManager.collection.first { it.getId() == id }.update(
+                name = route.getName(),
+                coordinates = route.getCoordinates(),
+                from = route.getFrom(),
+                to = route.getTo(),
+                distance = route.getDistance()
+            )
+                "Done"
         } catch (e: Exception) {
             "Wrong id format."
         })

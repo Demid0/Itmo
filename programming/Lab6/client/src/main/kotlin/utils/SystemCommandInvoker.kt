@@ -14,10 +14,7 @@ class SystemCommandInvoker {
     }
 
     fun invoke(listOfPacket: ArrayList<Packet>) {
-        for(packet in listOfPacket) {
-            val command = commands[packet.commandName]!!
-            command.execute(packet.arguments)
-        }
+        listOfPacket.forEach { commands[it.commandName]!!.execute(it.arguments) }
     }
     fun addCommand (commandName: String, systemCommand: SystemCommand) = commands.put(commandName, systemCommand)
     fun getCommands() = commands

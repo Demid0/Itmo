@@ -18,9 +18,7 @@ class Help: ClientCommand(CommandType.NO_ARG) {
             if (commands.isEmpty()) "No commands"
             else {
                 var out = "You can use this commands:\n"
-                for (command in commands.toSortedMap()) {
-                    out += command.key + "\n"
-                }
+                commands.toSortedMap().forEach { out += it.key + "\n" }
                 out.dropLast(1)
             }
         )

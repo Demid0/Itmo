@@ -17,9 +17,7 @@ class Show: ClientCommand(CommandType.NO_ARG) {
             MyString(if (collection.isEmpty()) "Collection is empty :("
         else {
             var out = "Collection:\n"
-            for (element in collection) {
-                out += element.toString() + "\n"
-            }
+            collection.forEach { out += it.toString() + "\n" }
             out.dropLast(1)
         })
         )).wrapIntoArray()

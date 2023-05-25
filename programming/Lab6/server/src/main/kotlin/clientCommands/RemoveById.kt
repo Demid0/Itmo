@@ -15,16 +15,8 @@ class RemoveById: ClientCommand(CommandType.SINGLE_ARG) {
         return Packet("print_to_client", arrayListOf(
             MyString(try {
             val id: Long = caster.toString(arguments[0]).toLong()
-            var bool = false
-            for (element in collectionManager.collection) {
-                if (element.getId() == id) {
-                    collectionManager.collection.remove(element)
-                    bool = true
-                    break
-                }
-            }
-            if (bool) "Done!"
-            else "No element with this id."
+            collectionManager.collection.removeIf { it.getId() == id }
+            "Done!"
         } catch (e: Exception) {
             "Wrong id format."
         })

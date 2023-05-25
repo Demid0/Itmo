@@ -13,11 +13,7 @@ import commandArgumentsAndTheirsComponents.MyString
 class RemoveLower: ClientCommand(CommandType.OBJECT_ARG) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         val route = caster.toRoute(arguments[0])
-        for (element in collectionManager.collection) {
-            if (element.getDistance() < route.getDistance()) {
-                collectionManager.collection.remove(element)
-            }
-        }
+        collectionManager.collection.removeAll { it.getDistance() < route.getDistance() }
         return Packet("print_to_client", arrayListOf(MyString("Done!"))).wrapIntoArray()
     }
 }

@@ -17,9 +17,7 @@ class PrintFieldDescendingDistance: ClientCommand(CommandType.NO_ARG) {
             MyString(if (collection.isEmpty()) "Collection is empty."
         else {
             var out = "Collection:\n"
-            for (element in collection) {
-                out += "${element.getDistance()} "
-            }
+            collection.forEach { out += "${it.getDistance()} " }
             out
         })
         )).wrapIntoArray()

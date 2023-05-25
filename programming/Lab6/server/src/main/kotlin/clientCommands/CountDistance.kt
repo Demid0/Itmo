@@ -16,15 +16,12 @@ class CountDistance(val compare: (a: Double, b: Double) -> Boolean): ClientComma
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         return Packet("print_to_client", arrayListOf(
             MyString(try {
-            var counter = 0
-            val distance: Double = caster.toString(arguments[0]).toDouble()
-            for (element in collectionManager.collection) {
-                if (compare(element.getDistance(), distance)) counter++
-            }
-            "$counter element(s)"
-        } catch (e: Exception) {
-            "Wrong distance format"
-        })
+                val distance: Double = caster.toString(arguments[0]).toDouble()
+                val counter = collectionManager.collection.filter { compare(it.getDistance(), distance) }.count()
+                "$counter element(s)"
+            } catch (e: Exception) {
+                "Wrong distance format"
+            })
         )).wrapIntoArray()
     }
 
