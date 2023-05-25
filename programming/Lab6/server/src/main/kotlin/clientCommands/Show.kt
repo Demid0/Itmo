@@ -17,7 +17,7 @@ class Show: ClientCommand(CommandType.NO_ARG) {
             MyString(if (collection.isEmpty()) "Collection is empty :("
         else {
             var out = "Collection:\n"
-            collection.forEach { out += it.toString() + "\n" }
+            collection.sortedBy { it.getName() }.forEach { out += it.toString() + "\n" }
             out.dropLast(1)
         })
         )).wrapIntoArray()
