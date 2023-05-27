@@ -14,23 +14,6 @@
 	isolation - изолированность (транзакции не влияют друг на друга)
 	durability - устойчивость (выполненные транзакции не откатываются из-за сбоев)
 
-
-3 ЛАБА
-	- 4 ПУНКТ ДЛЯ ПЕРВОЙ ЛР
-	- ВСЕ ОСТАЛЬНОЕ ДЛЯ ЗАДАНИЯ РУБЕЖКИ
-
-
-ДОП ЗАПРОСЫ НА 2 ЛАБУ
- Группа, фио, дисциплина, оценка - первый запрос
- Группа, фио, дисциплина, оценка, накопительная сумма (оценки) - второй запрос
-
-ДОП НА 1 ЛАБУ
-VIEW
- HUMAN.NAME, GROUP.NAME, ACTION_DESCRIPTION.DESCRIPTION WHERE ACTION_WITH_GROUP.DESCRIPTION_ID = ACTION_DESCRIPTION.ID 
- Вывести человека, группу и как они взаимодействуют
-
-
-
 WITH RECURSIVE TEMP (ИД, ОТД_ИД, КОРОТКОЕ_ИМЯ, ПУТЬ) AS (
 	SELECT T1.ИД, T1.ОТД_ИД, T1.КОРОТКОЕ_ИМЯ, CAST (T1.ИД AS VARCHAR(50)) AS ПУТЬ 
 	FROM Н_ОТДЕЛЫ AS T1 
@@ -44,7 +27,55 @@ SELECT КОРОТКОЕ_ИМЯ, ПУТЬ
 FROM TEMP;
 
 
+Индекс - список всех значений в группе из одного или нескольких столбцов, отсортированный в каком-либо порядке. Каждое значение имеет указатель на строку в таблице, где это значение встречается.
 
--5 задание из рубежки сделать для первой лабы
--перерисовать даталогическую модель для рубежки
--4 лаба
+Индексы создаются по таблицам для ускорения запросов с where, join, min(), max(), sort, group by.
+
+При изменении/удалении содержимого индексированного столбца/добавлении новой строки индекс нужнр обновить.
+
+btree индекс
+работа на основе сбалансированного дерева поиска
+полезен при использовании совместно с =, >, <, <=, >=, between
+
+hash index
+для построения этого индекса используется хэш-функция
+
+gist
+обобщенное дерево поиска
+
+
+
+
+!!Сделать как функцию (если человека нет - exception)
+
+VIEW
+ HUMAN.NAME, GROUP.NAME, ACTION_DESCRIPTION.DESCRIPTION WHERE ACTION_WITH_GROUP.DESCRIPTION_ID = ACTION_DESCRIPTION.ID 
+ Вывести человека, группу и как они взаимодействуют
+
+
+
+CREATE VIEW HUMAN_ACTION_WITH_GROUP_V
+AS
+	SELECT human.name AS Человек, action_description.description AS Что_сделал, "group".name AS С_какой_группой
+	FROM human
+	JOIN action_description
+	ON action_description.human_id = human.id
+	JOIN action_with_group
+	ON action_with_group.description_id = action_description.id
+	JOIN "group"
+	ON "group".id = action_with_group.group_id;
+
+
+
+системные представления (5 пункт рубежки) для 1 лабы
+
+
+cube, rollup, grouping sets
+
+накопительные суммы оценок 
+группа, человек, дисциплина, сумма оценок человека 
+over partition
+
+пропустить их через explain (analyze)
+\i 
+psql -f
