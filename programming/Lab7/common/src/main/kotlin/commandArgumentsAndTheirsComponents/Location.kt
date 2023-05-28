@@ -13,7 +13,12 @@ import kotlinx.serialization.Serializable
  * @param name Название локации
  */
 @Serializable
-class Location(private var x: Int?, private var y: Float, private var z: Long, private var name: String) {
+class Location(private var x: Int?,
+               private var y: Float,
+               private var z: Long,
+               private var name: String
+) {
+    constructor() : this (1, 1.0f, 1, "1")
     override fun toString(): String {
         return "\n\tname: $name\n\tx: $x, y: $y, z: $z"
     }
