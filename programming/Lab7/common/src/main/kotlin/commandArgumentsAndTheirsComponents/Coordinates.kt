@@ -10,7 +10,10 @@ import kotlinx.serialization.Serializable
  * @param y Координата y
  */
 @Serializable
-class Coordinates(private var x: Float?, private var y: Int?) {
+class Coordinates(
+    private var x: Float?,
+    private var y: Int?
+) {
     override fun toString(): String {
         return "x: $x, y: $y"
     }
