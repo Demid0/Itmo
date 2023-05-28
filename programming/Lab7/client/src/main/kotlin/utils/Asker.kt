@@ -1,6 +1,5 @@
 package utils
 
-import builders.ArgumentsBuilder
 import commandArgumentsAndTheirsComponents.Coordinates
 import commandArgumentsAndTheirsComponents.Location
 import org.koin.core.component.KoinComponent
@@ -22,7 +21,6 @@ class Asker: KoinComponent {
     private val readerManager : ReaderManager by inject()
     private val writer: PrintWriter = writerManager.get()
     private val reader: BufferedReader = readerManager.get()
-    private val argumentsBuilder = ArgumentsBuilder()
 
     private fun <T> ask(
         printHint: String,
@@ -54,25 +52,27 @@ class Asker: KoinComponent {
     val ToDouble: ToType<Double> = { it!!.toDouble() }
     val ToString: ToType<String> = { it!! }
 
-    fun askRoute() = argumentsBuilder.route {
-        name = ask("name", ToString) { it != "" }
-        coordinates = askCoordinates()
-        from = askNullableLocation("from")
-        to = askLocation("to")
-        distance = ask("distance", ToDouble) { it > 1 }
+    fun askRoute(): Route {
+        val name: String = ask("name", ToString) { it != "" }
+        val coordinates = askCoordinates()
+        val from: Location? = askNullableLocation("from")
+        val to: Location = askLocation("to")
+        val distance: Double = ask("distance", ToDouble) { it > 1 }
+        return Route(name, coordinates, from, to, distance)
     }
 
-
-    private fun askCoordinates() = argumentsBuilder.coordinates {
-        x = ask("Coordinates - x", ToFloatOrNull) { it == null || it <= 800 }
-        y = ask("Coordinates - y", ToIntOrNull) { true }
+    private fun askCoordinates(): Coordinates {
+        val x: Float? = ask("Coordinates - x", ToFloatOrNull) { it == null || it <= 800 }
+        val y: Int? = ask("Coordinates - y", ToIntOrNull) { true }
+        return Coordinates(x, y)
     }
 
-    private fun askLocation(Lname: String) = argumentsBuilder.location {
-        x = ask("$Lname - x", ToIntOrNull) { true }
-        y = ask("$Lname - y", ToFloat) { true }
-        z = ask("$Lname - z", ToLong) { true }
-        name = ask("$Lname - name", ToString) { it != "" && it.length <= 496}
+    private fun askLocation(Lname: String): Location {
+        val x: Int? = ask("$Lname - x", ToIntOrNull) { true }
+        val y: Float = ask("$Lname - y", ToFloat) { true }
+        val z: Long = ask("$Lname - z", ToLong) { true }
+        val name: String = ask("$Lname - name", ToString) { it != "" && it.length <= 496}
+        return Location(x, y, z, name)
     }
 
     private fun askNullableLocation(Lname: String): Location? {

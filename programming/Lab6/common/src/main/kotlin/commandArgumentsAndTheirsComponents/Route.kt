@@ -1,4 +1,4 @@
-package collectionObjectsClasses
+package commandArgumentsAndTheirsComponents
 
 import kotlinx.serialization.Serializable
 import java.text.SimpleDateFormat
@@ -22,7 +22,7 @@ class Route (private var name: String,
              private var from: Location?,
              private var to: Location,
              private var distance: Double
-) {
+) : CommandArgument() {
     private var id: Long = abs(UUID.randomUUID().mostSignificantBits)
     private var creationDate = SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(Date())
 

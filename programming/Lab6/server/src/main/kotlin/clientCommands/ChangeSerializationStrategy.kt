@@ -1,8 +1,9 @@
 package clientCommands
 
-import collectionObjectsClasses.Route
-import utils.AnswerPacket
-import utils.CommandType
+import commandArgumentsAndTheirsComponents.CommandArgument
+import utils.Packet
+import commandArgumentsAndTheirsComponents.CommandType
+import commandArgumentsAndTheirsComponents.MyString
 
 /***
  * change_serialization_strategy strategy : поменять тип сериализации
@@ -10,9 +11,10 @@ import utils.CommandType
  * @since 1.0
  */
 class ChangeSerializationStrategy: ClientCommand(CommandType.SINGLE_ARG) {
-    override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
-        return AnswerPacket(try {
-            val newType = singleArg!! + "strategy"
+    override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
+        return Packet("print_to_client", arrayListOf(
+            MyString(try {
+            val newType = caster.toString(arguments[0]) + "strategy"
             serializator.changeStrategy(serializator.getStrategy(newType)!!)
             "Changed"
         } catch (e: NullPointerException) {
@@ -20,6 +22,7 @@ class ChangeSerializationStrategy: ClientCommand(CommandType.SINGLE_ARG) {
         } catch (e: IndexOutOfBoundsException) {
             "Empty input\n${printSupportedStrategies()}"
         })
+        )).wrapIntoArray()
     }
 
     private fun printSupportedStrategies(): String {

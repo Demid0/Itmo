@@ -18,6 +18,7 @@ class ClientMessageHandler: Runnable, KoinComponent {
     private val serverAddress = InetSocketAddress("localhost", 1488)
 
     override fun run() {
+        sendRecieveInvoke(checkout())
         sendRecieveInvoke(getPacket())
     }
 

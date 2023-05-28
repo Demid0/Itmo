@@ -2,26 +2,20 @@ package utils
 
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import java.util.logging.Logger
 
-class ClientAssistant: KoinComponent {
-    private val serializator: Serializator by inject()
+class ClientAssistant(val clientName: String): KoinComponent {
     private val clientCommandInvoker: ClientCommandInvoker by inject()
-    var collectionManager = CollectionManager()
+    private var collectionManager = CollectionManager(clientName)
+    private val starter: Starter by inject()
+    private val logger = Logger.getLogger("Handler logger")
+
     init {
-        //download last system condition
+        starter.downloadLastSystemCondition(collectionManager)
     }
 
-    fun executeQuery(message: String) : String {
-        val argumentPacket = deserializeMessage(message)
-        val out = clientCommandInvoker.invoke(argumentPacket)
-        return serializeMessage(out)
-    }
-
-    fun serializeMessage(answerPacket: AnswerPacket) : String {
-        return serializator.serialize(answerPacket)
-    }
-
-    fun deserializeMessage(message: String) : ArgumentPacket {
-        return serializator.deserialize(message, ArgumentPacket())
+    fun executeQuery(packets: ArrayList<Packet>) : ArrayList<Packet> {
+        logger.info("Executing query to $clientName")
+        return clientCommandInvoker.invoke(packets, collectionManager)
     }
 }

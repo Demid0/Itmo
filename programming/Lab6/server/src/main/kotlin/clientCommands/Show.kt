@@ -1,8 +1,9 @@
 package clientCommands
 
-import collectionObjectsClasses.Route
-import utils.AnswerPacket
-import utils.CommandType
+import commandArgumentsAndTheirsComponents.CommandArgument
+import utils.Packet
+import commandArgumentsAndTheirsComponents.CommandType
+import commandArgumentsAndTheirsComponents.MyString
 
 /***
  * show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении
@@ -10,15 +11,15 @@ import utils.CommandType
  * @since 1.0
  */
 class Show: ClientCommand(CommandType.NO_ARG) {
-    override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
+    override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         val collection = collectionManager.collection
-        return AnswerPacket(if (collection.isEmpty()) "Collection is empty :("
+        return Packet("print_to_client", arrayListOf(
+            MyString(if (collection.isEmpty()) "Collection is empty :("
         else {
             var out = "Collection:\n"
-            for (element in collection) {
-                out += element.toString() + "\n"
-            }
+            collection.sortedBy { it.getName() }.forEach { out += it.toString() + "\n" }
             out.dropLast(1)
         })
+        )).wrapIntoArray()
     }
 }

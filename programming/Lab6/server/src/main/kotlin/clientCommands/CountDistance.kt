@@ -1,8 +1,9 @@
 package clientCommands
 
-import collectionObjectsClasses.Route
-import utils.AnswerPacket
-import utils.CommandType
+import commandArgumentsAndTheirsComponents.CommandArgument
+import utils.Packet
+import commandArgumentsAndTheirsComponents.CommandType
+import commandArgumentsAndTheirsComponents.MyString
 import java.lang.Exception
 
 /***
@@ -12,17 +13,16 @@ import java.lang.Exception
  * @since 1.0
  */
 class CountDistance(val compare: (a: Double, b: Double) -> Boolean): ClientCommand(CommandType.SINGLE_ARG) {
-    override fun execute(singleArg: String?, objectArg: Route?): AnswerPacket {
-        return AnswerPacket(try {
-            var counter = 0
-            val distance: Double = singleArg!!.toDouble()
-            for (element in collectionManager.collection) {
-                if (compare(element.getDistance(), distance)) counter++
-            }
-            "$counter element(s)"
-        } catch (e: Exception) {
-            "Wrong distance format"
-        })
+    override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
+        return Packet("print_to_client", arrayListOf(
+            MyString(try {
+                val distance: Double = caster.toString(arguments[0]).toDouble()
+                val counter = collectionManager.collection.filter { compare(it.getDistance(), distance) }.count()
+                "$counter element(s)"
+            } catch (e: Exception) {
+                "Wrong distance format"
+            })
+        )).wrapIntoArray()
     }
 
 }

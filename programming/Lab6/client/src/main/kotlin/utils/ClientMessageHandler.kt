@@ -13,13 +13,18 @@ class ClientMessageHandler: Runnable, KoinComponent {
     private val writerManager: WriterManager by inject()
     private val readerManager: ReaderManager by inject()
     private val systemCommandInvoker: SystemCommandInvoker by inject()
-
+    private var username: String = ""
     private val channel = DatagramChannel.open()
     private val serverAddress = InetSocketAddress("localhost", 1488)
 
     override fun run() {
-        val packet = getPacket()
-        val byteBuffer = packMessage(packet)
+        sendRecieveInvoke(checkout())
+        sendRecieveInvoke(getPacket())
+    }
+
+    fun sendRecieveInvoke(packet: Packet) {
+        packet.clientName = username
+        val byteBuffer = packMessage(packet.wrapIntoArray())
         val ansBuffer = ByteBuffer.wrap(ByteArray(65535))
         sendMessage(byteBuffer, serverAddress)
         receiveMessage(ansBuffer)
@@ -31,18 +36,19 @@ class ClientMessageHandler: Runnable, KoinComponent {
         }
     }
 
-    fun getPacket(): ArgumentPacket {
+    fun checkout() = Packet("checkout", arrayListOf())
+    fun getPacket(): Packet {
         var packet = app.run(readerManager, writerManager)
         while (packet == null) packet = app.run(readerManager, writerManager)
         return packet
     }
 
-    fun packMessage(packet: ArgumentPacket) : ByteBuffer {
+    fun packMessage(packet: ArrayList<Packet>) : ByteBuffer {
         return ByteBuffer.wrap(serializator.serialize(packet).toByteArray())
     }
 
-    fun unpackMessage(byteBuffer: ByteBuffer): AnswerPacket {
-        return serializator.deserialize(String(byteBuffer.array(), 0, byteBuffer.position()), AnswerPacket())
+    fun unpackMessage(byteBuffer: ByteBuffer): ArrayList<Packet> {
+        return serializator.deserialize(String(byteBuffer.array(), 0, byteBuffer.position()), ArrayList<Packet>())
     }
 
     fun sendMessage(byteBuffer: ByteBuffer, address: InetSocketAddress) {
@@ -51,6 +57,12 @@ class ClientMessageHandler: Runnable, KoinComponent {
 
     fun receiveMessage(byteBuffer: ByteBuffer) {
         channel.receive(byteBuffer)
+    }
+
+    fun login() {
+        writerManager.get().println("Enter username:")
+        writerManager.get().flush()
+        while(username == "") username = readerManager.get().readLine()
     }
 
 }

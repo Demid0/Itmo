@@ -23,11 +23,11 @@ val serverKoinModule = module {
 
     single { Serializator() }
 
-    single { CollectionManager() }
-
     single { ServerMessageHandler() }
 
     single { HashMap<String, BufferedReader>() }
+
+    single { Caster() }
 }
 
 /***

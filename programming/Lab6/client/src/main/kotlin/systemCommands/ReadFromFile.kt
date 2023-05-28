@@ -2,7 +2,7 @@ package systemCommands
 
 import exceptions.RecursionException
 import exceptions.SystemCommandInvocationException
-import utils.CommandType
+import commandArgumentsAndTheirsComponents.CommandArgument
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileInputStream
@@ -10,9 +10,9 @@ import java.io.FileNotFoundException
 import java.io.InputStreamReader
 
 class ReadFromFile : SystemCommand() {
-    override fun execute(singleArg: String?, commandType: CommandType?) {
+    override fun execute(arguments: ArrayList<CommandArgument>) {
         try {
-            var fileName = singleArg!!
+            var fileName = caster.toString(arguments[0])
             val file = File(fileName)
             val reader = BufferedReader(InputStreamReader(FileInputStream(file)))
             fileName = file.absolutePath
