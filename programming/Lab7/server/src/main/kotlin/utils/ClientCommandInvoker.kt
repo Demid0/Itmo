@@ -36,10 +36,10 @@ class ClientCommandInvoker: KoinComponent {
 
     fun invoke(listOfPackets: ArrayList<Packet>, collectionManager: CollectionManager): ArrayList<Packet> {
         val ans = ArrayList<Packet>()
-        listOfPackets.forEach {
-            val command = commands[it.commandName]!!
+        listOfPackets.forEach { packet ->
+            val command = commands[packet.commandName]!!
             command.collectionManager = collectionManager
-            ans.addAll(command.execute(it.arguments))
+            ans.addAll(command.execute(packet.arguments))
         }
         return ans
     }

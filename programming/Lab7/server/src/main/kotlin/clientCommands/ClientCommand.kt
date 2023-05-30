@@ -1,5 +1,6 @@
 package clientCommands
 
+import builders.Builder
 import utils.CollectionManager
 import utils.*
 import org.koin.core.component.KoinComponent
@@ -18,6 +19,6 @@ abstract class ClientCommand(val type: CommandType) : KoinComponent {
     internal val serializator: Serializator by inject()
     internal val caster: Caster by inject()
     internal val clientCommandInvoker: ClientCommandInvoker by inject()
-
+    internal val builder: Builder by inject()
     abstract fun execute(arguments: ArrayList<CommandArgument>) : ArrayList<Packet>
 }

@@ -14,6 +14,9 @@ class RemoveLower: ClientCommand(CommandType.OBJECT_ARG) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         val route = caster.toRoute(arguments[0])
         collectionManager.collection.removeAll { it.getDistance() < route.getDistance() }
-        return Packet("print_to_client", arrayListOf(MyString("Done!"))).wrapIntoArray()
+        return builder.packet {
+            commandName = "print_to_client"
+            string("Done!")
+        }.wrapIntoArray()
     }
 }

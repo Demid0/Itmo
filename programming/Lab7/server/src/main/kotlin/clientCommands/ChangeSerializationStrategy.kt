@@ -3,7 +3,6 @@ package clientCommands
 import commandArgumentsAndTheirsComponents.CommandArgument
 import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
-import commandArgumentsAndTheirsComponents.MyString
 
 /***
  * change_serialization_strategy strategy : поменять тип сериализации
@@ -12,17 +11,20 @@ import commandArgumentsAndTheirsComponents.MyString
  */
 class ChangeSerializationStrategy: ClientCommand(CommandType.SINGLE_ARG) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
-        return Packet("print_to_client", arrayListOf(
-            MyString(try {
-            val newType = caster.toString(arguments[0]) + "strategy"
-            serializator.changeStrategy(serializator.getStrategy(newType)!!)
-            "Changed"
-        } catch (e: NullPointerException) {
-            "Unknown serialization strategy\n${printSupportedStrategies()}"
-        } catch (e: IndexOutOfBoundsException) {
-            "Empty input\n${printSupportedStrategies()}"
-        })
-        )).wrapIntoArray()
+        return builder.packet {
+            commandName = "print_to_client"
+            string (
+                try {
+                    val newType = caster.toString(arguments[0]) + "strategy"
+                    serializator.changeStrategy(serializator.getStrategy(newType)!!)
+                    "Changed"
+                } catch (e: NullPointerException) {
+                    "Unknown serialization strategy\n${printSupportedStrategies()}"
+                } catch (e: IndexOutOfBoundsException) {
+                    "Empty input\n${printSupportedStrategies()}"
+                }
+            )
+        }.wrapIntoArray()
     }
 
     private fun printSupportedStrategies(): String {

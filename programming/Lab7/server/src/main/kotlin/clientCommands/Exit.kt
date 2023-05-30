@@ -25,6 +25,8 @@ class Exit: ClientCommand(CommandType.NO_ARG) {
         fileWriter.println(collectionManager.collection.javaClass.simpleName.lowercase())
         fileWriter.println(serializator.getChosenStrategy().javaClass.simpleName.lowercase())
         fileWriter.close()
-        return Packet("end_client_session", arrayListOf()).wrapIntoArray()
+        return builder.packet {
+            commandName = "end_client_session"
+        }.wrapIntoArray()
     }
 }

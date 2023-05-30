@@ -13,13 +13,16 @@ import commandArgumentsAndTheirsComponents.MyString
 class PrintFieldDescendingDistance: ClientCommand(CommandType.NO_ARG) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         val collection = collectionManager.collection.sortedByDescending { it.getDistance() }
-        return Packet("print_to_client", arrayListOf(
-            MyString(if (collection.isEmpty()) "Collection is empty."
-        else {
-            var out = "Collection:\n"
-            collection.forEach { out += "${it.getDistance()} " }
-            out
-        })
-        )).wrapIntoArray()
+        return builder.packet {
+            commandName = "print_to_client"
+            string (
+                if (collection.isEmpty()) "Collection is empty."
+                else {
+                    var out = "Collection:\n"
+                    collection.forEach { out += "${it.getDistance()} " }
+                    out
+                }
+            )
+        }.wrapIntoArray()
     }
 }

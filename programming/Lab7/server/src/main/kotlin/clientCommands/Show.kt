@@ -13,13 +13,16 @@ import commandArgumentsAndTheirsComponents.MyString
 class Show: ClientCommand(CommandType.NO_ARG) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         val collection = collectionManager.collection
-        return Packet("print_to_client", arrayListOf(
-            MyString(if (collection.isEmpty()) "Collection is empty :("
-        else {
-            var out = "Collection:\n"
-            collection.sortedBy { it.getName() }.forEach { out += it.toString() + "\n" }
-            out.dropLast(1)
-        })
-        )).wrapIntoArray()
+        return builder.packet {
+            commandName = "print_to_client"
+            string(
+                if (collection.isEmpty()) "Collection is empty :("
+                else {
+                    var out = "Collection:\n"
+                    collection.sortedBy { it.getName() }.forEach { out += it.toString() + "\n" }
+                    out.dropLast(1)
+                }
+            )
+        }.wrapIntoArray()
     }
 }

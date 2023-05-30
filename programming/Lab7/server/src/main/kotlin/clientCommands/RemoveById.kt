@@ -12,15 +12,17 @@ import java.lang.Exception
  */
 class RemoveById: ClientCommand(CommandType.SINGLE_ARG) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
-        return Packet("print_to_client", arrayListOf(
-            MyString(try {
-            val id: Long = caster.toString(arguments[0]).toLong()
-            collectionManager.collection.removeIf { it.getId() == id }
-            "Done!"
-        } catch (e: Exception) {
-            "Wrong id format."
-        })
-        )).wrapIntoArray()
+        return builder.packet {
+            commandName = "print_to_client"
+            string (
+                try {
+                    val id: Long = caster.toString(arguments[0]).toLong()
+                    collectionManager.collection.removeIf { it.getId() == id }
+                    "Done!"
+                } catch (e: Exception) {
+                    "Wrong id format."
+                }
+            )
+        }.wrapIntoArray()
     }
-
 }

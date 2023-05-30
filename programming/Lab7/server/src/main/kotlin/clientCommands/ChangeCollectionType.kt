@@ -3,7 +3,6 @@ package clientCommands
 import commandArgumentsAndTheirsComponents.CommandArgument
 import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
-import commandArgumentsAndTheirsComponents.MyString
 
 /***
  * change_collection_type type : поменять тип коллекции
@@ -13,17 +12,20 @@ import commandArgumentsAndTheirsComponents.MyString
 class ChangeCollectionType: ClientCommand(CommandType.SINGLE_ARG) {
 
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
-        return Packet("print_to_client", arrayListOf(
-            MyString(try {
-            val newType = caster.toString(arguments[0])
-            collectionManager.changeType(newType)
-            "Changed"
-        } catch (e: NullPointerException) {
-            "Unsupported collection type\n${printSupportedTypes()}"
-        } catch (e: IndexOutOfBoundsException) {
-            "Empty input\n${printSupportedTypes()}"
-        })
-        )).wrapIntoArray()
+        return builder.packet {
+            commandName = "print_to_client"
+            string (
+                try {
+                    val newType = caster.toString(arguments[0])
+                    collectionManager.changeType(newType)
+                    "Changed"
+                } catch (e: NullPointerException) {
+                    "Unsupported collection type\n${printSupportedTypes()}"
+                } catch (e: IndexOutOfBoundsException) {
+                    "Empty input\n${printSupportedTypes()}"
+                }
+            )
+        }.wrapIntoArray()
     }
 
     private fun printSupportedTypes() : String {
