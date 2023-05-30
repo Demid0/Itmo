@@ -4,7 +4,6 @@ import builders.Builder
 import org.koin.core.component.KoinComponent
 import java.io.*
 import org.koin.core.component.inject
-import commandArgumentsAndTheirsComponents.MyString
 
 /***
  * Класс, загружающий последнее сохраненное состояние системы и коллекции

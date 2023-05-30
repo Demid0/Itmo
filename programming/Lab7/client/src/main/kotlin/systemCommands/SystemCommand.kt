@@ -5,11 +5,13 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import utils.Caster
 import commandArgumentsAndTheirsComponents.CommandArgument
+import commandArgumentsAndTheirsComponents.CommandType
+import utils.Command
 import utils.ReaderManager
 import utils.WriterManager
 import java.io.BufferedReader
 
-abstract class SystemCommand: KoinComponent {
+abstract class SystemCommand(commandType: CommandType): Command(commandType), KoinComponent {
     internal val caster: Caster by inject()
     internal val scriptStack: ArrayDeque<String> by inject()
     internal val readerStack: HashMap<String, BufferedReader> by inject()

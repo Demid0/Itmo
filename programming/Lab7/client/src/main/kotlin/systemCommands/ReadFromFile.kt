@@ -3,13 +3,14 @@ package systemCommands
 import exceptions.RecursionException
 import exceptions.SystemCommandInvocationException
 import commandArgumentsAndTheirsComponents.CommandArgument
+import commandArgumentsAndTheirsComponents.CommandType
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.io.InputStreamReader
 
-class ReadFromFile : SystemCommand() {
+class ReadFromFile : SystemCommand(CommandType.SINGLE_ARG) {
     override fun execute(arguments: ArrayList<CommandArgument>) {
         try {
             var fileName = caster.toString(arguments[0])

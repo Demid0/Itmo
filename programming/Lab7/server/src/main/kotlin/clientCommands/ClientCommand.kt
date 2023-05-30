@@ -14,11 +14,11 @@ import commandArgumentsAndTheirsComponents.CommandType
  * @since 1.0
  */
 //@Serializable
-abstract class ClientCommand(val type: CommandType) : KoinComponent {
+abstract class ClientCommand(commandType: CommandType): Command(commandType), KoinComponent {
     var collectionManager = CollectionManager("default")
     internal val serializator: Serializator by inject()
     internal val caster: Caster by inject()
     internal val clientCommandInvoker: ClientCommandInvoker by inject()
-    internal val builder: Builder by inject()
+    internal val build: Builder by inject()
     abstract fun execute(arguments: ArrayList<CommandArgument>) : ArrayList<Packet>
 }

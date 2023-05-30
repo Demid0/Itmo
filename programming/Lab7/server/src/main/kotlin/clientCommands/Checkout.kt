@@ -14,7 +14,7 @@ class Checkout : ClientCommand(CommandType.NO_ARG) {
                     commandName = "add_client_command"
                     argsArray {
                         string (command.key)
-                        commandType(command.value.type)
+                        commandType(command.value.commandType)
                     }
                 }
             )
