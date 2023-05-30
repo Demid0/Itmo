@@ -1,5 +1,6 @@
 package clientCommands
 
+import builders.printToClientPacket
 import commandArgumentsAndTheirsComponents.CommandArgument
 import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
@@ -12,6 +13,6 @@ import commandArgumentsAndTheirsComponents.CommandType
 class Clear: ClientCommand(CommandType.NO_ARG) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         collectionManager.collection.clear()
-        return build.printToClientPacket("Done!")
+        return printToClientPacket("Done!")
     }
 }

@@ -1,5 +1,6 @@
 package clientCommands
 
+import builders.printToClientPacket
 import utils.*
 import commandArgumentsAndTheirsComponents.CommandArgument
 import commandArgumentsAndTheirsComponents.CommandType
@@ -12,7 +13,7 @@ import commandArgumentsAndTheirsComponents.CommandType
 class Help: ClientCommand(CommandType.NO_ARG) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         val commands = ClientCommandInvoker().getCommands()
-        return build.printToClientPacket(
+        return printToClientPacket(
             if (commands.isEmpty()) "No commands"
             else {
                 var out = "You can use this commands:\n"

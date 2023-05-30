@@ -1,6 +1,5 @@
 package utils
 
-import builders.Builder
 import org.koin.core.component.KoinComponent
 import org.koin.dsl.module
 import java.io.BufferedReader
@@ -30,7 +29,6 @@ val serverKoinModule = module {
 
     single { Caster() }
 
-    single { Builder() }
 }
 
 /***

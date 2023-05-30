@@ -1,5 +1,6 @@
 package clientCommands
 
+import builders.printToClientPacket
 import commandArgumentsAndTheirsComponents.CommandArgument
 import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
@@ -13,10 +14,10 @@ import java.lang.Exception
  */
 class CountDistance(val compare: (a: Double, b: Double) -> Boolean): ClientCommand(CommandType.SINGLE_ARG) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
-        return build.printToClientPacket(
+        return printToClientPacket(
             try {
-                val distance: Double = caster.toString(arguments[0]).toDouble()
-                val counter = collectionManager.collection.filter { compare(it.getDistance(), distance) }.count()
+                val distance: String = cast(arguments)
+                val counter = collectionManager.collection.filter { compare(it.getDistance(), distance.toDouble()) }.count()
                 "$counter element(s)"
             } catch (e: Exception) {
                 "Wrong distance format"

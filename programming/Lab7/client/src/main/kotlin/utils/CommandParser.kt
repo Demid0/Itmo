@@ -1,11 +1,11 @@
 package clientCommands.utils
 
+import builders.packet
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import utils.Asker
 import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
-import commandArgumentsAndTheirsComponents.MyString
 
 class CommandParser: KoinComponent {
     private val asker: Asker by inject()
@@ -47,24 +47,21 @@ class CommandParser: KoinComponent {
             if (commandType == null) Packet()
             else {
                 when(commandType) {
-                    CommandType.NO_ARG -> {
-                        if (args.size != 1) Packet()
-                        else Packet(commandName, arrayListOf())
-                    }
-                    CommandType.SINGLE_ARG -> {
-                        if (args.size != 2) Packet()
-                        else Packet(commandName, arrayListOf(MyString(args[1])))
-                    }
-                    CommandType.OBJECT_ARG -> {
-                        if (args.size != 1) Packet()
-                        else Packet(commandName, arrayListOf(asker.askRoute()))
-                    }
-                    CommandType.MIXED_ARG -> {
-                        if (args.size != 2) Packet()
-                        else Packet(commandName, arrayListOf(MyString(args[1]), asker.askRoute()))
-                    }
+                    CommandType.NO_ARG -> checkAndSet(args, 1, commandName)
+                    CommandType.SINGLE_ARG -> checkAndSet(args, 2, commandName, args[1])
+                    CommandType.OBJECT_ARG -> checkAndSet(args, 1, commandName, withRoute = true)
+                    CommandType.MIXED_ARG -> checkAndSet(args, 2, commandName, args[1], true)
+                    else -> checkAndSet(args, -1, commandName)
                 }
             }
+        }
+    }
+    private fun checkAndSet(args: MutableList<String>, size: Int, commandName: String, withString: String? = null, withRoute: Boolean = false): Packet {
+        return if (args.size != size) Packet()
+        else packet {
+            this.commandName = commandName
+            if (withString != null) string(withString)
+            if (withRoute) route(asker.askRoute())
         }
     }
 }

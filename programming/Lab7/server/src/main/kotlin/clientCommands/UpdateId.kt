@@ -1,8 +1,10 @@
 package clientCommands
 
+import builders.printToClientPacket
 import commandArgumentsAndTheirsComponents.CommandArgument
 import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
+import commandArgumentsAndTheirsComponents.Route
 import java.lang.Exception
 /***
  * update id {element} : обновить значение элемента коллекции, id которого равен заданному
@@ -11,9 +13,10 @@ import java.lang.Exception
  */
 class UpdateId: ClientCommand(CommandType.MIXED_ARG) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
-        val id: Long = caster.toString(arguments[0]).toLong()
-        val route = caster.toRoute(arguments[1])
-        return build.printToClientPacket (
+        val pair: Pair<String, Route> = cast(arguments)
+        val id: Long = pair.first.toLong()
+        val route: Route = pair.second
+        return printToClientPacket (
             try {
                 collectionManager.collection.first { it.getId() == id }.update(
                     name = route.getName(),

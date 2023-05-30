@@ -1,9 +1,9 @@
-import builders.Builder
+import builders.packet
+import builders.route
 import commandArgumentsAndTheirsComponents.CommandType
 
 fun main(args: Array<String>) {
-    val builder = Builder()
-    val route = builder.route {
+    val route = route {
         name = "Asdfg"
         coordinates = coordinates {
             x = null
@@ -19,7 +19,7 @@ fun main(args: Array<String>) {
         distance = 5.0
     }
     println(route.toString())
-    val packet = builder.packet {
+    val packet = packet {
         commandName = "add"
         arguments = argsArray {
             string("Asdlfasldfla")

@@ -1,6 +1,8 @@
 package utils
 
-import builders.Builder
+import builders.coordinates
+import builders.location
+import builders.route
 import commandArgumentsAndTheirsComponents.Location
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -20,7 +22,6 @@ class Asker: KoinComponent {
     private val readerManager : ReaderManager by inject()
     private val writer: PrintWriter = writerManager.get()
     private val reader: BufferedReader = readerManager.get()
-    private val builder: Builder by inject()
 
     private fun <T> ask(
         printHint: String,
@@ -52,7 +53,7 @@ class Asker: KoinComponent {
     val ToDouble: ToType<Double> = { it!!.toDouble() }
     val ToString: ToType<String> = { it!! }
 
-    fun askRoute() = builder.route {
+    fun askRoute() = route {
         name = ask("name", ToString) { it != "" }
         coordinates = askCoordinates()
         from = askNullableLocation("from")
@@ -61,12 +62,12 @@ class Asker: KoinComponent {
     }
 
 
-    private fun askCoordinates() = builder.coordinates {
+    private fun askCoordinates() = coordinates {
         x = ask("Coordinates - x", ToFloatOrNull) { it == null || it <= 800 }
         y = ask("Coordinates - y", ToIntOrNull) { true }
     }
 
-    private fun askLocation(Lname: String) = builder.location {
+    private fun askLocation(Lname: String) = location {
         x = ask("$Lname - x", ToIntOrNull) { true }
         y = ask("$Lname - y", ToFloat) { true }
         z = ask("$Lname - z", ToLong) { true }

@@ -1,8 +1,10 @@
 package clientCommands
 
+import builders.*
 import commandArgumentsAndTheirsComponents.CommandArgument
 import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
+import commandArgumentsAndTheirsComponents.Route
 
 /***
  * add {element} : добавить новый элемент в коллекцию
@@ -11,8 +13,8 @@ import commandArgumentsAndTheirsComponents.CommandType
  */
 class Add: ClientCommand(CommandType.OBJECT_ARG) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
-        val objectArg = caster.toRoute(arguments[0])
+        val objectArg: Route = cast(arguments)
         collectionManager.collection.add(objectArg)
-        return build.printToClientPacket("Done")
+        return printToClientPacket("Done")
     }
 }

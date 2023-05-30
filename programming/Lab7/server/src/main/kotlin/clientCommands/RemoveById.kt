@@ -1,5 +1,6 @@
 package clientCommands
 
+import builders.printToClientPacket
 import commandArgumentsAndTheirsComponents.CommandArgument
 import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
@@ -11,10 +12,10 @@ import java.lang.Exception
  */
 class RemoveById: ClientCommand(CommandType.SINGLE_ARG) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
-        return build.printToClientPacket (
+        return printToClientPacket (
             try {
-                val id: Long = caster.toString(arguments[0]).toLong()
-                collectionManager.collection.removeIf { it.getId() == id }
+                val id: String = cast(arguments)
+                collectionManager.collection.removeIf { it.getId() == id.toLong() }
                 "Done!"
             } catch (e: Exception) {
                 "Wrong id format."

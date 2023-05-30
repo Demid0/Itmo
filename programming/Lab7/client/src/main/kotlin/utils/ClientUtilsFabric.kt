@@ -1,6 +1,5 @@
 package utils
 
-import builders.Builder
 import clientCommands.utils.CommandParser
 import org.koin.core.component.KoinComponent
 import org.koin.dsl.module
@@ -31,8 +30,6 @@ val clientKoinModule = module {
     single { ClientMessageHandler() }
 
     single { Caster() }
-
-    single { Builder() }
 
 }
 

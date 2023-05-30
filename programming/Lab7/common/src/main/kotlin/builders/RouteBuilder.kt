@@ -13,6 +13,6 @@ class RouteBuilder {
 
     fun build() = Route(name!!, coordinates!!, from, to!!, distance!!)
 
-    fun location(init: LocationBuilder.() -> Unit) = Builder().location(init)
-    fun coordinates(init: CoordinatesBuilder.() -> Unit) = Builder().coordinates(init)
+    fun location(init: LocationBuilder.() -> Unit) = builders.location(init)
+    fun coordinates(init: CoordinatesBuilder.() -> Unit) = builders.coordinates(init)
 }

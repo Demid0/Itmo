@@ -1,5 +1,6 @@
 package clientCommands
 
+import builders.printToClientPacket
 import commandArgumentsAndTheirsComponents.CommandArgument
 import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
@@ -11,9 +12,10 @@ import commandArgumentsAndTheirsComponents.CommandType
  */
 class ChangeSerializationStrategy: ClientCommand(CommandType.SINGLE_ARG) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
-        return build.printToClientPacket(
+        return printToClientPacket(
             try {
-                val newType = caster.toString(arguments[0]) + "strategy"
+                var newType: String = cast(arguments)
+                newType += "strategy"
                 serializator.changeStrategy(serializator.getStrategy(newType)!!)
                 "Changed"
             } catch (e: NullPointerException) {

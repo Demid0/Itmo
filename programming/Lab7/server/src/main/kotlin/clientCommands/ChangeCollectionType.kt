@@ -1,5 +1,6 @@
 package clientCommands
 
+import builders.printToClientPacket
 import commandArgumentsAndTheirsComponents.CommandArgument
 import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
@@ -12,9 +13,9 @@ import commandArgumentsAndTheirsComponents.CommandType
 class ChangeCollectionType: ClientCommand(CommandType.SINGLE_ARG) {
 
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
-        return build.printToClientPacket(
+        return printToClientPacket(
             try {
-                val newType = caster.toString(arguments[0])
+                val newType : String = cast(arguments)
                 collectionManager.changeType(newType)
                 "Changed"
             } catch (e: NullPointerException) {

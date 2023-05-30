@@ -1,5 +1,6 @@
 package clientCommands
 
+import builders.packet
 import commandArgumentsAndTheirsComponents.CommandArgument
 import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
@@ -27,7 +28,7 @@ class Exit: ClientCommand(CommandType.NO_ARG) {
         fileWriter.println(serializator.getChosenStrategy().javaClass.simpleName.lowercase())
         fileWriter.close()
 
-        return build.packet {
+        return packet {
             commandName = "end_client_session"
         }.wrapIntoArray()
     }

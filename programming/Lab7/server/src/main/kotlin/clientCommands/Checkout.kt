@@ -1,16 +1,18 @@
 package clientCommands
 
+import builders.packet
+import builders.printToClientPacket
 import commandArgumentsAndTheirsComponents.CommandArgument
 import commandArgumentsAndTheirsComponents.CommandType
 import utils.Packet
 
 class Checkout : ClientCommand(CommandType.NO_ARG) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
-        val ans = build.packet { commandName = "clear_client_commands" }.wrapIntoArray()
+        val ans = packet { commandName = "clear_client_commands" }.wrapIntoArray()
         val existingCommands = clientCommandInvoker.getCommands()
         existingCommands.forEach { command ->
             ans.add(
-                build.packet {
+                packet {
                     commandName = "add_client_command"
                     argsArray {
                         string (command.key)
@@ -19,7 +21,7 @@ class Checkout : ClientCommand(CommandType.NO_ARG) {
                 }
             )
         }
-        ans.addAll(build.printToClientPacket("Done!"))
+        ans.addAll(printToClientPacket("Done!"))
         return ans
     }
 }

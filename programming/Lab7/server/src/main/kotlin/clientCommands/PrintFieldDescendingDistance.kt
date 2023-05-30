@@ -1,5 +1,6 @@
 package clientCommands
 
+import builders.printToClientPacket
 import commandArgumentsAndTheirsComponents.CommandArgument
 import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
@@ -12,7 +13,7 @@ import commandArgumentsAndTheirsComponents.CommandType
 class PrintFieldDescendingDistance: ClientCommand(CommandType.NO_ARG) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         val collection = collectionManager.collection.sortedByDescending { it.getDistance() }
-        return build.printToClientPacket(
+        return printToClientPacket(
             if (collection.isEmpty()) "Collection is empty."
             else {
                 var out = "Collection:\n"

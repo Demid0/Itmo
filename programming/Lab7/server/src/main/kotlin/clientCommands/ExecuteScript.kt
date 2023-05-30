@@ -1,5 +1,6 @@
 package clientCommands
 
+import builders.packet
 import commandArgumentsAndTheirsComponents.CommandArgument
 import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
@@ -11,8 +12,8 @@ import commandArgumentsAndTheirsComponents.CommandType
  */
 class ExecuteScript: ClientCommand(CommandType.SINGLE_ARG) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
-        val file_name = caster.toString(arguments[0])
-        return build.packet {
+        val file_name: String = cast(arguments)
+        return packet {
             commandName = "read_from_file"
             string(file_name)
         }.wrapIntoArray()

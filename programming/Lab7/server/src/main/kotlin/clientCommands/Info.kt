@@ -1,5 +1,6 @@
 package clientCommands
 
+import builders.printToClientPacket
 import commandArgumentsAndTheirsComponents.CommandArgument
 import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
@@ -11,7 +12,7 @@ import commandArgumentsAndTheirsComponents.CommandType
  */
 class Info: ClientCommand(CommandType.NO_ARG) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
-        return build.printToClientPacket(
+        return printToClientPacket(
             "Information about collection:" +
                   "\n\tType: ${collectionManager.collection.javaClass.simpleName}" +
                   "\n\tSize: ${collectionManager.collection.size}" +
