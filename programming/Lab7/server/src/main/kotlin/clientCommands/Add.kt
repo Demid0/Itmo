@@ -13,9 +13,6 @@ class Add: ClientCommand(CommandType.OBJECT_ARG) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         val objectArg = caster.toRoute(arguments[0])
         collectionManager.collection.add(objectArg)
-        return builder.packet {
-            commandName = "print_to_client"
-            string ("Done")
-        }.wrapIntoArray()
+        return build.printToClientPacket("Done")
     }
 }

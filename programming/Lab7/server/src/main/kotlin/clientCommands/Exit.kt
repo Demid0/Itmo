@@ -19,13 +19,15 @@ class Exit: ClientCommand(CommandType.NO_ARG) {
         var fileWriter = PrintWriter(file.outputStream(), true)
         fileWriter.println(serializator.serialize(collection))
         fileWriter.close()
+
         //save info about collection
         file = File(collectionManager.getInfoFileName())
         fileWriter = PrintWriter(file.outputStream(), true)
         fileWriter.println(collectionManager.collection.javaClass.simpleName.lowercase())
         fileWriter.println(serializator.getChosenStrategy().javaClass.simpleName.lowercase())
         fileWriter.close()
-        return builder.packet {
+
+        return build.packet {
             commandName = "end_client_session"
         }.wrapIntoArray()
     }

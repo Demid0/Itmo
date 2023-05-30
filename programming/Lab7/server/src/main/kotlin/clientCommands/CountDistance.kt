@@ -13,18 +13,15 @@ import java.lang.Exception
  */
 class CountDistance(val compare: (a: Double, b: Double) -> Boolean): ClientCommand(CommandType.SINGLE_ARG) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
-        return builder.packet {
-            commandName = "print_to_client"
-            string (
-                try {
-                    val distance: Double = caster.toString(arguments[0]).toDouble()
-                    val counter = collectionManager.collection.filter { compare(it.getDistance(), distance) }.count()
-                    "$counter element(s)"
-                } catch (e: Exception) {
-                    "Wrong distance format"
-                }
-            )
-        }.wrapIntoArray()
+        return build.printToClientPacket(
+            try {
+                val distance: Double = caster.toString(arguments[0]).toDouble()
+                val counter = collectionManager.collection.filter { compare(it.getDistance(), distance) }.count()
+                "$counter element(s)"
+            } catch (e: Exception) {
+                "Wrong distance format"
+            }
+        )
     }
 
 }

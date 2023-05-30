@@ -34,5 +34,10 @@ class PacketBuilder {
         init.invoke()
         return arguments
     }
+    fun printToClient(string: String): PacketBuilder {
+        commandName = "print_to_client"
+        string (string)
+        return this
+    }
 }
 

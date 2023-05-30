@@ -12,7 +12,7 @@ import commandArgumentsAndTheirsComponents.CommandType
 class ExecuteScript: ClientCommand(CommandType.SINGLE_ARG) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         val file_name = caster.toString(arguments[0])
-        return builder.packet {
+        return build.packet {
             commandName = "read_from_file"
             string(file_name)
         }.wrapIntoArray()

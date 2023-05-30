@@ -3,7 +3,6 @@ package clientCommands
 import commandArgumentsAndTheirsComponents.CommandArgument
 import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
-import commandArgumentsAndTheirsComponents.MyString
 import java.util.NoSuchElementException
 /***
  * remove_first : удалить первый элемент из коллекции
@@ -12,15 +11,12 @@ import java.util.NoSuchElementException
  */
 class RemoveFirst: ClientCommand(CommandType.NO_ARG) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
-        return builder.packet {
-            commandName = "print_to_client"
-            string (
-                try {
-                    collectionManager.collection.remove(collectionManager.collection.first())
-                    "Done!"
-                }
-                catch (e: NoSuchElementException) { "Collection is empty" }
-            )
-        }.wrapIntoArray()
+        return build.printToClientPacket (
+            try {
+                collectionManager.collection.remove(collectionManager.collection.first())
+                "Done!"
+            }
+            catch (e: NoSuchElementException) { "Collection is empty" }
+        )
     }
 }

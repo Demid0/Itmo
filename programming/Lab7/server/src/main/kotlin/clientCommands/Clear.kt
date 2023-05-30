@@ -12,9 +12,6 @@ import commandArgumentsAndTheirsComponents.CommandType
 class Clear: ClientCommand(CommandType.NO_ARG) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         collectionManager.collection.clear()
-        return builder.packet {
-            commandName = "print_to_client"
-            string("Done!")
-        }.wrapIntoArray()
+        return build.printToClientPacket("Done!")
     }
 }

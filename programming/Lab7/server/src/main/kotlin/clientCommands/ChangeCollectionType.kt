@@ -12,20 +12,17 @@ import commandArgumentsAndTheirsComponents.CommandType
 class ChangeCollectionType: ClientCommand(CommandType.SINGLE_ARG) {
 
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
-        return builder.packet {
-            commandName = "print_to_client"
-            string (
-                try {
-                    val newType = caster.toString(arguments[0])
-                    collectionManager.changeType(newType)
-                    "Changed"
-                } catch (e: NullPointerException) {
-                    "Unsupported collection type\n${printSupportedTypes()}"
-                } catch (e: IndexOutOfBoundsException) {
-                    "Empty input\n${printSupportedTypes()}"
-                }
-            )
-        }.wrapIntoArray()
+        return build.printToClientPacket(
+            try {
+                val newType = caster.toString(arguments[0])
+                collectionManager.changeType(newType)
+                "Changed"
+            } catch (e: NullPointerException) {
+                "Unsupported collection type\n${printSupportedTypes()}"
+            } catch (e: IndexOutOfBoundsException) {
+                "Empty input\n${printSupportedTypes()}"
+            }
+        )
     }
 
     private fun printSupportedTypes() : String {

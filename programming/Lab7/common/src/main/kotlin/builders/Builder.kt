@@ -8,4 +8,5 @@ class Builder {
     fun string(init: MyStringBuilder.() -> Unit) = MyStringBuilder().apply(init).build()
     fun commandType(init: CommandTypeArgumentBuilder.() -> Unit) = CommandTypeArgumentBuilder().apply(init).build()
     fun packet(init: PacketBuilder.() -> Unit) = PacketBuilder().apply(init).build()
+    fun printToClientPacket(string: String) = PacketBuilder().printToClient(string).build().wrapIntoArray()
 }

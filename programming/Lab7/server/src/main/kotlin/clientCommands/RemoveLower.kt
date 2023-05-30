@@ -3,7 +3,6 @@ package clientCommands
 import commandArgumentsAndTheirsComponents.CommandArgument
 import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
-import commandArgumentsAndTheirsComponents.MyString
 
 /***
  * remove_lower {element} : удалить из коллекции все элементы, меньшие, чем заданный
@@ -14,9 +13,6 @@ class RemoveLower: ClientCommand(CommandType.OBJECT_ARG) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         val route = caster.toRoute(arguments[0])
         collectionManager.collection.removeAll { it.getDistance() < route.getDistance() }
-        return builder.packet {
-            commandName = "print_to_client"
-            string("Done!")
-        }.wrapIntoArray()
+        return build.printToClientPacket("Done!")
     }
 }

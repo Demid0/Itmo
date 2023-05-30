@@ -14,17 +14,11 @@ class AddIfMax: ClientCommand(CommandType.OBJECT_ARG) {
         val route = caster.toRoute(arguments[0])
         for (element in collectionManager.collection) {
             if (element.getDistance() >= route.getDistance()) {
-                return builder.packet {
-                    commandName = "print_to_client"
-                    string ("I didn't add it")
-                }.wrapIntoArray()
+                return build.printToClientPacket("I didn't add it")
             }
         }
         collectionManager.collection.add(route)
-        return builder.packet {
-            commandName = "print_to_client"
-            string ("Done!")
-        }.wrapIntoArray()
+        return build.printToClientPacket("Done!")
     }
 
 }

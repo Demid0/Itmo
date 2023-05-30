@@ -12,16 +12,13 @@ import commandArgumentsAndTheirsComponents.CommandType
 class Help: ClientCommand(CommandType.NO_ARG) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         val commands = ClientCommandInvoker().getCommands()
-        return builder.packet {
-            commandName = "print_to_client"
-            string(
-                if (commands.isEmpty()) "No commands"
-                else {
-                    var out = "You can use this commands:\n"
-                    commands.toSortedMap().forEach { out += it.key + "\n" }
-                    out.dropLast(1)
-                }
-            )
-        }.wrapIntoArray()
+        return build.printToClientPacket(
+            if (commands.isEmpty()) "No commands"
+            else {
+                var out = "You can use this commands:\n"
+                commands.toSortedMap().forEach { out += it.key + "\n" }
+                out.dropLast(1)
+            }
+        )
     }
 }

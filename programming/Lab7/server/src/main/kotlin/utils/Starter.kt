@@ -1,5 +1,6 @@
 package utils
 
+import builders.Builder
 import org.koin.core.component.KoinComponent
 import java.io.*
 import org.koin.core.component.inject
@@ -12,6 +13,7 @@ import commandArgumentsAndTheirsComponents.MyString
  */
 class Starter: KoinComponent {
     private val serializator: Serializator by inject()
+    private val builder: Builder by inject()
     fun downloadLastSystemCondition(collectionManager: CollectionManager) : Packet {
         try {
             val file = File(collectionManager.getInfoFileName())
@@ -31,9 +33,9 @@ class Starter: KoinComponent {
             serializator.changeStrategy(serializator.getStrategy(output[1])!!)
             collectionManager.changeType(output[0])
 
-            return Packet("print_to_client", arrayListOf(MyString("Last system condition downloaded successful")))
+            return builder.printToClientPacket("Last system condition downloaded successful")[0]
         } catch (_: Exception) {
-            return Packet("print_to_client", arrayListOf(MyString("Can't found info about last system condition. Will use default serialization strategy and default collection type.")))
+            return builder.printToClientPacket("Can't found info about last system condition. Will use default serialization strategy and default collection type.")[0]
         }
     }
 

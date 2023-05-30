@@ -20,7 +20,7 @@ class Asker: KoinComponent {
     private val readerManager : ReaderManager by inject()
     private val writer: PrintWriter = writerManager.get()
     private val reader: BufferedReader = readerManager.get()
-    private val builder = Builder()
+    private val builder: Builder by inject()
 
     private fun <T> ask(
         printHint: String,
