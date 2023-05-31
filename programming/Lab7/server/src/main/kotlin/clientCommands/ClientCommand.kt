@@ -1,12 +1,9 @@
 package clientCommands
 
-import utils.CollectionManager
 import utils.*
+import commandArgumentsAndTheirsComponents.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import commandArgumentsAndTheirsComponents.CommandArgument
-import commandArgumentsAndTheirsComponents.CommandType
-import commandArgumentsAndTheirsComponents.Route
 
 /***
  * Абстрактный класс команды
@@ -14,7 +11,7 @@ import commandArgumentsAndTheirsComponents.Route
  * @since 1.0
  */
 //@Serializable
-abstract class ClientCommand(commandType: CommandType): Command(commandType), KoinComponent {
+abstract class ClientCommand(commandType: CommandType, val visibility: Visibility): Command(commandType), KoinComponent {
     var collectionManager = CollectionManager("default")
     internal val serializator: Serializator by inject()
     internal val clientCommandInvoker: ClientCommandInvoker by inject()

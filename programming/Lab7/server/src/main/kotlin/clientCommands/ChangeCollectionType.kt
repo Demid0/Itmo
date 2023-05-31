@@ -4,13 +4,14 @@ import builders.printToClientPacket
 import commandArgumentsAndTheirsComponents.CommandArgument
 import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
+import commandArgumentsAndTheirsComponents.Visibility
 
 /***
  * change_collection_type type : поменять тип коллекции
  * @author Demid0
  * @since 1.0
  */
-class ChangeCollectionType: ClientCommand(CommandType.SINGLE_ARG) {
+class ChangeCollectionType: ClientCommand(CommandType.SINGLE_ARG, Visibility.ONLY_LOGGED_USER) {
 
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         return printToClientPacket(

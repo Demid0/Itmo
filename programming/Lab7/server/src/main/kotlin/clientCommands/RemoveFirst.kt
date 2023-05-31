@@ -4,13 +4,14 @@ import builders.printToClientPacket
 import commandArgumentsAndTheirsComponents.CommandArgument
 import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
+import commandArgumentsAndTheirsComponents.Visibility
 import java.util.NoSuchElementException
 /***
  * remove_first : удалить первый элемент из коллекции
  * @author Demid0
  * @since 1.0
  */
-class RemoveFirst: ClientCommand(CommandType.NO_ARG) {
+class RemoveFirst: ClientCommand(CommandType.NO_ARG, Visibility.ONLY_LOGGED_USER) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         return printToClientPacket (
             try {

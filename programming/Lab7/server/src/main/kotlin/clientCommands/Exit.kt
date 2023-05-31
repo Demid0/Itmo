@@ -4,6 +4,7 @@ import builders.packet
 import commandArgumentsAndTheirsComponents.CommandArgument
 import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
+import commandArgumentsAndTheirsComponents.Visibility
 import java.io.File
 import java.io.PrintWriter
 
@@ -12,7 +13,7 @@ import java.io.PrintWriter
  * @author Demid0
  * @since 1.0
  */
-class Exit: ClientCommand(CommandType.NO_ARG) {
+class Exit: ClientCommand(CommandType.NO_ARG, Visibility.ALL_USERS) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         //save collection
         val collection = collectionManager.collection

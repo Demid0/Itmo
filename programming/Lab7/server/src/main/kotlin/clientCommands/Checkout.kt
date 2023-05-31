@@ -4,9 +4,10 @@ import builders.packet
 import builders.printToClientPacket
 import commandArgumentsAndTheirsComponents.CommandArgument
 import commandArgumentsAndTheirsComponents.CommandType
+import commandArgumentsAndTheirsComponents.Visibility
 import utils.Packet
 
-class Checkout : ClientCommand(CommandType.NO_ARG) {
+class Checkout : ClientCommand(CommandType.NO_ARG, Visibility.ONLY_LOGGED_USER) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         val ans = packet { commandName = "clear_client_commands" }.wrapIntoArray()
         val existingCommands = clientCommandInvoker.getCommands()

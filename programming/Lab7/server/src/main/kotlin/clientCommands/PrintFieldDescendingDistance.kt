@@ -4,13 +4,14 @@ import builders.printToClientPacket
 import commandArgumentsAndTheirsComponents.CommandArgument
 import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
+import commandArgumentsAndTheirsComponents.Visibility
 
 /***
  * print_field_descending_distance : вывести значения поля distance всех элементов в порядке убывания
  * @author Demid0
  * @since 1.0
  */
-class PrintFieldDescendingDistance: ClientCommand(CommandType.NO_ARG) {
+class PrintFieldDescendingDistance: ClientCommand(CommandType.NO_ARG, Visibility.ONLY_LOGGED_USER) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         val collection = collectionManager.collection.sortedByDescending { it.getDistance() }
         return printToClientPacket(

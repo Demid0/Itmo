@@ -4,13 +4,14 @@ import builders.printToClientPacket
 import commandArgumentsAndTheirsComponents.CommandArgument
 import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
+import commandArgumentsAndTheirsComponents.Visibility
 
 /***
  * show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении
  * @author Demid0
  * @since 1.0
  */
-class Show: ClientCommand(CommandType.NO_ARG) {
+class Show: ClientCommand(CommandType.NO_ARG, Visibility.ONLY_LOGGED_USER) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         val collection = collectionManager.collection
         return printToClientPacket (
