@@ -6,6 +6,8 @@ import utils.Packet
 class PacketBuilder {
     var commandName: String? = null
     var arguments: ArrayList<CommandArgument> = arrayListOf()
+    var clientName: String = "unlogged_user"
+    var password: String = "123"
 
     fun build(): Packet {
         val packet = Packet(commandName!!, arguments)
@@ -18,6 +20,13 @@ class PacketBuilder {
         return ans
     }
     fun commandType(c: CommandType) { commandType { it = c } }
+
+    fun visibility(init: VisibilityArgumentBuilder.() -> Unit) : VisibilityArgument {
+        val ans = builders.visibility(init)
+        arguments.add(ans)
+        return ans
+    }
+    fun visibility(v: Visibility) { visibility { it = v } }
     fun route(init: RouteBuilder.() -> Unit) : Route {
         val ans = builders.route(init)
         arguments.add(ans)

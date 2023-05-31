@@ -3,6 +3,7 @@ package utils
 import builders.coordinates
 import builders.location
 import builders.route
+import builders.string
 import commandArgumentsAndTheirsComponents.Location
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -79,4 +80,6 @@ class Asker: KoinComponent {
         return if (ans == "yes") null
         else askLocation(Lname)
     }
+    fun askLogin() = ask("Enter the username", ToString) { it != "" }
+    fun askPassword() = ask("Enter the password", ToString) { it != "" }
 }

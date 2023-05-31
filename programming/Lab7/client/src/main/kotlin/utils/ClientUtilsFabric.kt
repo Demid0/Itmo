@@ -1,6 +1,7 @@
 package utils
 
 import clientCommands.utils.CommandParser
+import commandArgumentsAndTheirsComponents.Visibility
 import org.koin.core.component.KoinComponent
 import org.koin.dsl.module
 import java.io.BufferedReader
@@ -30,6 +31,8 @@ val clientKoinModule = module {
     single { ClientMessageHandler() }
 
     single { Caster() }
+
+    single { Condition(Visibility.UNLOGGED_USER) }
 
 }
 

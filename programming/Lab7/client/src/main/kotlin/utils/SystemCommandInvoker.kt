@@ -11,6 +11,7 @@ class SystemCommandInvoker {
         addCommand("clear_client_commands", ClearClientCommands())
         addCommand("read_from_file", ReadFromFile())
         addCommand("end_client_session", EndClientSession())
+        addCommand("set_user", SetUser())
     }
 
     fun invoke(listOfPacket: ArrayList<Packet>) {

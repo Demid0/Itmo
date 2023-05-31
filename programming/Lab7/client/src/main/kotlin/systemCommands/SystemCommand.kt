@@ -3,12 +3,9 @@ package systemCommands
 import clientCommands.utils.CommandParser
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import utils.Caster
 import commandArgumentsAndTheirsComponents.CommandArgument
 import commandArgumentsAndTheirsComponents.CommandType
-import utils.Command
-import utils.ReaderManager
-import utils.WriterManager
+import utils.*
 import java.io.BufferedReader
 
 abstract class SystemCommand(commandType: CommandType): Command(commandType), KoinComponent {
@@ -18,5 +15,6 @@ abstract class SystemCommand(commandType: CommandType): Command(commandType), Ko
     internal val commandParser : CommandParser by inject()
     internal val writerManager : WriterManager by inject()
     internal val readerManager : ReaderManager by inject()
+    internal val condition : Condition by inject()
     abstract fun execute(arguments: ArrayList<CommandArgument>)
 }

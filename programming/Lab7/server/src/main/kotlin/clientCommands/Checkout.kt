@@ -5,13 +5,15 @@ import builders.printToClientPacket
 import commandArgumentsAndTheirsComponents.CommandArgument
 import commandArgumentsAndTheirsComponents.CommandType
 import commandArgumentsAndTheirsComponents.Visibility
+import commandArgumentsAndTheirsComponents.VisibilityArgument
 import utils.Packet
 
-class Checkout : ClientCommand(CommandType.NO_ARG, Visibility.ONLY_LOGGED_USER) {
+class Checkout : ClientCommand(CommandType.VISIBILITY_ARG, Visibility.ALL_USERS) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
+        val currentVisibilityLevel: Visibility = cast(arguments)
         val ans = packet { commandName = "clear_client_commands" }.wrapIntoArray()
         val existingCommands = clientCommandInvoker.getCommands()
-        existingCommands.forEach { command ->
+        existingCommands.filter { it.value.visibility == Visibility.ALL_USERS || it.value.visibility == currentVisibilityLevel }.forEach { command ->
             ans.add(
                 packet {
                     commandName = "add_client_command"
@@ -22,7 +24,6 @@ class Checkout : ClientCommand(CommandType.NO_ARG, Visibility.ONLY_LOGGED_USER) 
                 }
             )
         }
-        ans.addAll(printToClientPacket("Done!"))
         return ans
     }
 }

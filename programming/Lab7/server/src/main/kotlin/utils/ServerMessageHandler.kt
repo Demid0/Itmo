@@ -1,27 +1,31 @@
 package utils
 
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import java.net.DatagramPacket
 import java.net.DatagramSocket
 import java.util.logging.Logger
 
-class ServerMessageHandler: Runnable {
+class ServerMessageHandler: Runnable, KoinComponent {
     private val serializator = Serializator()
     private val logger = Logger.getLogger("Handler logger")
     private val socket = DatagramSocket(1488)
-    private val clients = HashMap<String, ClientAssistant>()
+    private val clients: HashMap<String, ClientAssistant> by inject()
+
+    init {
+        val unlogged_client = "unlogged_user"
+        val unlogged_password = "123"
+        clients[unlogged_client] = ClientAssistant(unlogged_client, unlogged_password)
+    }
 
     override fun run() {
         val byteArray = ByteArray(65535)
         val packet = DatagramPacket(byteArray, byteArray.size)
         receiveMessage(packet)
         val query = unpackMessage(packet)
-        val clientName = query.first().clientName
-        if (clients[clientName] == null) {
-            logger.info("New client: $clientName")
-            clients[clientName] = ClientAssistant(clientName)
-        }
-        logger.info("Message from client $clientName")
-        val client = clients[clientName]!!
+        logger.info("Message from client ${query.first().clientName}")
+        val client = clients[query.first().clientName]!!
+        if (client.password != query.first().password) return
         val out = client.executeQuery(query)
         logger.info("Answer to client \"$out\"")
         sendMessage(packMessage(out, packet))

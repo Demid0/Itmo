@@ -5,8 +5,6 @@ import commandArgumentsAndTheirsComponents.CommandArgument
 import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
 import commandArgumentsAndTheirsComponents.Visibility
-import java.io.File
-import java.io.PrintWriter
 
 /***
  * exit : завершить программу (без сохранения в файл)
@@ -15,20 +13,6 @@ import java.io.PrintWriter
  */
 class Exit: ClientCommand(CommandType.NO_ARG, Visibility.ALL_USERS) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
-        //save collection
-        val collection = collectionManager.collection
-        var file = File(collectionManager.getFileName())
-        var fileWriter = PrintWriter(file.outputStream(), true)
-        fileWriter.println(serializator.serialize(collection))
-        fileWriter.close()
-
-        //save info about collection
-        file = File(collectionManager.getInfoFileName())
-        fileWriter = PrintWriter(file.outputStream(), true)
-        fileWriter.println(collectionManager.collection.javaClass.simpleName.lowercase())
-        fileWriter.println(serializator.getChosenStrategy().javaClass.simpleName.lowercase())
-        fileWriter.close()
-
         return packet {
             commandName = "end_client_session"
         }.wrapIntoArray()

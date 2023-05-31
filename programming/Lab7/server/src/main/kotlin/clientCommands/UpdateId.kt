@@ -12,7 +12,7 @@ import java.lang.Exception
  * @author Demid0
  * @since 1.0
  */
-class UpdateId: ClientCommand(CommandType.MIXED_ARG, Visibility.ONLY_LOGGED_USER) {
+class UpdateId: ClientCommand(CommandType.MIXED_ARG, Visibility.LOGGED_USER) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         val pair: Pair<String, Route> = cast(arguments)
         val id: Long = pair.first.toLong()

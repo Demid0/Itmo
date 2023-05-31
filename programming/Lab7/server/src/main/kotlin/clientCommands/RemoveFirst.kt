@@ -11,7 +11,7 @@ import java.util.NoSuchElementException
  * @author Demid0
  * @since 1.0
  */
-class RemoveFirst: ClientCommand(CommandType.NO_ARG, Visibility.ONLY_LOGGED_USER) {
+class RemoveFirst: ClientCommand(CommandType.NO_ARG, Visibility.LOGGED_USER) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         return printToClientPacket (
             try {

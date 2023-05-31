@@ -11,14 +11,15 @@ import commandArgumentsAndTheirsComponents.Visibility
  * @author Demid0
  * @since 1.0
  */
-class Help: ClientCommand(CommandType.NO_ARG, Visibility.ALL_USERS) {
+class Help: ClientCommand(CommandType.VISIBILITY_ARG, Visibility.ALL_USERS) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
+        val currentVisibilityLevel: Visibility = cast(arguments)
         val commands = ClientCommandInvoker().getCommands()
         return printToClientPacket(
             if (commands.isEmpty()) "No commands"
             else {
                 var out = "You can use this commands:\n"
-                commands.toSortedMap().forEach { out += it.key + "\n" }
+                commands.toSortedMap().filter{ it.value.visibility == Visibility.ALL_USERS || it.value.visibility == currentVisibilityLevel }.forEach { out += it.key + "\n" }
                 out.dropLast(1)
             }
         )

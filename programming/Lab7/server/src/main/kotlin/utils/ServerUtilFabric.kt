@@ -13,6 +13,8 @@ import java.io.PrintWriter
  */
 val serverKoinModule = module {
 
+    single { HashMap<String, ClientAssistant>() }
+
     single { Starter() }
 
     single { WriterManager(PrintWriter(System.out, true)) }
@@ -29,6 +31,8 @@ val serverKoinModule = module {
 
     single { Caster() }
 
+
+    single { CollectionManager() }
 }
 
 /***

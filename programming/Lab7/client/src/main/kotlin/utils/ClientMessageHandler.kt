@@ -1,5 +1,7 @@
 package utils
 
+import builders.packet
+import commandArgumentsAndTheirsComponents.Visibility
 import exceptions.SystemCommandInvocationException
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -13,21 +15,25 @@ class ClientMessageHandler: Runnable, KoinComponent {
     private val writerManager: WriterManager by inject()
     private val readerManager: ReaderManager by inject()
     private val systemCommandInvoker: SystemCommandInvoker by inject()
-    private var username: String = ""
     private val channel = DatagramChannel.open()
     private val serverAddress = InetSocketAddress("localhost", 1488)
-
+    private val condition: Condition by inject()
     override fun run() {
         sendRecieveInvoke(getPacket())
     }
 
     fun sendRecieveInvoke(packet: Packet) {
-        packet.clientName = username
+        if (condition.get() != Visibility.UNLOGGED_USER) {
+            packet.clientName = condition.clientName
+            packet.password = condition.password
+        }
         val byteBuffer = packMessage(packet.wrapIntoArray())
         val ansBuffer = ByteBuffer.wrap(ByteArray(65535))
         sendMessage(byteBuffer, serverAddress)
         receiveMessage(ansBuffer)
         val ans = unpackMessage(ansBuffer)
+        condition.clientName = ans.first().clientName
+        condition.password = ans.first().password
         try {
             systemCommandInvoker.invoke(ans)
         } catch (e: SystemCommandInvocationException) {
@@ -35,7 +41,6 @@ class ClientMessageHandler: Runnable, KoinComponent {
         }
     }
 
-    fun checkout() = Packet("checkout", arrayListOf())
     fun getPacket(): Packet {
         var packet = app.run(readerManager, writerManager)
         while (packet == null) packet = app.run(readerManager, writerManager)
@@ -58,10 +63,12 @@ class ClientMessageHandler: Runnable, KoinComponent {
         channel.receive(byteBuffer)
     }
 
-    fun login() {
-        writerManager.get().println("Enter username:")
-        writerManager.get().flush()
-        while(username == "") username = readerManager.get().readLine()
+    fun setPossibleCommands() {
+        sendRecieveInvoke(packet {
+            commandName = "checkout"
+            clientName = condition.clientName
+            visibility(condition.get())
+        })
     }
 
 }

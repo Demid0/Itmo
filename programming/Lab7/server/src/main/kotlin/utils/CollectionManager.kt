@@ -16,12 +16,10 @@ import commandArgumentsAndTheirsComponents.Route
  * @param infoFileName
  * Имя файла, в который сохраняется информация о коллекции
  */
-class CollectionManager(clientName: String) {
+class CollectionManager {
     @Serializable
     var collection: MutableCollection<Route> = ArrayDeque()
     private var supportedCollectionTypes: HashMap<String, MutableCollection<Route>> = hashMapOf()
-    private var fileName = System.getenv("lab5_filename") + "/" + clientName
-    private var infoFileName = System.getenv("lab5_collection_info_file") + "/" + clientName
 
 
     init {
@@ -39,8 +37,6 @@ class CollectionManager(clientName: String) {
     fun addSupportedCollectionType(name: String, collection: MutableCollection<Route>) {
         supportedCollectionTypes[name] = collection
     }
-    fun getFileName() = fileName
-    fun getInfoFileName() = infoFileName
     fun getSupportedCollectionTypes() = supportedCollectionTypes
 
 }

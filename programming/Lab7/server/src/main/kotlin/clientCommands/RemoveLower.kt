@@ -12,7 +12,7 @@ import commandArgumentsAndTheirsComponents.Visibility
  * @author Demid0
  * @since 1.0
  */
-class RemoveLower: ClientCommand(CommandType.OBJECT_ARG, Visibility.ONLY_LOGGED_USER) {
+class RemoveLower: ClientCommand(CommandType.OBJECT_ARG, Visibility.LOGGED_USER) {
     override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
         val route: Route = cast(arguments)
         collectionManager.collection.removeAll { it.getDistance() < route.getDistance() }

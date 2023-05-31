@@ -8,5 +8,7 @@ enum class CommandType {
     SINGLE_ARG,
     OBJECT_ARG,
     MIXED_ARG,
-    COMMAND_ARG
+    COMMAND_ARG,
+    TWO_STRINGS_ARG,
+    VISIBILITY_ARG
 }
