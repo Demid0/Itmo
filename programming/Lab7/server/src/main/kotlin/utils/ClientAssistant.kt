@@ -12,6 +12,6 @@ class ClientAssistant(private val clientName: String, val password: String): Koi
 
     fun executeQuery(packets: ArrayList<Packet>) : ArrayList<Packet> {
         logger.info("Executing query to $clientName")
-        return clientCommandInvoker.invoke(packets, collectionManager)
+        return clientCommandInvoker.invoke(packets)
     }
 }

@@ -1,7 +1,6 @@
 package clientCommands
 
 import builders.packet
-import builders.visibility
 import commandArgumentsAndTheirsComponents.CommandArgument
 import commandArgumentsAndTheirsComponents.CommandType
 import commandArgumentsAndTheirsComponents.Visibility

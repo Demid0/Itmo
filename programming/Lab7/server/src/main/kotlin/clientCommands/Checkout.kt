@@ -1,11 +1,9 @@
 package clientCommands
 
 import builders.packet
-import builders.printToClientPacket
 import commandArgumentsAndTheirsComponents.CommandArgument
 import commandArgumentsAndTheirsComponents.CommandType
 import commandArgumentsAndTheirsComponents.Visibility
-import commandArgumentsAndTheirsComponents.VisibilityArgument
 import utils.Packet
 
 class Checkout : ClientCommand(CommandType.VISIBILITY_ARG, Visibility.ALL_USERS) {

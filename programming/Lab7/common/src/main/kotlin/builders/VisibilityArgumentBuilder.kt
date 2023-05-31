@@ -1,7 +1,5 @@
 package builders
 
-import commandArgumentsAndTheirsComponents.CommandType
-import commandArgumentsAndTheirsComponents.CommandTypeArgument
 import commandArgumentsAndTheirsComponents.Visibility
 import commandArgumentsAndTheirsComponents.VisibilityArgument
 
