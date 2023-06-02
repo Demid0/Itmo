@@ -8,7 +8,6 @@ fun main(args: Array<String>) {
     }
     val clientUtilFabric = ClientUtilsFabric()
     val clientMessageHandler: ClientMessageHandler by clientUtilFabric.inject()
-    clientMessageHandler.setPossibleCommands()
     while (true) {
         clientMessageHandler.run()
     }

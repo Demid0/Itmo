@@ -2,6 +2,7 @@ package utils
 
 import clientCommands.*
 import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 /***
  * Класс, вызывающий команды
@@ -12,6 +13,7 @@ import org.koin.core.component.KoinComponent
  */
 class ClientCommandInvoker: KoinComponent {
     private val commands = HashMap<String, ClientCommand>()
+    private val tokens: HashMap<Long, String> by inject()
 
     init {
         addCommand("add", Add())
@@ -40,7 +42,9 @@ class ClientCommandInvoker: KoinComponent {
         val ans = ArrayList<Packet>()
         listOfPackets.forEach { packet ->
             val command = commands[packet.commandName]!!
-            ans.addAll(command.execute(packet.arguments, user_id))
+            val out = command.execute(packet.arguments, user_id)
+            out.forEach { it.token = tokens[user_id].toString() }
+            ans.addAll(out)
         }
         return ans
     }

@@ -13,6 +13,13 @@ class CommandParser: KoinComponent {
     private var commands: HashMap<String, CommandType> = HashMap()
     private val condition: Condition by inject()
 
+    init {
+        addCommand("help", CommandType.NO_ARG)
+        addCommand("checkout", CommandType.NO_ARG)
+        addCommand("exit", CommandType.NO_ARG)
+        addCommand("login", CommandType.TWO_STRINGS_ARG)
+        addCommand("sign_up", CommandType.TWO_STRINGS_ARG)
+    }
     fun getCommands() = commands
 
     fun addCommand(name: String, command: CommandType) {

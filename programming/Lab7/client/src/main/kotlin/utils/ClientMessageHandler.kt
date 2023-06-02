@@ -8,7 +8,7 @@ import java.net.InetSocketAddress
 import java.nio.ByteBuffer
 import java.nio.channels.DatagramChannel
 
-class ClientMessageHandler: Runnable, KoinComponent {
+class ClientMessageHandler: KoinComponent {
     private val serializator: Serializator by inject()
     private val app: App by inject()
     private val writerManager: WriterManager by inject()
@@ -17,7 +17,7 @@ class ClientMessageHandler: Runnable, KoinComponent {
     private val channel = DatagramChannel.open()
     private val serverAddress = InetSocketAddress("localhost", 1488)
     private val condition: Condition by inject()
-    override fun run() {
+    fun run() {
         sendRecieveInvoke(getPacket())
     }
 
