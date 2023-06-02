@@ -6,8 +6,6 @@ import java.util.logging.Logger
 
 class ClientAssistant(private val user_id: Long): KoinComponent {
     private val clientCommandInvoker: ClientCommandInvoker by inject()
-    private val collectionManager: CollectionManager by inject()
-    private val starter: Starter by inject()
     private val logger = Logger.getLogger("Handler logger")
 
     fun executeQuery(packets: ArrayList<Packet>): ArrayList<Packet> {

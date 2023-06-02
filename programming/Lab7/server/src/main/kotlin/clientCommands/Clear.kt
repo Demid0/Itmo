@@ -13,7 +13,7 @@ import commandArgumentsAndTheirsComponents.Visibility
  */
 class Clear: ClientCommand(CommandType.NO_ARG, Visibility.LOGGED_USER) {
     override fun execute(arguments: ArrayList<CommandArgument>, user_id: Long): ArrayList<Packet> {
-        collectionManager.collection.clear()
-        return printToClientPacket("Done!")
+        if (dbHandler.clearCollection(user_id)) collectionManager.collection.clear()
+        return printToClientPacket("Removed all your Routes")
     }
 }

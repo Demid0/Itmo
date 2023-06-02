@@ -33,7 +33,7 @@ class DBHandler {
 
     fun setUser(username: String, password: String): Long {
         return try {
-            val query = "insert into users (username, password) values ('$username', '$password') returning id";
+            val query = "insert into users (username, password) values ('$username', '$password') returning id"
             val res = executeQuery(query)
             res.getLong("id")
         } catch (e: SQLException) {

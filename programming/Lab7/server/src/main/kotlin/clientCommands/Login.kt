@@ -7,7 +7,6 @@ import commandArgumentsAndTheirsComponents.CommandType
 import commandArgumentsAndTheirsComponents.Visibility
 import commandArgumentsAndTheirsComponents.VisibilityArgument
 import utils.ClientAssistant
-import utils.DBHandler
 import utils.Packet
 
 class Login: ClientCommand(CommandType.TWO_STRINGS_ARG, Visibility.UNLOGGED_USER) {
