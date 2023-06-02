@@ -9,7 +9,7 @@ class ClientAssistant(private val user_id: Long): KoinComponent {
     private val logger = Logger.getLogger("Handler logger")
 
     fun executeQuery(packets: ArrayList<Packet>): ArrayList<Packet> {
-        logger.info("Executing query to $user_id")
+        logger.info("Executing query to user (user_id=$user_id)")
         return clientCommandInvoker.invoke(packets, user_id)
     }
 }

@@ -1,11 +1,15 @@
 package utils
 
-import java.math.BigInteger
+import java.lang.StringBuilder
 import java.security.MessageDigest
 
 class Tokenizer {
-    fun md5(input:String): String {
-        val md = MessageDigest.getInstance("MD5")
-        return BigInteger(1, md.digest(input.toByteArray())).toString(16).padStart(32, '0')
+    private fun hashing(string: String, type: String) : String {
+        val bytes = MessageDigest.getInstance(type).digest(string.toByteArray())
+        return with(StringBuilder()) {
+            bytes.forEach { append(String.format("%02X", it)) }
+            toString().lowercase()
+        }
     }
+    fun md5(input: String): String = hashing(input, "MD5")
 }

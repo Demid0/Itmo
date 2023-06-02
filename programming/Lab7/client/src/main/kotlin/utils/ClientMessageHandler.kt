@@ -1,7 +1,6 @@
 package utils
 
 import builders.packet
-import commandArgumentsAndTheirsComponents.Visibility
 import exceptions.SystemCommandInvocationException
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -29,9 +28,6 @@ class ClientMessageHandler: Runnable, KoinComponent {
         sendMessage(byteBuffer, serverAddress)
         receiveMessage(ansBuffer)
         val ans = unpackMessage(ansBuffer)
-        if (condition.get() == Visibility.UNLOGGED_USER) {
-            condition.token = ans.first().token
-        }
         try {
             systemCommandInvoker.invoke(ans)
         } catch (e: SystemCommandInvocationException) {
