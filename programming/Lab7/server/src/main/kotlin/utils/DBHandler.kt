@@ -155,9 +155,6 @@ class DBHandler {
             val from_id = if (res.getString("from_id") == null) null else res.getString("from_id")
             val to_id = res.getString("to_id")
             val coordinates_id = res.getString("coordinates_id")
-            println(coordinates_id)
-            println(to_id)
-            println(from_id)
             var res1: ResultSet
             ans.add(
                 route {

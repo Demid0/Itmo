@@ -4,9 +4,15 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.net.DatagramPacket
 import java.net.DatagramSocket
+import java.net.SocketAddress
+import java.util.concurrent.ArrayBlockingQueue
+import java.util.concurrent.Executors
+import java.util.concurrent.ForkJoinPool
 import java.util.logging.Logger
 
-class ServerMessageHandler: Runnable, KoinComponent {
+class ServerMessageHandler: KoinComponent {
+    private val queryPool = ArrayBlockingQueue<Pair<ArrayList<Packet>, SocketAddress>>(10000)
+    private val outPool = ArrayBlockingQueue<Pair<ArrayList<Packet>, SocketAddress>>(10000)
     private val serializator = Serializator()
     private val logger = Logger.getLogger("Handler logger")
     private val socket = DatagramSocket(1488)
@@ -17,45 +23,67 @@ class ServerMessageHandler: Runnable, KoinComponent {
         clients[unlogged_client] = ClientAssistant(-32132)
     }
 
-    override fun run() {
-        val byteArray = ByteArray(65535)
-        val packet = DatagramPacket(byteArray, byteArray.size)
-        receiveMessage(packet)
-        val query = unpackMessage(packet)
-        val query_from = query.first().token
-        logger.info("Message from client $query_from")
-        if (!clients.contains(query_from)) {
-            println("Aboba")
-            return
+    fun executeQuery() {
+        while (true) {
+            if (queryPool.isNotEmpty()) {
+                Thread().start().run {
+                    val query = queryPool.first()
+                    queryPool.remove(query)
+                    val query_from = query.first.first().token
+                    if (!clients.contains(query_from)) return
+                    val out = clients[query_from]!!.executeQuery(query.first)
+                    outPool.add(out to query.second)
+                }
+            }
         }
-        val out = clients[query_from]!!.executeQuery(query)
-        logger.info("Answer to client \"$out\"")
-        sendMessage(packMessage(out, packet))
     }
 
-    fun receiveMessage(datagramPacket: DatagramPacket) {
-        socket.receive(datagramPacket)
+    fun receiveMessage() {
+        while (true) {
+            Executors.newCachedThreadPool().run {
+                val byteArray = ByteArray(65535)
+                val datagramPacket = DatagramPacket(byteArray, byteArray.size)
+                socket.receive(datagramPacket)
+                val address = datagramPacket.socketAddress
+                val query = unpackMessage(datagramPacket)
+                val query_from = query.first().token
+                logger.info("Message from client $query_from")
+                queryPool.add(query to address)
+            }
+        }
+    }
+    fun sendMessage() {
+        while (true) {
+            if (outPool.isNotEmpty()) {
+                ForkJoinPool.commonPool().run {
+                    val out = outPool.first()
+                    outPool.remove(out)
+                    logger.info("Sending answer to ${out.first.first().token}")
+                    val datagramPacket = packMessage(out.first, out.second)
+                    socket.send(datagramPacket)
+                }
+            }
+        }
     }
 
-    fun unpackMessage(datagramPacket: DatagramPacket) : ArrayList<Packet> {
+    private fun unpackMessage(datagramPacket: DatagramPacket) : ArrayList<Packet> {
         return deserializeMessage(String(datagramPacket.data, 0, datagramPacket.length))
     }
 
-    fun packMessage(packets: ArrayList<Packet>, packet: DatagramPacket): DatagramPacket {
-        val byteArray = serializeMessage(packets).toByteArray()
-        packet.setData(byteArray, 0, byteArray.size)
-        return packet
+    private fun packMessage(packets: ArrayList<Packet>, address: SocketAddress): DatagramPacket {
+        var byteArray = ByteArray(65535)
+        val datagramPacket = DatagramPacket(byteArray, byteArray.size)
+        byteArray = serializeMessage(packets).toByteArray()
+        datagramPacket.setData(byteArray, 0, byteArray.size)
+        datagramPacket.socketAddress = address
+        return datagramPacket
     }
 
-    fun sendMessage(datagramPacket: DatagramPacket) {
-        socket.send(datagramPacket)
-    }
-
-    fun serializeMessage(packets: ArrayList<Packet>) : String {
+    private fun serializeMessage(packets: ArrayList<Packet>) : String {
         return serializator.serialize(packets)
     }
 
-    fun deserializeMessage(message: String) : ArrayList<Packet> {
+    private fun deserializeMessage(message: String) : ArrayList<Packet> {
         return serializator.deserialize(message, ArrayList<Packet>())
     }
 }

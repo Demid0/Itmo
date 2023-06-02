@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 import commandArgumentsAndTheirsComponents.Route
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import java.util.concurrent.LinkedBlockingDeque
 
 /***
  * Класс, работающий с коллекцией
@@ -20,7 +21,7 @@ import org.koin.core.component.inject
  */
 class CollectionManager: KoinComponent {
     @Serializable
-    var collection: MutableCollection<Route> = ArrayDeque()
+    var collection: MutableCollection<Route> = LinkedBlockingDeque()
     private var supportedCollectionTypes: HashMap<String, MutableCollection<Route>> = hashMapOf()
     private val dbHandler: DBHandler by inject()
 
