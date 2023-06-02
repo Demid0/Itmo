@@ -20,9 +20,9 @@ class SignUp: ClientCommand(CommandType.TWO_STRINGS_ARG, Visibility.UNLOGGED_USE
         clients[token] = ClientAssistant(new_user_id)
         tokens[new_user_id] = token
         val ans = packet {
-            this.token = token
             commandName = "set_user"
             visibility(Visibility.LOGGED_USER)
+            string(token)
         }.wrapIntoArray()
         ans.addAll(Checkout().execute(arrayListOf(VisibilityArgument(Visibility.LOGGED_USER)), new_user_id))
         return ans
