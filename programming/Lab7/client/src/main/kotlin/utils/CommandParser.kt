@@ -14,8 +14,8 @@ class CommandParser: KoinComponent {
     private val condition: Condition by inject()
 
     init {
-        addCommand("help", CommandType.NO_ARG)
-        addCommand("checkout", CommandType.NO_ARG)
+        addCommand("help", CommandType.VISIBILITY_ARG)
+        addCommand("checkout", CommandType.VISIBILITY_ARG)
         addCommand("exit", CommandType.NO_ARG)
         addCommand("login", CommandType.TWO_STRINGS_ARG)
         addCommand("sign_up", CommandType.TWO_STRINGS_ARG)

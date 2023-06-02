@@ -15,8 +15,6 @@ val serverKoinModule = module {
 
     single { HashMap<String, ClientAssistant>() }
 
-    single { Starter() }
-
     single { WriterManager(PrintWriter(System.out, true)) }
 
     single { ReaderManager(BufferedReader(InputStreamReader(System.`in`))) }

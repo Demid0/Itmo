@@ -24,7 +24,10 @@ class ServerMessageHandler: Runnable, KoinComponent {
         val query = unpackMessage(packet)
         val query_from = query.first().token
         logger.info("Message from client $query_from")
-        if (!clients.contains(query_from)) return
+        if (!clients.contains(query_from)) {
+            println("Aboba")
+            return
+        }
         val out = clients[query_from]!!.executeQuery(query)
         logger.info("Answer to client \"$out\"")
         sendMessage(packMessage(out, packet))

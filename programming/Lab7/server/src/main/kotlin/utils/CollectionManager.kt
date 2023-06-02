@@ -2,6 +2,8 @@ package utils
 
 import kotlinx.serialization.Serializable
 import commandArgumentsAndTheirsComponents.Route
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 /***
  * Класс, работающий с коллекцией
@@ -16,15 +18,16 @@ import commandArgumentsAndTheirsComponents.Route
  * @param infoFileName
  * Имя файла, в который сохраняется информация о коллекции
  */
-class CollectionManager {
+class CollectionManager: KoinComponent {
     @Serializable
     var collection: MutableCollection<Route> = ArrayDeque()
     private var supportedCollectionTypes: HashMap<String, MutableCollection<Route>> = hashMapOf()
-
+    private val dbHandler: DBHandler by inject()
 
     init {
         addSupportedCollectionType("arraylist", ArrayList())
         addSupportedCollectionType("arraydeque", ArrayDeque())
+        collection = dbHandler.downloadCurrentCollection()
     }
     fun changeType(newType: String) {
         if (collection == getSupportedCollectionTypes()[newType]!!) return

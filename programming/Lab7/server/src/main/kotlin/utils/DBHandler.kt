@@ -1,5 +1,6 @@
 package utils
 
+import builders.route
 import commandArgumentsAndTheirsComponents.Coordinates
 import commandArgumentsAndTheirsComponents.Location
 import commandArgumentsAndTheirsComponents.Route
@@ -60,7 +61,7 @@ class DBHandler {
             val to_id = res.getLong("id")
             query = "insert into collection_elements (creation_date, user_id, " +
                     "name, coordinates_id, from_id, to_id, distance) values " +
-                    "(TO_TIMESTAMP('${element.getCreationDate()}','dd-mm-yyyy HH:MI:ss'), " +
+                    "(TO_TIMESTAMP('${element.getCreationDate()}','dd-mm-yyyy HH24:MI:ss'), " +
                     "$user_id, '${element.getName()}', $coordinates_id, $from_id, $to_id, ${element.getDistance()}) returning id"
             res = executeQuery(query)
             res.getLong("id")
@@ -139,11 +140,56 @@ class DBHandler {
         }
     }
     private fun executeUpdate(s: String) { statement.executeUpdate(s) }
-    private fun executeQuery(s: String): ResultSet {
+    private fun executeQuery(s: String, withNext: Boolean = true): ResultSet {
         val res = statement.executeQuery(s)
-        res.next()
+        if (withNext) res.next()
         return res
     }
     private fun coordinatesInsertQuery(coordinates: Coordinates) = "insert into coordinates (x, y) values (${coordinates.getX()}, ${coordinates.getY()}) returning id"
     private fun locationInsertQuery(location: Location) = "insert into location (x, y, z, name) values (${location.getX()}, ${location.getY()}, ${location.getZ()}, '${location.getName()}') returning id"
+    fun downloadCurrentCollection(): ArrayDeque<Route> {
+        var query = "select * from collection_elements"
+        val res = connection.createStatement().executeQuery(query)
+        val ans = ArrayDeque<Route>()
+        while (res.next()) {
+            val from_id = if (res.getString("from_id") == null) null else res.getString("from_id")
+            val to_id = res.getString("to_id")
+            val coordinates_id = res.getString("coordinates_id")
+            println(coordinates_id)
+            println(to_id)
+            println(from_id)
+            var res1: ResultSet
+            ans.add(
+                route {
+                    id = res.getLong("id")
+                    creationDate = res.getDate("creation_date")
+                    name = res.getString("name")
+                    distance = res.getDouble("distance")
+                    coordinates = coordinates {
+                        query = "select * from coordinates where id=$coordinates_id"
+                        res1 = executeQuery(query)
+                        x = res1.getFloat("x")
+                        y = res1.getInt("y")
+                    }
+                    from = if (from_id == null) null else location {
+                        query = "select * from location where id=$from_id"
+                        res1 = executeQuery(query)
+                        x = res1.getInt("x")
+                        y = res1.getFloat("y")
+                        z = res1.getLong("z")
+                        name = res1.getString("name")
+                    }
+                    to = location {
+                        query = "select * from location where id=$to_id"
+                        res1 = executeQuery(query)
+                        x = res1.getInt("x")
+                        y = res1.getFloat("y")
+                        z = res1.getLong("z")
+                        name = res1.getString("name")
+                    }
+                }
+            )
+        }
+        return ans
+    }
 }

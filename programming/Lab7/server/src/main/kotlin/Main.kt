@@ -10,5 +10,7 @@ fun main(args: Array<String>)  {
     }
     val serverUtilFabric = ServerUtilFabric()
     val serverMessageHandler: ServerMessageHandler by serverUtilFabric.inject()
-    serverMessageHandler.run()
+    while (true) {
+        serverMessageHandler.run()
+    }
 }

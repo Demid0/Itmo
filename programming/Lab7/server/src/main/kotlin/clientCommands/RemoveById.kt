@@ -19,7 +19,7 @@ class RemoveById: ClientCommand(CommandType.SINGLE_ARG, Visibility.LOGGED_USER) 
                 if (dbHandler.removeElement(id.toLong(), user_id)) {
                     collectionManager.collection.removeIf { it.getId() == id.toLong() }
                     "Done!"
-                } else "Can't find element"
+                } else "Can't find element or it is not your element"
             } catch (e: Exception) {
                 "Wrong id format."
             }

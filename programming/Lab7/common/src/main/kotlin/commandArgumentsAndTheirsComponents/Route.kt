@@ -54,4 +54,7 @@ class Route (private var name: String,
         id = routeId
     }
 
+    fun setCreationDate(date: Date) {
+        creationDate = SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(date)
+    }
 }
