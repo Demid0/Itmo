@@ -13,15 +13,14 @@ import commandArgumentsAndTheirsComponents.Visibility
  * @since 1.0
  */
 class AddIfMax: ClientCommand(CommandType.OBJECT_ARG, Visibility.LOGGED_USER) {
-    override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
+    override fun execute(arguments: ArrayList<CommandArgument>, user_id: Long): ArrayList<Packet> {
         val route: Route = cast(arguments)
         for (element in collectionManager.collection) {
             if (element.getDistance() >= route.getDistance()) {
                 return printToClientPacket("I didn't add it")
             }
         }
-        collectionManager.collection.add(route)
-        return printToClientPacket("Done!")
+        return Add().execute(arguments, user_id)
     }
 
 }

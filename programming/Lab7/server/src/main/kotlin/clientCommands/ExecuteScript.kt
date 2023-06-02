@@ -12,7 +12,7 @@ import commandArgumentsAndTheirsComponents.Visibility
  * @since 1.0
  */
 class ExecuteScript: ClientCommand(CommandType.SINGLE_ARG, Visibility.LOGGED_USER) {
-    override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
+    override fun execute(arguments: ArrayList<CommandArgument>, user_id: Long): ArrayList<Packet> {
         val file_name: String = cast(arguments)
         return packet {
             commandName = "read_from_file"

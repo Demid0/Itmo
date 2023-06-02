@@ -13,7 +13,7 @@ import commandArgumentsAndTheirsComponents.Visibility
  */
 class ChangeCollectionType: ClientCommand(CommandType.SINGLE_ARG, Visibility.LOGGED_USER) {
 
-    override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
+    override fun execute(arguments: ArrayList<CommandArgument>, user_id: Long): ArrayList<Packet> {
         return printToClientPacket(
             try {
                 val newType : String = cast(arguments)

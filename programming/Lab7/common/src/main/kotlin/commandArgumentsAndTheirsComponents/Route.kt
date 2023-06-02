@@ -23,7 +23,7 @@ class Route (private var name: String,
              private var to: Location,
              private var distance: Double
 ) : CommandArgument() {
-    private var id: Long = abs(UUID.randomUUID().mostSignificantBits)
+    private var id: Long = 0
     private var creationDate = SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(Date())
 
     override fun toString(): String {
@@ -49,6 +49,10 @@ class Route (private var name: String,
         this.from = from
         this.to = to
         this.distance = distance
+    }
+
+    fun setId(routeId: Long) {
+        id = routeId
     }
 
 }

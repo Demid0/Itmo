@@ -13,9 +13,15 @@ import commandArgumentsAndTheirsComponents.Visibility
  * @since 1.0
  */
 class Add: ClientCommand(CommandType.OBJECT_ARG, Visibility.LOGGED_USER) {
-    override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
+    override fun execute(arguments: ArrayList<CommandArgument>, user_id: Long): ArrayList<Packet> {
         val objectArg: Route = cast(arguments)
-        collectionManager.collection.add(objectArg)
-        return printToClientPacket("Done")
+        val route_id = dbHandler.addElement(objectArg, user_id)
+        return if (route_id > -1) {
+            objectArg.setId(route_id)
+            collectionManager.collection.add(objectArg)
+            printToClientPacket("Done")
+        } else {
+            printToClientPacket("Something went wrong")
+        }
     }
 }

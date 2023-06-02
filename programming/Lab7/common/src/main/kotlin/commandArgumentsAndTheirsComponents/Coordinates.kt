@@ -17,4 +17,6 @@ class Coordinates(
     override fun toString(): String {
         return "x: $x, y: $y"
     }
+    fun getX() = x
+    fun getY() = y
 }

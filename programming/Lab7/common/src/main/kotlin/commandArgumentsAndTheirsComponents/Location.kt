@@ -21,4 +21,9 @@ class Location(private var x: Int?,
     override fun toString(): String {
         return "\n\tname: $name\n\tx: $x, y: $y, z: $z"
     }
+
+    fun getX() = x
+    fun getY() = y
+    fun getZ() = z
+    fun getName() = name
 }

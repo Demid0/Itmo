@@ -21,8 +21,8 @@ dependencies {
     implementation("com.charleskorn.kaml:kaml:0.51.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.1")
-
     implementation("io.insert-koin:koin-core:3.3.3")
+    implementation("org.postgresql:postgresql:42.5.4")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")

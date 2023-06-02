@@ -23,17 +23,15 @@ class ClientMessageHandler: Runnable, KoinComponent {
     }
 
     fun sendRecieveInvoke(packet: Packet) {
-        if (condition.get() != Visibility.UNLOGGED_USER) {
-            packet.clientName = condition.clientName
-            packet.password = condition.password
-        }
+        packet.token = condition.token
         val byteBuffer = packMessage(packet.wrapIntoArray())
         val ansBuffer = ByteBuffer.wrap(ByteArray(65535))
         sendMessage(byteBuffer, serverAddress)
         receiveMessage(ansBuffer)
         val ans = unpackMessage(ansBuffer)
-        condition.clientName = ans.first().clientName
-        condition.password = ans.first().password
+        if (condition.get() == Visibility.UNLOGGED_USER) {
+            condition.token = ans.first().token
+        }
         try {
             systemCommandInvoker.invoke(ans)
         } catch (e: SystemCommandInvocationException) {
@@ -66,7 +64,7 @@ class ClientMessageHandler: Runnable, KoinComponent {
     fun setPossibleCommands() {
         sendRecieveInvoke(packet {
             commandName = "checkout"
-            clientName = condition.clientName
+            token = condition.token
             visibility(condition.get())
         })
     }

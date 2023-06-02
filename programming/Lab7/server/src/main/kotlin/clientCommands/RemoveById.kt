@@ -12,12 +12,14 @@ import java.lang.Exception
  * @since 1.0
  */
 class RemoveById: ClientCommand(CommandType.SINGLE_ARG, Visibility.LOGGED_USER) {
-    override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
+    override fun execute(arguments: ArrayList<CommandArgument>, user_id: Long): ArrayList<Packet> {
         return printToClientPacket (
             try {
                 val id: String = cast(arguments)
-                collectionManager.collection.removeIf { it.getId() == id.toLong() }
-                "Done!"
+                if (dbHandler.removeElement(id.toLong(), user_id)) {
+                    collectionManager.collection.removeIf { it.getId() == id.toLong() }
+                    "Done!"
+                } else "Can't find element"
             } catch (e: Exception) {
                 "Wrong id format."
             }

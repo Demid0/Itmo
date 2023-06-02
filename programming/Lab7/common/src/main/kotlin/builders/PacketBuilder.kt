@@ -6,8 +6,7 @@ import utils.Packet
 class PacketBuilder {
     var commandName: String? = null
     var arguments: ArrayList<CommandArgument> = arrayListOf()
-    var clientName: String = "unlogged_user"
-    var password: String = "123"
+    var token: String = "unlogged_user"
 
     fun build(): Packet {
         val packet = Packet(commandName!!, arguments)

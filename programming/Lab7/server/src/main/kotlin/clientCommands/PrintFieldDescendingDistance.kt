@@ -12,7 +12,7 @@ import commandArgumentsAndTheirsComponents.Visibility
  * @since 1.0
  */
 class PrintFieldDescendingDistance: ClientCommand(CommandType.NO_ARG, Visibility.LOGGED_USER) {
-    override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
+    override fun execute(arguments: ArrayList<CommandArgument>, user_id: Long): ArrayList<Packet> {
         val collection = collectionManager.collection.sortedByDescending { it.getDistance() }
         return printToClientPacket(
             if (collection.isEmpty()) "Collection is empty."

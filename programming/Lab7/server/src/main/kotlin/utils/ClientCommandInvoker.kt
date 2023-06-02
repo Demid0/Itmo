@@ -36,11 +36,11 @@ class ClientCommandInvoker: KoinComponent {
         addCommand("update", UpdateId())
     }
 
-    fun invoke(listOfPackets: ArrayList<Packet>): ArrayList<Packet> {
+    fun invoke(listOfPackets: ArrayList<Packet>, user_id: Long): ArrayList<Packet> {
         val ans = ArrayList<Packet>()
         listOfPackets.forEach { packet ->
             val command = commands[packet.commandName]!!
-            ans.addAll(command.execute(packet.arguments))
+            ans.addAll(command.execute(packet.arguments, user_id))
         }
         return ans
     }

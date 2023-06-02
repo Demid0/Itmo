@@ -1,6 +1,7 @@
 package clientCommands
 
 import builders.packet
+import builders.printToClientPacket
 import commandArgumentsAndTheirsComponents.CommandArgument
 import commandArgumentsAndTheirsComponents.CommandType
 import commandArgumentsAndTheirsComponents.Visibility
@@ -9,19 +10,21 @@ import utils.ClientAssistant
 import utils.Packet
 
 class SignUp: ClientCommand(CommandType.TWO_STRINGS_ARG, Visibility.UNLOGGED_USER) {
-    override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
+    override fun execute(arguments: ArrayList<CommandArgument>, user_id: Long): ArrayList<Packet> {
         val pair: Pair<String, String> = cast(arguments)
         val clientName = pair.first
         val password = pair.second
-        clients[clientName] = ClientAssistant(clientName, password)
-        /* will add user in db */
+        val new_user_id = dbHandler.setUser(clientName, password)
+        if (new_user_id == (-1).toLong()) return printToClientPacket("User $clientName already exists")
+        val token = tokenizer.md5(clientName + password)
+        clients[token] = ClientAssistant(new_user_id)
+        tokens[new_user_id] = token
         val ans = packet {
-            this.clientName = clientName
-            this.password = password
+            this.token = token
             commandName = "set_user"
             visibility(Visibility.LOGGED_USER)
         }.wrapIntoArray()
-        ans.addAll(Checkout().execute(arrayListOf(VisibilityArgument(Visibility.LOGGED_USER))))
+        ans.addAll(Checkout().execute(arrayListOf(VisibilityArgument(Visibility.LOGGED_USER)), new_user_id))
         return ans
     }
 }

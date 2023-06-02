@@ -14,8 +14,7 @@ class ServerMessageHandler: Runnable, KoinComponent {
 
     init {
         val unlogged_client = "unlogged_user"
-        val unlogged_password = "123"
-        clients[unlogged_client] = ClientAssistant(unlogged_client, unlogged_password)
+        clients[unlogged_client] = ClientAssistant(-32132)
     }
 
     override fun run() {
@@ -23,10 +22,10 @@ class ServerMessageHandler: Runnable, KoinComponent {
         val packet = DatagramPacket(byteArray, byteArray.size)
         receiveMessage(packet)
         val query = unpackMessage(packet)
-        logger.info("Message from client ${query.first().clientName}")
-        val client = clients[query.first().clientName]!!
-        if (client.password != query.first().password) return
-        val out = client.executeQuery(query)
+        val query_from = query.first().token
+        logger.info("Message from client $query_from")
+        if (!clients.contains(query_from)) return
+        val out = clients[query_from]!!.executeQuery(query)
         logger.info("Answer to client \"$out\"")
         sendMessage(packMessage(out, packet))
     }

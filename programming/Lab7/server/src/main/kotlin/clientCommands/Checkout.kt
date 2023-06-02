@@ -7,7 +7,7 @@ import commandArgumentsAndTheirsComponents.Visibility
 import utils.Packet
 
 class Checkout : ClientCommand(CommandType.VISIBILITY_ARG, Visibility.ALL_USERS) {
-    override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
+    override fun execute(arguments: ArrayList<CommandArgument>, user_id: Long): ArrayList<Packet> {
         val currentVisibilityLevel: Visibility = cast(arguments)
         val ans = packet { commandName = "clear_client_commands" }.wrapIntoArray()
         val existingCommands = clientCommandInvoker.getCommands()

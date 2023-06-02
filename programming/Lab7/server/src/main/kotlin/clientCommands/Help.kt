@@ -12,9 +12,9 @@ import commandArgumentsAndTheirsComponents.Visibility
  * @since 1.0
  */
 class Help: ClientCommand(CommandType.VISIBILITY_ARG, Visibility.ALL_USERS) {
-    override fun execute(arguments: ArrayList<CommandArgument>): ArrayList<Packet> {
+    override fun execute(arguments: ArrayList<CommandArgument>, user_id: Long): ArrayList<Packet> {
         val currentVisibilityLevel: Visibility = cast(arguments)
-        val commands = ClientCommandInvoker().getCommands()
+        val commands = clientCommandInvoker.getCommands()
         return printToClientPacket(
             if (commands.isEmpty()) "No commands"
             else {

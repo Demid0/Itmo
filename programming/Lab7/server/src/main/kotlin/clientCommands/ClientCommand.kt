@@ -16,6 +16,8 @@ abstract class ClientCommand(commandType: CommandType, val visibility: Visibilit
     internal val serializator: Serializator by inject()
     internal val clientCommandInvoker: ClientCommandInvoker by inject()
     internal val clients: HashMap<String, ClientAssistant> by inject()
-
-    abstract fun execute(arguments: ArrayList<CommandArgument>) : ArrayList<Packet>
+    internal val dbHandler: DBHandler by inject()
+    internal val tokenizer: Tokenizer by inject()
+    internal val tokens: HashMap<Long, String> by inject()
+    abstract fun execute(arguments: ArrayList<CommandArgument>, user_id: Long) : ArrayList<Packet>
 }

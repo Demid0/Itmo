@@ -31,8 +31,13 @@ val serverKoinModule = module {
 
     single { Caster() }
 
-
     single { CollectionManager() }
+
+    single { DBHandler() }
+
+    single { Tokenizer() }
+
+    single { HashMap<Long, String>() }
 }
 
 /***
