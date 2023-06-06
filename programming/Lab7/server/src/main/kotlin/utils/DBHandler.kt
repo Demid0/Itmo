@@ -157,6 +157,7 @@ class DBHandler {
         val res = connection.createStatement().executeQuery(query)
         val ans = ArrayDeque<Route>()
         while (res.next()) {
+            val user_id = res.getLong("user_id")
             val from_id = if (res.getString("from_id") == null) null else res.getString("from_id")
             val to_id = res.getString("to_id")
             val coordinates_id = res.getString("coordinates_id")
@@ -189,6 +190,7 @@ class DBHandler {
                         z = res1.getLong("z")
                         name = res1.getString("name")
                     }
+                    setOwner(user_id)
                 }
             )
         }

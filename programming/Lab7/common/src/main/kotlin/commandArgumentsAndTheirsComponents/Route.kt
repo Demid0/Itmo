@@ -1,5 +1,6 @@
 package commandArgumentsAndTheirsComponents
 
+import builders.RouteBuilder
 import kotlinx.serialization.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
@@ -24,6 +25,7 @@ class Route (private var name: String,
 ) : CommandArgument() {
     private var id: Long = 0
     private var creationDate = SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(Date())
+    private var owner_id: Long = 0
 
     override fun toString(): String {
         return "name: $name\ncoordinates: ${coordinates.toString()}\nfrom(Location): ${from.toString()}" +
@@ -57,4 +59,8 @@ class Route (private var name: String,
     fun setCreationDate(date: Date) {
         creationDate = SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(date)
     }
+    fun setOwner(l: Long) { owner_id = l }
+
+    fun getOwner() = owner_id
+
 }
