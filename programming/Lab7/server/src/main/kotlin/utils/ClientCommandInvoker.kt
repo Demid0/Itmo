@@ -36,6 +36,7 @@ class ClientCommandInvoker: KoinComponent {
         addCommand("show", Show())
         addCommand("sign_up", SignUp())
         addCommand("update", UpdateId())
+        addCommand("logout", Logout())
     }
 
     fun invoke(listOfPackets: ArrayList<Packet>, user_id: Long): ArrayList<Packet> {
