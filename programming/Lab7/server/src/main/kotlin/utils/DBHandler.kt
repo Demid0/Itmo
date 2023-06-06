@@ -13,8 +13,8 @@ import java.util.logging.Logger
 
 class DBHandler {
     private val connection: Connection = DriverManager.getConnection(
-        "jdbc:postgresql://localhost:3567/postgres",
-        "postgres", "1234"
+        "jdbc:postgresql://localhost:3567/root",
+        "root", "1234"
     )
     private val statement = connection.createStatement()
     private val logger = Logger.getLogger("DB Logger")
@@ -64,7 +64,12 @@ class DBHandler {
                     "(TO_TIMESTAMP('${element.getCreationDate()}','dd-mm-yyyy HH24:MI:ss'), " +
                     "$user_id, '${element.getName()}', $coordinates_id, $from_id, $to_id, ${element.getDistance()}) returning id"
             res = executeQuery(query)
-            res.getLong("id")
+            val ans = res.getLong("id")
+            query = "update coordinates set route_id = $ans where id=$coordinates_id"
+            executeUpdate(query)
+            query = "update location set route_id = $ans where id in ($to_id, $from_id)"
+            executeUpdate(query)
+            ans
         } catch (e: SQLException) {
             logger.log(Level.WARNING, e.message)
             -1
