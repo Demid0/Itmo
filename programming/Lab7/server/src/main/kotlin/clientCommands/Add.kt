@@ -16,6 +16,7 @@ val add = ClientCommand("add", CommandType.OBJECT_ARG, Visibility.LOGGED_USER, a
     val route_id = dbHandler.addElement(objectArg, user_id)
     if (route_id > -1) {
         objectArg.setId(route_id)
+        objectArg.setOwner(user_id)
         collectionManager.collection.add(objectArg)
         printToClientPacket("Done")
     } else {

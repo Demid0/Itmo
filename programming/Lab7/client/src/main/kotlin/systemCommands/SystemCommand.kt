@@ -1,6 +1,6 @@
 package systemCommands
 
-import clientCommands.utils.CommandParser
+import utils.parseCommandAndAskArguments
 import commandArgumentsAndTheirsComponents.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -14,7 +14,7 @@ class SystemCommand<R>(
 ): KoinComponent {
     internal val scriptStack: ArrayDeque<String> by inject()
     internal val readerStack: HashMap<String, BufferedReader> by inject()
-    internal val commandParser : CommandParser by inject()
+    internal val parseCommandAndAskArguments : parseCommandAndAskArguments by inject()
     internal val writerManager : WriterManager by inject()
     internal val readerManager : ReaderManager by inject()
     internal val condition : Condition by inject()

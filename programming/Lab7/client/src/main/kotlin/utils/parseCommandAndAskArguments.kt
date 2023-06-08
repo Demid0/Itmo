@@ -1,17 +1,15 @@
-package clientCommands.utils
+package utils
 
 import builders.packet
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import utils.Asker
-import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
-import utils.Condition
 
-class CommandParser: KoinComponent {
+class parseCommandAndAskArguments: KoinComponent {
     private val asker: Asker by inject()
     private var commands: HashMap<String, CommandType> = HashMap()
     private val condition: Condition by inject()
+    private val tokenizer: Tokenizer by inject()
 
     init {
         addCommand("help", CommandType.VISIBILITY_ARG)
@@ -47,8 +45,8 @@ class CommandParser: KoinComponent {
                     }
                     CommandType.TWO_STRINGS_ARG -> packet {
                         this.commandName = commandName
-                        string(asker.askLogin())
-                        string(asker.askPassword())
+                        string(tokenizer.md5(asker.askLogin()))
+                        string(tokenizer.md5(asker.askPassword()))
                     }
                     else -> Packet()
                 }

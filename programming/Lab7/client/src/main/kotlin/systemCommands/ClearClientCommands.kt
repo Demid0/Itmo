@@ -4,7 +4,7 @@ import exceptions.SystemCommandInvocationException
 
 val clearClientCommands = SystemCommand("clear_client_commands", {} ) {
     try {
-        commandParser.clear()
+        parseCommandAndAskArguments.clear()
     } catch (_: Exception) {
         throw SystemCommandInvocationException()
     }

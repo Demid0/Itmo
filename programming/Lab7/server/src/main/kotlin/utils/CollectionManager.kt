@@ -4,7 +4,9 @@ import kotlinx.serialization.Serializable
 import commandArgumentsAndTheirsComponents.Route
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import java.util.concurrent.BlockingQueue
 import java.util.concurrent.LinkedBlockingDeque
+import java.util.concurrent.LinkedBlockingQueue
 
 /***
  * Класс, работающий с коллекцией
@@ -26,9 +28,12 @@ class CollectionManager: KoinComponent {
     private val dbHandler: DBHandler by inject()
 
     init {
-        addSupportedCollectionType("arraylist", ArrayList())
-        addSupportedCollectionType("arraydeque", ArrayDeque())
+        addSupportedCollectionType("linkedblockingqueue", LinkedBlockingQueue())
+        addSupportedCollectionType("linkedblockingdeque", LinkedBlockingDeque())
+
+        val type = supportedCollectionTypes.filter { it.value::class == collection::class }.keys.first()
         collection = dbHandler.downloadCurrentCollection()
+        changeType(type)
     }
     fun changeType(newType: String) {
         if (collection == getSupportedCollectionTypes()[newType]!!) return

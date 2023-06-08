@@ -8,6 +8,8 @@ import commandArgumentsAndTheirsComponents.VisibilityArgument
 import utils.ClientAssistant
 import utils.Packet
 import utils.argToTwoStrings
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 val login = ClientCommand("login", CommandType.TWO_STRINGS_ARG, Visibility.UNLOGGED_USER, argToTwoStrings) {
@@ -15,7 +17,7 @@ val login = ClientCommand("login", CommandType.TWO_STRINGS_ARG, Visibility.UNLOG
     val ans: ArrayList<Packet>
     val connected_user_id = dbHandler.checkUser(clientName, password)
     if (connected_user_id != (-1).toLong()) {
-        val token = tokenizer.md5(clientName+password)
+        val token = tokenizer.md5(clientName+password+Date().time.toString())
         clients[token] = ClientAssistant(connected_user_id)
         tokens[connected_user_id] = token
         ans = packet {

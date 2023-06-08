@@ -1,6 +1,5 @@
 package utils
 
-import clientCommands.utils.CommandParser
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import commandArgumentsAndTheirsComponents.MyString
@@ -12,7 +11,7 @@ import kotlin.collections.ArrayDeque
 import kotlin.collections.HashMap
 
 class App: KoinComponent {
-    private val commandParser: CommandParser by inject()
+    private val parseCommandAndAskArguments: parseCommandAndAskArguments by inject()
     private val scriptStack: ArrayDeque<String> by inject()
     private val readerStack: HashMap<String, BufferedReader> by inject()
     private val writerManager: WriterManager by inject()
@@ -27,8 +26,8 @@ class App: KoinComponent {
             writer.flush()
             val input = reader.readLine().trim().split(" ").toMutableList()
             input.removeAll(setOf("", { input.size }))
-            val packet = commandParser.parse(input)
-            return if (commandParser.getCommands()[packet.commandName] == null) {
+            val packet = parseCommandAndAskArguments.parse(input)
+            return if (parseCommandAndAskArguments.getCommands()[packet.commandName] == null) {
                 writer.print("Command not found.\n")
                 writer.flush()
                 null

@@ -8,6 +8,7 @@ import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.ResultSet
 import java.sql.SQLException
+import java.util.concurrent.LinkedBlockingDeque
 import java.util.logging.Level
 import java.util.logging.Logger
 
@@ -152,10 +153,10 @@ class DBHandler(
     }
     private fun coordinatesInsertQuery(coordinates: Coordinates) = "insert into coordinates (x, y) values (${coordinates.getX()}, ${coordinates.getY()}) returning id"
     private fun locationInsertQuery(location: Location) = "insert into location (x, y, z, name) values (${location.getX()}, ${location.getY()}, ${location.getZ()}, '${location.getName()}') returning id"
-    fun downloadCurrentCollection(): ArrayDeque<Route> {
+    fun downloadCurrentCollection(): LinkedBlockingDeque<Route> {
         var query = "select * from collection_elements"
         val res = connection.createStatement().executeQuery(query)
-        val ans = ArrayDeque<Route>()
+        val ans = LinkedBlockingDeque<Route>()
         while (res.next()) {
             val user_id = res.getLong("user_id")
             val from_id = if (res.getString("from_id") == null) null else res.getString("from_id")

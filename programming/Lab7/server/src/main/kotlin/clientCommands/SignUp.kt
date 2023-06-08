@@ -7,13 +7,14 @@ import commandArgumentsAndTheirsComponents.Visibility
 import commandArgumentsAndTheirsComponents.VisibilityArgument
 import utils.ClientAssistant
 import utils.argToTwoStrings
+import java.util.*
 
 
 val signUp = ClientCommand("sign_up", CommandType.TWO_STRINGS_ARG, Visibility.LOGGED_USER, argToTwoStrings) {
         user_id, (clientName, password) ->
     val new_user_id = dbHandler.setUser(clientName, password)
     if (new_user_id == (-1).toLong()) return@ClientCommand printToClientPacket("User $clientName already exists")
-    val token = tokenizer.md5(clientName + password)
+    val token = tokenizer.md5(clientName + password + Date().time.toString())
     clients[token] = ClientAssistant(new_user_id)
     tokens[new_user_id] = token
     val ans = packet {
