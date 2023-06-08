@@ -2,6 +2,8 @@ package ClientCommandsTests
 
 import builders.route
 import clientCommands.*
+import commandArgumentsAndTheirsComponents.MyString
+import commandArgumentsAndTheirsComponents.Route
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -10,6 +12,8 @@ import org.koin.core.context.stopKoin
 import org.koin.dsl.module
 import utils.DBHandler
 import utils.serverKoinModule
+import java.util.concurrent.LinkedBlockingQueue
+import kotlin.test.assertEquals
 
 class ClientCommandsTests {
     private val route = route {
@@ -64,8 +68,14 @@ class ClientCommandsTests {
         command.execute(arrayListOf(route), 1)
         assert(command.collectionManager.collection.size == x)
         command.execute(arrayListOf(anotherRoute), 1)
-        assert(command.collectionManager.collection.size == x + 1)
+        assert(command.collectionManager.collection.size == x)
+    }
 
+    @Test
+    fun changeCollectionTypeCommand() {
+        val command = changeCollectionType
+        command.execute(arrayListOf(MyString("linkedblockingqueue")), 1)
+        assertEquals(command.collectionManager.collection::class, LinkedBlockingQueue<Route>()::class)
     }
 
 

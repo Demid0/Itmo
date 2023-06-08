@@ -16,17 +16,17 @@ class SystemCommandsTests {
     fun addClientCommandTest() {
         val command = addClientCommand
         val newCommandName = "test_command"
-        val x = command.commandParser.getCommands().size + 1
+        val x = command.parseCommandAndAskArguments.getCommands().size + 1
         command.execute(arrayListOf(MyString(newCommandName), CommandTypeArgument(CommandType.NO_ARG)))
-        assertEquals(command.commandParser.getCommands().size, x)
-        assertEquals(command.commandParser.getCommands()[newCommandName], CommandType.NO_ARG)
+        assertEquals(command.parseCommandAndAskArguments.getCommands().size, x)
+        assertEquals(command.parseCommandAndAskArguments.getCommands()[newCommandName], CommandType.NO_ARG)
     }
 
     @Test
     fun clearClientCommandTest() {
         val command = clearClientCommands
         command.execute(ArrayList())
-        assertEquals(command.commandParser.getCommands().size, 0)
+        assertEquals(command.parseCommandAndAskArguments.getCommands().size, 0)
     }
 
     @Test
