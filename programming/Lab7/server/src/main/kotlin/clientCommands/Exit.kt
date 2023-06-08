@@ -1,8 +1,6 @@
 package clientCommands
 
 import builders.packet
-import commandArgumentsAndTheirsComponents.CommandArgument
-import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
 import commandArgumentsAndTheirsComponents.Visibility
 
@@ -11,15 +9,15 @@ import commandArgumentsAndTheirsComponents.Visibility
  * @author Demid0
  * @since 1.0
  */
-class Exit: ClientCommand(CommandType.NO_ARG, Visibility.ALL_USERS) {
-    override fun execute(arguments: ArrayList<CommandArgument>, user_id: Long): ArrayList<Packet> {
-        val token = tokens[user_id]
-        if (token != null) {// means authorized user
-            clients.remove(token)
-            tokens.remove(user_id)
-        }
-        return packet {
-            commandName = "end_client_session"
-        }.wrapIntoArray()
+
+val exit = ClientCommand("exit", CommandType.NO_ARG, Visibility.ALL_USERS, {}) {
+        user_id, _ ->
+    val token = tokens[user_id]
+    if (token != null) {// means authorized user
+        clients.remove(token)
+        tokens.remove(user_id)
     }
+    packet {
+        commandName = "end_client_session"
+    }.wrapIntoArray()
 }

@@ -1,37 +1,30 @@
 package clientCommands
 
 import builders.printToClientPacket
-import commandArgumentsAndTheirsComponents.CommandArgument
-import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
 import commandArgumentsAndTheirsComponents.Visibility
+import utils.argToString
 
 /***
  * change_serialization_strategy strategy : поменять тип сериализации
  * @author Demid0
  * @since 1.0
  */
-class ChangeSerializationStrategy: ClientCommand(CommandType.SINGLE_ARG, Visibility.LOGGED_USER) {
-    override fun execute(arguments: ArrayList<CommandArgument>, user_id: Long): ArrayList<Packet> {
-        return printToClientPacket(
-            try {
-                var newType: String = cast(arguments)
-                newType += "strategy"
-                serializator.changeStrategy(serializator.getStrategy(newType)!!)
-                "Changed"
-            } catch (e: NullPointerException) {
-                "Unknown serialization strategy\n${printSupportedStrategies()}"
-            } catch (e: IndexOutOfBoundsException) {
-                "Empty input\n${printSupportedStrategies()}"
-            }
-        )
-    }
 
-    private fun printSupportedStrategies(): String {
-        var out = "You can use this strategies:\n"
-        for (strategy in serializator.getStrategies()) {
-            out += strategy.value.toString() + "\n"
+val changeSerializationStrategy = ClientCommand("change_serialization_strategy", CommandType.SINGLE_ARG,Visibility.LOGGED_USER, argToString) {
+    _, argument ->
+    printToClientPacket(
+        try {
+            var newType = argument
+            newType += "strategy"
+            serializator.changeStrategy(serializator.getStrategy(newType)!!)
+            "Changed"
+        } catch (e: NullPointerException) {
+            var out = "You can use this strategies:\n"
+            for (strategy in serializator.getStrategies()) {
+                out += strategy.value.toString() + "\n"
+            }
+            "Unknown serialization strategy\n${out.dropLast(1)}"
         }
-        return out.dropLast(1)
-    }
+    )
 }

@@ -1,20 +1,25 @@
 package systemCommands
 
 import clientCommands.utils.CommandParser
+import commandArgumentsAndTheirsComponents.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import commandArgumentsAndTheirsComponents.CommandArgument
-import commandArgumentsAndTheirsComponents.CommandType
 import utils.*
-import java.io.BufferedReader
+import java.io.*
 
-abstract class SystemCommand(commandType: CommandType): Command(commandType), KoinComponent {
-    internal val caster: Caster by inject()
+class SystemCommand<R>(
+    val commandName: String,
+    private val type: (ArrayList<CommandArgument>) -> R,
+    private val execution: SystemCommand<R>.(R) -> Unit
+): KoinComponent {
     internal val scriptStack: ArrayDeque<String> by inject()
     internal val readerStack: HashMap<String, BufferedReader> by inject()
     internal val commandParser : CommandParser by inject()
     internal val writerManager : WriterManager by inject()
     internal val readerManager : ReaderManager by inject()
     internal val condition : Condition by inject()
-    abstract fun execute(arguments: ArrayList<CommandArgument>)
+    fun execute(arguments: ArrayList<CommandArgument>) {
+        execution.invoke(this, type.invoke(arguments))
+    }
 }
+

@@ -8,6 +8,7 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.PrintWriter
 
+
 val clientKoinModule = module {
 
     single { CommandParser() }
@@ -29,8 +30,6 @@ val clientKoinModule = module {
     single { HashMap<String, BufferedReader>() }
 
     single { ClientMessageHandler() }
-
-    single { Caster() }
 
     single { Condition(Visibility.UNLOGGED_USER) }
 

@@ -12,31 +12,31 @@ import org.koin.core.component.inject
  * Поддерживаемые типы комманд
  */
 class ClientCommandInvoker: KoinComponent {
-    private val commands = HashMap<String, ClientCommand>()
+    private val commands = HashMap<String, ClientCommand<*>>()
     private val tokens: HashMap<Long, String> by inject()
 
     init {
-        addCommand("add", Add())
-        addCommand("add_if_max", AddIfMax())
-        addCommand("change_collection_type", ChangeCollectionType())
-        addCommand("change_serialization_strategy", ChangeSerializationStrategy())
-        addCommand("checkout", Checkout())
-        addCommand("clear", Clear())
-        addCommand("count_by_distance", CountDistance { a: Double, b: Double -> a == b })
-        addCommand("count_less_than_distance", CountDistance { a: Double, b: Double -> a < b })
-        addCommand("execute_script", ExecuteScript())
-        addCommand("exit", Exit())
-        addCommand("help", Help())
-        addCommand("info", Info())
-        addCommand("login", Login())
-        addCommand("print_field_descending_distance", PrintFieldDescendingDistance())
-        addCommand("remove_by_id", RemoveById())
-        addCommand("remove_first", RemoveFirst())
-        addCommand("remove_lower", RemoveLower())
-        addCommand("show", Show())
-        addCommand("sign_up", SignUp())
-        addCommand("update", UpdateId())
-        addCommand("logout", Logout())
+        addCommand(add)
+        addCommand(addIfMax)
+        addCommand(changeCollectionType)
+        addCommand(changeSerializationStrategy)
+        addCommand(checkout)
+        addCommand(clear)
+        addCommand(countByDistance)
+        addCommand(countLessThanDistance)
+        addCommand(executeScript)
+        addCommand(exit)
+        addCommand(help)
+        addCommand(info)
+        addCommand(login)
+        addCommand(logout)
+        addCommand(printFieldDescendingDistance)
+        addCommand(removeById)
+        addCommand(removeFirst)
+        addCommand(removeLower)
+        addCommand(show)
+        addCommand(signUp)
+        addCommand(updateId)
     }
 
     fun invoke(listOfPackets: ArrayList<Packet>, user_id: Long): ArrayList<Packet> {
@@ -49,7 +49,9 @@ class ClientCommandInvoker: KoinComponent {
         }
         return ans
     }
-    fun addCommand (commandName: String, clientCommand: ClientCommand) = commands.put(commandName, clientCommand)
+    fun addCommand (clientCommand: ClientCommand<*>) {
+        commands.put(clientCommand.commandName, clientCommand)
+    }
     fun getCommands() = commands
 
 }

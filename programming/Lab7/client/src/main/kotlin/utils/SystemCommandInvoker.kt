@@ -3,20 +3,21 @@ package utils
 import systemCommands.*
 
 class SystemCommandInvoker {
-    private val commands = HashMap<String, SystemCommand>()
+    private val commands = HashMap<String, SystemCommand<*>>()
 
     init {
-        addCommand("print_to_client", PrintToClient())
-        addCommand("add_client_command", AddClientCommand())
-        addCommand("clear_client_commands", ClearClientCommands())
-        addCommand("read_from_file", ReadFromFile())
-        addCommand("end_client_session", EndClientSession())
-        addCommand("set_user", SetUser())
+        addCommand(printToClient)
+        addCommand(addClientCommand)
+        addCommand(clearClientCommands)
+        addCommand(endClientSession)
+        addCommand(readFromFile)
+        addCommand(setUser)
     }
 
     fun invoke(listOfPacket: ArrayList<Packet>) {
         listOfPacket.forEach { commands[it.commandName]!!.execute(it.arguments) }
     }
-    fun addCommand (commandName: String, systemCommand: SystemCommand) = commands.put(commandName, systemCommand)
-    fun getCommands() = commands
+    fun addCommand(systemCommand: SystemCommand<*>) {
+        commands.put(systemCommand.commandName, systemCommand)
+    }
 }

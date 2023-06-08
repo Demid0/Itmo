@@ -1,18 +1,13 @@
 package systemCommands
 
 import exceptions.SystemCommandInvocationException
-import commandArgumentsAndTheirsComponents.CommandArgument
-import commandArgumentsAndTheirsComponents.CommandType
+import utils.argToCommand
 
-class AddClientCommand : SystemCommand(CommandType.COMMAND_ARG) {
-    override fun execute(arguments: ArrayList<CommandArgument>) {
-        try {
-            val singleArg = caster.toString(arguments[0])
-            val commandType = caster.toCommandType(arguments[1])
-            commandParser.addCommand(singleArg, commandType)
-        } catch (_: Exception) {
-            throw SystemCommandInvocationException()
-        }
+val addClientCommand = SystemCommand("add_client_command", argToCommand) {
+        (singleArg, commandType) ->
+    try {
+        commandParser.addCommand(singleArg, commandType)
+    } catch (_: Exception) {
+        throw SystemCommandInvocationException()
     }
-
 }

@@ -1,19 +1,15 @@
 package systemCommands
 
 import exceptions.SystemCommandInvocationException
-import commandArgumentsAndTheirsComponents.CommandArgument
-import commandArgumentsAndTheirsComponents.CommandType
+import utils.argToString
 
-class PrintToClient : SystemCommand(CommandType.SINGLE_ARG) {
-    override fun execute(arguments: ArrayList<CommandArgument>) {
-        try {
-            val singleArg = caster.toString(arguments[0])
-            val writer = writerManager.get()
-            writer.println(singleArg)
-            writer.flush()
-        } catch (_: Exception) {
-            throw SystemCommandInvocationException()
-        }
+val printToClient = SystemCommand("print_to_client", argToString) {
+        singleArg ->
+    try {
+        val writer = writerManager.get()
+        writer.println(singleArg)
+        writer.flush()
+    } catch (_: Exception) {
+        throw SystemCommandInvocationException()
     }
-
 }

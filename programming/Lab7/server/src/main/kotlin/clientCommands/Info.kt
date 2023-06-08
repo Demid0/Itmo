@@ -1,8 +1,6 @@
 package clientCommands
 
 import builders.printToClientPacket
-import commandArgumentsAndTheirsComponents.CommandArgument
-import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
 import commandArgumentsAndTheirsComponents.Visibility
 
@@ -11,14 +9,14 @@ import commandArgumentsAndTheirsComponents.Visibility
  * @author Demid0
  * @since 1.0
  */
-class Info: ClientCommand(CommandType.NO_ARG, Visibility.LOGGED_USER) {
-    override fun execute(arguments: ArrayList<CommandArgument>, user_id: Long): ArrayList<Packet> {
-        return printToClientPacket(
-            "Information about collection:" +
-                  "\n\tType: ${collectionManager.collection.javaClass.simpleName}" +
-                  "\n\tSize: ${collectionManager.collection.size}" +
-                  "\nInfo about system:" +
-                  "\n\tSerialization strategy: ${serializator.getChosenStrategy().toString()}"
-        )
-    }
+
+val info = ClientCommand("info", CommandType.NO_ARG, Visibility.LOGGED_USER, {}) {
+        _, _ ->
+    printToClientPacket(
+        "Information about collection:" +
+                "\n\tType: ${collectionManager.collection.javaClass.simpleName}" +
+                "\n\tSize: ${collectionManager.collection.size}" +
+                "\nInfo about system:" +
+                "\n\tSerialization strategy: ${serializator.getChosenStrategy().toString()}"
+    )
 }

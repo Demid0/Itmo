@@ -1,37 +1,29 @@
 package clientCommands
 
 import builders.printToClientPacket
-import commandArgumentsAndTheirsComponents.CommandArgument
-import utils.Packet
 import commandArgumentsAndTheirsComponents.CommandType
 import commandArgumentsAndTheirsComponents.Visibility
+import utils.argToString
 
 /***
  * change_collection_type type : поменять тип коллекции
  * @author Demid0
  * @since 1.0
  */
-class ChangeCollectionType: ClientCommand(CommandType.SINGLE_ARG, Visibility.LOGGED_USER) {
 
-    override fun execute(arguments: ArrayList<CommandArgument>, user_id: Long): ArrayList<Packet> {
-        return printToClientPacket(
-            try {
-                val newType : String = cast(arguments)
-                collectionManager.changeType(newType)
-                "Changed"
-            } catch (e: NullPointerException) {
-                "Unsupported collection type\n${printSupportedTypes()}"
-            } catch (e: IndexOutOfBoundsException) {
-                "Empty input\n${printSupportedTypes()}"
+
+val changeCollectionType = ClientCommand("change_collection_type", CommandType.SINGLE_ARG, Visibility.LOGGED_USER, argToString) {
+        _, newType ->
+    printToClientPacket(
+        try {
+            collectionManager.changeType(newType)
+            "Changed"
+        } catch (e: Exception) {
+            var out = "You can use this types:\n"
+            for (type in collectionManager.getSupportedCollectionTypes()) {
+                out += type.key +"\n"
             }
-        )
-    }
-
-    private fun printSupportedTypes() : String {
-        var out = "You can use this types:\n"
-        for (type in collectionManager.getSupportedCollectionTypes()) {
-            out += type.key +"\n"
+            "Unsupported collection type\n${out.dropLast(1)}"
         }
-        return out.dropLast(1)
-    }
+    )
 }
