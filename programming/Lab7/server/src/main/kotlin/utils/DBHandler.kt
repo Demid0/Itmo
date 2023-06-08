@@ -11,11 +11,11 @@ import java.sql.SQLException
 import java.util.logging.Level
 import java.util.logging.Logger
 
-class DBHandler {
-    private val connection: Connection = DriverManager.getConnection(
-        "jdbc:postgresql://localhost:3567/root",
-        "root", "1234"
-    )
+class DBHandler(
+    url: String,
+    user: String,
+    password: String) {
+    private val connection: Connection = DriverManager.getConnection(url, user, password)
     private val statement = connection.createStatement()
     private val logger = Logger.getLogger("DB Logger")
 

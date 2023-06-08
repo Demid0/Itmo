@@ -1,13 +1,11 @@
 import org.koin.core.component.inject
 import org.koin.core.context.startKoin
-import utils.ServerMessageHandler
-import utils.ServerUtilFabric
-import utils.serverKoinModule
+import utils.*
 import kotlin.concurrent.thread
 
 fun main(args: Array<String>)  {
     startKoin {
-        modules(serverKoinModule)
+        modules(dbHandlerModule, serverKoinModule)
     }
     val serverUtilFabric = ServerUtilFabric()
     val serverMessageHandler: ServerMessageHandler by serverUtilFabric.inject()

@@ -29,11 +29,13 @@ val serverKoinModule = module {
 
     single { CollectionManager() }
 
-    single { DBHandler() }
-
     single { Tokenizer() }
 
     single { HashMap<Long, String>() }
+}
+
+val dbHandlerModule = module {
+    single { DBHandler("jdbc:postgresql://localhost:3567/root","root","1234") }
 }
 
 /***
