@@ -58,7 +58,7 @@ class ServerMessageHandler: KoinComponent {
                 ForkJoinPool.commonPool().run {
                     val out = outPool.first()
                     outPool.remove(out)
-                    logger.info("Sending answer to ${out.first.first().token}")
+                    logger.info("Sending answer to ${out.first.first().token} ${out.first.first().commandName}")
                     val datagramPacket = packMessage(out.first, out.second)
                     socket.send(datagramPacket)
                 }
