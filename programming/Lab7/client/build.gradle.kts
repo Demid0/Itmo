@@ -1,9 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.8.10"
+    kotlin("jvm") version "1.8.0"
     kotlin("plugin.serialization") version "1.8.10"
 
+    id("org.openjfx.javafxplugin") version "0.0.8"
     id("org.jetbrains.dokka") version "1.8.10"
 
     application
@@ -18,7 +19,9 @@ repositories {
 
 dependencies {
     implementation(project(":common"))
+
     implementation("com.charleskorn.kaml:kaml:0.51.0")
+
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.1")
 
@@ -33,6 +36,16 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.8.10")
 
     dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.8.10")
+
+    implementation("no.tornado:tornadofx:1.7.19")
+    implementation("org.openjfx:javafx:1.7.19")
+    implementation("org.openjfx:javafx-base:11.0.2")
+    implementation("org.openjfx:javafx-controls:11.0.2")
+}
+
+javafx {
+    version = "11.0.2"
+    modules = mutableListOf("javafx.controls", "javafx.graphics")
 }
 
 
@@ -41,7 +54,7 @@ tasks.test {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "11"
 }
 
 tasks.dokkaHtml.configure {
