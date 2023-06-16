@@ -4,7 +4,11 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.net.DatagramPacket
 import java.net.DatagramSocket
+import java.net.InetSocketAddress
 import java.net.SocketAddress
+import java.net.SocketOption
+import java.nio.ByteBuffer
+import java.nio.channels.DatagramChannel
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.Executors
 import java.util.concurrent.ForkJoinPool
@@ -15,7 +19,7 @@ class ServerMessageHandler: KoinComponent {
     private val outPool = ArrayBlockingQueue<Pair<ArrayList<Packet>, SocketAddress>>(10000)
     private val serializator = Serializator()
     private val logger = Logger.getLogger("Handler logger")
-    private val socket = DatagramSocket(1488)
+    private var socket = DatagramSocket(1490)
     private val clients: HashMap<String, ClientAssistant> by inject()
 
     init {
@@ -84,6 +88,15 @@ class ServerMessageHandler: KoinComponent {
     }
 
     private fun deserializeMessage(message: String) : ArrayList<Packet> {
-        return serializator.deserialize(message, ArrayList<Packet>())
+        return serializator.deserialize(message, ArrayList())
+    }
+
+    fun setConnection(port: Int) {
+        val balancerAddress = InetSocketAddress("localhost", 1489)
+        val channel = DatagramChannel.open()
+        channel.send(ByteBuffer.wrap(port.toString().toByteArray()), balancerAddress)
+        channel.close()
+        socket.close()
+        socket = DatagramSocket(port)
     }
 }

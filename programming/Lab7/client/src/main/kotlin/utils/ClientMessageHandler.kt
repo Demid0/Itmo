@@ -18,7 +18,7 @@ class ClientMessageHandler: KoinComponent {
     private val readerManager: ReaderManager by inject()
     private val systemCommandInvoker: SystemCommandInvoker by inject()
     private val channel = DatagramChannel.open()
-    private val serverAddress = InetSocketAddress("localhost", 1488)
+    private val balancerAddress = InetSocketAddress("localhost", 1488)
     private val condition: Condition by inject()
     private val threadPool = LinkedBlockingQueue<Thread>()
 
@@ -53,7 +53,7 @@ class ClientMessageHandler: KoinComponent {
         packet.token = condition.token
         val byteBuffer = packMessage(packet.wrapIntoArray())
         val ansBuffer = ByteBuffer.wrap(ByteArray(65535))
-        sendMessage(byteBuffer, serverAddress)
+        sendMessage(byteBuffer, balancerAddress)
         return receiveMessage(ansBuffer) to ansBuffer
     }
 
@@ -68,7 +68,7 @@ class ClientMessageHandler: KoinComponent {
     }
 
     fun unpackMessage(byteBuffer: ByteBuffer): ArrayList<Packet> {
-        return serializator.deserialize(String(byteBuffer.array(), 0, byteBuffer.position()), ArrayList<Packet>())
+        return serializator.deserialize(String(byteBuffer.array(), 0, byteBuffer.position()), ArrayList())
     }
 
     fun sendMessage(byteBuffer: ByteBuffer, address: InetSocketAddress) {
@@ -79,7 +79,7 @@ class ClientMessageHandler: KoinComponent {
         val selector = Selector.open()
         channel.configureBlocking(false)
         channel.register(selector, SelectionKey.OP_READ)
-        selector.select(1500)
+        selector.select(10000)
         val selectedKeys = selector.selectedKeys()
         return if (selectedKeys.isEmpty()) {
             false
