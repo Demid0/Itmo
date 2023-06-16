@@ -68,7 +68,7 @@ class ClientMessageHandler: KoinComponent {
     }
 
     fun unpackMessage(byteBuffer: ByteBuffer): ArrayList<Packet> {
-        return serializator.deserialize(String(byteBuffer.array(), 0, byteBuffer.position()), ArrayList())
+        return serializator.deserialize(String(byteBuffer.array(), 0, byteBuffer.position()), ArrayList<Packet>())
     }
 
     fun sendMessage(byteBuffer: ByteBuffer, address: InetSocketAddress) {

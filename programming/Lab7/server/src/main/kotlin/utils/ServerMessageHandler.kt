@@ -6,7 +6,6 @@ import java.net.DatagramPacket
 import java.net.DatagramSocket
 import java.net.InetSocketAddress
 import java.net.SocketAddress
-import java.net.SocketOption
 import java.nio.ByteBuffer
 import java.nio.channels.DatagramChannel
 import java.util.concurrent.ArrayBlockingQueue
@@ -88,7 +87,7 @@ class ServerMessageHandler: KoinComponent {
     }
 
     private fun deserializeMessage(message: String) : ArrayList<Packet> {
-        return serializator.deserialize(message, ArrayList())
+        return serializator.deserialize(message, ArrayList<Packet>())
     }
 
     fun setConnection(port: Int) {
