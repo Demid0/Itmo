@@ -3,6 +3,7 @@ package clientCommands
 import builders.packet
 import commandArgumentsAndTheirsComponents.CommandType
 import commandArgumentsAndTheirsComponents.Visibility
+import utils.ServerMessageHandler
 
 /***
  * exit : завершить программу (без сохранения в файл)
@@ -16,6 +17,7 @@ val exit = ClientCommand("exit", CommandType.NO_ARG, Visibility.ALL_USERS, {}) {
     if (token != null) {// means authorized user
         clients.remove(token)
         tokens.remove(user_id)
+        ServerMessageHandler.updateUser(token, user_id)
     }
     packet {
         commandName = "end_client_session"

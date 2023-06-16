@@ -1,5 +1,6 @@
 package utils
 
+import builders.packet
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.net.DatagramPacket
@@ -16,11 +17,9 @@ import java.util.logging.Logger
 class ServerMessageHandler: KoinComponent {
     private val queryPool = ArrayBlockingQueue<Pair<ArrayList<Packet>, SocketAddress>>(10000)
     private val outPool = ArrayBlockingQueue<Pair<ArrayList<Packet>, SocketAddress>>(10000)
-    private val serializator = Serializator()
     private val logger = Logger.getLogger("Handler logger")
     private var socket = DatagramSocket(1490)
     private val clients: HashMap<String, ClientAssistant> by inject()
-
     init {
         val unlogged_client = "unlogged_user"
         clients[unlogged_client] = ClientAssistant(-32132)
@@ -33,9 +32,12 @@ class ServerMessageHandler: KoinComponent {
                     val query = queryPool.first()
                     queryPool.remove(query)
                     val query_from = query.first.first().token
-                    if (!clients.contains(query_from)) return
-                    val out = clients[query_from]!!.executeQuery(query.first)
-                    outPool.add(out to query.second)
+                    if (clients[query_from] == null) clients[query_from] = ClientAssistant(query.first.first().user_id)
+                    else if (query.first.first().commandName == "command") clients.remove(query_from)
+                    else {
+                        val out = clients[query_from]!!.executeQuery(query.first)
+                        outPool.add(out to query.second)
+                    }
                 }
             }
         }
@@ -55,6 +57,7 @@ class ServerMessageHandler: KoinComponent {
             }
         }
     }
+
     fun sendMessage() {
         while (true) {
             if (outPool.isNotEmpty()) {
@@ -68,7 +71,6 @@ class ServerMessageHandler: KoinComponent {
             }
         }
     }
-
     private fun unpackMessage(datagramPacket: DatagramPacket) : ArrayList<Packet> {
         return deserializeMessage(String(datagramPacket.data, 0, datagramPacket.length))
     }
@@ -82,20 +84,29 @@ class ServerMessageHandler: KoinComponent {
         return datagramPacket
     }
 
-    private fun serializeMessage(packets: ArrayList<Packet>) : String {
-        return serializator.serialize(packets)
-    }
-
-    private fun deserializeMessage(message: String) : ArrayList<Packet> {
-        return serializator.deserialize(message, ArrayList<Packet>())
-    }
-
     fun setConnection(port: Int) {
         val balancerAddress = InetSocketAddress("localhost", 1489)
         val channel = DatagramChannel.open()
-        channel.send(ByteBuffer.wrap(port.toString().toByteArray()), balancerAddress)
+        channel.send(ByteBuffer.wrap("new_server $port".toByteArray()), balancerAddress)
         channel.close()
         socket.close()
         socket = DatagramSocket(port)
+    }
+
+    companion object {
+
+        private val serializator = Serializator()
+        private fun deserializeMessage(message: String) : ArrayList<Packet> {
+            return serializator.deserialize(message, ArrayList<Packet>())
+        }
+        private fun serializeMessage(packets: ArrayList<Packet>) : String {
+            return serializator.serialize(packets)
+        }
+        fun updateUser(token: String, user_id: Long) {
+            val balancerAddress = InetSocketAddress("localhost", 1489)
+            val channel = DatagramChannel.open()
+            channel.send(ByteBuffer.wrap("update_user ${serializeMessage(packet{ this.token = token; this.user_id = user_id }.wrapIntoArray())}".toByteArray()), balancerAddress)
+            channel.close()
+        }
     }
 }

@@ -4,12 +4,14 @@ import commandArgumentsAndTheirsComponents.*
 import utils.Packet
 
 class PacketBuilder {
-    var commandName: String? = null
+    var commandName: String? = "command"
     var arguments: ArrayList<CommandArgument> = arrayListOf()
     var token: String = "unlogged_user"
+    var user_id: Long = 0
 
     fun build(): Packet {
         val packet = Packet(commandName!!, arguments)
+        packet.user_id = user_id
         return packet
     }
 

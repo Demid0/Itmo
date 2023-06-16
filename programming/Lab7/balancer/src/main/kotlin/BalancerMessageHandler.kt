@@ -17,6 +17,7 @@ class BalancerMessageHandler {
     private val newServerListener = DatagramSocket(1489)
     private val serverPool = ArrayBlockingQueue<Pair<DatagramChannel, Int>>(10000)
     private val logger = Logger.getLogger("Balancer logger")
+    private val clients = HashSet<String>()
 
     fun listenClients() {
         while (true) {
@@ -31,16 +32,26 @@ class BalancerMessageHandler {
         }
     }
 
-    fun listenNewServers() {
+    fun listenServersQuery() {
         while (true) {
             Executors.newCachedThreadPool().run {
                 val byteArray = ByteArray(65535)
                 val datagramPacket = DatagramPacket(byteArray, byteArray.size)
                 newServerListener.receive(datagramPacket)
                 val data = datagramPacket.data.filter { it != 0.toByte() }.toByteArray()
-                val port = String(data, 0, data.size).toInt()
-                serverPool.add(DatagramChannel.open() to port)
-                logger.info("New server ${datagramPacket.socketAddress}")
+                val query = String(data, 0, data.size).splitToSequence(" ", ignoreCase =  true, limit = 2).toMutableList()
+                println(query.size)
+                if (query[0] == "new_server") {
+                    val port = query[1].toInt()
+                    serverPool.add(DatagramChannel.open() to port)
+                    logger.info("New server ${datagramPacket.socketAddress}")
+                }
+                else {
+                    val clientToken = query[1]
+                    for (server in serverPool) {
+                        server.first.send(ByteBuffer.wrap(clientToken.toByteArray()), InetSocketAddress("localhost", server.second))
+                    }
+                }
             }
         }
     }
@@ -52,9 +63,7 @@ class BalancerMessageHandler {
                     val query = queryPool.first()
                     queryPool.remove(query)
                     var server = serverPool.first()
-                    serverPool.remove(server)
                     var serverAddress = InetSocketAddress( "localhost", server.second)
-                    server.first.send(ByteBuffer.wrap(query.first.filter { it != 0.toByte() }.toByteArray()), serverAddress)
                     val selector = Selector.open()
                     server.first.configureBlocking(false)
                     server.first.register(selector, SelectionKey.OP_READ)

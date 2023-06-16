@@ -6,6 +6,7 @@ import commandArgumentsAndTheirsComponents.CommandType
 import commandArgumentsAndTheirsComponents.Visibility
 import commandArgumentsAndTheirsComponents.VisibilityArgument
 import utils.ClientAssistant
+import utils.ServerMessageHandler
 import utils.argToTwoStrings
 import java.util.*
 
@@ -17,6 +18,7 @@ val signUp = ClientCommand("sign_up", CommandType.TWO_STRINGS_ARG, Visibility.LO
     val token = tokenizer.md5(clientName + password + Date().time.toString())
     clients[token] = ClientAssistant(new_user_id)
     tokens[new_user_id] = token
+    ServerMessageHandler.updateUser(token, user_id)
     val ans = packet {
         commandName = "set_user"
         visibility(Visibility.LOGGED_USER)

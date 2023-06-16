@@ -7,6 +7,7 @@ import commandArgumentsAndTheirsComponents.Visibility
 import commandArgumentsAndTheirsComponents.VisibilityArgument
 import utils.ClientAssistant
 import utils.Packet
+import utils.ServerMessageHandler
 import utils.argToTwoStrings
 import java.util.*
 import kotlin.collections.ArrayList
@@ -20,6 +21,7 @@ val login = ClientCommand("login", CommandType.TWO_STRINGS_ARG, Visibility.UNLOG
         val token = tokenizer.md5(clientName+password+Date().time.toString())
         clients[token] = ClientAssistant(connected_user_id)
         tokens[connected_user_id] = token
+        ServerMessageHandler.updateUser(token, connected_user_id)
         ans = packet {
             commandName = "set_user"
             visibility(Visibility.LOGGED_USER)
