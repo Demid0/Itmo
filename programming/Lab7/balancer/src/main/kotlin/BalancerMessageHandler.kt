@@ -17,7 +17,6 @@ class BalancerMessageHandler {
     private val newServerListener = DatagramSocket(1489)
     private val serverPool = ArrayBlockingQueue<Pair<DatagramChannel, Int>>(10000)
     private val logger = Logger.getLogger("Balancer logger")
-    private val clients = HashSet<String>()
 
     fun listenClients() {
         while (true) {
