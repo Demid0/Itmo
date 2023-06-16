@@ -13,7 +13,7 @@ import java.util.concurrent.LinkedBlockingQueue
 
 class ClientMessageHandler: KoinComponent {
     private val serializator: Serializator by inject()
-    private val app: App by inject()
+    private val consoleApp: ConsoleApp by inject()
     private val writerManager: WriterManager by inject()
     private val readerManager: ReaderManager by inject()
     private val systemCommandInvoker: SystemCommandInvoker by inject()
@@ -45,7 +45,7 @@ class ClientMessageHandler: KoinComponent {
         try {
             systemCommandInvoker.invoke(ans)
         } catch (e: SystemCommandInvocationException) {
-            app.setDefaultCondition(e)
+            consoleApp.setDefaultCondition(e)
         }
     }
 
@@ -58,8 +58,8 @@ class ClientMessageHandler: KoinComponent {
     }
 
     fun getPacket(): Packet {
-        var packet = app.run(readerManager, writerManager)
-        while (packet == null) packet = app.run(readerManager, writerManager)
+        var packet = consoleApp.run(readerManager, writerManager)
+        while (packet == null) packet = consoleApp.run(readerManager, writerManager)
         return packet
     }
 

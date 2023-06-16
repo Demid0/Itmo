@@ -16,7 +16,7 @@ val clientKoinModule = module {
 
     single { WriterManager(PrintWriter(System.out)) }
 
-    single { App() }
+    single { ConsoleApp() }
 
     single { Serializator() }
 
