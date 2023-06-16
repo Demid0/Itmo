@@ -7,7 +7,7 @@ val printToClient = SystemCommand("print_to_client", argToString) {
         singleArg ->
     try {
         val writer = writerManager.get()
-        writer.println(singleArg)
+        writer.print(singleArg)
         writer.flush()
     } catch (_: Exception) {
         throw SystemCommandInvocationException()

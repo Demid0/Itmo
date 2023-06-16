@@ -8,4 +8,4 @@ fun string(init: MyStringBuilder.() -> Unit) = MyStringBuilder().apply(init).bui
 fun commandType(init: CommandTypeArgumentBuilder.() -> Unit) = CommandTypeArgumentBuilder().apply(init).build()
 fun visibility(init: VisibilityArgumentBuilder.() -> Unit) = VisibilityArgumentBuilder().apply(init).build()
 fun packet(init: PacketBuilder.() -> Unit) = PacketBuilder().apply(init).build()
-fun printToClientPacket(string: String) = PacketBuilder().printToClient(string).build().wrapIntoArray()
+fun printToClientPacket(string: String, newLine: Boolean = true) = PacketBuilder().printToClient(string + if (newLine) "\n" else "" ).build().wrapIntoArray()

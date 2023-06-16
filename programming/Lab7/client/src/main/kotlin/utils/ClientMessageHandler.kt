@@ -1,12 +1,15 @@
 package utils
 
-import builders.packet
+import builders.printToClientPacket
 import exceptions.SystemCommandInvocationException
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.net.InetSocketAddress
 import java.nio.ByteBuffer
 import java.nio.channels.DatagramChannel
+import java.nio.channels.SelectionKey
+import java.nio.channels.Selector
+import java.util.concurrent.LinkedBlockingQueue
 
 class ClientMessageHandler: KoinComponent {
     private val serializator: Serializator by inject()
@@ -17,22 +20,41 @@ class ClientMessageHandler: KoinComponent {
     private val channel = DatagramChannel.open()
     private val serverAddress = InetSocketAddress("localhost", 1488)
     private val condition: Condition by inject()
+    private val threadPool = LinkedBlockingQueue<Thread>()
+
     fun run() {
-        sendRecieveInvoke(getPacket())
+        val packet = getPacket()
+        val ans = sendAndRecieve(packet)
+        if (!ans.first) {
+            systemCommandInvoker.invoke(printToClientPacket("Server is dead"))
+            val thread = Thread {
+                var tryAgain = sendAndRecieve(packet)
+                while (!tryAgain.first) tryAgain = sendAndRecieve(packet)
+                if (threadPool.size == 1) systemCommandInvoker.invoke(printToClientPacket("\nServer is alive\n> ", false))
+                threadPool.remove()
+            }
+            threadPool.add(thread)
+            thread.start()
+        } else {
+            invoke(ans.second)
+        }
     }
 
-    fun sendRecieveInvoke(packet: Packet) {
-        packet.token = condition.token
-        val byteBuffer = packMessage(packet.wrapIntoArray())
-        val ansBuffer = ByteBuffer.wrap(ByteArray(65535))
-        sendMessage(byteBuffer, serverAddress)
-        receiveMessage(ansBuffer)
+    fun invoke(ansBuffer: ByteBuffer) {
         val ans = unpackMessage(ansBuffer)
         try {
             systemCommandInvoker.invoke(ans)
         } catch (e: SystemCommandInvocationException) {
             app.setDefaultCondition(e)
         }
+    }
+
+    fun sendAndRecieve(packet: Packet): Pair<Boolean, ByteBuffer> {
+        packet.token = condition.token
+        val byteBuffer = packMessage(packet.wrapIntoArray())
+        val ansBuffer = ByteBuffer.wrap(ByteArray(65535))
+        sendMessage(byteBuffer, serverAddress)
+        return receiveMessage(ansBuffer) to ansBuffer
     }
 
     fun getPacket(): Packet {
@@ -53,16 +75,18 @@ class ClientMessageHandler: KoinComponent {
         channel.send(byteBuffer, address)
     }
 
-    fun receiveMessage(byteBuffer: ByteBuffer) {
-        channel.receive(byteBuffer)
-    }
-
-    fun setPossibleCommands() {
-        sendRecieveInvoke(packet {
-            commandName = "checkout"
-            token = condition.token
-            visibility(condition.get())
-        })
+    fun receiveMessage(byteBuffer: ByteBuffer): Boolean {
+        val selector = Selector.open()
+        channel.configureBlocking(false)
+        channel.register(selector, SelectionKey.OP_READ)
+        selector.select(1500)
+        val selectedKeys = selector.selectedKeys()
+        return if (selectedKeys.isEmpty()) {
+            false
+        } else {
+            channel.receive(byteBuffer)
+            true
+        }
     }
 
 }
