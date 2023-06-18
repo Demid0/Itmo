@@ -1,7 +1,6 @@
 package clientCommands
 
 import builders.packet
-import builders.printToClientPacket
 import commandArgumentsAndTheirsComponents.CommandType
 import commandArgumentsAndTheirsComponents.Visibility
 import utils.ServerMessageHandler
