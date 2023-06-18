@@ -4,7 +4,6 @@ import exceptions.SystemCommandInvocationException
 import exceptions.UIException
 import tornado.MyApp
 import tornado.commandButton
-import tornadofx.add
 import tornadofx.getChildList
 import utils.argToCommand
 
