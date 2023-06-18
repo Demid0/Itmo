@@ -6,5 +6,6 @@ import kotlinx.serialization.Serializable
 enum class Visibility {
     LOGGED_USER,
     UNLOGGED_USER,
-    ALL_USERS
+    ALL_USERS,
+    SERVER_HELP_COMMAND
 }

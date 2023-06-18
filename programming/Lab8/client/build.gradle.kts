@@ -4,7 +4,7 @@ plugins {
     kotlin("jvm") version "1.8.0"
     kotlin("plugin.serialization") version "1.8.10"
 
-    id("org.openjfx.javafxplugin") version "0.0.8"
+    id("org.openjfx.javafxplugin") version "0.0.10"
     id("org.jetbrains.dokka") version "1.8.10"
 
     application

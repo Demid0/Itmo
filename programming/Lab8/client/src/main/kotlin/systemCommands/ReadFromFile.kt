@@ -22,7 +22,7 @@ val readFromFile = SystemCommand("read_from_file", argToString) {
         throw e
     } catch (_: FileNotFoundException) {
         throw SystemCommandInvocationException("File not found")
-    } catch (_: Exception) {
-        throw SystemCommandInvocationException()
+    } catch (e: Exception) {
+        throw SystemCommandInvocationException("${e::class} : ${e.message}")
     }
 }

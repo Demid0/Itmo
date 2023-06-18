@@ -18,9 +18,9 @@ class ClientCommandInvoker: KoinComponent {
     init {
         addCommand(add)
         addCommand(addIfMax)
-        addCommand(changeCollectionType)
-        addCommand(changeSerializationStrategy)
-        addCommand(checkout)
+        //addCommand(changeCollectionType)
+        //addCommand(changeSerializationStrategy)
+        //addCommand(checkout)
         addCommand(clear)
         addCommand(countByDistance)
         addCommand(countLessThanDistance)

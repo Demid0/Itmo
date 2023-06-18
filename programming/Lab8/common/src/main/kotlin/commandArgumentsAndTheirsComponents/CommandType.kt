@@ -9,5 +9,6 @@ enum class CommandType {
     OBJECT_ARG,
     MIXED_ARG,
     TWO_STRINGS_ARG,
-    VISIBILITY_ARG
+    VISIBILITY_ARG,
+    EXECUTE_LOCALLY
 }

@@ -20,6 +20,6 @@ val exit = ClientCommand("exit", CommandType.NO_ARG, Visibility.ALL_USERS, {}) {
         ServerMessageHandler.updateUser(token, user_id)
     }
     packet {
-        commandName = "end_client_session"
+        commandName = "exit"
     }.wrapIntoArray()
 }

@@ -1,5 +1,6 @@
 import org.koin.core.context.startKoin
 import utils.*
+import java.util.logging.Logger
 import kotlin.concurrent.thread
 
 fun main(args: Array<String>)  {
@@ -21,7 +22,19 @@ fun main(args: Array<String>)  {
         }
         incorrectPort = false
     }
-    thread { serverMessageHandler.receiveMessage() }
-    thread { serverMessageHandler.executeQuery() }
-    thread { serverMessageHandler.sendMessage() }
+    try {
+        thread { serverMessageHandler.receiveMessage() }
+    } catch (e: Exception) {
+        Logger.getLogger("Main").info(e.message)
+    }
+    try {
+        thread { serverMessageHandler.executeQuery() }
+    } catch (e: Exception) {
+        Logger.getLogger("Main").info(e.message)
+    }
+    try {
+        thread { serverMessageHandler.sendMessage() }
+    } catch (e: Exception) {
+        Logger.getLogger("Main").info(e.message)
+    }
 }

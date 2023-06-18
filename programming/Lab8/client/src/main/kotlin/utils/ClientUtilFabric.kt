@@ -3,6 +3,7 @@ package utils
 import commandArgumentsAndTheirsComponents.Visibility
 import org.koin.core.component.KoinComponent
 import org.koin.dsl.module
+import tornado.UIAsker
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.PrintWriter
@@ -34,6 +35,7 @@ val clientKoinModule = module {
 
     single { Tokenizer() }
 
+    single { UIAsker() }
+
 }
 
-class ClientUtilsFabric: KoinComponent

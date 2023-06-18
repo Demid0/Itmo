@@ -5,7 +5,7 @@ import commandArgumentsAndTheirsComponents.CommandType
 import commandArgumentsAndTheirsComponents.Visibility
 import utils.argToVisibility
 
-val checkout = ClientCommand("checkout", CommandType.VISIBILITY_ARG, Visibility.ALL_USERS, argToVisibility) {
+val checkout = ClientCommand("checkout", CommandType.VISIBILITY_ARG, Visibility.SERVER_HELP_COMMAND, argToVisibility) {
         _, currentVisibilityLevel ->
     val ans = packet { commandName = "clear_client_commands" }.wrapIntoArray()
     val existingCommands = clientCommandInvoker.getCommands()

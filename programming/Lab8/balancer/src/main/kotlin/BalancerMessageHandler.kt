@@ -13,7 +13,7 @@ import java.util.logging.Logger
 class BalancerMessageHandler {
     private val queryPool = ArrayBlockingQueue<Pair<ByteArray, SocketAddress>>(10000)
     private val ansPool = ArrayBlockingQueue<Pair<ByteArray, SocketAddress>>(10000)
-    private val clientListener = DatagramSocket(1488)
+    private val clientListener = DatagramSocket(1592)
     private val newServerListener = DatagramSocket(1489)
     private val serverPool = ArrayBlockingQueue<Pair<DatagramChannel, Int>>(10000)
     private val logger = Logger.getLogger("Balancer logger")
