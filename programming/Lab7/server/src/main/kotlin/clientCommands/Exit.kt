@@ -1,6 +1,7 @@
 package clientCommands
 
 import builders.packet
+import builders.printToClientPacket
 import commandArgumentsAndTheirsComponents.CommandType
 import commandArgumentsAndTheirsComponents.Visibility
 import utils.ServerMessageHandler
@@ -20,6 +21,6 @@ val exit = ClientCommand("exit", CommandType.NO_ARG, Visibility.ALL_USERS, {}) {
         ServerMessageHandler.updateUser(token, user_id)
     }
     packet {
-        commandName = "end_client_session"
+        this.commandName = "exit"
     }.wrapIntoArray()
 }

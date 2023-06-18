@@ -1,11 +1,15 @@
 package utils
 
 import builders.packet
+import builders.printToClientPacket
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import commandArgumentsAndTheirsComponents.CommandType
+import commandArgumentsAndTheirsComponents.MyString
+import systemCommands.printToClient
 
 class parseCommandAndAskArguments: KoinComponent {
+    private val systemCommandInvoker: SystemCommandInvoker by inject()
     private val asker: Asker by inject()
     private var commands: HashMap<String, CommandType> = HashMap()
     private val condition: Condition by inject()
@@ -13,8 +17,7 @@ class parseCommandAndAskArguments: KoinComponent {
 
     init {
         addCommand("help", CommandType.VISIBILITY_ARG)
-        addCommand("checkout", CommandType.VISIBILITY_ARG)
-        addCommand("exit", CommandType.NO_ARG)
+        addCommand("exit", CommandType.EXECUTE_LOCALLY)
         addCommand("login", CommandType.TWO_STRINGS_ARG)
         addCommand("sign_up", CommandType.TWO_STRINGS_ARG)
     }
@@ -34,21 +37,35 @@ class parseCommandAndAskArguments: KoinComponent {
             val commandType = commands[commandName]
             if (commandType == null) Packet()
             else {
-                when(commandType) {
-                    CommandType.NO_ARG -> checkAndSet(args, 1, commandName)
-                    CommandType.SINGLE_ARG -> checkAndSet(args, 2, commandName, args[1])
-                    CommandType.OBJECT_ARG -> checkAndSet(args, 1, commandName, withRoute = true)
-                    CommandType.MIXED_ARG -> checkAndSet(args, 2, commandName, args[1], true)
-                    CommandType.VISIBILITY_ARG -> packet {
-                        this.commandName = commandName
-                        visibility(condition.get())
+                try {
+                    when (commandType) {
+                        CommandType.NO_ARG -> checkAndSet(args, 1, commandName)
+                        CommandType.SINGLE_ARG -> checkAndSet(args, 2, commandName, args[1])
+                        CommandType.OBJECT_ARG -> checkAndSet(args, 1, commandName, withRoute = true)
+                        CommandType.MIXED_ARG -> checkAndSet(args, 2, commandName, args[1], true)
+                        CommandType.VISIBILITY_ARG -> packet {
+                            this.commandName = commandName
+                            visibility(condition.get())
+                        }
+
+                        CommandType.TWO_STRINGS_ARG -> packet {
+                            this.commandName = commandName
+                            string(tokenizer.md5(asker.askLogin()))
+                            string(tokenizer.md5(asker.askPassword()))
+                        }
+
+                        CommandType.EXECUTE_LOCALLY -> {
+                            val packet = packet {
+                                this.commandName = commandName
+                            }
+                            systemCommandInvoker.invoke(packet.wrapIntoArray())
+                            packet
+                        }
+
+                        else -> Packet()
                     }
-                    CommandType.TWO_STRINGS_ARG -> packet {
-                        this.commandName = commandName
-                        string(tokenizer.md5(asker.askLogin()))
-                        string(tokenizer.md5(asker.askPassword()))
-                    }
-                    else -> Packet()
+                } catch (e: Exception) {
+                    Packet()
                 }
             }
         }
