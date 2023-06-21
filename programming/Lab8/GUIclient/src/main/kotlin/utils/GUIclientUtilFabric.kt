@@ -1,14 +1,13 @@
 package utils
 
+import GUIsystemCommands.*
 import commandArgumentsAndTheirsComponents.Visibility
-import org.koin.core.component.KoinComponent
 import org.koin.dsl.module
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.PrintWriter
 
-
-val clientKoinModule = module {
+val GUIclientKoinModule = module {
 
     single { ParseCommandAndAskArguments() }
 
@@ -20,9 +19,13 @@ val clientKoinModule = module {
 
     single { Serializator() }
 
-    single { Asker() }
-
-    single { SystemCommandInvoker() }
+    single {
+        val systemCommandInvoker = SystemCommandInvoker()
+        systemCommandInvoker.addCommand(printToClient)
+        systemCommandInvoker.addCommand(clearTable)
+        systemCommandInvoker.addCommand(insertIntoTable)
+        systemCommandInvoker
+    }
 
     single { ArrayDeque<String>() }
 
@@ -35,5 +38,3 @@ val clientKoinModule = module {
     single { Tokenizer() }
 
 }
-
-class ClientUtilsFabric: KoinComponent

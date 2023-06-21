@@ -3,7 +3,6 @@ package utils
 import builders.coordinates
 import builders.location
 import builders.route
-import commandArgumentsAndTheirsComponents.Location
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.BufferedReader
@@ -17,7 +16,7 @@ typealias ToType<T> = (input: String?) -> T
  * @author Demid0
  * @since 1.0
  */
-class Asker: KoinComponent {
+class Asker(val GUI: Boolean = false): KoinComponent {
     private val writerManager : WriterManager by inject()
     private val readerManager : ReaderManager by inject()
     private val writer: PrintWriter = writerManager.get()
@@ -34,11 +33,13 @@ class Asker: KoinComponent {
         while (true) {
             try {
                 var input = reader.readLine()
+                println(input)
                 input = if (input == "") null else input
                 output = converter(input)
                 if (checker.test(output)) break
                 else throw Exception()
             } catch (_: Exception) {
+                if (GUI) throw Exception()
                 writer.println("Incorrect input. Try again.")
                 writer.flush()
             }
@@ -56,7 +57,7 @@ class Asker: KoinComponent {
     fun askRoute() = route {
         name = ask("name", ToString) { it != "" }
         coordinates = askCoordinates()
-        from = askNullableLocation("from")
+        from = askLocation("from")
         to = askLocation("to")
         distance = ask("distance", ToDouble) { it > 1 }
     }
@@ -74,11 +75,6 @@ class Asker: KoinComponent {
         name = ask("$Lname - name", ToString) { it != "" && it.length <= 496}
     }
 
-    private fun askNullableLocation(Lname: String): Location? {
-        val ans = ask("$Lname is nullable field. If you want to make it null, print \"yes\".", ToString) {true}
-        return if (ans == "yes") null
-        else askLocation(Lname)
-    }
     fun askLogin() = ask("Enter the username", ToString) { it != "" }
     fun askPassword() = ask("Enter the password", ToString) { it != "" }
 }

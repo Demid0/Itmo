@@ -2,7 +2,7 @@ package utils
 
 import systemCommands.*
 
-class SystemCommandInvoker {
+open class SystemCommandInvoker {
     private val commands = HashMap<String, SystemCommand<*>>()
 
     init {
@@ -12,9 +12,11 @@ class SystemCommandInvoker {
         addCommand(endClientSession)
         addCommand(readFromFile)
         addCommand(setUser)
+        addCommand(insertIntoTable)
+        addCommand(clearTable)
     }
 
-    fun invoke(listOfPacket: ArrayList<Packet>) {
+    open fun invoke(listOfPacket: ArrayList<Packet>) {
         listOfPacket.forEach { commands[it.commandName]!!.execute(it.arguments) }
     }
     fun addCommand(systemCommand: SystemCommand<*>) {

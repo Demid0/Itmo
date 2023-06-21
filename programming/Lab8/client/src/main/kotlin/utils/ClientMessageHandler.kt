@@ -13,13 +13,13 @@ import java.util.concurrent.LinkedBlockingQueue
 
 class ClientMessageHandler: KoinComponent {
     private val serializator: Serializator by inject()
-    private val consoleApp: ConsoleApp by inject()
+    private val app: App by inject()
     private val writerManager: WriterManager by inject()
     private val readerManager: ReaderManager by inject()
-    private val systemCommandInvoker: SystemCommandInvoker by inject()
+    val systemCommandInvoker: SystemCommandInvoker by inject()
     private val channel = DatagramChannel.open()
     private val balancerAddress = InetSocketAddress("localhost", 1488)
-    private val condition: Condition by inject()
+    val condition: Condition by inject()
     private val threadPool = LinkedBlockingQueue<Thread>()
 
     fun run() {
@@ -49,8 +49,7 @@ class ClientMessageHandler: KoinComponent {
         try {
             systemCommandInvoker.invoke(ans)
         } catch (e: SystemCommandInvocationException) {
-            println(e.stackTrace)
-            consoleApp.setDefaultCondition(e)
+            app.setDefaultCondition(e)
         }
     }
 
@@ -63,8 +62,8 @@ class ClientMessageHandler: KoinComponent {
     }
 
     fun getPacket(): Packet {
-        var packet = consoleApp.run(readerManager, writerManager)
-        while (packet == null) packet = consoleApp.run(readerManager, writerManager)
+        var packet = app.run(readerManager, writerManager)
+        while (packet == null) packet = app.run(readerManager, writerManager)
         return packet
     }
 

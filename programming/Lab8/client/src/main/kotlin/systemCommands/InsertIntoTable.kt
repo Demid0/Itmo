@@ -1,13 +1,13 @@
 package systemCommands
 
 import exceptions.SystemCommandInvocationException
-import utils.argToString
+import utils.argToRoute
 
-val printToClient = SystemCommand("print_to_client", argToString) {
-        singleArg ->
+val insertIntoTable = SystemCommand("insert_into_table", argToRoute) {
+    route ->
     try {
         val writer = writerManager.get()
-        writer.print(singleArg)
+        writer.print(route.toString())
         writer.flush()
     } catch (_: Exception) {
         throw SystemCommandInvocationException()

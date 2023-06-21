@@ -23,7 +23,8 @@ class DBHandler(
     fun checkUser(username: String, password: String): Long {
         return try {
             val query = "select * from users where username='$username'"
-            val res = executeQuery(query)
+            val res = executeQuery(query, false)
+            res.next()
             val pass = res.getString("password")
             if (pass != password) -1
             else res.getLong("id")

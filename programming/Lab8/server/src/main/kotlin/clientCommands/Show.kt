@@ -1,6 +1,6 @@
 package clientCommands
 
-import builders.printToClientPacket
+import builders.packet
 import commandArgumentsAndTheirsComponents.CommandType
 import commandArgumentsAndTheirsComponents.Visibility
 
@@ -13,12 +13,16 @@ import commandArgumentsAndTheirsComponents.Visibility
 val show = ClientCommand("show", CommandType.NO_ARG, Visibility.LOGGED_USER, {}) {
         user_id, _ ->
     val collection = collectionManager.collection
-    printToClientPacket (
-        if (collection.isEmpty()) "Collection is empty :("
-        else {
-            var out = "Collection:\n"
-            collection.sortedBy { it.getName() }.forEach { out += it.toString() + "\n" }
-            out.dropLast(1)
-        }
-    )
+    val packets = packet {
+        commandName = "clear_table"
+    }.wrapIntoArray()
+    collection.forEach {
+        packets.add(
+            packet {
+                commandName = "insert_into_table"
+                route(it)
+            }
+        )
+    }
+    packets
 }

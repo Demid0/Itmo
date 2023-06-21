@@ -10,8 +10,8 @@ import java.io.PrintWriter
 import kotlin.collections.ArrayDeque
 import kotlin.collections.HashMap
 
-class ConsoleApp: KoinComponent {
-    private val parseCommandAndAskArguments: parseCommandAndAskArguments by inject()
+class App: KoinComponent {
+    private val parseCommandAndAskArguments: ParseCommandAndAskArguments by inject()
     private val scriptStack: ArrayDeque<String> by inject()
     private val readerStack: HashMap<String, BufferedReader> by inject()
     private val writerManager: WriterManager by inject()
