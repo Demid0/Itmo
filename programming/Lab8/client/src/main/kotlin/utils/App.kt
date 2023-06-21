@@ -7,12 +7,12 @@ import java.io.BufferedReader
 import java.io.File
 import java.io.InputStreamReader
 import java.io.PrintWriter
-import kotlin.collections.ArrayDeque
+import java.util.concurrent.ArrayBlockingQueue
 import kotlin.collections.HashMap
 
 class App: KoinComponent {
     private val parseCommandAndAskArguments: ParseCommandAndAskArguments by inject()
-    private val scriptStack: ArrayDeque<String> by inject()
+    private val scriptStack: ArrayBlockingQueue<String> by inject()
     private val readerStack: HashMap<String, BufferedReader> by inject()
     private val writerManager: WriterManager by inject()
     private val readerManager: ReaderManager by inject()
@@ -36,7 +36,7 @@ class App: KoinComponent {
                 packet
             }
         } catch (e: NullPointerException) {
-            readerStack.remove(scriptStack.removeLast())
+            readerStack.remove(scriptStack.remove())
             if(scriptStack.isEmpty()) readerManager.set(BufferedReader(InputStreamReader(System.`in`)))
             return null
         }

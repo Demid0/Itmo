@@ -19,21 +19,20 @@ typealias ToType<T> = (input: String?) -> T
 class Asker(val GUI: Boolean = false): KoinComponent {
     private val writerManager : WriterManager by inject()
     private val readerManager : ReaderManager by inject()
-    private val writer: PrintWriter = writerManager.get()
-    private val reader: BufferedReader = readerManager.get()
 
     private fun <T> ask(
         printHint: String,
         converter: ToType<T>,
         checker: Predicate<T>
     ): T {
-        var output: T
+        val writer: PrintWriter = writerManager.get()
+        val reader: BufferedReader = readerManager.get()
+        val output: T
         writer.print("$printHint > ")
         writer.flush()
         while (true) {
             try {
                 var input = reader.readLine()
-                println(input)
                 input = if (input == "") null else input
                 output = converter(input)
                 if (checker.test(output)) break
@@ -42,6 +41,7 @@ class Asker(val GUI: Boolean = false): KoinComponent {
                 if (GUI) throw Exception()
                 writer.println("Incorrect input. Try again.")
                 writer.flush()
+                throw Exception()
             }
         }
         return output

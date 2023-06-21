@@ -28,7 +28,7 @@ class Route (private var name: String,
 
     override fun toString(): String {
         return "name: $name\ncoordinates: ${coordinates.toString()}\nfrom(Location): ${from.toString()}" +
-                "\nto(Location): ${to.toString()}\ndistance: $distance\nid: $id\ncreationDate: $creationDate\nowner:$owner_id"
+                "\nto(Location): ${to.toString()}\ndistance: $distance\nid: $id\ncreationDate: $creationDate\nowner:$owner_id\n"
     }
 
     fun getId(): Long = id

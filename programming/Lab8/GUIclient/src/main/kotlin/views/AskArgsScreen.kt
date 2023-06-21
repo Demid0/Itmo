@@ -15,6 +15,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import tornadofx.*
 import utils.SystemCommandInvoker
+import java.lang.Thread.sleep
 
 class AskArgsScreen(commandName: String, commandType: CommandType): View(commandName), KoinComponent {
     private val systemCommandInvoker by inject<SystemCommandInvoker>()
@@ -40,7 +41,10 @@ class AskArgsScreen(commandName: String, commandType: CommandType): View(command
                 with(this@AskArgsScreen.root) {
                     form {
                         fieldset {
-                            textfield(model.string_arg) { label(singleArgHints[commandName] ?: "") }.required()
+                            labelPosition = Orientation.VERTICAL
+                            field(singleArgHints[commandName] ?: "") {
+                                textfield(model.string_arg).required()
+                            }
                         }
                         buttonbar {
                             button("Enter") {
@@ -50,6 +54,7 @@ class AskArgsScreen(commandName: String, commandType: CommandType): View(command
                                             this.commandName = commandName
                                             string(model.string_arg.value)
                                         })
+                                        if (commandName == "execute_script") sleep(500)
                                         this@AskArgsScreen.replaceWith(
                                             MainScreen::class,
                                             ViewTransition.Slide(Duration(300.0)),
@@ -171,7 +176,8 @@ class AskArgsScreen(commandName: String, commandType: CommandType): View(command
                                         })
                                         this@AskArgsScreen.replaceWith(
                                             MainScreen::class,
-                                            ViewTransition.Slide(Duration(300.0))
+                                            ViewTransition.Slide(Duration(300.0)),
+                                            sizeToScene = true
                                         )
                                     } else {
                                         alert(Alert.AlertType.WARNING, "Wrong args type", "Check your input")
@@ -298,7 +304,8 @@ class AskArgsScreen(commandName: String, commandType: CommandType): View(command
                                         })
                                         this@AskArgsScreen.replaceWith(
                                             MainScreen::class,
-                                            ViewTransition.Slide(Duration(300.0))
+                                            ViewTransition.Slide(Duration(300.0)),
+                                            sizeToScene = true
                                         )
                                     } else {
                                         alert(Alert.AlertType.WARNING, "Wrong args type", "Check your input")
