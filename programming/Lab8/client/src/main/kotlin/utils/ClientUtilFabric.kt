@@ -6,6 +6,7 @@ import org.koin.dsl.module
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.PrintWriter
+import java.util.concurrent.ArrayBlockingQueue
 
 
 val clientKoinModule = module {
@@ -24,7 +25,7 @@ val clientKoinModule = module {
 
     single { SystemCommandInvoker() }
 
-    single { ArrayDeque<String>() }
+    single { ArrayBlockingQueue<String>(10000) }
 
     single { HashMap<String, BufferedReader>() }
 

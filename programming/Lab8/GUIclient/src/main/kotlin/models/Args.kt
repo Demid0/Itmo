@@ -1,5 +1,6 @@
 package models
 
+import app.MyApp
 import builders.route
 import javafx.beans.property.SimpleStringProperty
 import tornadofx.ValidationContext
@@ -60,17 +61,20 @@ class ArgsModel(args: Args): ViewModel() {
                 x != null && x > 0
             } catch (_: Exception) { false }
             ) ValidationMessage("", ValidationSeverity.Success)
-        else ValidationMessage("this field must be Double and more than 0", ValidationSeverity.Error)
+        else ValidationMessage(MyApp.getString("valid_error_1"), ValidationSeverity.Error)
+        //"this field must be Double and more than 0"
     }
     val route_name_valid: ValidationContext.(input: String?) -> ValidationMessage? = {
         input -> if (input != "" && input != null) ValidationMessage("", ValidationSeverity.Success)
-        else ValidationMessage("this field must be String with more than 0 length", ValidationSeverity.Error)
+        else ValidationMessage(MyApp.getString("valid_error_2"), ValidationSeverity.Error)
+        //"this field must be String with more than 0 length"
     }
     val coordinates_x_valid: ValidationContext.(input: String?) -> ValidationMessage? = {
         input ->
         val x = input?.toFloatOrNull()
         if (x == null || x <= 800) ValidationMessage("", ValidationSeverity.Success)
-        else ValidationMessage("this field must be null or Float less than 800", ValidationSeverity.Error)
+        else ValidationMessage(MyApp.getString("valid_error_3"), ValidationSeverity.Error)
+        //"this field must be null or Float less than 800"
     }
     val coordinates_y_valid: ValidationContext.(input: String?) -> ValidationMessage? = {
         input ->
@@ -81,7 +85,8 @@ class ArgsModel(args: Args): ViewModel() {
             } catch(_: Exception) {
                 false
             }) ValidationMessage("", ValidationSeverity.Success)
-        else ValidationMessage("this field must be null or Int", ValidationSeverity.Error)
+        else ValidationMessage(MyApp.getString("valid_error_4"), ValidationSeverity.Error)
+        //"this field must be null or Int"
     }
     val location_x_valid: ValidationContext.(input: String?) -> ValidationMessage? = {
             input ->
@@ -92,7 +97,8 @@ class ArgsModel(args: Args): ViewModel() {
             } catch(_: Exception) {
                 false
             }) ValidationMessage("", ValidationSeverity.Success)
-        else ValidationMessage("this field must be null or Int", ValidationSeverity.Error)
+        else ValidationMessage(MyApp.getString("valid_error_5"), ValidationSeverity.Error)
+        //"this field must be null or Int"
     }
     val location_y_valid: ValidationContext.(input: String?) -> ValidationMessage? = {
             input ->
@@ -103,7 +109,8 @@ class ArgsModel(args: Args): ViewModel() {
             } catch(_: Exception) {
                 false
             }) ValidationMessage("", ValidationSeverity.Success)
-        else ValidationMessage("this field must be Float", ValidationSeverity.Error)
+        else ValidationMessage(MyApp.getString("valid_error_6"), ValidationSeverity.Error)
+        //"this field must be Float"
     }
     val location_z_valid: ValidationContext.(input: String?) -> ValidationMessage? = {
             input ->
@@ -114,12 +121,14 @@ class ArgsModel(args: Args): ViewModel() {
             } catch(_: Exception) {
                 false
             }) ValidationMessage("", ValidationSeverity.Success)
-        else ValidationMessage("this field must be Long", ValidationSeverity.Error)
+        else ValidationMessage(MyApp.getString("valid_error_7"), ValidationSeverity.Error)
+        //"this field must be Long"
     }
     val location_name_valid: ValidationContext.(input: String?) -> ValidationMessage? = {
             input ->
         if (input != "" && input != null && input.length <= 496) ValidationMessage("", ValidationSeverity.Success)
-        else ValidationMessage("this field must be null or String with length in values (1, 496)", ValidationSeverity.Error)
+        else ValidationMessage(MyApp.getString("valid_error_8"), ValidationSeverity.Error)
+        //"this field must be null or String with length in values (1, 496)"
     }
     val distance_valid: ValidationContext.(input: String?) -> ValidationMessage? = {
             input ->
@@ -130,6 +139,7 @@ class ArgsModel(args: Args): ViewModel() {
             } catch(_: Exception) {
                 false
             }) ValidationMessage("", ValidationSeverity.Success)
-        else ValidationMessage("this field must be Double and more than 1", ValidationSeverity.Error)
+        else ValidationMessage(MyApp.getString("valid_error_9"), ValidationSeverity.Error)
+        //"this field must be Double and more than 1"
     }
 }

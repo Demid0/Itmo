@@ -1,22 +1,25 @@
 package views
 
+import app.MyApp
 import app.Style
 import tornadofx.*
 
-class StartScreen : View("Start") {
+class StartScreen : View(MyApp.getString("start")) {
     override val root = Form().addClass(Style.form)
 
     init {
+        setWindowMinSize(400, 0)
+        setWindowMaxSize(400, 0)
         with(root) {
             buttonbar {
-                button("login") {
+                button(MyApp.getString("login")) {
                     action {
-                        replaceWith(AuthScreen("login", "Wrong username or password"), sizeToScene = true)
+                        replaceWith(AuthScreen("login", MyApp.getString("login_error_hint")), sizeToScene = true)
                     }
                 }
-                button("sign_up") {
+                button(MyApp.getString("sign_up")) {
                     action {
-                        replaceWith(AuthScreen("sign_up", "User with this name already exists"), sizeToScene = true)
+                        replaceWith(AuthScreen("sign_up", MyApp.getString("sign_up_error_hint")), sizeToScene = true)
                     }
                 }
             }

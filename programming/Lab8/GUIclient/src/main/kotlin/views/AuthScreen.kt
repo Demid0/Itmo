@@ -1,5 +1,6 @@
 package views
 
+import app.MyApp
 import app.Style
 import clientMessageHandler
 import controllers.SetUserController
@@ -18,27 +19,25 @@ class AuthScreen(commandName: String, errorHint: String) : View() {
     private val model = UserModel(User())
     private val controller: SetUserController by inject()
     init {
-        title = commandName
-
         with(root) {
             fieldset {
                 labelPosition = Orientation.VERTICAL
-                field("Username") {
-                    textfield(model.username).required(message = "Insert your username")
+                field(MyApp.getString("username")) {
+                    textfield(model.username).required(message = MyApp.getString("username_required"))
                 }
-                field("Password") {
-                    passwordfield(model.password).required(message = "Insert your password")
+                field(MyApp.getString("password")) {
+                    passwordfield(model.password).required(message = MyApp.getString("password_required"))
                 }
             }
             buttonbar {
-                button("Enter") {
+                button(MyApp.getString("enter_button")) {
                     action {
                         exec(commandName, errorHint)
                     }
                 }
-                button("Go back") {
+                button(MyApp.getString("go_back_button")) {
                     action {
-                        replaceWith(StartScreen::class, sizeToScene = true)
+                        replaceWith(StartScreen(), sizeToScene = true)
                     }
                 }
             }
@@ -54,12 +53,13 @@ class AuthScreen(commandName: String, errorHint: String) : View() {
             } ui { (success, ans) ->
                 if (success) {
                     clientMessageHandler.invoke(ans.second)
-                    replaceWith(MainScreen::class, Slide(Duration(100.0)), sizeToScene = true)
+                    MyApp.usernameProperty.value = model.username.value
+                    replaceWith(MainScreen(), Slide(Duration(100.0)), sizeToScene = true)
                 }
                 else {
                     val header = if (ans.first) errorHint
-                    else "Server is dead"
-                    alert(Alert.AlertType.WARNING,"$commandName failed", header)
+                    else MyApp.getString("server_dead_error")
+                    alert(Alert.AlertType.WARNING,MyApp.getString("auth_failed"), header)
                 }
             }
         }

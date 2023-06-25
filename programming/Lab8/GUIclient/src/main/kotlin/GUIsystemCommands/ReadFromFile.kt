@@ -1,5 +1,6 @@
 package GUIsystemCommands
 
+import app.MyApp
 import clientMessageHandler
 import exceptions.RecursionException
 import exceptions.SystemCommandInvocationException
@@ -30,14 +31,13 @@ val readFromFile = SystemCommand("read_from_file", argToString) {
             readerStack.clear()
             scriptStack.clear()
             app.setDefaultCondition(e)
-            MainScreen.outputProperty.value = "Execution successful"
+            MainScreen.outputProperty.value = MyApp.getString("execution_successful")
         }
     } catch (e: SystemCommandInvocationException) {
         throw e
     } catch (_: FileNotFoundException) {
-        MainScreen.outputProperty.value = "File not found"
-        throw SystemCommandInvocationException("File not found")
+        MainScreen.outputProperty.value = MyApp.getString("file_not_found")
     } catch (_: Exception) {
-        throw SystemCommandInvocationException()
+        MainScreen.outputProperty.value = MyApp.getString("unknown_error")
     }
 }
