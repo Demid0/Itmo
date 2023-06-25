@@ -20,7 +20,6 @@ repositories {
 dependencies {
     implementation(project(":client"))
     implementation(project(":common"))
-    implementation(project(":server"))
 
     implementation("io.insert-koin:koin-core:3.3.3")
 

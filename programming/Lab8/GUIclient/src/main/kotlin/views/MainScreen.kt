@@ -89,7 +89,7 @@ class MainScreen : View(MyApp.getString("main")), KoinComponent {
                             button {
                                 action {
                                     hbox {
-                                        val toggle = togglegroup {
+                                        togglegroup {
                                             togglebutton("Russian") {
                                                 action {
                                                     MyApp.bundle = ResourceBundle.getBundle("messages", Locale("ru"))

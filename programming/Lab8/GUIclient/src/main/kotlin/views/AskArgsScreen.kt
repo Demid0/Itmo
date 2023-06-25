@@ -6,11 +6,9 @@ import builders.packet
 import clientMessageHandler
 import commandArgumentsAndTheirsComponents.CommandType
 import javafx.geometry.Orientation
-import javafx.scene.Scene
 import javafx.scene.control.Alert
 import javafx.scene.control.Button
 import javafx.scene.control.ScrollPane
-import javafx.stage.Stage
 import javafx.util.Duration
 import models.Args
 import models.ArgsModel
@@ -18,7 +16,6 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import tornadofx.*
 import utils.SystemCommandInvoker
-import java.lang.Thread.sleep
 
 class AskArgsScreen(commandName: String, commandType: CommandType): View(MyApp.getString(commandName)), KoinComponent {
     private val systemCommandInvoker by inject<SystemCommandInvoker>()
