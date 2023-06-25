@@ -9,15 +9,17 @@ import javafx.geometry.Orientation
 import javafx.scene.control.Alert
 import javafx.scene.control.Button
 import javafx.scene.control.ScrollPane
-import javafx.util.Duration
+import javafx.stage.Stage
 import models.Args
 import models.ArgsModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import tornadofx.*
 import utils.SystemCommandInvoker
+import utils.wrapInStage
 
 class AskArgsScreen(commandName: String, commandType: CommandType): View(MyApp.getString(commandName)), KoinComponent {
+    private lateinit var stage: Stage
     private val systemCommandInvoker by inject<SystemCommandInvoker>()
     private val model = ArgsModel(Args())
     override val root = ScrollPane().addClass(Style.form)
@@ -40,7 +42,6 @@ class AskArgsScreen(commandName: String, commandType: CommandType): View(MyApp.g
         }
         CommandType.SINGLE_ARG -> {
             {
-                it.replaceWith(this@AskArgsScreen, ViewTransition.Slide(Duration(200.0)), sizeToScene = true)
                 with(this@AskArgsScreen.root) {
                     form {
                         fieldset {
@@ -57,31 +58,24 @@ class AskArgsScreen(commandName: String, commandType: CommandType): View(MyApp.g
                                             this.commandName = commandName
                                             string(model.string_arg.value)
                                         })
-                                        this@AskArgsScreen.replaceWith(
-                                            MainScreen(),
-                                            ViewTransition.Slide(Duration(200.0)),
-                                            sizeToScene = true
-                                        )
+                                        stage.close()
                                     }
                                 }
                             }
                             button(MyApp.getString("go_back_button")) {
                                 action {
-                                    this@AskArgsScreen.replaceWith(
-                                        MainScreen(),
-                                        ViewTransition.Slide(Duration(200.0)),
-                                        sizeToScene = true
-                                    )
+                                    stage.close()
                                 }
                             }
                         }
                     }
                 }
+                stage = wrapInStage(this@AskArgsScreen)
+                stage.showAndWait()
             }
         }
         CommandType.OBJECT_ARG -> {
             {
-                it.replaceWith(this@AskArgsScreen, ViewTransition.Slide(Duration(200.0)), sizeToScene = true)
                 with(this@AskArgsScreen.root) {
                     form {
                         fieldset(MyApp.getString("route")) {
@@ -176,11 +170,7 @@ class AskArgsScreen(commandName: String, commandType: CommandType): View(MyApp.g
                                             this.commandName = commandName
                                             route(model.createRoute())
                                         })
-                                        this@AskArgsScreen.replaceWith(
-                                            MainScreen(),
-                                            ViewTransition.Slide(Duration(200.0)),
-                                            sizeToScene = true
-                                        )
+                                        stage.close()
                                     } else {
                                         alert(Alert.AlertType.WARNING, MyApp.getString("wrong_arg_type"), MyApp.getString("check_your_input"))
                                     }
@@ -188,21 +178,18 @@ class AskArgsScreen(commandName: String, commandType: CommandType): View(MyApp.g
                             }
                             button(MyApp.getString("go_back_button")) {
                                 action {
-                                    this@AskArgsScreen.replaceWith(
-                                        MainScreen(),
-                                        ViewTransition.Slide(Duration(200.0)),
-                                        sizeToScene = true
-                                    )
+                                    stage.close()
                                 }
                             }
                         }
                     }
                 }
+                stage = wrapInStage(this@AskArgsScreen)
+                stage.showAndWait()
             }
         }
         CommandType.MIXED_ARG -> {
             {
-                it.replaceWith(this@AskArgsScreen, ViewTransition.Slide(Duration(200.0)), sizeToScene = true)
                 with(this@AskArgsScreen.root) {
                     form {
                         fieldset {
@@ -294,41 +281,36 @@ class AskArgsScreen(commandName: String, commandType: CommandType): View(MyApp.g
                                     )
                                 }
                             }
-                            buttonbar {
-                                button(MyApp.getString("enter_button")) {
-                                    action {
-                                        if (model.commit()) {
-                                            clientMessageHandler.run(packet {
-                                                this.commandName = commandName
-                                                route(model.createRoute())
-                                            })
-                                            this@AskArgsScreen.replaceWith(
-                                                MainScreen(),
-                                                ViewTransition.Slide(Duration(200.0)),
-                                                sizeToScene = true
-                                            )
-                                        } else {
-                                            alert(
-                                                Alert.AlertType.WARNING,
-                                                MyApp.getString("wrong_arg_type"),
-                                                MyApp.getString("check_your_input")
-                                            )
-                                        }
-                                    }
-                                }
-                                button(MyApp.getString("go_back_button")) {
-                                    action {
-                                        this@AskArgsScreen.replaceWith(
-                                            MainScreen(),
-                                            ViewTransition.Slide(Duration(200.0)),
-                                            sizeToScene = true
+                        }
+                        buttonbar {
+                            button(MyApp.getString("enter_button")) {
+                                action {
+                                    if (model.commit()) {
+                                        clientMessageHandler.run(packet {
+                                            this.commandName = commandName
+                                            string(model.route_id.value)
+                                            route(model.createRoute())
+                                        })
+                                        stage.close()
+                                    } else {
+                                        alert(
+                                            Alert.AlertType.WARNING,
+                                            MyApp.getString("wrong_arg_type"),
+                                            MyApp.getString("check_your_input")
                                         )
                                     }
+                                }
+                            }
+                            button(MyApp.getString("go_back_button")) {
+                                action {
+                                    stage.close()
                                 }
                             }
                         }
                     }
                 }
+                stage = wrapInStage(this@AskArgsScreen)
+                stage.showAndWait()
             }
         }
         CommandType.VISIBILITY_ARG -> {
