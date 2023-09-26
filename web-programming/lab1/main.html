@@ -2,12 +2,12 @@
 <html lang="ru">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script src="script.js"></script>
+    <script src="responseAndRequest.js" defer></script>
     <title>Абоба</title>
 </head>
 <body>
 <h1>Рязанов Демид Витальевич P3221 вариант 3129</h1>
-<form action="script.php" method="get">
+<form id="form">
     <p><label id="X">
         <b>Выберите значение X</b><br>
         <input type="radio" name="X" value="-2" checked="checked"> -2 <br>
@@ -20,15 +20,25 @@
         <input type="radio" name="X" value="1.5"> 1.5 <br>
         <input type="radio" name="X" value="2"> 2 <br>
     </label></p>
-    <p><label for="Y">
+    <p><label>
         <b>Введите значение Y (-5..5)</b><br>
-        <input id="Y" type="text" onchange="validate()"><br>
+        <input name="Y" type="text" value="" onchange="validate()"><br>
     </label></p>
-    <p><label for="R">
+    <p><label>
         <b>Введите значение R (-2..5)</b><br>
-        <input id="R" type="text" onchange="validate()"><br>
+        <input name="R" type="text" value="" onchange="validate()"><br>
     </label></p>
     <input id="button" type="submit" value="Отправить" disabled>
 </form>
+<table id='result_table'>
+    <tr>
+        <th>X</th>
+        <th>Y</th>
+        <th>R</th>
+        <th>current time</th>
+        <th>execution time</th>
+        <th>result</th>
+    </tr>
+</table>
 </body>
 </html>
