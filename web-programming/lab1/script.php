@@ -6,9 +6,9 @@ session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET'){
     $initialTime = microtime(true);
-    $x = floatval($_GET['X']);
-    $y = floatval($_GET['Y']);
-    $r = floatval($_GET['R']);
+    $x = floatval($_GET['x']);
+    $y = floatval($_GET['y']);
+    $r = floatval($_GET['r']);
 
     if (validate($x, $y, $r)) {
         $result = isHit($x, $y, $r);
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'){
         $executionTime = number_format(($initialTime - $_SERVER['REQUEST_TIME_FLOAT'])*1000, 3);
 
         $receivedData = [
-            'X' => $x, 'Y' => $y, 'R' => $r,
+            'x' => $x, 'y' => $y, 'r' => $r,
             'currentTime' => $currentTime,
             'executionTime' => $executionTime,
             'result' => $result
@@ -25,11 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'){
         echo json_encode($receivedData);
         http_response_code(201);
     } else {
-        echo json_encode(['error' => 'invalid data']);
         http_response_code(400);
     }
 } else {
-    echo json_encode(['error' => 'missing data']);
     http_response_code(400);
 }
 
@@ -37,7 +35,7 @@ function validate($x, $y, $r) : bool {
     if (!(is_float($x) && is_float($y) && is_float($r))) return false;
     if (!(-2 <= $x && $x <= 2)) return false;
     if (!(-5 <= $y && $y <= 5)) return false;
-    if (!(-2 <= $r && $r <= 5)) return false;
+    if (!(2 <= $r && $r <= 5)) return false;
     return true;
 }
 
