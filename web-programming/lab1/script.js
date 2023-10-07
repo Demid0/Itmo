@@ -34,11 +34,11 @@ document.addEventListener('DOMContentLoaded', function () {
     let form = document.getElementById('form');
     form.addEventListener('submit', function (event) {
         event.preventDefault();
-        let x = document.querySelector('input[name="X"]').value.replace(',', '.');
-        let y = document.querySelector('input[name="Y"]').value.replace(',', '.');
-        let r = document.querySelector('input[name="R"]').value.replace(',', '.');
+        let x = document.querySelector('input[name="x"]').value.replace(',', '.');
+        let y = document.querySelector('input[name="y"]').value.replace(',', '.');
+        let r = document.querySelector('input[name="r"]').value.replace(',', '.');
 
-        fetch(`script.php?X=${x}&Y=${y}&R=${r}`, {
+        fetch(`script.php?x=${x}&y=${y}&r=${r}`, {
             method: 'GET'
         })
         .then(response => {
