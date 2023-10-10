@@ -19,7 +19,7 @@ form.addEventListener('submit', function (event) {
     let r = document.querySelector('input[name="r"]').value;
 
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', `index.php?x=${x}&y=${y}&r=${r}`, true);
+    xhr.open('GET', `php/index.php?x=${x}&y=${y}&r=${r}`, true);
     xhr.setRequestHeader('Content-type', 'application/json');
     xhr.onload = function () {
         if (xhr.status === 200) {
@@ -65,7 +65,7 @@ function putRowInTable(data){
 
 function displayResults() {
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'get_results.php', true);
+    xhr.open('GET', 'php/get_results.php', true);
     xhr.setRequestHeader('Content-type', 'application/json');
     xhr.onload = function () {
         if (xhr.status === 200) {
@@ -86,7 +86,7 @@ function displayResults() {
 
 function clearResults() {
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'clear_results.php', true);
+    xhr.open('GET', 'php/clear_results.php', true);
     xhr.send();
     clearTable();
 }
