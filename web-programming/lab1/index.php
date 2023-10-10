@@ -4,27 +4,42 @@ header("Access-Control-Allow-Origin: *");
 date_default_timezone_set('Europe/Moscow');
 session_start();
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET'){
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $initialTime = microtime(true);
-    $x = floatval($_GET['x']);
-    $y = floatval($_GET['y']);
-    $r = floatval($_GET['r']);
+    $x = $_GET['x'];
+    $y = $_GET['y'];
+    $r = $_GET['r'];
+
+    $previousData = $_SESSION['result_table'] ?? array();
 
     if (validate($x, $y, $r)) {
+        $x = floatval($x);
+        $y = floatval($y);
+        $r = floatval($r);
         $result = isHit($x, $y, $r);
         $currentTime = date('H:i:s');
         $executionTime = number_format(($initialTime - $_SERVER['REQUEST_TIME_FLOAT'])*1000, 3);
 
         $receivedData = [
-            'x' => $x, 'y' => $y, 'r' => $r,
+            'x' => $x,
+            'y' => $y,
+            'r' => $r,
             'currentTime' => $currentTime,
             'executionTime' => $executionTime,
             'result' => $result
         ];
-        header('Content-Type: application/json');
-        echo json_encode($receivedData);
-        http_response_code(201);
+
+        $_SESSION['result_table'][] = $receivedData;
+
+        http_response_code(200);
     } else {
+        $error = [
+            'message' => 'Неверные типы параметров или они не попадают в ограничения'
+        ];
+
+        header('Content-Type: application/json');
+        echo json_encode($error);
+
         http_response_code(400);
     }
 } else {
@@ -32,7 +47,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'){
 }
 
 function validate($x, $y, $r) : bool {
-    if (!(is_float($x) && is_float($y) && is_float($r))) return false;
+    if (!(is_numeric($x) && is_numeric($y) && is_numeric($r))) return false;
+    $x = floatval($x);
+    $y = floatval($y);
+    $r = floatval($r);
     if (!(-2 <= $x && $x <= 2)) return false;
     if (!(-5 <= $y && $y <= 5)) return false;
     if (!(2 <= $r && $r <= 5)) return false;

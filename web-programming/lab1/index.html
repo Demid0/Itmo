@@ -3,42 +3,56 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <script src="script.js" defer></script>
-    <title>Абоба</title>
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
+    <title>Первая лаба</title>
 </head>
 <body>
-<h1>Рязанов Демид Витальевич P3221 вариант 3129</h1>
-<form id="form">
-    <p><label id="x">
-        <b>Выберите значение X</b><br>
-        <input type="radio" name="X" value="-2" checked="checked"> -2 <br>
-        <input type="radio" name="X" value="-1.5"> -1.5 <br>
-        <input type="radio" name="X" value="-1"> -1 <br>
-        <input type="radio" name="X" value="-0.5"> -0.5 <br>
-        <input type="radio" name="X" value="0"> 0 <br>
-        <input type="radio" name="X" value="0.5"> 0.5 <br>
-        <input type="radio" name="X" value="1"> 1 <br>
-        <input type="radio" name="X" value="1.5"> 1.5 <br>
-        <input type="radio" name="X" value="2"> 2 <br>
-    </label></p>
-    <p><label>
-        <b>Введите значение Y (-5..5)</b><br>
-        <input name="y" type="text" value="" onchange="validate()"><br>
-    </label></p>
-    <p><label>
-        <b>Введите значение R (-2..5)</b><br>
-        <input name="r" type="text" value="" onchange="validate()"><br>
-    </label></p>
-    <input id="button" type="submit" value="Отправить" disabled>
-</form>
-<table id='result_table'>
-    <tr>
-        <th>X</th>
-        <th>Y</th>
-        <th>R</th>
-        <th>current time</th>
-        <th>execution time</th>
-        <th>result</th>
-    </tr>
-</table>
+<div id="header">
+    <h1>Рязанов Демид Витальевич P3221 вариант 3129</h1>
+</div>
+<div id="table">
+    <button id="clear_results" onclick="clearResults()">Очистить таблицу</button>
+    <table id='result_table'>
+        <tr>
+            <th>X</th>
+            <th>Y</th>
+            <th>R</th>
+            <th>Когда выполнялся</th>
+            <th>Время выполнения</th>
+            <th>Результат</th>
+        </tr>
+    </table>
+</div>
+<div id="image">
+    <img src="graph.png" alt="">
+</div>
+<div id="error_string">
+    <p></p>
+</div>
+<div id="form_div">
+    <form id="form">
+        <label>
+            <b>Выберите значение X</b><br>
+            <input type="radio" name="x" value="-2" checked="checked"> -2 <br>
+            <input type="radio" name="x" value="-1.5"> -1.5 <br>
+            <input type="radio" name="x" value="-1"> -1 <br>
+            <input type="radio" name="x" value="-0.5"> -0.5 <br>
+            <input type="radio" name="x" value="0"> 0 <br>
+            <input type="radio" name="x" value="0.5"> 0.5 <br>
+            <input type="radio" name="x" value="1"> 1 <br>
+            <input type="radio" name="x" value="1.5"> 1.5 <br>
+            <input type="radio" name="x" value="2"> 2 <br>
+        </label> <br>
+        <label>
+            <b>Введите значение Y (-5..5)</b><br>
+            <input name="y" type="text" value="" onchange="validate()"><br>
+        </label> <br>
+        <label>
+            <b>Введите значение R (2..5)</b><br>
+            <input name="r" type="text" value="" onchange="validate()"><br>
+        </label> <br>
+        <input id="send" type="submit" value="Отправить" disabled>
+    </form>
+</div>
 </body>
 </html>
