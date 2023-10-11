@@ -21,7 +21,7 @@ form.addEventListener('submit', function (event) {
     timezone = (timezone === 0 ? 0 : -timezone);
 
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', `php/index.php?x=${x}&y=${y}&r=${r}$timezone=${timezone}`, true);
+    xhr.open('GET', `php/index.php?x=${x}&y=${y}&r=${r}&timezone=${timezone}`, true);
     xhr.setRequestHeader('Content-type', 'application/json');
     xhr.onload = () => {
         if (xhr.status === 200) {
