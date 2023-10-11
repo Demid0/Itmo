@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $r = floatval($r);
         $result = isHit($x, $y, $r);
         $currentTime = date('H:i:s');
-        $executionTime = number_format(($initialTime - $_SERVER['REQUEST_TIME_FLOAT'])*1000, 3);
+        $executionTime = number_format($initialTime - $_SERVER['REQUEST_TIME_FLOAT'], 6);
 
         $receivedData = [
             'x' => $x,

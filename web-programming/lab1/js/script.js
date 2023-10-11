@@ -47,7 +47,7 @@ function clearTable() {
             <th>Y</th>
             <th>R</th>
             <th>Когда выполнялся</th>
-            <th>Время выполнения</th>
+            <th>Время выполнения, sec</th>
             <th>Результат</th>
         </tr>
     `;
