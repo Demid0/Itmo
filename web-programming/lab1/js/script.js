@@ -17,11 +17,13 @@ form.addEventListener('submit', function (event) {
     let x = document.querySelector('input[name="x"]:checked').value;
     let y = document.querySelector('input[name="y"]').value;
     let r = document.querySelector('input[name="r"]').value;
+    let timezone = new Date().getTimezoneOffset();
+    timezone = (timezone === 0 ? 0 : -timezone);
 
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', `php/index.php?x=${x}&y=${y}&r=${r}`, true);
+    xhr.open('GET', `php/index.php?x=${x}&y=${y}&r=${r}$timezone=${timezone}`, true);
     xhr.setRequestHeader('Content-type', 'application/json');
-    xhr.onload = function () {
+    xhr.onload = () => {
         if (xhr.status === 200) {
             displayResults();
             form.reset();
@@ -67,7 +69,7 @@ function displayResults() {
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'php/get_results.php', true);
     xhr.setRequestHeader('Content-type', 'application/json');
-    xhr.onload = function () {
+    xhr.onload = () => {
         if (xhr.status === 200) {
             clearTable();
             let previousResults = JSON.parse(xhr.responseText);

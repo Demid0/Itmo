@@ -1,7 +1,7 @@
 <?php
 
 header("Access-Control-Allow-Origin: *");
-date_default_timezone_set('Europe/Moscow');
+date_default_timezone_set(timezone_name_from_abbr("", $_GET['timezone']*60, false));
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
