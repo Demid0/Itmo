@@ -89,8 +89,17 @@ function displayResults() {
 function clearResults() {
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'php/clear_results.php', true);
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.onload = () => {
+        if (xhr.status === 200) {
+            clearTable();
+        }
+        else {
+            let err = JSON.parse(xhr.responseText);
+            showError(err.message, 2.5);
+        }
+    }
     xhr.send();
-    clearTable();
 }
 
 /* validating */
