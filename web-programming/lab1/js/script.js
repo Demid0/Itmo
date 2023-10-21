@@ -23,15 +23,17 @@ form.addEventListener('submit', function (event) {
     let xhr = new XMLHttpRequest();
     xhr.open('GET', `php/index.php?x=${x}&y=${y}&r=${r}&timezone=${timezone}`, true);
     xhr.setRequestHeader('Content-type', 'application/json');
-    xhr.onload = () => {
-        if (xhr.status === 200) {
-            displayResults();
-            form.reset();
-            buttonIsActive(false);
-        }
-        else {
-            let err = JSON.parse(xhr.responseText);
-            showError(err.message, 2.5);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                displayResults();
+                form.reset();
+                buttonIsActive(false);
+            }
+            else {
+                let err = JSON.parse(xhr.responseText);
+                showError(err.message, 2.5);
+            }
         }
     }
     xhr.send();
@@ -69,17 +71,18 @@ function displayResults() {
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'php/get_results.php', true);
     xhr.setRequestHeader('Content-type', 'application/json');
-    xhr.onload = () => {
-        if (xhr.status === 200) {
-            clearTable();
-            let previousResults = JSON.parse(xhr.responseText);
-            previousResults.forEach(row => {
-                putRowInTable(row);
-            });
-        }
-        else {
-            let err = JSON.parse(xhr.responseText);
-            showError(err.message, 2.5);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                clearTable();
+                let previousResults = JSON.parse(xhr.responseText);
+                previousResults.forEach(row => {
+                    putRowInTable(row);
+                });
+            } else {
+                let err = JSON.parse(xhr.responseText);
+                showError(err.message, 2.5);
+            }
         }
     };
     xhr.send();
@@ -90,13 +93,14 @@ function clearResults() {
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'php/clear_results.php', true);
     xhr.setRequestHeader('Content-type', 'application/json');
-    xhr.onload = () => {
-        if (xhr.status === 200) {
-            clearTable();
-        }
-        else {
-            let err = JSON.parse(xhr.responseText);
-            showError(err.message, 2.5);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                clearTable();
+            } else {
+                let err = JSON.parse(xhr.responseText);
+                showError(err.message, 2.5);
+            }
         }
     }
     xhr.send();
