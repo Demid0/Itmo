@@ -1,0 +1,94 @@
+body {
+    color: black;
+    background-color: white;
+}
+
+#header {
+    background-color: white;
+    font-size: 2rem;
+    padding: 8px 0;
+    position: sticky;
+}
+
+h1 {
+    color: #00386e;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+h1:first-letter {
+    color: black;
+    font-weight: bold;
+}
+
+form, table {
+    background-color: white;
+    padding: 0;
+}
+
+form {
+    height: 100%;
+    border: white solid 1px;
+    border-radius: 4px;
+}
+
+input {
+    background-color: white;
+    border: white solid 1px;
+    padding: 4px;
+}
+
+.disabled {
+    opacity: 0.6 !important;
+}
+
+label {
+    font-weight: bold;
+}
+
+#image, #form_div {
+    margin-left: 100px;
+}
+
+img[src="graph.png"] {
+    height: 400px;
+    width: 400px;
+}
+
+
+#error_string p {
+    margin-left: 100px;
+    color: red;
+}
+
+.r {
+    background-color: white;
+}
+
+.r:checked {
+    background-color: aqua;
+}
+
+th, td {
+    padding: 4px;
+    border: black solid 1px;
+}
+
+#table th {
+    text-align: center;
+    color: #00386e;
+    font-weight: bold;
+    margin: 0 auto;
+}
+
+#table {
+    margin: 0 auto;
+    width: 50%;
+    float: right;
+}
+
+#clear_results {
+    background-color: white;
+    border: white solid 1px;
+    padding: 4px;
+}
