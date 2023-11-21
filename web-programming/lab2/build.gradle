@@ -25,7 +25,7 @@ dependencies {
     compileOnly('jakarta.platform:jakarta.jakartaee-api:9.1.0')
     compileOnly('jakarta.mvc:jakarta.mvc-api:2.0.0')
     implementation ('org.json:json:20230227')
-
+    implementation("org.glassfish.web:jakarta.servlet.jsp.jstl:2.0.0-M1")
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }

@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:useBean id="table" class="lab2.Table" scope="session"/>
+
 <!DOCTYPE HTML>
 <html lang="ru">
 <head>
@@ -14,7 +17,6 @@
 </div>
 
 <div id="table">
-
     <button id="clear_results">Очистить таблицу</button> <%-- onclick="clearResults()" --%>
 
     <div id="response_error">
@@ -30,6 +32,16 @@
             <th>Время выполнения, sec</th>
             <th>Результат</th>
         </tr>
+        <c:forEach items="${table.rows}" var="row">
+            <tr>
+                <th>${row.x.toString()}</th>
+                <th>${row.y.toString()}</th>
+                <th>${row.r.toString()}</th>
+                <th>${row.localTime}</th>
+                <th>${row.executionTime}</th>
+                <th>${row.result.toString()}</th>
+            </tr>
+        </c:forEach>
     </table>
 
 </div>

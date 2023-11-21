@@ -17,10 +17,16 @@ public class AreaCheckServlet extends HttpServlet {
         float x = Float.parseFloat(request.getParameter("x"));
         float y = Float.parseFloat(request.getParameter("y"));
         float r = Float.parseFloat(request.getParameter("r"));
-        float currentTime;
-        float executionTime;
-        boolean hit;
-        checkArea(x, y, r);
+        String currentTime = "";
+        String executionTime = "";
+        boolean hit = checkArea(x, y, r);
+        Row newRow = new Row(x, y, r, currentTime, executionTime, hit);
+        Table table = (Table) request.getSession().getAttribute("table");
+        if (table == null) {
+            table = new Table();
+        }
+        table.addRow(newRow);
+        request.getSession().setAttribute("table", table);
         response.sendRedirect("/lab2-1.0-SNAPSHOT/");
     }
 
