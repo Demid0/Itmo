@@ -3,8 +3,7 @@
 <html lang="ru">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script src="js/script.js" defer></script>
+    <script type="module" src="./js/script.js"></script>
     <link rel="stylesheet" type="text/css" href="css/styles.css"/>
     <title>Вторая лаба</title>
 </head>
@@ -17,6 +16,10 @@
 <div id="table">
 
     <button id="clear_results">Очистить таблицу</button> <%-- onclick="clearResults()" --%>
+
+    <div id="response_error">
+        <p></p>
+    </div>
 
     <table id='result_table'>
         <tr>
@@ -37,11 +40,7 @@
 
 <div id="form_div">
 
-    <form id="form">
-
-        <div class="error_string">
-            <p></p>
-        </div>
+    <form id="form" action="controller" method="post">
 
         <label>
             <b>Выберите значение X</b><br>
@@ -52,30 +51,23 @@
             %>
         </label><br>
 
-        <div class="error_string">
-            <p></p>
-        </div>
-
         <label>
             <b>Введите значение Y (-3..5)</b><br>
             <input required name="y" type="text" maxlength="7"><br>
         </label><br>
 
-        <div class="error_string">
-            <p></p>
-        </div>
-
         <b>Введите значение R</b><br>
         <%
             for (int i = 1; i <= 5; i++) {
-                out.println("<input type=\"button\" class=\"r\" name=\"r\" value=\"" + i + "\" onclick=\"changeColor(this)\">");
+                out.println("<input type=\"button\" name=\"r_possible_values\" value=\"" + i + "\">");
             }
         %>
+        <input type="hidden" name="r" value="">
+        <input type="hidden" name="executionTime" value="<%=new java.util.Date()%>">
         <br>
-
-        <input id="send" type="submit" value="Отправить">
-
+        <input id="send" type="submit" value="Отправить" disabled>
     </form>
+
 </div>
 </body>
 </html>

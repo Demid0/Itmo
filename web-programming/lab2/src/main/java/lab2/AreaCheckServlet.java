@@ -7,15 +7,26 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+import static lab2.AreaFunctions.checkArea;
+
 public class AreaCheckServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        log("areaChecker.doPost");
+        float x = Float.parseFloat(request.getParameter("x"));
+        float y = Float.parseFloat(request.getParameter("y"));
+        float r = Float.parseFloat(request.getParameter("r"));
+        float currentTime;
+        float executionTime;
+        boolean hit;
+        checkArea(x, y, r);
+        response.sendRedirect("/lab2-1.0-SNAPSHOT/");
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        log("areaChecker.doGet");
         request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
     }
 }
