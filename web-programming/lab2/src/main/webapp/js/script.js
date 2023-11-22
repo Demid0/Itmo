@@ -62,3 +62,24 @@ function validateR() {
     });
     return bool;
 }
+
+document.getElementById("clear_results").addEventListener( 'click', () => {
+    $('#result_table').html(`
+        <tr>
+            <th>X</th>
+            <th>Y</th>
+            <th>R</th>
+            <th>Когда выполнялся</th>
+            <th>Время выполнения, sec</th>
+            <th>Результат</th>
+        </tr>`);
+
+    $.ajax({
+        type: "POST",
+        url: "clearTable",
+        async: false,
+        success: function (data) {
+            window.location.reload();
+        }
+    });
+});

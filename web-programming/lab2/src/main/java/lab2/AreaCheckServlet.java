@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import static lab2.AreaFunctions.checkArea;
 
-public class AreaCheckServlet extends HttpServlet {
+public class AreaCheckServlet extends MyServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,9 +30,4 @@ public class AreaCheckServlet extends HttpServlet {
         response.sendRedirect("/lab2-1.0-SNAPSHOT/");
     }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        log("areaChecker.doGet");
-        request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
-    }
 }

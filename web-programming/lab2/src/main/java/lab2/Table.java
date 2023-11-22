@@ -24,9 +24,7 @@ public class Table implements Serializable {
         this.rows.add(row);
    }
 
-    public void nullTable() {
-        this.rows = null;
-    }
+    public void clearTable() { this.rows = new ArrayList<>(); }
 
     public int getSize() {
         return rows.size();

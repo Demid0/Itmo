@@ -19,4 +19,12 @@
         <servlet-name>AreaCheckServlet</servlet-name>
         <url-pattern>/checker</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ClearTable</servlet-name>
+        <servlet-class>lab2.ClearTable</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ClearTable</servlet-name>
+        <url-pattern>/clearTable</url-pattern>
+    </servlet-mapping>
 </web-app>

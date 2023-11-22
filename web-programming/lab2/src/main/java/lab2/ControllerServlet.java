@@ -1,13 +1,11 @@
 package lab2;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class ControllerServlet extends HttpServlet {
-
+public class ControllerServlet extends MyServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         log("controller.doPost");
@@ -16,11 +14,4 @@ public class ControllerServlet extends HttpServlet {
             request.getParameter("x") != null) request.getRequestDispatcher("/checker").forward(request, response);
         else request.getRequestDispatcher("/err").forward(request, response);
     }
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        log("controller.doGet");
-        request.getRequestDispatcher("/index.jsp").forward(request, response);
-    }
-
-
 }
