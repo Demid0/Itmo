@@ -27,7 +27,7 @@ public class AreaCheckServlet extends MyServlet {
         }
         table.addRow(newRow);
         request.getSession().setAttribute("table", table);
-        response.sendRedirect("/lab2-1.0-SNAPSHOT/");
+        response.sendRedirect("/lab2-1.0-SNAPSHOT/table.jsp");
     }
 
 }

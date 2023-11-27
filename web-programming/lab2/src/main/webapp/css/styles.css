@@ -56,8 +56,7 @@ th {
 
 #table {
     margin: 0 auto;
-    width: 50%;
-    float: right;
+    width: 100%;
 }
 
 th {
@@ -77,18 +76,13 @@ label {
     margin-left: 100px;
 }
 
-img[src="graph.png"] {
-    height: 400px;
-    width: 400px;
-}
-
-#clear_results {
+button {
     background-color: white;
     border: var(--white) solid 1px;
     padding: 4px;
 }
 
-#response_error p {
-    margin-left: 100px;
-    color: red;
+#image {
+    float: left;
+    margin-right: 200px;
 }
