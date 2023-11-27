@@ -13,7 +13,7 @@ document.getElementById("clear_results").addEventListener( 'click', () => {
         type: "POST",
         url: "clearTable",
         async: false,
-        success: function (data) {
+        success: function () {
             window.location.reload();
         }
     });
