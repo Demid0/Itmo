@@ -1,4 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="table" class="lab2.Table" scope="session" />
 <html>
 <head>
     <title>Вторая лаба</title>
@@ -57,7 +59,9 @@
         <text x="324" y="408">-R/2</text>
         <text x="324" y="508">-R</text>
 
-
+        <c:forEach items="${table.rows}" var="point">
+            <circle class="${point.r}" r="3" cx="${300 + (200 * point.x) / point.r}" cy="${300 - (200 * point.y) / point.r}" fill="red" visibility="hidden"></circle>
+        </c:forEach>
     </svg>
 </div>
 

@@ -27,6 +27,27 @@ rButtons.forEach( button => {
         });
         button.style.background = 'green';
         rVal.value = button.value;
+
+        document.querySelectorAll("circle").forEach(circle => {
+            circle.style.visibility = 'hidden';
+        });
+        console.log(button.value);
+        let circles;
+        switch (button.value) {
+            case "1": {circles = document.querySelectorAll("circle[class='1.0']"); break;}
+            case "2": {circles = document.querySelectorAll("circle[class='2.0']"); break;}
+            case "3": {circles = document.querySelectorAll("circle[class='3.0']"); break;}
+            case "4": {circles = document.querySelectorAll("circle[class='4.0']"); break;}
+            case "5": {circles = document.querySelectorAll("circle[class='5.0']"); break;}
+        }
+        try {
+            circles.forEach(circle => {
+                circle.style.visibility = 'visible';
+            });
+        } catch (e) {
+            console.log("there are no circles with this R");
+        }
+
         validate();
     });
 });
