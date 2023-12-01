@@ -8,25 +8,12 @@ public class Table implements Serializable {
 
     public Table() {}
 
-    public Table(ArrayList<Row> rows) {
-        this.rows = rows;
-    }
-
     public ArrayList<Row> getRows() {
         return rows;
     }
-
-    public void setRows(ArrayList<Row> rows) {
-        this.rows = rows;
-    }
-
     public void  addRow(Row row) {
         this.rows.add(row);
    }
-
     public void clearTable() { this.rows = new ArrayList<>(); }
 
-    public int getSize() {
-        return rows.size();
-    }
 }
