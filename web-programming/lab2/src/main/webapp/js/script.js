@@ -38,15 +38,12 @@ rButtons.forEach( button => {
         } catch (e) {
             console.log("there are no circles");
         }
-
-        let circles;
-        switch (button.value) {
-            case "1": {circles = document.querySelectorAll("circle[class='1.0']"); break;}
-            case "2": {circles = document.querySelectorAll("circle[class='2.0']"); break;}
-            case "3": {circles = document.querySelectorAll("circle[class='3.0']"); break;}
-            case "4": {circles = document.querySelectorAll("circle[class='4.0']"); break;}
-            case "5": {circles = document.querySelectorAll("circle[class='5.0']"); break;}
-        }
+        let numero;
+        if (button.value.indexOf(",") === -1 && button.value.indexOf(".")) numero = button.value + ".0";
+        else numero = button.value;
+        let selector = "circle[class=\'" + numero + "\']";
+        console.log(parseFloat(button.value));
+        let circles = document.querySelectorAll(selector);
         try {
             circles.forEach(circle => {
                 circle.style.visibility = 'visible';
