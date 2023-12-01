@@ -3,7 +3,6 @@ const y = document.querySelector('input[name="y"]');
 const rButtons = document.querySelectorAll('input[name="r_possible_values"]');
 const rVal = document.querySelector('input[name="r"]');
 y.addEventListener('change', () => {
-    console.log(y.value);
     validate();
 });
 
@@ -31,7 +30,7 @@ rButtons.forEach( button => {
         document.querySelectorAll("circle").forEach(circle => {
             circle.style.visibility = 'hidden';
         });
-        console.log(button.value);
+
         let circles;
         switch (button.value) {
             case "1": {circles = document.querySelectorAll("circle[class='1.0']"); break;}
@@ -86,4 +85,26 @@ function validateR() {
 
 document.getElementById("go_to_table").addEventListener('click', () => {
     window.location.replace('/lab2-1.0-SNAPSHOT/table.jsp');
+});
+document.querySelector("svg").addEventListener('click', function (e) {
+    if (validateR()) {
+        let target = this.getBoundingClientRect();
+        let px = e.clientX - target.left;
+        let py = e.clientY - target.top;
+        let x = (px - 300) * rVal.value / 200;
+        let y = -(py - 300) * rVal.value / 200;
+        $.ajax({
+            type: "POST",
+            url: "controller",
+            async: true,
+            data: {
+                r: rVal.value,
+                y: y,
+                x: x
+            },
+            success: function () {
+                window.location.reload();
+            }
+        });
+    } else { alert("Please, choose the R"); }
 });
