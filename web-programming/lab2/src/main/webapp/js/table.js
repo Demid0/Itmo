@@ -14,7 +14,10 @@ clearResultsButton.addEventListener( 'click', () => {
 
     $.ajax({
         type: "POST",
-        url: "clearTable",
+        url: "controller",
+        data: {
+            query: "/clearTable"
+        },
         success: function () {
             window.location.reload();
         }
