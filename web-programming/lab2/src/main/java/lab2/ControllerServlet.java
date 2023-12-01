@@ -12,6 +12,8 @@ public class ControllerServlet extends MyServlet {
         if (request.getParameter("r") != null &&
             request.getParameter("y") != null &&
             request.getParameter("x") != null) request.getRequestDispatcher("/checker").forward(request, response);
-        else request.getRequestDispatcher("/err").forward(request, response);
+        else {
+            request.getRequestDispatcher("/lab2-1.0-SNAPSHOT/").forward(request, response);
+        }
     }
 }

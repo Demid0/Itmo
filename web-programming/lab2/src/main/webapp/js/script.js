@@ -2,6 +2,10 @@ const xCheckboxes = document.querySelectorAll('input[name="x"]');
 const y = document.querySelector('input[name="y"]');
 const rButtons = document.querySelectorAll('input[name="r_possible_values"]');
 const rVal = document.querySelector('input[name="r"]');
+const sendButton = document.getElementById("send");
+const goToTableButton = document.getElementById("go_to_table");
+const currentTime = document.querySelector('input[name="currentTime"]');
+const imagePlace = document.querySelector("svg");
 y.addEventListener('change', () => {
     validate();
 });
@@ -27,9 +31,13 @@ rButtons.forEach( button => {
         button.style.background = 'green';
         rVal.value = button.value;
 
-        document.querySelectorAll("circle").forEach(circle => {
-            circle.style.visibility = 'hidden';
-        });
+        try {
+            document.querySelectorAll("circle").forEach(circle => {
+                circle.style.visibility = 'hidden';
+            });
+        } catch (e) {
+            console.log("there are no circles");
+        }
 
         let circles;
         switch (button.value) {
@@ -57,7 +65,7 @@ function validate() {
 }
 
 function buttonIsActive(bool) {
-    document.getElementById("send").disabled = !bool;
+    sendButton.disabled = !bool;
 }
 
 function validateY() {
@@ -83,10 +91,11 @@ function validateR() {
     return bool;
 }
 
-document.getElementById("go_to_table").addEventListener('click', () => {
+goToTableButton.addEventListener('click', () => {
     window.location.replace('/lab2-1.0-SNAPSHOT/table.jsp');
 });
-document.querySelector("svg").addEventListener('click', function (e) {
+
+imagePlace.addEventListener('click', function (e) {
     if (validateR()) {
         let target = this.getBoundingClientRect();
         let px = e.clientX - target.left;
@@ -96,12 +105,11 @@ document.querySelector("svg").addEventListener('click', function (e) {
         $.ajax({
             type: "POST",
             url: "controller",
-            async: true,
             data: {
                 r: rVal.value,
                 y: y,
                 x: x,
-                currentTime: document.querySelector('input[name="currentTime"]').value
+                currentTime: currentTime.value
             },
             success: function () {
                 window.location.replace("/lab2-1.0-SNAPSHOT/table.jsp");
