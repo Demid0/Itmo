@@ -23,7 +23,7 @@
             <th>Y</th>
             <th>R</th>
             <th>Когда выполнялся</th>
-            <th>Время выполнения, sec</th>
+            <th>Время выполнения, ms</th>
             <th>Результат</th>
         </tr>
         <c:forEach items="${table.rows}" var="row">

@@ -100,10 +100,11 @@ document.querySelector("svg").addEventListener('click', function (e) {
             data: {
                 r: rVal.value,
                 y: y,
-                x: x
+                x: x,
+                currentTime: document.querySelector('input[name="currentTime"]').value
             },
             success: function () {
-                window.location.reload();
+                window.location.replace("/lab2-1.0-SNAPSHOT/table.jsp");
             }
         });
     } else { alert("Please, choose the R"); }

@@ -39,7 +39,7 @@
             }
         %>
         <input type="hidden" name="r" value="">
-        <input type="hidden" name="executionTime" value="<%=new java.util.Date()%>">
+        <input type="hidden" name="currentTime" value="<%=java.time.format.DateTimeFormatter.ofPattern("MM dd yyyy, hh:mm:ss").format(java.time.LocalDateTime.now())%>">
         <br>
         <input id="send" type="submit" value="Отправить" disabled>
     </form>

@@ -12,13 +12,14 @@ public class AreaCheckServlet extends MyServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         log("areaChecker.doPost");
-        float x = Float.parseFloat(request.getParameter("x"));
-        float y = Float.parseFloat(request.getParameter("y"));
-        float r = Float.parseFloat(request.getParameter("r"));
-        String currentTime = "";
-        String executionTime = "";
+        double start = System.currentTimeMillis();
+        double x = Double.parseDouble(request.getParameter("x"));
+        double y = Double.parseDouble(request.getParameter("y"));
+        double r = Double.parseDouble(request.getParameter("r"));
+        String currentTime = request.getParameter("currentTime");
         boolean hit = checkArea(x, y, r);
-        Row newRow = new Row(x, y, r, currentTime, executionTime, hit);
+        log(x + " " + y + " " + r + " " + hit);
+        Row newRow = new Row(x, y, r, currentTime, System.currentTimeMillis() - start, hit);
         Table table = (Table) request.getSession().getAttribute("table");
         if (table == null) {
             table = new Table();

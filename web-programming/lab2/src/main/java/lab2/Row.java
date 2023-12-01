@@ -3,17 +3,17 @@ package lab2;
 import java.io.Serializable;
 
 public class Row implements Serializable {
-    private float x;
-    private float y;
-    private float r;
+    private double x;
+    private double y;
+    private double r;
     private boolean result;
 
     private String localTime;
-    private String executionTime;
+    private double executionTime;
 
     public Row() {}
 
-    public Row(float x, float y, float r, String localTime, String executionTime, boolean result) {
+    public Row(double x, double y, double r, String localTime, double executionTime, boolean result) {
         this.x = x;
         this.y = y;
         this.r = r;
@@ -22,27 +22,27 @@ public class Row implements Serializable {
         this.result = result;
     }
 
-    public float getX() {
+    public double getX() {
         return x;
     }
 
-    public void setX(float x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public float getY() {
+    public double getY() {
         return y;
     }
 
-    public void setY(float y) {
+    public void setY(double y) {
         this.y = y;
     }
 
-    public float getR() {
+    public double getR() {
         return r;
     }
 
-    public void setR(float r) {
+    public void setR(double r) {
         this.r = r;
     }
 
@@ -62,11 +62,11 @@ public class Row implements Serializable {
         this.localTime = localTime;
     }
 
-    public String getExecutionTime() {
+    public double getExecutionTime() {
         return executionTime;
     }
 
-    public void setExecutionTime(String executionTime) {
+    public void setExecutionTime(double executionTime) {
         this.executionTime = executionTime;
     }
 
