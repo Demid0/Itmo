@@ -1,5 +1,6 @@
 package lab2;
 
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -10,7 +11,7 @@ import static lab2.AreaFunctions.checkArea;
 public class AreaCheckServlet extends MyServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         log("areaChecker.doPost");
         double start = System.currentTimeMillis();
         double x = Double.parseDouble(request.getParameter("x"));
@@ -26,7 +27,7 @@ public class AreaCheckServlet extends MyServlet {
         }
         table.addRow(newRow);
         request.getSession().setAttribute("table", table);
-        response.sendRedirect("/lab2-1.0-SNAPSHOT/table.jsp");
+        request.getRequestDispatcher("/table.jsp").forward(request, response);
     }
 
 }
