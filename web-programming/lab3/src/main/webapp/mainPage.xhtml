@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Третья лаба</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+    <script type="module" src="js/main.js"> </script>
+</h:head>
+<h:body>
+    <div id="form">
+        <h:form>
+            <div class="paramDiv">
+                <input id="xValue" type="hidden" value="#{chosen.x}"/>
+                <h:outputText value="Введите X" styleClass="h3"/><br/>
+                <ui:repeat value="#{choosingOptions.XValues}" var="value">
+                    <h:selectBooleanCheckbox id="x#{value}" styleClass="xValueOption"/><h:outputText styleClass="optionsLabels" value="#{value}"/><br/>
+                </ui:repeat>
+            </div>
+            <div class="paramDiv">
+                <input id="yValue" type="hidden" value="#{chosen.y}"/>
+                <h:outputText value="Введите Y" styleClass="h3"/><br/>
+                <h:inputText value="#{chosen.y}" required="true" maxlength="7" requiredMessage="Введите y">
+                    <!--TODO()-->
+                    <f:validateDoubleRange minimum="-3" maximum="5"/>
+                </h:inputText>
+            </div>
+            <div class="paramDiv">
+                <input id="rValue" type="hidden" value="#{chosen.r}"/>
+                <h:outputText value="Введите R" styleClass="h3"/><br/>
+                <ui:repeat value="#{choosingOptions.RValues}" var="value">
+                    <!--TODO()-->
+                    <h:button id="r#{value}" value="#{value}" styleClass="rValueOption"/><br/>
+                </ui:repeat>
+            </div>
+        </h:form>
+    </div>
+    <div id="image">
+        <h:form>
+
+        </h:form>
+    </div>
+    <div id="table">
+        <h:form>
+
+        </h:form>
+    </div>
+</h:body>
+</html>

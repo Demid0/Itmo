@@ -1,0 +1,138 @@
+:root {
+    --white: #e2e8f0;
+    --black: #020617;
+    --primary: #00386e;
+    padding: 15px;
+}
+
+body {
+    color: var(--black);
+    background-color: var(--white);
+}
+
+body * {
+    margin: 0 0 10px 10px;
+}
+
+#header {
+    background-color: var(--white);
+    font-size: 2rem;
+    padding: 8px 0;
+    position: sticky;
+}
+
+.h1 {
+    color: var(--primary);
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 500%;
+}
+
+.h2 {
+    color: var(--primary);
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 300%;
+}
+
+.time {
+    color: var(--black);
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 300%;
+}
+
+.navigationLink {
+    color: var(--primary);
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 300%;
+}
+
+.navigationLink:hover {
+    color: var(--primary);
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 700%;
+}
+
+#navigationLink {
+    position: absolute;
+    left: 45%;
+    top: 45%;
+}
+
+#form {
+    border: 5px var(--primary) solid;
+}
+
+form {
+    margin-top: 10px;
+}
+.paramDiv, #form {
+    display: inline-block;
+    padding-right: 10px;
+}
+
+/*
+form, table {
+    background-color: var(--white);
+    padding: 0;
+}
+
+form {
+    height: 100%;
+    border: var(--white) solid 1px;
+    border-radius: 4px;
+}
+
+input {
+    background-color: white;
+    border: var(--white) solid 1px;
+    padding: 4px;
+}
+
+th, td {
+    padding: 4px;
+    border: var(--black) solid 1px;
+}
+
+th {
+    text-align: center;
+    color: var(--primary);
+}
+
+#table {
+    margin: 0 auto;
+    width: 100%;
+}
+
+th {
+    font-weight: bold;
+    margin: 0 auto;
+}
+
+.disabled {
+    opacity: 0.6 !important;
+}
+
+label {
+    font-weight: bold;
+}
+
+#image, #form_div {
+    margin-left: 100px;
+}
+
+button {
+    background-color: white;
+    border: var(--white) solid 1px;
+    padding: 4px;
+}
+
+#image {
+    float: left;
+    margin-right: 200px;
+}
+
+ */
