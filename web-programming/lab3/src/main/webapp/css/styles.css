@@ -35,6 +35,13 @@ body * {
     font-size: 300%;
 }
 
+.h3 {
+    color: var(--primary);
+    font-weight: bolder;
+    font-family: monospace;
+    font-size: 150%;
+}
+
 .time {
     color: var(--black);
     font-weight: bold;
@@ -46,24 +53,18 @@ body * {
     color: var(--primary);
     font-weight: bold;
     font-family: monospace;
-    font-size: 300%;
-}
-
-.navigationLink:hover {
-    color: var(--primary);
-    font-weight: bold;
-    font-family: monospace;
     font-size: 700%;
 }
 
 #navigationLink {
     position: absolute;
-    left: 45%;
-    top: 45%;
+    left: 40%;
+    top: 40%;
 }
 
 #form {
-    border: 5px var(--primary) solid;
+    background-color: #cadaef;
+    border: 3px var(--primary) solid;
 }
 
 form {
@@ -74,65 +75,12 @@ form {
     padding-right: 10px;
 }
 
-/*
-form, table {
-    background-color: var(--white);
-    padding: 0;
+.rValueOption, .yValueOption, .xValueOption {
+    background: var(--white);
+    border: 1px var(--primary) solid;
 }
 
-form {
-    height: 100%;
-    border: var(--white) solid 1px;
-    border-radius: 4px;
+.rValueOption:hover {
+    background: #cadaff;
+    border: 1px var(--primary) solid;
 }
-
-input {
-    background-color: white;
-    border: var(--white) solid 1px;
-    padding: 4px;
-}
-
-th, td {
-    padding: 4px;
-    border: var(--black) solid 1px;
-}
-
-th {
-    text-align: center;
-    color: var(--primary);
-}
-
-#table {
-    margin: 0 auto;
-    width: 100%;
-}
-
-th {
-    font-weight: bold;
-    margin: 0 auto;
-}
-
-.disabled {
-    opacity: 0.6 !important;
-}
-
-label {
-    font-weight: bold;
-}
-
-#image, #form_div {
-    margin-left: 100px;
-}
-
-button {
-    background-color: white;
-    border: var(--white) solid 1px;
-    padding: 4px;
-}
-
-#image {
-    float: left;
-    margin-right: 200px;
-}
-
- */

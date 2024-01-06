@@ -3,50 +3,56 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Третья лаба</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css"/>
-    <script type="module" src="js/main.js"> </script>
 </h:head>
 <h:body>
-    <div id="form">
-        <h:form>
+    <h:form>
+        <div id="form">
             <div class="paramDiv">
-                <input id="xValue" type="hidden" value="#{chosen.x}"/>
                 <h:outputText value="Введите X" styleClass="h3"/><br/>
-                <ui:repeat value="#{choosingOptions.XValues}" var="value">
-                    <h:selectBooleanCheckbox id="x#{value}" styleClass="xValueOption"/><h:outputText styleClass="optionsLabels" value="#{value}"/><br/>
-                </ui:repeat>
+                <h:selectOneRadio id="xValue" value="#{chosen.x}" styleClass="xValueOption" layout="pageDirection">
+                    <f:selectItems value="#{chosen.XValues}"/>
+                    <f:ajax render="@form"/>
+                </h:selectOneRadio>
             </div>
             <div class="paramDiv">
-                <input id="yValue" type="hidden" value="#{chosen.y}"/>
                 <h:outputText value="Введите Y" styleClass="h3"/><br/>
-                <h:inputText value="#{chosen.y}" required="true" maxlength="7" requiredMessage="Введите y">
-                    <!--TODO()-->
-                    <f:validateDoubleRange minimum="-3" maximum="5"/>
+                <h:inputText id="yValue" value="#{chosen.y}" styleClass="yValueOption" maxlength="7">
+                    <f:ajax render="@form"/>
                 </h:inputText>
             </div>
             <div class="paramDiv">
-                <input id="rValue" type="hidden" value="#{chosen.r}"/>
                 <h:outputText value="Введите R" styleClass="h3"/><br/>
-                <ui:repeat value="#{choosingOptions.RValues}" var="value">
-                    <!--TODO()-->
-                    <h:button id="r#{value}" value="#{value}" styleClass="rValueOption"/><br/>
-                </ui:repeat>
+                <p:selectOneButton id="rValue" value="#{chosen.r}" styleClass="rValueOption">
+                    <f:selectItems value="#{chosen.RValues}"/>
+                    <f:ajax render="@form"/>
+                </p:selectOneButton>
             </div>
-        </h:form>
-    </div>
-    <div id="image">
-        <h:form>
+            <div>
+                <h:commandButton value="Submit"
+                                 disabled="#{!chosen.xIsValid()
+                                 || !chosen.yIsValid()
+                                 || !chosen.rIsValid()}"
+                                 id="submit">
+                    <f:ajax onevent="document.querySelectorAll('.ans').forEach(it => console.log(it.innerHTML))"/>
+                </h:commandButton>
+            </div>
+            <div class="paramDiv">
+                <h:outputText value="Вы бранные значения"/><br/>
+                <h:outputText value="#{chosen.x}" styleClass="ans"/><br/>
+                <h:outputText value="#{chosen.y}" styleClass="ans"/><br/>
+                <h:outputText value="#{chosen.r}" styleClass="ans"/>
+            </div>
+        </div>
+        <div id="image">
+        </div>
+        <div id="table">
 
-        </h:form>
-    </div>
-    <div id="table">
-        <h:form>
-
-        </h:form>
-    </div>
+        </div>
+    </h:form>
 </h:body>
 </html>
