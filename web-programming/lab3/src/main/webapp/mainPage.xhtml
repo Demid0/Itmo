@@ -12,41 +12,35 @@
 <h:body>
     <h:form>
         <div id="form">
-            <div class="paramDiv">
-                <h:outputText value="Введите X" styleClass="h3"/><br/>
-                <h:selectOneRadio id="xValue" value="#{chosen.x}" styleClass="xValueOption" layout="pageDirection">
-                    <f:selectItems value="#{chosen.XValues}"/>
-                    <f:ajax render="@form"/>
+            <div class="xInput">
+                <h:outputLabel for="xValue" value="Введите X" styleClass="h3"/><br/>
+                <h:selectOneRadio id="xValue" value="#{xBean.value}" layout="pageDirection">
+                    <f:selectItems value="#{xBean.possibleValues}"/>
+                    <f:ajax execute="xValue" render="@form"/>
                 </h:selectOneRadio>
             </div>
-            <div class="paramDiv">
-                <h:outputText value="Введите Y" styleClass="h3"/><br/>
-                <h:inputText id="yValue" value="#{chosen.y}" styleClass="yValueOption" maxlength="7">
-                    <f:ajax render="@form"/>
+            <div class="yInput">
+                <h:outputLabel for="yValue" value="Введите Y" styleClass="h3"/><br/>
+                <h:inputText id="yValue" value="#{yBean.value}" maxlength="7" required="true" validatorMessage="#{yBean.message}" requiredMessage="#{yBean.message}" converterMessage="#{yBean.message}">
+                    <f:converter for="yValue" converterId="jakarta.faces.Double"/>
+                    <f:validateDoubleRange for="yValue" minimum="#{yBean.minimum}" maximum="#{yBean.maximum}"/>
+                    <f:ajax execute="yValue" render="@form"/>
                 </h:inputText>
             </div>
-            <div class="paramDiv">
-                <h:outputText value="Введите R" styleClass="h3"/><br/>
-                <p:selectOneButton id="rValue" value="#{chosen.r}" styleClass="rValueOption">
-                    <f:selectItems value="#{chosen.RValues}"/>
-                    <f:ajax render="@form"/>
+            <div class="rInput">
+                <h:outputLabel for="rValue" value="Введите R" styleClass="h3"/><br/>
+                <p:selectOneButton id="rValue" value="#{rBean.value}">
+                    <f:selectItems value="#{rBean.possibleValues}"/>
+                    <f:ajax execute="rValue" render="@form"/>
                 </p:selectOneButton>
             </div>
-            <div>
-                <h:commandButton value="Submit"
-                                 disabled="#{!chosen.xIsValid()
-                                 || !chosen.yIsValid()
-                                 || !chosen.rIsValid()}"
-                                 id="submit">
-                    <f:ajax onevent="document.querySelectorAll('.ans').forEach(it => console.log(it.innerHTML))"/>
+            <div class="submitButtom">
+                <h:commandButton value="Submit" id="submit" rendered="#{xBean.isValid() and yBean.isValid() and rBean.isValid()}">
+                    <f:ajax execute="@form" for="submit" listener="#{hitChecker.check(xBean.value, yBean.value, rBean.value)}" render="@form"/>
                 </h:commandButton>
             </div>
-            <div class="paramDiv">
-                <h:outputText value="Вы бранные значения"/><br/>
-                <h:outputText value="#{chosen.x}" styleClass="ans"/><br/>
-                <h:outputText value="#{chosen.y}" styleClass="ans"/><br/>
-                <h:outputText value="#{chosen.r}" styleClass="ans"/>
-            </div>
+            <h:outputText id="chosen" value="Выбранные значения: x = #{xBean.value}, y = #{yBean.value}, r = #{rBean.value}."/><br/>
+            <p:messages id="messages" showSummary="true" showDetail="false" autoUpdate="true" rendered="#{not (xBean.isValid()  and yBean.isValid() and rBean.isValid())}"/>
         </div>
         <div id="image">
         </div>
