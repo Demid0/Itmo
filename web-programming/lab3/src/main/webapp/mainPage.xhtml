@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
     <title>Третья лаба</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css"/>
@@ -21,7 +22,10 @@
             </div>
             <div class="yInput">
                 <h:outputLabel for="yValue" value="Введите Y" styleClass="h3"/><br/>
-                <h:inputText id="yValue" value="#{yBean.value}" maxlength="7" required="true" validatorMessage="#{yBean.message}" requiredMessage="#{yBean.message}" converterMessage="#{yBean.message}">
+                <h:inputText id="yValue" value="#{yBean.value}" maxlength="7"
+                             required="true" requiredMessage="#{yBean.message}"
+                             converterMessage="#{yBean.message}" validatorMessage="#{yBean.message}">
+                    <f:validateRequired for="yValue"/>
                     <f:converter for="yValue" converterId="jakarta.faces.Double"/>
                     <f:validateDoubleRange for="yValue" minimum="#{yBean.minimum}" maximum="#{yBean.maximum}"/>
                     <f:ajax execute="yValue" render="@form"/>
@@ -29,9 +33,10 @@
             </div>
             <div class="rInput">
                 <h:outputLabel for="rValue" value="Введите R" styleClass="h3"/><br/>
-                <p:selectOneButton id="rValue" value="#{rBean.value}">
+                <p:selectOneButton id="rValue" value="#{rBean.value}" required="true" requiredMessage="Выберите R">
                     <f:selectItems value="#{rBean.possibleValues}"/>
-                    <f:ajax execute="rValue" render="@form"/>
+                    <f:validateRequired for="rValue"/>
+                    <f:ajax execute="rValue" listener="#{hitChecker.showPoints(rBean.value)}" render="@form"/>
                 </p:selectOneButton>
             </div>
             <div class="submitButtom">
@@ -40,12 +45,90 @@
                 </h:commandButton>
             </div>
             <h:outputText id="chosen" value="Выбранные значения: x = #{xBean.value}, y = #{yBean.value}, r = #{rBean.value}."/><br/>
-            <p:messages id="messages" showSummary="true" showDetail="false" autoUpdate="true" rendered="#{not (xBean.isValid()  and yBean.isValid() and rBean.isValid())}"/>
+            <p:messages id="messages" showSummary="true" showDetail="false" autoUpdate="true" rendered="#{not (xBean.isValid() and yBean.isValid() and rBean.isValid())}"/>
         </div>
         <div id="image">
+            <svg width="600px" height="600px">
+
+                <!-- arrows -->
+                <polygon points="300,0 290,20 310,20" stroke="#2c2d2a"/>
+                <polygon points="600,300 580,290 580,310" stroke="#2c2d2a"/>
+
+                <!-- rectangle -->
+                <polygon points="100,100 100,300 300,300 300,100" fill="#0783ff"/>
+
+                <!-- triangle -->
+                <polygon points="100,300 300,300 300,400" fill="#0783ff"/>
+
+                <!-- circle -->
+                <path d="M 400,300 A 100,100 90 0,1 300,400 L 300,300 Z" fill="#0783ff"/>
+
+                <!-- axis -->
+                <line x1="0" x2="600" y1="300" y2="300" stroke="#2c2d2a"/>
+                <line x1="300" x2="300" y1="0" y2="600" stroke="#2c2d2a"/>
+
+                <!-- labels on the axis x -->
+                <line x1="100" x2="100" y1="290" y2="310" stroke="#2c2d2a"/>
+                <line x1="200" x2="200" y1="290" y2="310" stroke="#2c2d2a"/>
+                <line x1="400" x2="400" y1="290" y2="310" stroke="#2c2d2a"/>
+                <line x1="500" x2="500" y1="290" y2="310" stroke="#2c2d2a"/>
+
+                <!-- labels on the axis y -->
+                <line x1="290" x2="310" y1="100" y2="100" stroke="#2c2d2a"/>
+                <line x1="290" x2="310" y1="200" y2="200" stroke="#2c2d2a"/>
+                <line x1="290" x2="310" y1="400" y2="400" stroke="#2c2d2a"/>
+                <line x1="290" x2="310" y1="500" y2="500" stroke="#2c2d2a"/>
+
+                <!-- axis labels -->
+                <text x="580" y="280">x</text>
+                <text x="310" y="20">y</text>
+
+                <!-- R values on the axis x -->
+                <text x="80" y="276"><h:outputText value="#{-rBean.value}"/></text>
+                <text x="170" y="276"><h:outputText value="#{-rBean.value/2}"/></text>
+                <text x="380" y="276"><h:outputText value="#{rBean.value/2}"/></text>
+                <text x="490" y="276"><h:outputText value="#{rBean.value}"/></text>
+
+                <!-- R values on the axis y -->
+                <text x="324" y="508"><h:outputText value="#{-rBean.value}"/></text>
+                <text x="324" y="408"><h:outputText value="#{-rBean.value/2}"/></text>
+                <text x="324" y="208"><h:outputText value="#{rBean.value/2}"/></text>
+                <text x="324" y="108"><h:outputText value="#{rBean.value}"/></text>
+
+                <ui:repeat value="#{hitChecker.history}" var="point">
+                    <circle class="#{point.r}" r="3"
+                            cx="#{300 + (200 * point.x) / point.r}"
+                            cy="#{300 - (200 * point.y) / point.r}"
+                            fill="#{point.color}"
+                            visibility="#{point.visibility}">
+                    </circle>
+                </ui:repeat>
+
+            </svg>
         </div>
         <div id="table">
-
+            <h:dataTable value="#{hitChecker.history}" var="point">
+                <h:column>
+                    <f:facet name="header">X</f:facet>
+                    #{point.x}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Y</f:facet>
+                    #{point.y}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">R</f:facet>
+                    #{point.r}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Текущее время</f:facet>
+                    #{point.currentTime}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Результат</f:facet>
+                    #{point.result}
+                </h:column>
+            </h:dataTable>
         </div>
     </h:form>
 </h:body>
