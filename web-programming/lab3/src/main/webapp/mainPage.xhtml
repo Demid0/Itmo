@@ -134,7 +134,6 @@
         <p:remoteCommand name="send" update="@form" action="#{hitChecker.checkFromSVG()}"/>
         <script type="text/javascript">
             function checkFromSVG(e) {
-                console.log("aboba");
                 let target = document.querySelector("svg").getBoundingClientRect();
                 let r = document.getElementById("form:rVal");
                 if (!(r.value == null || isNaN(r.value))) {
