@@ -1,9 +1,11 @@
 package itmo.web.lab3
 
 import jakarta.enterprise.context.SessionScoped
+import jakarta.faces.context.FacesContext
 import jakarta.inject.Named
 import java.io.Serializable
 import java.time.LocalDateTime
+
 
 @Named
 @SessionScoped
@@ -14,6 +16,21 @@ class HitChecker: Serializable {
         val point = Point(x, y, r, LocalDateTime.now().toString(), isInArea(x, y, r))
         history.add(point)
         showPoints(r)
+    }
+    fun checkFromSVG() {
+        val params = FacesContext.getCurrentInstance().externalContext.requestParameterMap
+        try {
+            val x = params["x"]!!.toDouble()
+            val y = params["y"]!!.toDouble()
+            val r = params["r"]!!.toDouble()
+            check(x, y, r)
+        } catch (e: NullPointerException) {
+            println(e.message)
+            return
+        } catch (e: NumberFormatException) {
+            println(e.message)
+            return
+        }
     }
     fun showPoints(r: Double) = history.forEach { it.visibility = if(r == it.r) "visible" else "hidden" }
     private fun isInArea(x: Double, y: Double, r: Double) = isInTriangle(x, y, r) || isInCircle(x, y, r) || isInRectangle(x, y, r)

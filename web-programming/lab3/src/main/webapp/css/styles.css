@@ -80,7 +80,7 @@ form {
     border: 1px var(--primary) solid;
 }
 
-.rValueOption:hover {
-    background: #cadaff;
-    border: 1px var(--primary) solid;
+div[id="form:rValue"] .ui-state-active {
+    cursor: not-allowed;
+    pointer-events: none;
 }

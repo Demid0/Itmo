@@ -11,8 +11,8 @@
     <link rel="stylesheet" type="text/css" href="css/styles.css"/>
 </h:head>
 <h:body>
-    <h:form>
-        <div id="form">
+    <h:form id="form">
+        <div id="valuesInput">
             <div class="xInput">
                 <h:outputLabel for="xValue" value="Введите X" styleClass="h3"/><br/>
                 <h:selectOneRadio id="xValue" value="#{xBean.value}" layout="pageDirection">
@@ -38,6 +38,7 @@
                     <f:validateRequired for="rValue"/>
                     <f:ajax execute="rValue" listener="#{hitChecker.showPoints(rBean.value)}" render="@form"/>
                 </p:selectOneButton>
+                <h:inputHidden id="rVal" value="#{rBean.value}"/>
             </div>
             <div class="submitButtom">
                 <h:commandButton value="Submit" id="submit" rendered="#{xBean.isValid() and yBean.isValid() and rBean.isValid()}">
@@ -48,7 +49,7 @@
             <p:messages id="messages" showSummary="true" showDetail="false" autoUpdate="true" rendered="#{not (xBean.isValid() and yBean.isValid() and rBean.isValid())}"/>
         </div>
         <div id="image">
-            <svg width="600px" height="600px">
+            <svg width="600px" height="600px" onclick="checkFromSVG(event)">
 
                 <!-- arrows -->
                 <polygon points="300,0 290,20 310,20" stroke="#2c2d2a"/>
@@ -130,6 +131,23 @@
                 </h:column>
             </h:dataTable>
         </div>
+        <p:remoteCommand name="send" update="@form" action="#{hitChecker.checkFromSVG()}"/>
+        <script type="text/javascript">
+            function checkFromSVG(e) {
+                console.log("aboba");
+                let target = document.querySelector("svg").getBoundingClientRect();
+                let r = document.getElementById("form:rVal");
+                if (!(r.value == null || isNaN(r.value))) {
+                    let px = e.clientX - target.left;
+                    let py = e.clientY - target.top;
+                    let x = ((px - 300) * r.value / 200).toFixed(2);
+                    let y = (-(py - 300) * r.value / 200).toFixed(2);
+                    document.getElementById("form:xValue").value = x;
+                    document.getElementById("form:yValue").value = y;
+                    send([{name: "x", value: x}, {name: "y", value: y}, {name: "r", value: r.value}]);
+                }
+            }
+        </script>
     </h:form>
 </h:body>
 </html>
