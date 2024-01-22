@@ -24,8 +24,6 @@ class Point(
     var id: Int = 0
     @Column(name = "color")
     var color = "red"
-    @Transient
-    var visibility = "hidden"
 
     init {
         this.color = if (result) "green" else "red"

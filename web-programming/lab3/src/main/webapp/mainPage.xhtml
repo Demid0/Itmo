@@ -36,7 +36,7 @@
                 <p:selectOneButton id="rValue" value="#{rBean.value}" required="true" requiredMessage="Выберите R">
                     <f:selectItems value="#{rBean.possibleValues}"/>
                     <f:validateRequired for="rValue"/>
-                    <f:ajax execute="rValue" listener="#{hitChecker.showPoints(rBean.value)}" render="@form"/>
+                    <f:ajax execute="rValue" render="@form"/>
                 </p:selectOneButton>
                 <h:inputHidden id="rVal" value="#{rBean.value}"/>
             </div>
@@ -97,12 +97,13 @@
                 <text x="324" y="108"><h:outputText value="#{rBean.value}"/></text>
 
                 <ui:repeat value="#{hitChecker.history}" var="point">
+                    <h:panelGroup rendered="#{point.r == rBean.value}">
                     <circle class="#{point.r}" r="3"
                             cx="#{300 + (200 * point.x) / point.r}"
                             cy="#{300 - (200 * point.y) / point.r}"
-                            fill="#{point.color}"
-                            visibility="#{point.visibility}">
+                            fill="#{point.color}">
                     </circle>
+                    </h:panelGroup>
                 </ui:repeat>
 
             </svg>

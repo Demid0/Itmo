@@ -15,7 +15,6 @@ class HitChecker: Serializable {
         println("$x, $y, $r")
         val point = Point(x, y, r, LocalDateTime.now().toString(), isInArea(x, y, r))
         historyManager.addPoint(point)
-        showPoints(r)
     }
     fun checkFromSVG() {
         val params = FacesContext.getCurrentInstance().externalContext.requestParameterMap
@@ -32,7 +31,6 @@ class HitChecker: Serializable {
             return
         }
     }
-    fun showPoints(r: Double) = historyManager.getHistory().forEach { it.visibility = if(r == it.r) "visible" else "hidden" }
     fun getHistory() = historyManager.getHistory()
     fun clearHistory() = historyManager.clearHistory()
 
