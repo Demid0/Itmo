@@ -131,6 +131,9 @@
                 </h:column>
             </h:dataTable>
         </div>
+        <h:commandButton value="Clear" id="clear">
+            <f:ajax execute="clear" for="clear" listener="#{hitChecker.clearHistory()}" render="@form"/>
+        </h:commandButton>
         <p:remoteCommand name="send" update="@form" action="#{hitChecker.checkFromSVG()}"/>
         <script type="text/javascript">
             function checkFromSVG(e) {

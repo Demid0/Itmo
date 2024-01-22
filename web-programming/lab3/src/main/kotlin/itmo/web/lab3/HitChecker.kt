@@ -1,5 +1,6 @@
 package itmo.web.lab3
 
+import jakarta.ejb.Init
 import jakarta.enterprise.context.SessionScoped
 import jakarta.faces.context.FacesContext
 import jakarta.inject.Named
@@ -10,11 +11,11 @@ import java.time.LocalDateTime
 @Named
 @SessionScoped
 class HitChecker: Serializable {
-    val history = ArrayList<Point>()
+    val historyManager = HistoryManager()
     fun check(x: Double, y: Double, r: Double) {
         println("$x, $y, $r")
         val point = Point(x, y, r, LocalDateTime.now().toString(), isInArea(x, y, r))
-        history.add(point)
+        historyManager.addPoint(point)
         showPoints(r)
     }
     fun checkFromSVG() {
@@ -32,7 +33,10 @@ class HitChecker: Serializable {
             return
         }
     }
-    fun showPoints(r: Double) = history.forEach { it.visibility = if(r == it.r) "visible" else "hidden" }
+    fun showPoints(r: Double) = historyManager.getHistory().forEach { it.visibility = if(r == it.r) "visible" else "hidden" }
+    fun getHistory() = historyManager.getHistory()
+    fun clearHistory() = historyManager.clearHistory()
+
     private fun isInArea(x: Double, y: Double, r: Double) = isInTriangle(x, y, r) || isInCircle(x, y, r) || isInRectangle(x, y, r)
     private fun isInRectangle(x: Double, y: Double, r: Double) = (x in -r..0.0) && (y in 0.0..r)
     private fun isInCircle(x: Double, y: Double, r: Double) = (x*x + y*y <= r*r/4) && (y <= 0) && (x >= 0)

@@ -45,7 +45,8 @@ noArg {
 dependencies {
   implementation('org.primefaces:primefaces:13.0.0:jakarta')
   compileOnly('jakarta.platform:jakarta.jakartaee-api:9.1.0')
-  implementation('org.eclipse.persistence:org.eclipse.persistence.jpa:3.0.2')
+  implementation("org.postgresql:postgresql:42.7.1")
+  implementation("org.eclipse.persistence:eclipselink:4.0.2")
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }

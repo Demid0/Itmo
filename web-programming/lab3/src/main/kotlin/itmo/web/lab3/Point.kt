@@ -1,22 +1,33 @@
 package itmo.web.lab3
 
+import jakarta.persistence.*
 import java.io.Serializable
 
-class Point: Serializable {
-    var x = .0
-    var y = .0
-    var r = .0
-    var currentTime = ""
-    var result = false
+@Entity
+@Table(name="points")
+@NamedQuery(name = "Point.getAll", query = "SELECT p from Point p")
+class Point(
+    @Column(name = "x")
+    var x: Double = .0,
+    @Column(name = "y")
+    var y: Double = .0,
+    @Column(name = "r")
+    var r: Double = .0,
+    @Column(name = "currentTime")
+    var currentTime: String = "",
+    @Column(name = "result")
+    var result: Boolean = false
+) : Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    var id: Int = 0
+    @Column(name = "color")
     var color = "red"
+    @Transient
     var visibility = "hidden"
 
-    constructor(x: Double = .0, y: Double = .0, r: Double = .0, currentTime: String = "", result: Boolean = false) {
-        this.x = x
-        this.y = y
-        this.r = r
-        this.currentTime = currentTime
-        this.result = result
+    init {
         this.color = if (result) "green" else "red"
     }
 }
