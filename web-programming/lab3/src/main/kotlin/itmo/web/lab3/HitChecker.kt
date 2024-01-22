@@ -1,6 +1,5 @@
 package itmo.web.lab3
 
-import jakarta.ejb.Init
 import jakarta.enterprise.context.SessionScoped
 import jakarta.faces.context.FacesContext
 import jakarta.inject.Named
