@@ -5,7 +5,6 @@ import java.io.Serializable
 
 @Entity
 @Table(name="points")
-@NamedQuery(name = "Point.getAll", query = "SELECT p from Point p")
 class Point(
     @Column(name = "x")
     var x: Double = .0,
@@ -22,10 +21,5 @@ class Point(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     var id: Int = 0
-    @Column(name = "color")
-    var color = "red"
-
-    init {
-        this.color = if (result) "green" else "red"
-    }
+    fun getColor() = if (result) "green" else "red"
 }
