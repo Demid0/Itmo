@@ -11,7 +11,8 @@ import java.time.LocalDateTime
 @SessionScoped
 class HitChecker: Serializable {
     val historyManager = HistoryManager()
-    fun check(x: Double, y: Double, r: Double) {
+    fun check(v: Boolean, x: Double, y: Double, r: Double) {
+        if (!v) return
         println("$x, $y, $r")
         val point = Point(x, y, r, LocalDateTime.now().toString(), isInArea(x, y, r))
         historyManager.addPoint(point)
@@ -22,7 +23,7 @@ class HitChecker: Serializable {
             val x = params["x"]!!.toDouble()
             val y = params["y"]!!.toDouble()
             val r = params["r"]!!.toDouble()
-            check(x, y, r)
+            check(true, x, y, r)
         } catch (e: NullPointerException) {
             println(e.message)
             return

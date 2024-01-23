@@ -47,7 +47,7 @@
                         </h:panelGroup>
                         <h:panelGroup id="submitButton">
                             <h:commandButton value="Submit" id="submit" styleClass="commandButton">
-                                <f:ajax execute="@all" for="submit" listener="#{hitChecker.check(xBean.value, yBean.value, rBean.value)}" render="@all"/>
+                                <f:ajax execute="@all" for="submit" listener="#{hitChecker.check(xBean.isValid() and yBean.isValid() and rBean.isValid(), xBean.value, yBean.value, rBean.value)}" render="@all" resetValues="true"/>
                             </h:commandButton>
                         </h:panelGroup>
                     </h:panelGrid>
