@@ -7,7 +7,7 @@ import java.io.Serializable
 @Named
 @SessionScoped
 class RBean: Serializable {
-    var value: Double = Double.NaN
+    var value: Double = 1.0
     val possibleValues = List(5) { (it + 1).toDouble() }
     fun isValid() = !value.isNaN() && possibleValues.contains(value)
 }

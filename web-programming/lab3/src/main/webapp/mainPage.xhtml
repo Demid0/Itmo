@@ -21,19 +21,19 @@
                         <h:outputLabel for="xValue" value="Введите X" styleClass="h3"/><br/>
                         <h:selectOneRadio id="xValue" value="#{xBean.value}" layout="pageDirection" styleClass="h4">
                             <f:selectItems value="#{xBean.possibleValues}"/>
-                            <f:ajax execute="xValue" render="@all"/>
+                            <f:ajax execute="xValue" render="@all" immediate="true"/>
                         </h:selectOneRadio>
                     </h:panelGroup>
                     <h:panelGrid columns="1">
                         <h:panelGroup id="yValuePanel">
-                            <h:outputLabel for="yValue" value="Введите Y" styleClass="h3"/><br/>
+                            <h:outputLabel for="yValue" value="Введите Y (-3..5)" styleClass="h3"/><br/>
                             <h:inputText id="yValue" value="#{yBean.value}" maxlength="7"
                                          required="true" requiredMessage="#{yBean.message}"
                                          converterMessage="#{yBean.message}" validatorMessage="#{yBean.message}">
                                 <f:validateRequired for="yValue"/>
                                 <f:converter for="yValue" converterId="jakarta.faces.Double"/>
                                 <f:validateDoubleRange for="yValue" minimum="#{yBean.minimum}" maximum="#{yBean.maximum}"/>
-                                <f:ajax execute="yValue" render="@all"/>
+                                <f:ajax execute="yValue" render="@all" immediate="true"/>
                             </h:inputText>
                         </h:panelGroup>
                         <h:panelGroup id="rValuePanel">
@@ -41,7 +41,7 @@
                             <p:selectOneButton id="rValue" value="#{rBean.value}" required="true" requiredMessage="Выберите R" styleClass="h4">
                                 <f:selectItems value="#{rBean.possibleValues}"/>
                                 <f:validateRequired for="rValue"/>
-                                <f:ajax execute="rValue" render="@all"/>
+                                <f:ajax execute="rValue" render="@all" immediate="true"/>
                             </p:selectOneButton>
                             <h:inputHidden id="rVal" value="#{rBean.value}"/>
                         </h:panelGroup>
@@ -104,6 +104,17 @@
                     <line x1="290" x2="310" y1="200" y2="200" stroke="#2c2d2a"/>
                     <line x1="290" x2="310" y1="400" y2="400" stroke="#2c2d2a"/>
                     <line x1="290" x2="310" y1="500" y2="500" stroke="#2c2d2a"/>
+
+                    <line x1="0" x2="0" y1="0" y2="600" stroke="#2c2d2a"/>
+                    <line x1="0" x2="600" y1="0" y2="0" stroke="#2c2d2a"/>
+                    <line x1="600" x2="600" y1="600" y2="0" stroke="#2c2d2a"/>
+                    <line x1="0" x2="600" y1="600" y2="600" stroke="#2c2d2a"/>
+
+                    <line x1="0" x2 ="600" y1="#{300+600/rBean.value}" y2="#{300+600/rBean.value}" stroke="red"/>
+                    <polygon points="0,600 0,#{300+600/rBean.value} 600,#{300+600/rBean.value} 600,600" fill="#2c2d2a30"/>
+
+                    <line x1="0" x2 ="600" y1="#{300-1000/rBean.value}" y2="#{300-1000/rBean.value}" stroke="red"/>
+                    <polygon points="0,0 0,#{300-1000/rBean.value} 600,#{300-1000/rBean.value} 600,0" fill="#2c2d2a30"/>
 
                     <!-- axis labels -->
                     <text x="580" y="280">x</text>
