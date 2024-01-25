@@ -5,16 +5,18 @@ import jakarta.faces.context.FacesContext
 import jakarta.inject.Named
 import java.io.Serializable
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 @Named
 @SessionScoped
 class HitChecker: Serializable {
     val historyManager = HistoryManager()
+    private val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
     fun check(v: Boolean, x: Double, y: Double, r: Double) {
         if (!v) return
         println("$x, $y, $r")
-        val point = Point(x, y, r, LocalDateTime.now().toString(), isInArea(x, y, r))
+        val point = Point(x, y, r, LocalDateTime.now().format(formatter).toString(), isInArea(x, y, r))
         historyManager.addPoint(point)
     }
     fun checkFromSVG() {
