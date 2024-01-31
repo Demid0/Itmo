@@ -17,7 +17,7 @@
   <div>
   <label>{{variable}}</label><br/>
   <input type="button" v-for="n in to - from + 1" v-on:click="push(n + from - 1)" v-bind:value="n + from - 1">
-  <input type="hidden" v-bind:id="variable"/>
+  <input type="hidden" v-bind:id="variable" value="NaN"/>
   </div>
 </template>
 

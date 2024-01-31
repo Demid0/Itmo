@@ -1,10 +1,18 @@
 <script>
   import axios from "axios";
+  import ErrorSpace from "./ErrorSpace.vue";
 
   export default {
+    components: {ErrorSpace},
     props: ['points', 'r'],
+    data() {
+      return {
+        errors: []
+      }
+    },
     methods: {
       checkFromSVG(event) {
+        this.errors.length = 0
         let target = document.querySelector("svg").getBoundingClientRect();
         if (!(this.r == null || isNaN(this.r))) {
           let px = event.clientX - target.left;
@@ -18,6 +26,9 @@
             if(result.status === 200) this.points.push(result.data)
           })
         }
+        else {
+          this.errors.push("r is required")
+        }
       }
     }
   }
@@ -25,6 +36,7 @@
 
 <template>
   <div>
+    <error-space :errors="errors"/>
     <svg width="600px" height="600px" v-on:click="checkFromSVG">
       <!-- arrows -->
       <polygon points="300,0 290,20 310,20" stroke="#2c2d2a"/>

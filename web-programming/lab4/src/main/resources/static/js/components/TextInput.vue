@@ -7,7 +7,7 @@
 <template>
   <div>
     <label>{{variable}}</label><br/>
-    <input type="text" v-bind:id="variable"/>
+    <input type="text" v-bind:id="variable" maxlength="7"/>
   </div>
 </template>
 
