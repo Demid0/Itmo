@@ -2,7 +2,6 @@
 import axios from "axios";
 import ButtonInput from "./ButtonInput.vue";
 import TextInput from "./TextInput.vue";
-import {validate} from "@babel/core/lib/config/validation/options";
 import ErrorSpace from "./ErrorSpace.vue";
 
 export default {
