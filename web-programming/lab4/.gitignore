@@ -35,3 +35,10 @@ out/
 
 ### VS Code ###
 .vscode/
+gradle
+node_modules
+node_modules/**
+src/resources/application.properties
+yarn.lock
+
+gradlew.bat
