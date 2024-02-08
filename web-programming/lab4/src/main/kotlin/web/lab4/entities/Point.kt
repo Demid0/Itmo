@@ -1,4 +1,4 @@
-package web.lab4.domain
+package web.lab4.entities
 
 import jakarta.persistence.*
 import java.io.Serializable
@@ -8,9 +8,9 @@ import java.time.format.DateTimeFormatter
 @Entity
 @Table(name = "points")
 class Point(
-    var x: Double = 0.0,
-    var y: Double = 0.0,
-    var r: Double = 0.0
+    val x: Double = 0.0,
+    val y: Double = 0.0,
+    val r: Double = 0.0
 ) : Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
