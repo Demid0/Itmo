@@ -8,9 +8,10 @@ import web.lab4.repositories.PointRepository
 
 @RestController
 @RequestMapping("controller")
-class Controller(
-    @Autowired private val array: PointRepository
-) {
+class Controller {
+
+    @Autowired
+    private lateinit var array: PointRepository
 
     @PostMapping
     fun create(@RequestBody point: Point) = array.save(point)

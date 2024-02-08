@@ -13,10 +13,12 @@ import web.lab4.authentication.jwt.JwtFilter
 
 @Configuration
 @EnableWebSecurity
-class SecurityConfiguration(
-    @Autowired private val jwtFilter: JwtFilter,
-    @Autowired private val authenticationProvider: AuthenticationProvider
-) {
+class SecurityConfiguration {
+
+    @Autowired
+    private lateinit var jwtFilter: JwtFilter
+    @Autowired
+    private lateinit var authenticationProvider: AuthenticationProvider
 
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain = http

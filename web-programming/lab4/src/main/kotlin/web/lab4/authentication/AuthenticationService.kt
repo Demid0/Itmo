@@ -15,12 +15,14 @@ import web.lab4.entities.User
 import web.lab4.repositories.UserRepository
 
 @Service
-class AuthenticationService(
-    @Autowired private val userRepository: UserRepository,
-    @Autowired private val passwordEncoder: PasswordEncoder,
-    @Autowired private val jwtService: JwtService
-) {
+class AuthenticationService {
 
+    @Autowired
+    private lateinit var userRepository: UserRepository
+    @Autowired
+    private lateinit var passwordEncoder: PasswordEncoder
+    @Autowired
+    private lateinit var jwtService: JwtService
 
     fun register(request: AuthenticationRequest): AuthenticationResponse {
         if (!userRepository.findByName(request.name).isEmpty) throw Exception("User already exists")

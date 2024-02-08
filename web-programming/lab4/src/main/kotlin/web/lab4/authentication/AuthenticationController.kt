@@ -11,9 +11,10 @@ import web.lab4.authentication.response.AuthenticationResponse
 
 @RestController
 @RequestMapping("/auth")
-class AuthenticationController(
-    @Autowired private val service: AuthenticationService
-) {
+class AuthenticationController {
+
+    @Autowired
+    private lateinit var service: AuthenticationService
 
     @PostMapping("/register")
     fun register(@RequestBody request: AuthenticationRequest): ResponseEntity<AuthenticationResponse> = ResponseEntity.ok(service.register(request))

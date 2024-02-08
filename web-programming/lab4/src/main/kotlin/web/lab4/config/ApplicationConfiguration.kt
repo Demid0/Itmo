@@ -12,9 +12,10 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import web.lab4.repositories.UserRepository
 
 @Configuration
-class ApplicationConfiguration(
-    @Autowired private val userRepository: UserRepository
-) {
+class ApplicationConfiguration {
+
+    @Autowired
+    private lateinit var userRepository: UserRepository
 
     @Bean
     fun getUserDetailsService(): UserDetailsService = UserDetailsService {
