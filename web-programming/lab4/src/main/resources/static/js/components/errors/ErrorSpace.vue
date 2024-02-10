@@ -6,7 +6,7 @@
 
 <template>
   <p v-if="errors.length">
-    <b>Пожалуйста исправьте указанные ошибки:</b>
+    <b>Error:</b>
     <ul>
       <li v-for="error in errors">{{ error }}</li>
     </ul>

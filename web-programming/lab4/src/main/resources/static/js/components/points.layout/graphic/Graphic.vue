@@ -1,6 +1,8 @@
 <script>
   import axios from "axios";
-  import ErrorSpace from "./ErrorSpace.vue";
+  import ErrorSpace from "../../errors/ErrorSpace.vue";
+  import {store} from "../../../store";
+  import {displayErrors} from "../../../displayErrors";
 
   export default {
     components: {ErrorSpace},
@@ -12,7 +14,7 @@
     },
     methods: {
       checkFromSVG(event) {
-        this.errors.length = 0
+        this.errors.length = 0;
         let target = document.querySelector("svg").getBoundingClientRect();
         if (!(this.r == null || isNaN(this.r))) {
           let px = event.clientX - target.left;
@@ -21,13 +23,18 @@
             x: ((px - 300) * this.r / 200).toFixed(2),
             y: (-(py - 300) * this.r / 200).toFixed(2),
             r: this.r
-          }
-          axios.post('/controller/hash_to_init', res).then(result => {
-            if(result.status === 200) this.points.push(result.data)
-          })
+          };
+          axios.post('/controller', res, {
+            headers: { 'Authorization': "Bearer " + store.getters.getToken }
+          }).then(result => {
+            if(result.status === 200) this.points.push(result.data);
+            else {
+              displayErrors(this.errors, ["something went wrong"]);
+            }
+          });
         }
         else {
-          this.errors.push("r is required")
+          displayErrors(this.errors, ["r is required"]);
         }
       }
     }

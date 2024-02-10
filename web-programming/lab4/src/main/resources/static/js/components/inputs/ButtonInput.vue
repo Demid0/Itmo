@@ -3,10 +3,10 @@
     props: ['variable', 'from', 'to', 'r'],
     methods: {
       push: function (number) {
-        document.getElementById(this.variable).value = number
+        document.getElementById(this.variable).value = number;
         if (this.r !== undefined) {
-          this.r.length = 0
-          this.r.push(number)
+          this.r.length = 0;
+          this.r.push(number);
         }
       }
     }

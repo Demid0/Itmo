@@ -32,16 +32,22 @@ class AuthenticationService {
         user.role = Role.USER
         userRepository.save(user)
         val jwtToken = jwtService.generateToken(userDetails = user)
-        return AuthenticationResponse(jwtToken)
+        return AuthenticationResponse(token = jwtToken)
     }
 
     fun login(request: AuthenticationRequest): AuthenticationResponse {
-        val user = userRepository.findByName(request.name).orElseThrow { UsernameNotFoundException("User not found") }
-        if (passwordEncoder.matches(request.userPassword, user.userPassword)) throw BadCredentialsException("Bad credentials")
+        val user = userRepository.findByName(request.name).orElseThrow { Exception("User not found") }
+        if (!passwordEncoder.matches(request.userPassword, user.userPassword)) throw Exception("Bad credentials")
         val authToken = UsernamePasswordAuthenticationToken(user, null, user.authorities)
         SecurityContextHolder.getContext().authentication = authToken
         val jwtToken = jwtService.generateToken(userDetails = user)
-        return AuthenticationResponse(jwtToken)
+        return AuthenticationResponse(token = jwtToken)
+    }
+
+    fun logout(token: String): AuthenticationResponse {
+        val user = userRepository.findByName(jwtService.extractUsername(token)!!).orElseThrow { Exception("Token is invalid") }
+        SecurityContextHolder.getContext().authentication = null
+        return AuthenticationResponse()
     }
 
 }

@@ -31,17 +31,19 @@ class JwtFilter: OncePerRequestFilter() {
             return
         }
         val jwtToken = authHeader.substring(7)
-        val username = jwtService.extractUsername(jwtToken)
-        if (username != null && SecurityContextHolder.getContext().authentication == null) {
-            val userDetails = userDetailsService.loadUserByUsername(username)
-            if (jwtService.isTokenValid(jwtToken, userDetails)) {
-                val authToken = UsernamePasswordAuthenticationToken(
-                    userDetails, null, userDetails.authorities
-                ).also { it.details = WebAuthenticationDetailsSource().buildDetails(request) }
-                SecurityContextHolder.getContext().authentication = authToken
+        try {
+            val username = jwtService.extractUsername(jwtToken)
+            if (username != null && SecurityContextHolder.getContext().authentication == null) {
+                val userDetails = userDetailsService.loadUserByUsername(username)
+                if (jwtService.isTokenValid(jwtToken, userDetails)) {
+                    val authToken = UsernamePasswordAuthenticationToken(
+                        userDetails, null, userDetails.authorities
+                    ).also { it.details = WebAuthenticationDetailsSource().buildDetails(request) }
+                    SecurityContextHolder.getContext().authentication = authToken
+                }
             }
-        }
-        filterChain.doFilter(request, response)
+        } catch (e: Exception) { return }
+        finally { filterChain.doFilter(request, response) }
     }
 
 }
