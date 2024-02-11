@@ -6,6 +6,6 @@ import org.springframework.data.repository.query.Param
 import web.lab4.entities.Point
 
 interface PointRepository: JpaRepository<Point, Int> {
-    @Query(value = "delete from points p where p.ownerId=:ownerId", nativeQuery = true)
+    @Query(value = "delete from points p where p.owner_id=:ownerId", nativeQuery = true)
     fun deleteAllByOwnerId(@Param("ownerId") ownerId: Long)
 }
