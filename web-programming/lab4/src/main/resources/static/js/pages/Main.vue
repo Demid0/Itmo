@@ -27,7 +27,6 @@ export default {
         </td>
         <td>
           <point-form :points="points" :r="r" :errors="errors"/>
-          <br/>
           <point-table :points="points"/>
         </td>
       </tr>
@@ -42,7 +41,7 @@ export default {
   td {
     padding-top: 50px;
     padding-right: 100px;
-    padding-left: 100px;
+    padding-left: 200px;
     width: 50%;
   }
 </style>

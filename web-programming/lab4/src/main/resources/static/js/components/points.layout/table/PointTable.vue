@@ -38,17 +38,19 @@ export default {
       <h1>Previous results</h1>
       <input class="button" type="button" value="Clear" v-on:click="clear"/>
     </div>
-    <table>
-      <tr>
-        <td class="td-text">X</td>
-        <td class="td-text">Y</td>
-        <td class="td-text">R</td>
-        <td class="td-text">Result</td>
-        <td class="td-time">Time</td>
-        <td></td>
-      </tr>
-      <point-table-row v-for="point in points" :point="point" :points="points"/>
-    </table>
+    <div class="table_body">
+      <table>
+        <tr>
+          <td class="td-text">X</td>
+          <td class="td-text">Y</td>
+          <td class="td-text">R</td>
+          <td class="td-text">Result</td>
+          <td class="td-time">Time</td>
+          <td></td>
+        </tr>
+        <point-table-row v-for="point in points" :point="point" :points="points"/>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -70,6 +72,15 @@ export default {
   table {
     border-collapse: collapse;
     border: 2px var(--primary) solid;
+    width: 530px;
+    overflow-x: auto;
+  }
+  .table_body {
+    width: max-content;
+    height: 180px;
+    overflow-x: scroll;
+    border: 2px var(--primary) solid;
+    background-color: var(--button-background-hover);
   }
   tr, .td-text, .td-time {
     color: var(--primary);

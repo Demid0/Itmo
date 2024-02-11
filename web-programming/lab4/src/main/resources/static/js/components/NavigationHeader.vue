@@ -14,6 +14,7 @@
   <div>
     <div v-show="store.getters.isAuthenticated">
       <router-link class="button" to="/main">Main page</router-link>
+      <router-link class="button" to="/user">{{store.getters.getUsername.length >= 13 ? store.getters.getUsername.substring(10).concat("...") : store.getters.getUsername }}</router-link>
       <router-link class="button" to="/logout">Logout</router-link>
     </div>
     <div v-show="!store.getters.isAuthenticated">
