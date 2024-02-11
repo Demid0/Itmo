@@ -17,6 +17,7 @@ class Point(
     var id: Int = 0
     var time: String = ""
     var result: Boolean = false
+    var ownerId: Long = 0
 
     init {
         time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"))
