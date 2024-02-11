@@ -52,4 +52,16 @@ class Controller {
             return ResponseEntity(e.message, HttpStatus.BAD_REQUEST)
         }
     }
+
+    @DeleteMapping("{id}")
+    fun deleteOne(@PathVariable id: Int, @RequestHeader(HttpHeaders.AUTHORIZATION) token: String): ResponseEntity<*> {
+        try {
+            val ownerId = userRepository.findByName(jwtService.extractUsername(token.split(" ")[1]).orEmpty())
+                .orElseThrow { Exception("Bad token") }.id
+            return if(array.findById(id).orElseThrow { Exception("point not found") }.ownerId == ownerId) ResponseEntity(array.deleteById(id), HttpStatus.OK)
+            else ResponseEntity("It is not your point", HttpStatus.FORBIDDEN)
+        } catch (e: Exception) {
+            return ResponseEntity(e.message, HttpStatus.BAD_REQUEST)
+        }
+    }
 }
