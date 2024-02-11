@@ -6,12 +6,7 @@
 
   export default {
     components: {ErrorSpace},
-    props: ['points', 'r'],
-    data() {
-      return {
-        errors: []
-      }
-    },
+    props: ['points', 'r', 'errors'],
     methods: {
       checkFromSVG(event) {
         this.errors.length = 0;
@@ -43,7 +38,6 @@
 
 <template>
   <div>
-    <error-space :errors="errors"/>
     <svg width="600px" height="600px" v-on:click="checkFromSVG">
       <!-- arrows -->
       <polygon points="300,0 290,20 310,20" stroke="#2c2d2a"/>

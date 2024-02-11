@@ -13,16 +13,28 @@
 <template>
   <div>
     <div v-show="store.getters.isAuthenticated">
-      <router-link to="/main">Main</router-link>
-      <router-link to="/logout">Logout</router-link>
+      <router-link class="button" to="/main">Main page</router-link>
+      <router-link class="button" to="/logout">Logout</router-link>
     </div>
     <div v-show="!store.getters.isAuthenticated">
-      <router-link to="/login">Login</router-link>
-      <router-link to="/register">Register</router-link>
+      <router-link class="button" to="/login">Login page</router-link>
+      <router-link class="button" to="/register">Register page</router-link>
     </div>
   </div>
 </template>
 
-<style>
-
+<style scoped>
+  div {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+  }
+  .button:hover {
+    font-size: 170%;
+  }
+  .button {
+    text-align: center;
+    height: 25px;
+    width: 163px;
+  }
 </style>

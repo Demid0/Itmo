@@ -5,9 +5,18 @@ export default {
 </script>
 
 <template>
-  <h1>Bro, please return for existing pages</h1>
+  <div>
+    <h1>Bro, please return for existing pages</h1>
+  </div>
 </template>
 
-<style>
-
+<style scoped>
+  div {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+  }
+  h1 {
+    color: var(--red);
+  }
 </style>

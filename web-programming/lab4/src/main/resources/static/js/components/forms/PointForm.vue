@@ -8,35 +8,29 @@ import {displayErrors} from "../../displayErrors";
 
 export default {
   components: {ErrorSpace, TextInput, ButtonInput},
-  props: ['points', 'r'],
-  data() {
-    return {
-      errors: [],
-      defaultErr: ["something went wrong"]
-    }
-  },
+  props: ['points', 'errors', 'r'],
   methods: {
-    send: function () {
+    send() {
       if (this.validateForm()) {
         let res = {
           x: document.getElementById("x").value,
-          y: document.getElementById("y").value,
+          y: document.getElementById("Input_y").value,
           r: document.getElementById("r").value
         };
         axios.post('/controller', res, {
           headers: { 'Authorization': "Bearer " + store.getters.getToken }
         }).then(result => {
           if (result.status === 200) this.points.push(result.data);
-          else displayErrors(this.errors, this.defaultErr)
+          else displayErrors(this.errors, ["something went wrong"]);
           document.getElementById("x").value = NaN;
-          document.getElementById("y").value = '';
+          document.getElementById("Input_y").value = '';
           document.getElementById("r").value = NaN;
         });
       }
     },
-    validateForm: function () {
+    validateForm() {
       let x = document.getElementById("x").value;
-      let y = document.getElementById("y").value;
+      let y = document.getElementById("Input_y").value;
       let r = document.getElementById("r").value;
       let errorsToDisplay = [];
       if (x === null || isNaN(x)) errorsToDisplay.push("x is required");
@@ -45,6 +39,12 @@ export default {
       if (r === null || isNaN(r)) errorsToDisplay.push("r is required");
       displayErrors(this.errors, errorsToDisplay);
       return this.errors.length === 0;
+    },
+    reset() {
+      document.getElementById("x").value = NaN;
+      document.getElementById("Input_y").value = '';
+      document.getElementById("r").value = NaN;
+      this.errors.length = 0;
     }
   }
   }
@@ -53,10 +53,10 @@ export default {
 <template>
   <div>
     <button-input variable="x" :from="-4" :to="4"/>
-    <text-input variable="y" :length="7"/>
+    <text-input variable="Input_y" :length="7"/>
     <button-input variable="r" :from="1" :to="4" :r="r"/>
-    <input type="submit" value="Save" v-on:click="send">
-    <error-space :errors="errors"/>
+    <input class="button" type="submit" value="Save" v-on:click="send">
+    <input class="button" type="submit" value="Reset" v-on:click="reset">
   </div>
 </template>
 

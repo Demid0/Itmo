@@ -2,11 +2,14 @@
 import PointForm from "../components/forms/PointForm.vue";
 import PointTable from "../components/points.layout/table/PointTable.vue";
 import Graphic from "../components/points.layout/graphic/Graphic.vue";
+import ErrorSpace from "../components/errors/ErrorSpace.vue";
+import NavigationHeader from "../components/NavigationHeader.vue";
 
 export default {
-    components: {Graphic, PointForm, PointTable},
+    components: {NavigationHeader, ErrorSpace, Graphic, PointForm, PointTable},
     data() {
       return {
+        errors: [],
         points: [],
         r: []
       };
@@ -16,12 +19,30 @@ export default {
 
 <template>
   <div>
-    <point-form :points="points" :r="r"/>
-    <point-table :points="points"/>
-    <graphic :points="points" :r="r[0]"/>
+    <navigation-header/>
+    <table>
+      <tr>
+        <td>
+          <graphic :points="points" :r="r[0]" :errors="errors"/>
+        </td>
+        <td>
+          <point-form :points="points" :r="r" :errors="errors"/>
+          <br/>
+          <point-table :points="points"/>
+        </td>
+      </tr>
+      <tr>
+        <error-space :errors="errors" padding="150px"></error-space>
+      </tr>
+    </table>
   </div>
 </template>
 
-<style>
-
+<style scoped>
+  td {
+    padding-top: 50px;
+    padding-right: 100px;
+    padding-left: 100px;
+    width: 50%;
+  }
 </style>

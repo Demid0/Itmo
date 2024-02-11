@@ -34,15 +34,56 @@ export default {
 
 <template>
   <div>
-    <div>Previous results</div>
-    <input type="button" value="clear" v-on:click="clear"/>
+    <div class="table_header">
+      <h1>Previous results</h1>
+      <input class="button" type="button" value="Clear" v-on:click="clear"/>
+    </div>
     <table>
-      <tr><td>X</td><td>Y</td><td>R</td><td>Result</td><td>Time</td></tr>
+      <tr>
+        <td class="td-text">X</td>
+        <td class="td-text">Y</td>
+        <td class="td-text">R</td>
+        <td class="td-text">Result</td>
+        <td class="td-time">Time</td>
+        <td></td>
+      </tr>
       <point-table-row v-for="point in points" :point="point" :points="points"/>
     </table>
   </div>
 </template>
 
-<style>
-
+<style scoped>
+  .table_header {
+    width: max-content;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  h1 {
+    color: var(--primary);
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 200%;
+    margin-right: 10px;
+  }
+  table {
+    border-collapse: collapse;
+    border: 2px var(--primary) solid;
+  }
+  tr, .td-text, .td-time {
+    color: var(--primary);
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 120%;
+    background-color: var(--button-background);
+    width: 50px;
+    border: 2px var(--primary) solid;
+    text-align: center;
+    padding: 5px;
+  }
+  .td-time {
+    width: max-content;
+    padding: 5px;
+  }
 </style>

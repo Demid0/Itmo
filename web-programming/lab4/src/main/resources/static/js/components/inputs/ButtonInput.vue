@@ -15,12 +15,28 @@
 
 <template>
   <div>
-  <label>{{variable}}</label><br/>
-  <input type="button" v-for="n in to - from + 1" v-on:click="push(n + from - 1)" v-bind:value="n + from - 1">
-  <input type="hidden" v-bind:id="variable" value="NaN"/>
+    <div class="label-div">
+      <label>Input {{variable}}</label><br/>
+    </div>
+    <input class="button" type="button" v-for="n in to - from + 1" v-on:click="push(n + from - 1)" v-bind:value="n + from - 1">
+    <input type="hidden" v-bind:id="variable" value="NaN"/>
   </div>
 </template>
 
-<style>
-
+<style scoped>
+  .label-div {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  label {
+    color: var(--primary);
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 150%;
+    text-decoration: none;
+    padding: 5px;
+  }
+  .button {
+    width: 36px;
+  }
 </style>

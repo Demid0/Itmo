@@ -1,21 +1,23 @@
 <script>
 
-import {defineComponent} from "vue";
+import {defineComponent, registerRuntimeCompiler} from "vue";
 import TextInput from "../../components/inputs/TextInput.vue";
 import axios from "axios";
 import {router} from "../../router";
 import ErrorSpace from "../../components/errors/ErrorSpace.vue";
 import { store } from "../../store";
 import {displayErrors} from "../../displayErrors";
+import NavigationHeader from "../../components/NavigationHeader.vue";
 
 export default defineComponent({
-  components: {ErrorSpace, TextInput},
+  components: {NavigationHeader, ErrorSpace, TextInput},
   data() {
     return {
       errors: []
     }
   },
   methods: {
+    registerRuntimeCompiler,
     signUp() {
       let username = document.getElementById("Username").value;
       let password = document.getElementById("Password").value;
@@ -57,14 +59,24 @@ export default defineComponent({
 
 <template>
   <div>
-    <error-space :errors="errors"/>
-    <text-input variable="Username" :length="15"/>
-    <text-input variable="Password" :length="15"/>
-    <text-input variable="Password_confirm" :length="15"/>
-    <input type="submit" value="Sign up" v-on:click="signUp">
+    <navigation-header/>
+    <div class="block">
+      <table>
+        <tr><text-input variable="Username" :length="15"/></tr>
+        <tr><text-input variable="Password" :length="15" :secret="true"/></tr>
+        <tr><text-input variable="Password_confirm" :length="15" :secret="true"/></tr>
+        <tr><input class="button" type="submit" value="Sign up" v-on:click="signUp"></tr>
+        <tr><error-space :errors="errors" padding="0px"/></tr>
+      </table>
+    </div>
   </div>
 </template>
 
-<style>
-
+<style scoped>
+  .block {
+    margin-top: 20px;
+  }
+  table {
+    width: min-content;
+  }
 </style>
