@@ -1,21 +1,22 @@
 <script>
+import NavigationHeader from "../NavigationHeader.vue";
+
 export default {
+  components: {NavigationHeader}
 
 }
 </script>
 
 <template>
   <div>
-    <h1>Bro, please return for existing pages</h1>
+    <navigation-header/>
+    <div class="block">
+      <h1>Bro, please return for existing pages</h1>
+    </div>
   </div>
 </template>
 
 <style scoped>
-  div {
-    display: flex;
-    align-content: center;
-    justify-content: center;
-  }
   h1 {
     color: var(--red);
   }
