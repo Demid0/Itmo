@@ -1,4 +1,4 @@
-package web.lab4.entities
+package web.lab4.entities.user
 
 import jakarta.persistence.*
 import org.springframework.security.core.GrantedAuthority

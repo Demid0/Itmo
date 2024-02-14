@@ -1,4 +1,4 @@
-package web.lab4.entities
+package web.lab4.entities.user
 
 enum class Role {
     USER, ADMIN

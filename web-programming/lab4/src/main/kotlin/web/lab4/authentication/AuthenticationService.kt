@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service
 import web.lab4.authentication.jwt.JwtService
 import web.lab4.authentication.request.AuthenticationRequest
 import web.lab4.authentication.response.AuthenticationResponse
-import web.lab4.entities.Role
-import web.lab4.entities.User
+import web.lab4.entities.user.Role
+import web.lab4.entities.user.User
 import web.lab4.repositories.UserRepository
 
 @Service

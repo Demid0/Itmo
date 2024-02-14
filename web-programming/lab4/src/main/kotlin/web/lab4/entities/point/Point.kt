@@ -1,4 +1,4 @@
-package web.lab4.entities
+package web.lab4.entities.point
 
 import jakarta.persistence.*
 import java.io.Serializable

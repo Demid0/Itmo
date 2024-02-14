@@ -5,28 +5,24 @@ import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import web.lab4.authentication.jwt.JwtService
-import web.lab4.entities.Point
-import web.lab4.repositories.PointRepository
-import web.lab4.repositories.UserRepository
+import web.lab4.entities.point.Point
+import web.lab4.entities.point.PointService
+import web.lab4.entities.user.UserService
 
 @RestController
 @RequestMapping("controller")
 class Controller {
 
     @Autowired
-    private lateinit var array: PointRepository
+    private lateinit var pointService: PointService
     @Autowired
-    private lateinit var userRepository: UserRepository
-    @Autowired
-    private lateinit var jwtService: JwtService
+    private lateinit var userService: UserService
 
     @PostMapping
     fun create(@RequestBody point: Point, @RequestHeader(HttpHeaders.AUTHORIZATION) token: String): ResponseEntity<*> {
         try {
-            point.ownerId = userRepository.findByName(jwtService.extractUsername(token.split(" ")[1]).orEmpty())
-                .orElseThrow { Exception("Bad token") }.id
-            return ResponseEntity.ok(array.save(point))
+            point.ownerId = userService.getByToken(token).id
+            return ResponseEntity.ok(pointService.save(point))
         } catch (e: Exception) {
             return ResponseEntity(e.message, HttpStatus.BAD_REQUEST)
         }
@@ -35,9 +31,8 @@ class Controller {
     @GetMapping
     fun readAll(@RequestHeader(HttpHeaders.AUTHORIZATION) token: String): ResponseEntity<*> {
         try {
-            val ownerId = userRepository.findByName(jwtService.extractUsername(token.split(" ")[1]).orEmpty())
-                .orElseThrow { Exception("Bad token") }.id
-            return ResponseEntity.ok(array.findAll().filter { it.ownerId == ownerId })
+            val ownerId = userService.getByToken(token).id
+            return ResponseEntity.ok(pointService.getByOwnerId(ownerId))
         } catch (e: Exception) {
             return ResponseEntity(e.message, HttpStatus.BAD_REQUEST)
         }
@@ -45,9 +40,8 @@ class Controller {
     @DeleteMapping
     fun deleteAll(@RequestHeader(HttpHeaders.AUTHORIZATION) token: String) : ResponseEntity<*> {
         try {
-            val ownerId = userRepository.findByName(jwtService.extractUsername(token.split(" ")[1]).orEmpty())
-                .orElseThrow { Exception("Bad token") }.id
-            return ResponseEntity(array.deleteAllByOwnerId(ownerId), HttpStatus.OK)
+            val ownerId = userService.getByToken(token).id
+            return ResponseEntity(pointService.deleteAllByOwnerId(ownerId), HttpStatus.OK)
         } catch (e: Exception) {
             return ResponseEntity(e.message, HttpStatus.BAD_REQUEST)
         }
@@ -56,10 +50,8 @@ class Controller {
     @DeleteMapping("{id}")
     fun deleteOne(@PathVariable id: Int, @RequestHeader(HttpHeaders.AUTHORIZATION) token: String): ResponseEntity<*> {
         try {
-            val ownerId = userRepository.findByName(jwtService.extractUsername(token.split(" ")[1]).orEmpty())
-                .orElseThrow { Exception("Bad token") }.id
-            return if(array.findById(id).orElseThrow { Exception("point not found") }.ownerId == ownerId) ResponseEntity(array.deleteById(id), HttpStatus.OK)
-            else ResponseEntity("It is not your point", HttpStatus.FORBIDDEN)
+            val ownerId = userService.getByToken(token).id
+            return ResponseEntity(pointService.deleteById(id, ownerId), HttpStatus.OK)
         } catch (e: Exception) {
             return ResponseEntity(e.message, HttpStatus.BAD_REQUEST)
         }

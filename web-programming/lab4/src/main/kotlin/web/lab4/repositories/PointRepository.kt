@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
-import web.lab4.entities.Point
+import web.lab4.entities.point.Point
 
 interface PointRepository: JpaRepository<Point, Int> {
 
