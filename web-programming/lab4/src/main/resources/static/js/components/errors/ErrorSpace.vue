@@ -4,7 +4,7 @@
   export default {
     computed: {
       store() {
-        return store
+        return store;
       }
     },
     props: ['errors', 'padding']

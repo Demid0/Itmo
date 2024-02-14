@@ -6,7 +6,7 @@
   import NavigationHeader from "../../components/NavigationHeader.vue";
 
   export default {
-    components: {NavigationHeader},
+    components: { NavigationHeader },
     methods: {
       logout() {
         axios.post("/auth/logout", {}, {
@@ -20,7 +20,7 @@
             console.log("/logout error");
             this.backToMain();
           }
-        });
+        }).catch(_ => this.backToMain());
       },
       backToMain() {
         router.back();

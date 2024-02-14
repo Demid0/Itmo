@@ -1,15 +1,11 @@
 <script>
   import axios from "axios";
-  import ErrorSpace from "../../errors/ErrorSpace.vue";
   import {store} from "../../../store";
-  import {displayErrors} from "../../../displayErrors";
 
   export default {
-    components: {ErrorSpace},
-    props: ['points', 'r', 'errors'],
+    props: ['points', 'r'],
     methods: {
       checkFromSVG(event) {
-        this.errors.length = 0;
         let target = document.querySelector("svg").getBoundingClientRect();
         if (!(this.r == null || isNaN(this.r))) {
           let px = event.clientX - target.left;
@@ -22,14 +18,12 @@
           axios.post('/controller', res, {
             headers: { 'Authorization': "Bearer " + store.getters.getToken }
           }).then(result => {
-            if(result.status === 200) this.points.push(result.data);
-            else {
-              displayErrors(this.errors, ["something went wrong"]);
-            }
-          });
+            if(result.status === 200) this.$emit('add', result.data);
+            else this.$emit('err', ["Something went wrong"]);
+          }).catch(error => { this.$emit('err', error.response.data.message)});
         }
         else {
-          displayErrors(this.errors, ["r is required"]);
+          this.$emit('err', ["r is required"]);
         }
       }
     }
@@ -38,7 +32,7 @@
 
 <template>
   <div>
-    <svg width="600px" height="600px" v-on:click="checkFromSVG">
+    <svg width="600px" height="600px" @click="checkFromSVG">
       <!-- arrows -->
       <polygon points="300,0 290,20 310,20" stroke="#2c2d2a"/>
       <polygon points="600,300 580,290 580,310" stroke="#2c2d2a"/>

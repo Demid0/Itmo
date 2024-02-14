@@ -1,13 +1,13 @@
 <script>
   export default {
-    props: ['variable', 'from', 'to', 'r'],
+    props: ['from', 'to', 'modelValue'],
     methods: {
-      push: function (number) {
-        document.getElementById(this.variable).value = number;
-        if (this.r !== undefined) {
-          this.r.length = 0;
-          this.r.push(number);
-        }
+      set(value) {
+        let newVal = {
+          name: this.modelValue.name,
+          value: value
+        };
+        this.$emit('update:modelValue', newVal);
       }
     }
   }
@@ -16,10 +16,9 @@
 <template>
   <div>
     <div class="label-div">
-      <label>Input {{variable}}</label><br/>
+      <label>Input {{ modelValue.name }}</label><br/>
     </div>
-    <input class="button" type="button" v-for="n in to - from + 1" v-on:click="push(n + from - 1)" v-bind:value="n + from - 1">
-    <input type="hidden" v-bind:id="variable" value="NaN"/>
+    <input class="button" type="button" v-for="n in to - from + 1" @click="set(n + from - 1)" :value="n + from - 1"/>
   </div>
 </template>
 

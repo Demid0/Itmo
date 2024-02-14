@@ -1,21 +1,24 @@
 <script>
   export default {
-    props: ['variable', 'length', 'secret']
+    props: ['length', 'secret', 'modelValue'],
+    methods: {
+      set(value) {
+        let newVal = {
+          name: this.modelValue.name,
+          value: value
+        };
+        this.$emit('update:modelValue', newVal);
+      }
+    }
   }
 </script>
 
 <template>
-  <div v-if="secret">
+  <div>
     <div class="label-div">
-      <label>{{ variable.replaceAll("_", " ") }}</label><br/>
+      <label>Input {{ modelValue.name }}</label><br/>
     </div>
-    <input type="password" v-bind:id="variable" :maxlength="length"/>
-  </div>
-  <div v-else>
-    <div class="label-div">
-      <label>{{ variable.replaceAll("_", " ") }}</label><br/>
-    </div>
-    <input type="text" v-bind:id="variable" :maxlength="length"/>
+    <input :type="secret ? 'password' : 'text'" :maxlength="length" @input="set($event.target.value)"/>
   </div>
 </template>
 

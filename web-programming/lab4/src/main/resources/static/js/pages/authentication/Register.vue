@@ -1,27 +1,38 @@
 <script>
 
-import {defineComponent, registerRuntimeCompiler} from "vue";
 import TextInput from "../../components/inputs/TextInput.vue";
 import axios from "axios";
 import {router} from "../../router";
 import ErrorSpace from "../../components/errors/ErrorSpace.vue";
 import { store } from "../../store";
-import {displayErrors} from "../../displayErrors";
 import NavigationHeader from "../../components/NavigationHeader.vue";
 
-export default defineComponent({
+export default {
   components: {NavigationHeader, ErrorSpace, TextInput},
   data() {
     return {
-      errors: []
-    }
+      errors: [],
+      user: {
+        username: {
+          value: '',
+          name: "Username"
+        },
+        password: {
+          value: '',
+          name: "Password"
+        },
+        passwordConfirm: {
+          value: '',
+          name: 'Password Confirm'
+        }
+      }
+    };
   },
   methods: {
-    registerRuntimeCompiler,
     signUp() {
-      let username = document.getElementById("Username").value;
-      let password = document.getElementById("Password").value;
-      let confirm = document.getElementById("Password_confirm").value;
+      let username = this.user.username.value;
+      let password = this.user.password.value;
+      let confirm = this.user.passwordConfirm.value;
       if (this.isConfirm(username, password, confirm)) {
         axios.post('/auth/register', {
           name: username,
@@ -35,15 +46,15 @@ export default defineComponent({
             store.dispatch('login', user);
             router.push("/main");
           }
-          else displayErrors(this.errors, [response.data.message]);
-        }).catch(err => displayErrors(this.errors, [err.response.data.message]));
+          else this.errors = [response.data.message];
+        }).catch(err => this.errors = [err.response.data.message]);
       }
       else {
         let errorsToDisplay = [];
         if (username === null || username === "") errorsToDisplay.push("Login is required");
         if (password === null || password === "") errorsToDisplay.push("Password is required");
         if (password !== confirm) errorsToDisplay.push("Password and confirm are not the same");
-        displayErrors(this.errors, errorsToDisplay);
+        this.errors = errorsToDisplay;
       }
     },
     isConfirm(username, password, confirm) {
@@ -54,7 +65,7 @@ export default defineComponent({
           && password === confirm;
     }
   }
-})
+}
 </script>
 
 <template>
@@ -62,11 +73,22 @@ export default defineComponent({
     <navigation-header/>
     <div class="block">
       <table>
-        <tr><text-input variable="Username" :length="15"/></tr>
-        <tr><text-input variable="Password" :length="15" :secret="true"/></tr>
-        <tr><text-input variable="Password_confirm" :length="15" :secret="true"/></tr>
-        <tr><input class="button" type="submit" value="Sign up" v-on:click="signUp"></tr>
-        <tr><error-space :errors="errors" padding="0px"/></tr>
+        <tr><text-input
+            v-model="user.username"
+            :length="15"
+        /></tr>
+        <tr><text-input
+            v-model="user.password"
+            :length="15"
+            :secret="true"
+        /></tr>
+        <tr><text-input
+            v-model="user.passwordConfirm"
+            :length="15"
+            :secret="true"
+        /></tr>
+        <tr><input class="button" type="submit" value="Sign up" @click="signUp"></tr>
+        <tr><error-space :errors="errors" style="padding: 0;"/></tr>
       </table>
     </div>
   </div>

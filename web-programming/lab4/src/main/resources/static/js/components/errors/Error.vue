@@ -2,8 +2,7 @@
 import NavigationHeader from "../NavigationHeader.vue";
 
 export default {
-  components: {NavigationHeader}
-
+  components: { NavigationHeader }
 }
 </script>
 

@@ -5,10 +5,10 @@ import {store} from "../store";
 export default {
   computed: {
     store() {
-      return store
+      return store;
     }
   },
-  components: {NavigationHeader}
+  components: { NavigationHeader }
 
 }
 </script>

@@ -4,30 +4,20 @@ import axios from "axios";
 import {store} from "../../../store";
 
 export default {
-    components: {PointTableRow},
+    components: { PointTableRow },
     props: ['points'],
-    created() {
-      axios.get('/controller', {
-        headers: { 'Authorization': "Bearer " + store.getters.getToken }
-      }).then(result => {
-        if (result.status === 200) {
-          result.data.forEach(point => this.points.push(point));
-        } else {
-          console.log("/point_table error");
-        }
-      })
-    },
     methods: {
       clear() {
         axios.delete('/controller', {
           headers: { 'Authorization': "Bearer " + store.getters.getToken }
         }).then(result => {
-          if (result.status === 200) this.points.length = 0;
+          if (result.status === 200) this.$emit('clear');
           else {
-            console.log("/point_table error");
+            this.$emit('err', ['Something went wrong']);
           }
-        })
-      }
+        }).catch(error => { this.$emit('err', error.response.data.message)});
+      },
+      deletePoint(id) { this.$emit('deleteById', id); }
     }
   }
 </script>
@@ -36,7 +26,7 @@ export default {
   <div>
     <div class="table_header">
       <h1>Previous results</h1>
-      <input class="button" type="button" value="Clear" v-on:click="clear"/>
+      <input class="button" type="button" value="Clear" @click="clear"/>
     </div>
     <div class="table_body">
       <table>
@@ -48,7 +38,12 @@ export default {
           <td class="td-time">Time</td>
           <td></td>
         </tr>
-        <point-table-row v-for="point in points" :point="point" :points="points"/>
+        <point-table-row
+            v-for="point in points"
+            :point="point"
+            :points="points"
+            @delete="deletePoint"
+        />
       </table>
     </div>
   </div>

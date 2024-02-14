@@ -10,21 +10,12 @@
           headers: { 'Authorization': "Bearer " + store.getters.getToken }
         }).then(result => {
           if (result.status === 200) {
-            axios.get('/controller', {
-              headers: { 'Authorization': "Bearer " + store.getters.getToken }
-            }).then(result => {
-              if (result.status === 200) {
-                this.points.length = 0;
-                result.data.forEach(point => this.points.push(point));
-              } else {
-                console.log("/point_table error");
-              }
-            });
+            this.$emit('delete', id);
           }
           else {
-            console.log("/point_table error");
+            this.$emit('err', ['Something went wrong']);
           }
-        });
+        }).catch(error => this.$emit('err', error.response.data.message));
       }
     }
   }
@@ -37,7 +28,7 @@
     <td class="td-text">{{point.r}}</td>
     <td class="td-text">{{point.result}}</td>
     <td class="td-time">{{point.time}}</td>
-    <td class="td-button" v-on:click="deletePoint(point.id)">X</td>
+    <td class="td-button" @click="deletePoint(point.id)">X</td>
   </tr>
 </template>
 
