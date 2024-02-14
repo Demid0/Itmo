@@ -18,7 +18,7 @@
     <div class="label-div">
       <label>Input {{ modelValue.name }}</label><br/>
     </div>
-    <input :type="secret ? 'password' : 'text'" :maxlength="length" @input="set($event.target.value)"/>
+    <input :type="secret ? 'password' : 'text'" :maxlength="length" @input="set($event.target.value)" v-bind:value="this.modelValue.value"/>
   </div>
 </template>
 

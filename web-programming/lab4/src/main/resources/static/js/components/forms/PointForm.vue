@@ -36,7 +36,10 @@ export default {
       this.$emit('err', errorsToDisplay);
       return errorsToDisplay.length === 0;
     },
-    reset() {
+    resetPoint() {
+      this.point.x.value = NaN;
+      this.point.y.value = '';
+      this.point.r.value = NaN;
       this.$emit('reset');
       this.$emit('err', []);
     },
@@ -49,8 +52,8 @@ export default {
     <button-input v-model="point.x" :from="-4" :to="4"/>
     <text-input v-model="point.y" :length="7"/>
     <button-input v-model="point.r" :from="1" :to="4"/>
-    <input class="button" type="submit" value="Save" @click="send">
-    <input class="button" type="submit" value="Reset" @click="reset">
+    <input class="button" type="button" value="Save" @click="send">
+    <input class="button" type="button" value="Reset" @click="resetPoint">
   </div>
 </template>
 
