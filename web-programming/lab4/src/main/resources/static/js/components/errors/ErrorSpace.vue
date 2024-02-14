@@ -22,7 +22,7 @@
 
 <style scoped>
   p {
-    padding: 10px 10px 10px v-bind(padding);
+    padding: 10px;
     border-radius: 10px;
   }
   * {

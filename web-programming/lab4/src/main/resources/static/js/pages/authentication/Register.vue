@@ -88,7 +88,7 @@ export default {
             :secret="true"
         /></tr>
         <tr><input class="button" type="submit" value="Sign up" @click="signUp"></tr>
-        <tr><error-space :errors="errors" style="padding: 0;"/></tr>
+        <tr><error-space :errors="errors" style="padding-left: 0;"/></tr>
       </table>
     </div>
   </div>

@@ -82,7 +82,7 @@ export default {
         </td>
       </tr>
       <tr>
-        <error-space :errors="errors" style="padding: 150px;"></error-space>
+        <error-space :errors="errors" style="padding-left: 150px;"></error-space>
       </tr>
     </table>
   </div>
