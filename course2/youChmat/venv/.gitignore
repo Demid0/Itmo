@@ -1,0 +1,6 @@
+pyvenv.cfg
+/venv/bin/**
+/venv/bin/
+/venv/lib/
+/venv/lib/**
+src/__init__.py
