@@ -5,7 +5,7 @@ import os
 import random
 import re
 import sys
-
+import itertools
 
 class Result:
     isMethodApplicable = True
@@ -17,10 +17,9 @@ class Result:
         try:
             Result.n = n
             Result.matrix = matrix
-            Result.isPossible(matrix)
-            if not Result.isMethodApplicable:
+            if not Result.isPossible(matrix):
+                Result.isMethodApplicable = False
                 return []
-
             x = [0 for _ in range(n)]
             r = [0 for _ in range(n)]
             max_difference = epsilon + 1
@@ -39,47 +38,28 @@ class Result:
             return []
 
     def isPossible(matrix):
-        diagonalCandidates = [[0 for i in range(Result.n)] for i in range(Result.n)]
-        for i in range(Result.n):
-            sumOfRowValues = 0
-            for j in range(Result.n):
-                sumOfRowValues += matrix[i][j]
-            for j in range(Result.n):
-                if sumOfRowValues < 2 * matrix[i][j]:
-                    diagonalCandidates[i][j] = 2
-                else:
-                    if sumOfRowValues == 2 * matrix[i][j]:
-                        diagonalCandidates[i][j] = 1
-                    else:
-                        diagonalCandidates[i][j] = 0
-        rank = Result.rankOfMatrix(diagonalCandidates)
-        if rank == Result.n:
-            Result.isMethodApplicable = True
-        else:
-            Result.isMethodApplicable = False
+        permutations = list(itertools.permutations(Result.matrix, Result.n))
+        for new_matrix in permutations:
+            Result.matrix = new_matrix
+            if Result.isDDM(new_matrix):
+                return True
+        return False
 
-    def rankOfMatrix(diagonalCandidates):
-        rank = Result.n
-        for i in range(rank):
-            if diagonalCandidates[i][i] != 0:
-                for j in range(Result.n):
-                    if j != i:
-                        mult = diagonalCandidates[j][i] / diagonalCandidates[i][i]
-                        for k in range(rank):
-                            diagonalCandidates[j][k] -= mult * diagonalCandidates[i][k]
+    def isDDM(matrix):
+        strictly_more = 0
+        for i in range(Result.n):
+            sum = 0
+            for j in range(Result.n):
+                sum = sum + abs(Result.matrix[i][j])
+            if abs(2 * Result.matrix[i][i]) < sum:
+                return False
             else:
-                reduce = True
-                for k in range(i + 1, Result.n):
-                    if diagonalCandidates[k][i] != 0:
-                        diagonalCandidates[i], diagonalCandidates[k] = diagonalCandidates[k], diagonalCandidates[i]
-                        Result.matrix[i], Result.matrix[k] = Result.matrix[k], Result.matrix[i]
-                        reduce = False
-                        break
-                if reduce:
-                    rank -= 1
-                    return rank
-                i -= 1
-        return rank
+                if abs(2 * Result.matrix[i][i]) > sum:
+                    strictly_more = strictly_more + 1
+        if strictly_more > 0:
+            return True
+        else:
+            return False
 
 
 if __name__ == '__main__':
