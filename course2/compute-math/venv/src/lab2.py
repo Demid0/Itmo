@@ -23,12 +23,12 @@ class Result:
                 max_difference = 0
                 for i in range(n):
                     iteration_sum = 0
-                    for j in range(0, n):
+                    for j in range(n):
                         iteration_sum += matrix[i][j] * x_values[j]
-                    residuals[i] = (matrix[i][n] - iteration_sum) / matrix[i][i]
+                    residuals[i] = (iteration_sum - matrix[i][n]) / matrix[i][i]
                     x_values[i] -= residuals[i]
                     max_difference = max(max_difference, abs(residuals[i]))
-            return x_values + residuals
+            return x_values
         except:
             Result.isMethodApplicable = False
             return []
@@ -37,7 +37,7 @@ class Result:
         for i in range(n):
             sum_of_abs_row_elements = 0
             for j in range(n):
-                sum_of_abs_row_elements = sum_of_abs_row_elements + matrix[i][j]
+                sum_of_abs_row_elements = sum_of_abs_row_elements + abs(matrix[i][j])
             if sum_of_abs_row_elements >= 2 * abs(matrix[i][i]):
                 return False
         return True
