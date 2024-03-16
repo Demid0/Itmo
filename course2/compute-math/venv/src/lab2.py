@@ -5,61 +5,42 @@ import os
 import random
 import re
 import sys
-import itertools
+
 
 class Result:
     isMethodApplicable = True
     errorMessage = "The system has no diagonal dominance for this method. Method of the Gauss-Seidel is not applicable."
-    n = 0
-    matrix = []
 
     def solveByGaussSeidel(n, matrix, epsilon):
         try:
-            Result.n = n
-            Result.matrix = matrix
-            if not Result.isPossible(matrix):
+            if not Result.isDDM(n, matrix):
                 Result.isMethodApplicable = False
                 return []
-            x = [0 for _ in range(n)]
-            r = [0 for _ in range(n)]
+            x_values = [0 for _ in range(n)]
+            residuals = [0 for _ in range(n)]
             max_difference = epsilon + 1
             while max_difference > epsilon:
                 max_difference = 0
                 for i in range(n):
                     iteration_sum = 0
                     for j in range(0, n):
-                        iteration_sum += Result.matrix[i][j] * x[j]
-                    r[i] = (iteration_sum - Result.matrix[i][n]) / Result.matrix[i][i]
-                    x[i] -= r[i]
-                    max_difference = max(max_difference, abs(r[i]))
-            return x + r
+                        iteration_sum += matrix[i][j] * x_values[j]
+                    residuals[i] = (matrix[i][n] - iteration_sum) / matrix[i][i]
+                    x_values[i] -= residuals[i]
+                    max_difference = max(max_difference, abs(residuals[i]))
+            return x_values + residuals
         except:
             Result.isMethodApplicable = False
             return []
 
-    def isPossible(matrix):
-        permutations = list(itertools.permutations(Result.matrix, Result.n))
-        for new_matrix in permutations:
-            Result.matrix = new_matrix
-            if Result.isDDM(new_matrix):
-                return True
-        return False
-
-    def isDDM(matrix):
-        strictly_more = 0
-        for i in range(Result.n):
-            sum = 0
-            for j in range(Result.n):
-                sum = sum + abs(Result.matrix[i][j])
-            if abs(2 * Result.matrix[i][i]) < sum:
+    def isDDM(n, matrix):
+        for i in range(n):
+            sum_of_abs_row_elements = 0
+            for j in range(n):
+                sum_of_abs_row_elements = sum_of_abs_row_elements + matrix[i][j]
+            if sum_of_abs_row_elements >= 2 * abs(matrix[i][i]):
                 return False
-            else:
-                if abs(2 * Result.matrix[i][i]) > sum:
-                    strictly_more = strictly_more + 1
-        if strictly_more > 0:
-            return True
-        else:
-            return False
+        return True
 
 
 if __name__ == '__main__':
