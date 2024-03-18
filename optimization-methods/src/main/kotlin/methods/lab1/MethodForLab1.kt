@@ -9,16 +9,16 @@ class MethodForLab1(
     var i = 1
     var a = 0.0
     var b = 1.0
-    val epsilon = 0.001
-    val function = {
+    var epsilon = 0.001
+    var function = {
         x: Double ->
         x.pow(3) - 3 * sin(x)
     }
-    val derivative = {
+    var derivative = {
         x: Double ->
         3 * x.pow(2) - 3 * cos(x)
     }
-    val secondDerivative = {
+    var secondDerivative = {
         x: Double ->
         6 * x + 3 * sin(x)
     }
