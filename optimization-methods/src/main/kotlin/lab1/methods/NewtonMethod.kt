@@ -1,4 +1,4 @@
-package org.example.methods.lab1
+package lab1.methods
 
 import kotlin.math.abs
 

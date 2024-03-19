@@ -1,4 +1,4 @@
-package org.example.methods.lab1
+package lab1.methods
 
 val halfDividingMethod = MethodForLab1("Серединное деление") {
     while (b - a > 2 * epsilon) {
