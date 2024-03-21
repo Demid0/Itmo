@@ -1,4 +1,4 @@
-package codeforces
+package codeforces.block1
 
 import java.util.*
 
